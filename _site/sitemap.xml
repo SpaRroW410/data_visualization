@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>data-visualization/intro.qmd/data-visualization/intro.html</loc>
+    <lastmod>2025-08-26T17:50:25.163Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/r-foundations/getting-started.html</loc>
+    <lastmod>2025-08-26T14:47:37.051Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/r-foundations/data-wrangling.html</loc>
+    <lastmod>2025-08-26T17:16:29.410Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/plot-gallery/basic.html</loc>
+    <lastmod>2025-08-26T14:51:38.654Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/plot-gallery/advanced.html</loc>
+    <lastmod>2025-08-26T14:52:06.380Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/plot-gallery/interactive.html</loc>
+    <lastmod>2025-08-26T14:47:23.099Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/index.html</loc>
+    <lastmod>2025-08-26T17:50:23.027Z</lastmod>
+  </url>
+</urlset>

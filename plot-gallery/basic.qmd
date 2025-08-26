@@ -1,0 +1,14 @@
+---
+title: "Basic Plots"
+sidebar:
+  style: "floating"
+  contents:
+    - section: "Plot Gallery"
+      contents:
+        - href: basic.qmd
+          text: "Basic"
+        - href: advanced.qmd
+          text: "Advanced"
+        - href: interactive.qmd
+          text: "Interactive"
+---

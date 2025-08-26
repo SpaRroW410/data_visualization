@@ -1,0 +1,14 @@
+---
+title: "Introduction"
+sidebar:
+  style: "floating"
+  contents:
+    - section: "Data Visualization"
+      contents:
+        - href: intro.qmd
+          text: "Introduction"
+        - href: best_practices.qmd
+          text: "Best Practices"
+---
+
+# Introduction

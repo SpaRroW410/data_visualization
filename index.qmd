@@ -1,0 +1,35 @@
+---
+format: html
+---
+
+
+
+ This site is your interactive guide for the **Data Visualization Workshop** that uses **R** and **Quarto**.  You'll find everything you need to learn or improve your skills, including hands-on examples, best practices, and plotting techniques, all in one place.
+
+## 🎯 Workshop Goals
+
+ - Learn the basics of good data visualization
+ - Use R to learn how to wrangle and prepare data
+ - Learn about basic, advanced, and interactive ways to plot data
+ - Make and share your own visualizations based on Quarto
+
+## 🗺️  Find your way around the workshop
+
+ To look at each module, use the navigation bar above:
+
+ - 📊 **[Data Visualization Principles](data-visualization/intro.qmd)**   
+   Learn the basics of good visual design and what not to do.
+
+ - 🧬 **[R Foundations](r-foundations/getting-started.qmd)**  
+   Learn how to use R syntax, clean up your data, and make your workflows neat.
+
+ - 🎨 **[Plot Gallery](plot-gallery/basic.qmd)**  
+   Look at examples that range from simple bar charts to interactive dashboards.
+
+## 🧪 Code and Examples in Real Time
+
+ There are code snippets, rendered outputs, and downloadable datasets all over the site.  You can change and play around with the code for your own projects.
+
+## Printable Resources
+
+ ---

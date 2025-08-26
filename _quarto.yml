@@ -1,0 +1,41 @@
+project:
+  type: website
+
+website:
+  title: "Data Visualization"
+  site-url: "data-visualization/intro.qmd"
+  navbar:
+    left:
+      - text: "Data Visualization"
+        menu:
+          - text: "Introduction"
+            href: data-visualization/intro.qmd
+          - text: "Best Practices"
+            href: data-visualization/best_practices.qmd
+      - text: "R Foundations"
+        menu:
+          - text: "Getting Started"
+            href: r-foundations/getting-started.qmd
+          - text: "Data Wrangling"
+            href: r-foundations/data-wrangling.qmd
+      - text: "Plot Gallery"
+        menu:
+          - text: "Basic Plots"
+            href: plot-gallery/basic.qmd
+          - text: "Advanced Plots"
+            href: plot-gallery/advanced.qmd
+          - text: "Interactive Plots"
+            href: plot-gallery/interactive.qmd
+    right:
+      - icon: envelope
+        href: contact.qmd
+        aria-label: "Contact Us"
+        text: "Contact"
+  sidebar: true
+  search: true
+
+format:
+  html:
+    theme: flatly
+    css: theme_webp.css
+    toc: true

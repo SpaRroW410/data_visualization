@@ -1,0 +1,93 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Visualization",
+    "section": "",
+    "text": "This site is your interactive guide for the Data Visualization Workshop that uses R and Quarto. You’ll find everything you need to learn or improve your skills, including hands-on examples, best practices, and plotting techniques, all in one place."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "data-visualization/intro.html",
+    "href": "data-visualization/intro.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "Introduction"
+  },
+  {
+    "objectID": "data-visualization/best_practices.html",
+    "href": "data-visualization/best_practices.html",
+    "title": "Best practices",
+    "section": "",
+    "text": "Practices"
+  },
+  {
+    "objectID": "plot-gallery/interactive.html",
+    "href": "plot-gallery/interactive.html",
+    "title": "Interactive",
+    "section": "",
+    "text": "Practices"
+  },
+  {
+    "objectID": "r-foundations/data-wrangling.html",
+    "href": "r-foundations/data-wrangling.html",
+    "title": "Data wrangling",
+    "section": "",
+    "text": "Practices"
+  },
+  {
+    "objectID": "plot-gallery/advanced.html",
+    "href": "plot-gallery/advanced.html",
+    "title": "Advanced plots",
+    "section": "",
+    "text": "Practices"
+  },
+  {
+    "objectID": "index.html#workshop-goals",
+    "href": "index.html#workshop-goals",
+    "title": "Data Visualization",
+    "section": "🎯 Workshop Goals",
+    "text": "🎯 Workshop Goals\n\nLearn the basics of good data visualization\nUse R to learn how to wrangle and prepare data\nLearn about basic, advanced, and interactive ways to plot data\nMake and share your own visualizations based on Quarto"
+  },
+  {
+    "objectID": "index.html#navigate-the-workshop",
+    "href": "index.html#navigate-the-workshop",
+    "title": "Welcome to Quarto Webpage Visualization",
+    "section": "",
+    "text": "Use the navigation bar above to explore each module:\n\n📊 Data Visualization Principles\nLearn the theory behind good visual design and common pitfalls to avoid.\n🧬 R Foundations\nGet comfortable with R syntax, data wrangling, and tidy workflows.\n🎨 Plot Gallery\nDive into examples ranging from simple bar charts to interactive dashboards."
+  },
+  {
+    "objectID": "index.html#live-code-examples",
+    "href": "index.html#live-code-examples",
+    "title": "Welcome to Quarto Webpage Visualization",
+    "section": "",
+    "text": "Throughout the site, you’ll find embedded code chunks, rendered outputs, and downloadable datasets. Feel free to experiment and adapt the code to your own projects."
+  },
+  {
+    "objectID": "index.html#printable-resources",
+    "href": "index.html#printable-resources",
+    "title": "Data Visualization",
+    "section": "Printable Resources",
+    "text": "Printable Resources"
+  },
+  {
+    "objectID": "index.html#find-your-way-around-the-workshop",
+    "href": "index.html#find-your-way-around-the-workshop",
+    "title": "Data Visualization",
+    "section": "🗺️ Find your way around the workshop",
+    "text": "🗺️ Find your way around the workshop\nTo look at each module, use the navigation bar above:\n\n📊 Data Visualization Principles\nLearn the basics of good visual design and what not to do.\n🧬 R Foundations\nLearn how to use R syntax, clean up your data, and make your workflows neat.\n🎨 Plot Gallery\nLook at examples that range from simple bar charts to interactive dashboards."
+  },
+  {
+    "objectID": "index.html#code-and-examples-in-real-time",
+    "href": "index.html#code-and-examples-in-real-time",
+    "title": "Data Visualization",
+    "section": "🧪 Code and Examples in Real Time",
+    "text": "🧪 Code and Examples in Real Time\nThere are code snippets, rendered outputs, and downloadable datasets all over the site. You can change and play around with the code for your own projects."
+  }
+]

@@ -1,0 +1,12 @@
+---
+title: "Getting Started with R"
+sidebar:
+  style: "floating"
+  contents:
+    - section: "R Foundations"
+      contents:
+        - href: getting-started.qmd
+          text: "Getting Started"
+        - href: data-wrangling.qmd
+          text: "Data Wrangling"
+---
