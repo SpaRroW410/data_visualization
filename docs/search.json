@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "plot-gallery/interactive.html",
+    "href": "plot-gallery/interactive.html",
+    "title": "Interactive",
+    "section": "",
+    "text": "Practices"
+  },
+  {
+    "objectID": "plot-gallery/advanced.html",
+    "href": "plot-gallery/advanced.html",
+    "title": "Advanced plots",
+    "section": "",
+    "text": "Practices"
+  },
+  {
+    "objectID": "data-visualization/intro.html",
+    "href": "data-visualization/intro.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "Introduction"
+  },
+  {
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Contact Us",
+    "section": "",
+    "text": "We welcome feedback, collaboration ideas, and questions about the workshop or its materials. Whether you’re an educator, learner, or curious explorer, feel free to reach out.\n\n\nDr. Rudresh Negi Assistant Professor, Community Medicine\nDr. Mukul Maheshwari\nAssistant Professor, Community Medicine\nEmail: [ryan00700@gmail.com]\nGitHub: github.com/SpaRroW410\n\n\n\n\n\nCompetency-based medical education\nTime trend analysis\nData visualization and analytics in R\nCurriculum design using Quarto\nFinancial modeling for health economics\nStrategic learning tools and gamified pedagogy\n\n\n\n\n\nIf you’re experiencing issues with the site or workshop materials, please include:\n\nYour R version and operating system\nA brief description of the error\nScreenshot or code snippet (if applicable)\n\nWe’ll do our best to respond promptly and help you troubleshoot.\n\n\n\n\nTo receive updates on new modules, public releases, or upcoming workshops, watch the GitHub repo or connect via email."
+  },
+  {
+    "objectID": "contact.html#get-in-touch",
+    "href": "contact.html#get-in-touch",
+    "title": "Contact Us",
+    "section": "",
+    "text": "We welcome feedback, collaboration ideas, and questions about the workshop or its materials. Whether you’re an educator, learner, or curious explorer, feel free to reach out.\n\n\nDr. Rudresh Negi Assistant Professor, Community Medicine\nDr. Mukul Maheshwari\nAssistant Professor, Community Medicine\nEmail: [ryan00700@gmail.com]\nGitHub: github.com/SpaRroW410\n\n\n\n\n\nCompetency-based medical education\nTime trend analysis\nData visualization and analytics in R\nCurriculum design using Quarto\nFinancial modeling for health economics\nStrategic learning tools and gamified pedagogy\n\n\n\n\n\nIf you’re experiencing issues with the site or workshop materials, please include:\n\nYour R version and operating system\nA brief description of the error\nScreenshot or code snippet (if applicable)\n\nWe’ll do our best to respond promptly and help you troubleshoot.\n\n\n\n\nTo receive updates on new modules, public releases, or upcoming workshops, watch the GitHub repo or connect via email."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html",
+    "href": "data-visualization/best_practices.html",
+    "title": "Best practices",
+    "section": "",
+    "text": "Practices"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Visualization",
+    "section": "",
+    "text": "This site is your interactive guide for the Data Visualization Workshop that uses R and Quarto. You’ll find everything you need to learn or improve your skills, including hands-on examples, best practices, and plotting techniques, all in one place."
+  },
+  {
+    "objectID": "index.html#workshop-goals",
+    "href": "index.html#workshop-goals",
+    "title": "Data Visualization",
+    "section": "🎯 Workshop Goals",
+    "text": "🎯 Workshop Goals\n\nLearn the basics of good data visualization\nUse R to learn how to wrangle and prepare data\nLearn about basic, advanced, and interactive ways to plot data\nMake and share your own visualizations based on Quarto"
+  },
+  {
+    "objectID": "index.html#find-your-way-around-the-workshop",
+    "href": "index.html#find-your-way-around-the-workshop",
+    "title": "Data Visualization",
+    "section": "🗺️ Find your way around the workshop",
+    "text": "🗺️ Find your way around the workshop\nTo look at each module, use the navigation bar above:\n\n📊 Data Visualization Principles\nLearn the basics of good visual design and what not to do.\n🧬 R Foundations\nLearn how to use R syntax, clean up your data, and make your workflows neat.\n🎨 Plot Gallery\nLook at examples that range from simple bar charts to interactive dashboards."
+  },
+  {
+    "objectID": "index.html#code-and-examples-in-real-time",
+    "href": "index.html#code-and-examples-in-real-time",
+    "title": "Data Visualization",
+    "section": "🧪 Code and Examples in Real Time",
+    "text": "🧪 Code and Examples in Real Time\nThere are code snippets, rendered outputs, and downloadable datasets all over the site. You can change and play around with the code for your own projects."
+  },
+  {
+    "objectID": "index.html#printable-resources",
+    "href": "index.html#printable-resources",
+    "title": "Data Visualization",
+    "section": "Printable Resources",
+    "text": "Printable Resources"
+  },
+  {
+    "objectID": "r-foundations/data-wrangling.html",
+    "href": "r-foundations/data-wrangling.html",
+    "title": "Data wrangling",
+    "section": "",
+    "text": "Practices"
+  }
+]
