@@ -10,3 +10,15 @@ sidebar:
         - href: data-wrangling.qmd
           text: "Data Wrangling"
 ---
+
+R
+
+Installing R and RStudio
+
+Navigating the Rstudio Interface
+
+Using VS Code with R
+
+Writing and executing basic R code
+
+UNderstanding R packages and the tidyverse

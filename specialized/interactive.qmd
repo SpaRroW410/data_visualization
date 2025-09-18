@@ -1,0 +1,72 @@
+---
+title: "Interactive"
+author: "SpaRroW"
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Interactive Visualizations - Using plotly for interactivity - ggiraph
+and hoverable tooltips - Embedding interactive plots in Quarto or Shiny
+
+### ▸ Categorical
+
+-   Interactive bar chart (plotly, ggiraph)
+
+-   Dropdown-filtered categorical plots
+
+### ▸ Continuous
+
+-   Interactive density or histogram with sliders
+
+-   Zoomable ridgeline plots
+
+### ▸ Category vs. Category
+
+-   Interactive heatmap
+
+-   Clickable mosaic plot
+
+### ▸ Continuous vs. Continuous
+
+-   Hoverable scatter plot with tooltips
+
+-   Brushed selection scatter matrix
+
+### ▸ Category vs. Continuous
+
+-   Interactive violin or boxplot with hover labels
+
+-   Dynamic filtering by category
+
+### ▸ Time Series
+
+-   Scrollable time series
+
+-   Tooltip-enabled line chart
+
+### ▸ Map
+
+-   Interactive choropleth (leaflet, plotly)
+
+-   Clickable bubble map with popups
+
+Scatter plot
+
+Bubble plot
+
+Heat map
+
+Tree map
+
+Sankey diagram
+
+Chord diagram
+
+Spider / radar chart
+
+Waterfall chart
+
+Forest plot
+
+Word cloud

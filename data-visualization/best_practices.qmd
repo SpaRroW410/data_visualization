@@ -3,4 +3,13 @@ title: "Best practices"
 author: "SpaRroW"
 ---
 
-### Practices
+Choosing the right plot for your data type
+
+Avoiding misleading visuals
+
+
+Color theory and accessibility
+
+
+Labeling, scaling, and layout tips
+

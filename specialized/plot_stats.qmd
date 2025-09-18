@@ -1,0 +1,73 @@
+---
+title: "Specialized Plots (with statistics)"
+author: "SpaRroW"
+---
+
+Statistical Visualizations
+
+-    Regression lines and confidence intervals
+
+-   Correlation matrices
+
+-   Residual plots
+
+-   Visualizing model outputs
+
+### Categorical
+
+-   Bar chart with confidence intervals
+
+-   Proportion plots with error bars 
+
+### ▸ Continuous
+
+-   Density plots with quantile shading
+
+-   Histogram with fitted curve 
+
+### ▸ Category vs. Category
+
+-   Chi-square residual heatmap
+-   Proportional stacked bar with significance markers 
+
+### ▸ Continuous vs. Continuous
+
+-   Scatter plot with regression line
+
+-   Correlation matrix
+
+-   Residual plots 
+
+### ▸ Category vs. Continuous
+
+-   Violin plot with median and IQR
+
+-   Boxplot with notches or statistical annotations Time Series
+
+-   Forecast overlays
+
+-   Decomposition plots (trend, seasonality, residuals) 
+
+### ▸ Map
+
+-   Choropleth with statistical bins
+
+-   Cartogram scaled by statistical variable
+
+Histogram
+
+Density plot
+
+Box plot
+
+Violin plot
+
+Correlogram
+
+Forest plot
+
+Ridge line plot
+
+Heat map (especially for correlations or frequencies)
+
+Scatter plot (when enhanced with regression or stats)

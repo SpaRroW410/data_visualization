@@ -1,7 +1,0 @@
----
-title: "Interactive"
-author: "SpaRroW"
----
-
-Practices
-

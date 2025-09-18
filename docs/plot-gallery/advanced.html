@@ -83,21 +83,6 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-visualization" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
- <span class="menu-text">Data Visualization</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-visualization">    
-        <li>
-    <a class="dropdown-item" href="../data-visualization/intro.html" rel="" target="">
- <span class="dropdown-text">Introduction</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../data-visualization/best_practices.html" rel="" target="">
- <span class="dropdown-text">Best Practices</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-r-foundations" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">R Foundations</span>
     </a>
@@ -113,6 +98,25 @@ ul.task-list li input[type="checkbox"] {
     </ul>
   </li>
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-visualization" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Data Visualization</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-visualization">    
+        <li>
+    <a class="dropdown-item" href="../data-visualization/intro.html" rel="" target="">
+ <span class="dropdown-text">Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../data-visualization/best_practices.html" rel="" target="">
+ <span class="dropdown-text">Best Practices</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../data-visualization/plot_data.html" rel="" target="">
+ <span class="dropdown-text">Matching data to plots</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-plot-gallery" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Plot Gallery</span>
     </a>
@@ -122,12 +126,50 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Basic Plots</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../plot-gallery/moderate.html" rel="" target="">
+ <span class="dropdown-text">Intermediate plots</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../plot-gallery/advanced.html" rel="" target="">
  <span class="dropdown-text">Advanced Plots</span></a>
   </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-specialized-plots" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Specialized Plots</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-specialized-plots">    
         <li>
-    <a class="dropdown-item" href="../plot-gallery/interactive.html" rel="" target="">
+    <a class="dropdown-item" href="../specialized/merge_visuals.html" rel="" target="">
+ <span class="dropdown-text">Merged Visuals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../specialized/plot_stats.html" rel="" target="">
+ <span class="dropdown-text">Specialized plots (with statistics)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../specialized/interactive.html" rel="" target="">
  <span class="dropdown-text">Interactive Plots</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-exporting-tools-and-debugging" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Exporting, Tools and Debugging</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-exporting-tools-and-debugging">    
+        <li>
+    <a class="dropdown-item" href="../exporting_tools/exporting_plots.html" rel="" target="">
+ <span class="dropdown-text">Exporting Plots</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../exporting_tools/plotting_tools.html" rel="" target="">
+ <span class="dropdown-text">Plotting Tools</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../exporting_tools/debugging_plots.html" rel="" target="">
+ <span class="dropdown-text">Debugging Plots</span></a>
   </li>  
     </ul>
   </li>
@@ -150,7 +192,19 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#categorical" id="toc-categorical" class="nav-link active" data-scroll-target="#categorical">▸ Categorical</a></li>
+  <li><a href="#category-vs.-category" id="toc-category-vs.-category" class="nav-link" data-scroll-target="#category-vs.-category">▸ Category vs.&nbsp;Category</a></li>
+  <li><a href="#continuous-vs.-continuous" id="toc-continuous-vs.-continuous" class="nav-link" data-scroll-target="#continuous-vs.-continuous">▸ Continuous vs.&nbsp;Continuous</a></li>
+  <li><a href="#category-vs.-continuous" id="toc-category-vs.-continuous" class="nav-link" data-scroll-target="#category-vs.-continuous">▸ Category vs.&nbsp;Continuous</a></li>
+  <li><a href="#time-series" id="toc-time-series" class="nav-link" data-scroll-target="#time-series">▸ Time Series</a></li>
+  <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map">▸ Map</a></li>
+  <li><a href="#others" id="toc-others" class="nav-link" data-scroll-target="#others">▸ Others</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -178,9 +232,62 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Practices</p>
+<section id="categorical" class="level3">
+<h3 class="anchored" data-anchor-id="categorical">▸ Categorical</h3>
+<ul>
+<li><p>Faceted bar plots <strong>- Spider / radar charts</strong> <strong>- Tree Map</strong> ### ▸ Continuous</p></li>
+<li><p>2D density plot</p></li>
+<li><p>Hexbin plot</p></li>
+</ul>
+</section>
+<section id="category-vs.-category" class="level3">
+<h3 class="anchored" data-anchor-id="category-vs.-category">▸ Category vs.&nbsp;Category</h3>
+<ul>
+<li><p><strong>Sankey diagram</strong></p></li>
+<li><p><strong>Chord diagram</strong></p></li>
+</ul>
+</section>
+<section id="continuous-vs.-continuous" class="level3">
+<h3 class="anchored" data-anchor-id="continuous-vs.-continuous">▸ Continuous vs.&nbsp;Continuous</h3>
+<ul>
+<li>Residual plots</li>
+</ul>
+</section>
+<section id="category-vs.-continuous" class="level3">
+<h3 class="anchored" data-anchor-id="category-vs.-continuous">▸ Category vs.&nbsp;Continuous</h3>
+<ul>
+<li>Raincloud plots</li>
+</ul>
+</section>
+<section id="time-series" class="level3">
+<h3 class="anchored" data-anchor-id="time-series">▸ Time Series</h3>
+<ul>
+<li>Time series decomposition plots</li>
+</ul>
+</section>
+<section id="map" class="level3">
+<h3 class="anchored" data-anchor-id="map">▸ Map</h3>
+<ul>
+<li>Animated geospatial transitions</li>
+</ul>
+</section>
+<section id="others" class="level3">
+<h3 class="anchored" data-anchor-id="others">▸ Others</h3>
+<ul>
+<li><p><strong>Waterfall chart</strong></p></li>
+<li><p><strong>Funnel chart</strong></p></li>
+<li><p><strong>Sunburst chart</strong></p></li>
+<li><p><strong>Word cloud</strong></p></li>
+</ul>
+<!-- -->
+<ul>
+<li><p>Combining plots with patchwork or cowplot</p></li>
+<li><p>Custom themes and annotations</p></li>
+<li><p>Dual-axis plots (with caution)</p></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

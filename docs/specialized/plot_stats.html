@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="SpaRroW">
 
-<title>Data Visualization</title>
+<title>Data Visualization - Specialized Plots (with statistics)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +24,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -61,8 +62,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="theme_webp.css">
-<link rel="stylesheet" href="zoom.css">
+<link rel="stylesheet" href="../theme_webp.css">
 </head>
 
 <body class="nav-fixed">
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Data Visualization</span>
     </a>
   </div>
@@ -88,11 +88,11 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-r-foundations">    
         <li>
-    <a class="dropdown-item" href="./r-foundations/getting-started.html" rel="" target="">
+    <a class="dropdown-item" href="../r-foundations/getting-started.html" rel="" target="">
  <span class="dropdown-text">Getting Started</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./r-foundations/data-wrangling.html" rel="" target="">
+    <a class="dropdown-item" href="../r-foundations/data-wrangling.html" rel="" target="">
  <span class="dropdown-text">Data Wrangling</span></a>
   </li>  
     </ul>
@@ -103,15 +103,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-data-visualization">    
         <li>
-    <a class="dropdown-item" href="./data-visualization/intro.html" rel="" target="">
+    <a class="dropdown-item" href="../data-visualization/intro.html" rel="" target="">
  <span class="dropdown-text">Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./data-visualization/best_practices.html" rel="" target="">
+    <a class="dropdown-item" href="../data-visualization/best_practices.html" rel="" target="">
  <span class="dropdown-text">Best Practices</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./data-visualization/plot_data.html" rel="" target="">
+    <a class="dropdown-item" href="../data-visualization/plot_data.html" rel="" target="">
  <span class="dropdown-text">Matching data to plots</span></a>
   </li>  
     </ul>
@@ -122,15 +122,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-plot-gallery">    
         <li>
-    <a class="dropdown-item" href="./plot-gallery/basic.html" rel="" target="">
+    <a class="dropdown-item" href="../plot-gallery/basic.html" rel="" target="">
  <span class="dropdown-text">Basic Plots</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./plot-gallery/moderate.html" rel="" target="">
+    <a class="dropdown-item" href="../plot-gallery/moderate.html" rel="" target="">
  <span class="dropdown-text">Intermediate plots</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./plot-gallery/advanced.html" rel="" target="">
+    <a class="dropdown-item" href="../plot-gallery/advanced.html" rel="" target="">
  <span class="dropdown-text">Advanced Plots</span></a>
   </li>  
     </ul>
@@ -141,15 +141,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-specialized-plots">    
         <li>
-    <a class="dropdown-item" href="./specialized/merge_visuals.html" rel="" target="">
+    <a class="dropdown-item" href="../specialized/merge_visuals.html" rel="" target="">
  <span class="dropdown-text">Merged Visuals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./specialized/plot_stats.html" rel="" target="">
+    <a class="dropdown-item" href="../specialized/plot_stats.html" rel="" target="">
  <span class="dropdown-text">Specialized plots (with statistics)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./specialized/interactive.html" rel="" target="">
+    <a class="dropdown-item" href="../specialized/interactive.html" rel="" target="">
  <span class="dropdown-text">Interactive Plots</span></a>
   </li>  
     </ul>
@@ -160,15 +160,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-exporting-tools-and-debugging">    
         <li>
-    <a class="dropdown-item" href="./exporting_tools/exporting_plots.html" rel="" target="">
+    <a class="dropdown-item" href="../exporting_tools/exporting_plots.html" rel="" target="">
  <span class="dropdown-text">Exporting Plots</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./exporting_tools/plotting_tools.html" rel="" target="">
+    <a class="dropdown-item" href="../exporting_tools/plotting_tools.html" rel="" target="">
  <span class="dropdown-text">Plotting Tools</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./exporting_tools/debugging_plots.html" rel="" target="">
+    <a class="dropdown-item" href="../exporting_tools/debugging_plots.html" rel="" target="">
  <span class="dropdown-text">Debugging Plots</span></a>
   </li>  
     </ul>
@@ -183,11 +183,11 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-reference">    
         <li>
-    <a class="dropdown-item" href="./contact.html" rel="" target="">
+    <a class="dropdown-item" href="../contact.html" rel="" target="">
  <span class="dropdown-text">Contact Us</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./references.html" rel="" target="">
+    <a class="dropdown-item" href="../references.html" rel="" target="">
  <span class="dropdown-text">References</span></a>
   </li>  
     </ul>
@@ -208,61 +208,106 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#workshop-goals" id="toc-workshop-goals" class="nav-link active" data-scroll-target="#workshop-goals">Workshop Goals</a></li>
-  <li><a href="#find-your-way-around-the-workshop" id="toc-find-your-way-around-the-workshop" class="nav-link" data-scroll-target="#find-your-way-around-the-workshop">Find your way around the workshop</a></li>
-  <li><a href="#code-and-examples-in-real-time" id="toc-code-and-examples-in-real-time" class="nav-link" data-scroll-target="#code-and-examples-in-real-time">Code and Examples in Real Time</a></li>
-  <li><a href="#printable-resources" id="toc-printable-resources" class="nav-link" data-scroll-target="#printable-resources">Printable Resources</a></li>
+  <li><a href="#categorical" id="toc-categorical" class="nav-link active" data-scroll-target="#categorical">Categorical</a></li>
+  <li><a href="#continuous" id="toc-continuous" class="nav-link" data-scroll-target="#continuous">▸ Continuous</a></li>
+  <li><a href="#category-vs.-category" id="toc-category-vs.-category" class="nav-link" data-scroll-target="#category-vs.-category">▸ Category vs.&nbsp;Category</a></li>
+  <li><a href="#continuous-vs.-continuous" id="toc-continuous-vs.-continuous" class="nav-link" data-scroll-target="#continuous-vs.-continuous">▸ Continuous vs.&nbsp;Continuous</a></li>
+  <li><a href="#category-vs.-continuous" id="toc-category-vs.-continuous" class="nav-link" data-scroll-target="#category-vs.-continuous">▸ Category vs.&nbsp;Continuous</a></li>
+  <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map">▸ Map</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Specialized Plots (with statistics)</h1>
+</div>
 
 
-<p>This site is your interactive guide for the <strong>Data Visualization Workshop</strong> that uses <strong>R</strong> and <strong>Quarto</strong>. You’ll find everything you need to learn or improve your skills, including hands-on examples, best practices, and plotting techniques, all in one place.</p>
-<section id="workshop-goals" class="level2">
-<h2 class="anchored" data-anchor-id="workshop-goals">Workshop Goals</h2>
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>SpaRroW </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Statistical Visualizations</p>
 <ul>
-<li>Learn the basics of good data visualization</li>
-<li>Use R to learn how to wrangle and prepare data</li>
-<li>Learn about basic, advanced, and interactive ways to plot data</li>
-<li>Make and share your own visualizations based on Quarto</li>
+<li><p>Regression lines and confidence intervals</p></li>
+<li><p>Correlation matrices</p></li>
+<li><p>Residual plots</p></li>
+<li><p>Visualizing model outputs</p></li>
+</ul>
+<section id="categorical" class="level3">
+<h3 class="anchored" data-anchor-id="categorical">Categorical</h3>
+<ul>
+<li><p>Bar chart with confidence intervals</p></li>
+<li><p>Proportion plots with error bars</p></li>
 </ul>
 </section>
-<section id="find-your-way-around-the-workshop" class="level2">
-<h2 class="anchored" data-anchor-id="find-your-way-around-the-workshop">Find your way around the workshop</h2>
-<p>To look at each module, use the navigation bar above:</p>
+<section id="continuous" class="level3">
+<h3 class="anchored" data-anchor-id="continuous">▸ Continuous</h3>
 <ul>
-<li><p><strong><a href="./r-foundations/getting-started.html">R Foundations</a></strong><br>
-Learn how to use R syntax, clean up your data, and make your workflows neat.</p></li>
-<li><p><strong><a href="./data-visualization/intro.html">Data Visualization Principles</a></strong><br>
-Learn the basics of good visual design and what not to do.</p></li>
-<li><p><strong><a href="./plot-gallery/basic.html">Plot Gallery</a></strong><br>
-Look at examples that range from simple bar charts to interactive dashboards.</p></li>
+<li><p>Density plots with quantile shading</p></li>
+<li><p>Histogram with fitted curve</p></li>
 </ul>
 </section>
-<section id="code-and-examples-in-real-time" class="level2">
-<h2 class="anchored" data-anchor-id="code-and-examples-in-real-time">Code and Examples in Real Time</h2>
-<p>There are code snippets, rendered outputs, and downloadable datasets all over the site. You can change and play around with the code for your own projects.</p>
+<section id="category-vs.-category" class="level3">
+<h3 class="anchored" data-anchor-id="category-vs.-category">▸ Category vs.&nbsp;Category</h3>
+<ul>
+<li>Chi-square residual heatmap</li>
+<li>Proportional stacked bar with significance markers</li>
+</ul>
 </section>
-<section id="printable-resources" class="level2">
-<h2 class="anchored" data-anchor-id="printable-resources">Printable Resources</h2>
-<hr>
+<section id="continuous-vs.-continuous" class="level3">
+<h3 class="anchored" data-anchor-id="continuous-vs.-continuous">▸ Continuous vs.&nbsp;Continuous</h3>
+<ul>
+<li><p>Scatter plot with regression line</p></li>
+<li><p>Correlation matrix</p></li>
+<li><p>Residual plots</p></li>
+</ul>
+</section>
+<section id="category-vs.-continuous" class="level3">
+<h3 class="anchored" data-anchor-id="category-vs.-continuous">▸ Category vs.&nbsp;Continuous</h3>
+<ul>
+<li><p>Violin plot with median and IQR</p></li>
+<li><p>Boxplot with notches or statistical annotations Time Series</p></li>
+<li><p>Forecast overlays</p></li>
+<li><p>Decomposition plots (trend, seasonality, residuals)</p></li>
+</ul>
+</section>
+<section id="map" class="level3">
+<h3 class="anchored" data-anchor-id="map">▸ Map</h3>
+<ul>
+<li><p>Choropleth with statistical bins</p></li>
+<li><p>Cartogram scaled by statistical variable</p></li>
+</ul>
+<p>Histogram</p>
+<p>Density plot</p>
+<p>Box plot</p>
+<p>Violin plot</p>
+<p>Correlogram</p>
+<p>Forest plot</p>
+<p>Ridge line plot</p>
+<p>Heat map (especially for correlations or frequencies)</p>
+<p>Scatter plot (when enhanced with regression or stats)</p>
 
 
 </section>
 
 </main> <!-- /main -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('img.zoomable').forEach(img => {
-      img.addEventListener('click', function () {
-        this.classList.toggle('active');
-      });
-    });
-  });
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

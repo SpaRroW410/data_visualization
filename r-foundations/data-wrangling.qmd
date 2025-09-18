@@ -3,5 +3,25 @@ title: "Data wrangling"
 author: "SpaRroW"
 ---
 
-Practices
+Importing data (CSV, Excel, etc.)
 
+Exploring data structures
+  vectors, lists, data frames, tibbles
+  
+Data cleaning (handling missing values, duplicates)
+  transforming data with dplyr
+  
+reshaping data (pivoting, melting)
+  tidyr functions like pivot_longer, pivot_wider
+  
+Merging and joining datasets
+  dplyr joins: inner_join, left_join, right_join, full_join
+  
+Filtering and selecting data
+  dplyr functions: filter, select
+  
+Sorting and arranging data
+  dplyr function: arrange
+  
+Creating new variables (mutate)
+  dplyr function: mutate

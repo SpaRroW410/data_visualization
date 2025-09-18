@@ -1,0 +1,58 @@
+---
+title: "Merged Visuals"
+sidebar:
+  style: "floating"
+  contents:
+    - section: "Specialized Plots"
+      contents:
+        - href: merge_visuals.qmd
+          text: "Merged Visuals"
+        - href: plot_stats.qmd
+          text: "Statistical Visualization"
+        - href: interactive.qmd
+          text: "Interactive Visualization"
+---
+
+-   Overlaying multiple plot types
+-   Plotting distributions with statistical overlays
+-   Embedding plots within plots (e.g., inset zooms)
+
+### Categorical
+
+-   Bar chart + annotations
+
+### ▸ Continuous
+
+-   Density + histogram overlay
+
+-   Ridgeline + density
+
+### ▸ Category vs. Category
+
+-   Grouped bar chart + facet grid
+
+-   Mosaic + stacked bar hybrid
+
+### ▸ Continuous vs. Continuous
+
+-   Scatter + marginal histograms
+
+-   Bubble chart + trend line
+
+### ▸ Category vs. Continuous
+
+-   Boxplot + jittered points
+
+-   Violin + box overlay
+
+### ▸ Time Series
+
+-   Line + area chart
+
+-   Stream graph + annotations
+
+### ▸ Map
+
+-   Choropleth + bubble overlay
+
+-   Map + inset zoom

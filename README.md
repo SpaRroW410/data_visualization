@@ -18,7 +18,7 @@ quarto_webpage_visualization/
 ├── _quarto.yml # Global configuration 
 ├── theme_webp.css # Custom styling 
 ├── index.qmd # Landing page 
-├── about.qmd # Workshop background 
+├── contact.qmd # Workshop background 
 ├── README.md # Project documentation 
 ├── data-visualization/ 
 │ ├── intro.qmd 

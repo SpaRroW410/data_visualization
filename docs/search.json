@@ -11,14 +11,14 @@
     "href": "plot-gallery/advanced.html",
     "title": "Advanced plots",
     "section": "",
-    "text": "Practices"
+    "text": "▸ Categorical\n\nFaceted bar plots - Spider / radar charts - Tree Map ### ▸ Continuous\n2D density plot\nHexbin plot\n\n\n\n▸ Category vs. Category\n\nSankey diagram\nChord diagram\n\n\n\n▸ Continuous vs. Continuous\n\nResidual plots\n\n\n\n▸ Category vs. Continuous\n\nRaincloud plots\n\n\n\n▸ Time Series\n\nTime series decomposition plots\n\n\n\n▸ Map\n\nAnimated geospatial transitions\n\n\n\n▸ Others\n\nWaterfall chart\nFunnel chart\nSunburst chart\nWord cloud\n\n\n\nCombining plots with patchwork or cowplot\nCustom themes and annotations\nDual-axis plots (with caution)"
   },
   {
     "objectID": "data-visualization/intro.html",
     "href": "data-visualization/intro.html",
     "title": "Introduction",
     "section": "",
-    "text": "Introduction"
+    "text": "Introduction\nWhy Visualize Data?\nGrammer of Graphics: the ggplot2 Philosophy\nFoundations of Visualization\nThese concepts form the backbone of any ggplot2 plot. - Data – The dataset being visualized - Aesthetics – Mapping data to visual properties (aes()) - Geometries – Visual marks like points, lines, bars (geom_) - Statistics – Summarizing or transforming data (stat_) - Coordinates – Defining the plotting space (coord_) - Facets – Creating subplots for subsets of data (facet_wrap, facet_grid) - Scales – Mapping data values to aesthetics (scale_) - Guides – Legends and axes to interpret scales\nStyling and Layout These elements refine the appearance and readability of plots. - Themes – Overall visual style (theme_*, theme()) - Color – Using palettes and contrast effectively - Labels – Axis labels, data labels (labs(), geom_text) - Titles – Plot titles and subtitles - Captions – Additional context below the plot - Margins – Adjusting spacing around plot elements - Annotations – Highlighting specific data points (annotate(), geom_label)\nStructural Composition These concepts help build complex and layered plots. - Layers – Combining multiple geoms and stats - Customization – Tailoring plots to specific needs - Exporting – Saving plots (ggsave(), formats) - Reproducibility – Ensuring consistent outputs across sessions\nInterpretation and Communication These ideas focus on the purpose and impact of visualization. - Data Preparation – Cleaning and transforming data - Data Exploration – Using plots to uncover patterns - Communication – Conveying insights effectively - Storytelling – Building narrative through visuals - Accessibility – Designing for diverse audiences\nAdvanced Techniques and Tools These extend ggplot2’s capabilities and introduce interactivity. - Interactivity – Dynamic plots with plotly, ggiraph - Animation – Time-based visuals with gganimate - Tools and Libraries – Supporting packages (ggplot2, patchwork, cowplot) - ggplot2 – Core package for layered grammar of graphics - Other R Packages – lattice, plotly, shiny, etc.\nMapping aesthetics to data variables - Common aesthetics: x, y, color, fill, size, shape, alpha - Aesthetic mappings are defined inside aes() function - Example: aes(x = variable1, y = variable2, color = category) - Aesthetic mappings can be global (in ggplot()) or local (in geom_*) - Global mappings apply to all layers, local mappings override global ones for that layer"
   },
   {
     "objectID": "contact.html",
@@ -39,7 +39,7 @@
     "href": "data-visualization/best_practices.html",
     "title": "Best practices",
     "section": "",
-    "text": "Practices"
+    "text": "Choosing the right plot for your data type\nAvoiding misleading visuals\nColor theory and accessibility\nLabeling, scaling, and layout tips"
   },
   {
     "objectID": "index.html",
@@ -52,22 +52,22 @@
     "objectID": "index.html#workshop-goals",
     "href": "index.html#workshop-goals",
     "title": "Data Visualization",
-    "section": "🎯 Workshop Goals",
-    "text": "🎯 Workshop Goals\n\nLearn the basics of good data visualization\nUse R to learn how to wrangle and prepare data\nLearn about basic, advanced, and interactive ways to plot data\nMake and share your own visualizations based on Quarto"
+    "section": "Workshop Goals",
+    "text": "Workshop Goals\n\nLearn the basics of good data visualization\nUse R to learn how to wrangle and prepare data\nLearn about basic, advanced, and interactive ways to plot data\nMake and share your own visualizations based on Quarto"
   },
   {
     "objectID": "index.html#find-your-way-around-the-workshop",
     "href": "index.html#find-your-way-around-the-workshop",
     "title": "Data Visualization",
-    "section": "🗺️ Find your way around the workshop",
-    "text": "🗺️ Find your way around the workshop\nTo look at each module, use the navigation bar above:\n\n📊 Data Visualization Principles\nLearn the basics of good visual design and what not to do.\n🧬 R Foundations\nLearn how to use R syntax, clean up your data, and make your workflows neat.\n🎨 Plot Gallery\nLook at examples that range from simple bar charts to interactive dashboards."
+    "section": "Find your way around the workshop",
+    "text": "Find your way around the workshop\nTo look at each module, use the navigation bar above:\n\nR Foundations\nLearn how to use R syntax, clean up your data, and make your workflows neat.\nData Visualization Principles\nLearn the basics of good visual design and what not to do.\nPlot Gallery\nLook at examples that range from simple bar charts to interactive dashboards."
   },
   {
     "objectID": "index.html#code-and-examples-in-real-time",
     "href": "index.html#code-and-examples-in-real-time",
     "title": "Data Visualization",
-    "section": "🧪 Code and Examples in Real Time",
-    "text": "🧪 Code and Examples in Real Time\nThere are code snippets, rendered outputs, and downloadable datasets all over the site. You can change and play around with the code for your own projects."
+    "section": "Code and Examples in Real Time",
+    "text": "Code and Examples in Real Time\nThere are code snippets, rendered outputs, and downloadable datasets all over the site. You can change and play around with the code for your own projects."
   },
   {
     "objectID": "index.html#printable-resources",
@@ -81,6 +81,76 @@
     "href": "r-foundations/data-wrangling.html",
     "title": "Data wrangling",
     "section": "",
-    "text": "Practices"
+    "text": "Importing data (CSV, Excel, etc.)\nExploring data structures vectors, lists, data frames, tibbles\nData cleaning (handling missing values, duplicates) transforming data with dplyr\nreshaping data (pivoting, melting) tidyr functions like pivot_longer, pivot_wider\nMerging and joining datasets dplyr joins: inner_join, left_join, right_join, full_join\nFiltering and selecting data dplyr functions: filter, select\nSorting and arranging data dplyr function: arrange\nCreating new variables (mutate) dplyr function: mutate"
+  },
+  {
+    "objectID": "plot-gallery/moderate.html",
+    "href": "plot-gallery/moderate.html",
+    "title": "Intermediate plots",
+    "section": "",
+    "text": "▸ Categorical\n- Grouped bar chart\n- Lollipop chart\n- Cleveland dot plot\n- Circular Bar plot\n- Waffle Plot\n\n\n▸ Continuous\n- Ridgeline plot\n- Frequency polygon\n\n\n▸ Category vs. Category\n- Grouped bar chart with facets\n- Heatmap of categorical intersections\n\n\n▸ Continuous vs. Continuous\n- Bubble chart\n- Pair plot (GGally::ggpairs)\n- Correlation matrix\n- Correlogram\n\n\n▸ Category vs. Continuous\n\n\n- Violin plot\n- Beeswarm plot\n- Dot plot\n- Jittered scatter over boxplot\n\n\n▸ Time Series\n- Area chart\n- Stacked Area chart\n- Stream graph\n\n\n▸ Map\n- Faceted choropleths\n- Cartogram\n\n\n▸ Others\n- Heat Map\n- Forest Plot"
+  },
+  {
+    "objectID": "specialized/plot_stats.html",
+    "href": "specialized/plot_stats.html",
+    "title": "Specialized Plots (with statistics)",
+    "section": "",
+    "text": "Statistical Visualizations\n\nRegression lines and confidence intervals\nCorrelation matrices\nResidual plots\nVisualizing model outputs\n\n\nCategorical\n\nBar chart with confidence intervals\nProportion plots with error bars\n\n\n\n▸ Continuous\n\nDensity plots with quantile shading\nHistogram with fitted curve\n\n\n\n▸ Category vs. Category\n\nChi-square residual heatmap\nProportional stacked bar with significance markers\n\n\n\n▸ Continuous vs. Continuous\n\nScatter plot with regression line\nCorrelation matrix\nResidual plots\n\n\n\n▸ Category vs. Continuous\n\nViolin plot with median and IQR\nBoxplot with notches or statistical annotations Time Series\nForecast overlays\nDecomposition plots (trend, seasonality, residuals)\n\n\n\n▸ Map\n\nChoropleth with statistical bins\nCartogram scaled by statistical variable\n\nHistogram\nDensity plot\nBox plot\nViolin plot\nCorrelogram\nForest plot\nRidge line plot\nHeat map (especially for correlations or frequencies)\nScatter plot (when enhanced with regression or stats)"
+  },
+  {
+    "objectID": "r-foundations/getting-started.html",
+    "href": "r-foundations/getting-started.html",
+    "title": "Getting Started with R",
+    "section": "",
+    "text": "R\nInstalling R and RStudio\nNavigating the Rstudio Interface\nUsing VS Code with R\nWriting and executing basic R code\nUNderstanding R packages and the tidyverse"
+  },
+  {
+    "objectID": "data-visualization/plot_data.html",
+    "href": "data-visualization/plot_data.html",
+    "title": "Plot data",
+    "section": "",
+    "text": "Plot types as per data structure\n\nCategorical vs. continuous variables\nUnivariate, bivariate, and multivariate plots\nTime series and grouped data considerations"
+  },
+  {
+    "objectID": "plot-gallery/basic.html",
+    "href": "plot-gallery/basic.html",
+    "title": "Basic Plots",
+    "section": "",
+    "text": "execute:\n  echo: true\n  warning: false\n  error: false\n  message: false\n\nformat:\n  html:\n    fig-preview: true\n    fig-class: \"zoomable\" \n\n▸ Categorical\n\nBar Chart Development\n\nSlide 1: Basic Bar ChartSlide 2: Grouped Bar Chart\n\n\n\nlibrary(ggplot2)\n\n# Basic bar chart showing count of vehicle classes\np1 &lt;- ggplot(mpg, aes(x = class)) +\ngeom_bar()\nprint(p1)\n\n\n\n\n\n\n\nlibrary(ggplot2)\n\n# Bar chart grouped by drive type\np2 &lt;- ggplot(mpg, aes(x = class, fill = drv)) +\ngeom_bar(position = \"dodge\")\n\nprint(p2)\n\n\n\n\n\n\n\n\n\n\n▸ Categorical\n\nBar chart\nPie chart\nDonut chart\n\n\n\n▸ Category vs. Category\n\nStacked bar chart\nMosaic plot\n\n\n\n▸ Continuous\n\nHistogram\nDensity plot\n\n\n\n▸ Continuous vs. Continuous\n\nScatter plot\n\n\n\n▸ Category vs. Continuous\n\nBox plot\n\n\n\n▸ Time Series\n\nLine chart\n\n\n\n▸ Map\n\nBubble map\nBasic choropleth"
+  },
+  {
+    "objectID": "specialized/merge_visuals.html",
+    "href": "specialized/merge_visuals.html",
+    "title": "Merged Visuals",
+    "section": "",
+    "text": "Overlaying multiple plot types\nPlotting distributions with statistical overlays\nEmbedding plots within plots (e.g., inset zooms)\n\n\nCategorical\n\nBar chart + annotations\n\n\n\n▸ Continuous\n\nDensity + histogram overlay\nRidgeline + density\n\n\n\n▸ Category vs. Category\n\nGrouped bar chart + facet grid\nMosaic + stacked bar hybrid\n\n\n\n▸ Continuous vs. Continuous\n\nScatter + marginal histograms\nBubble chart + trend line\n\n\n\n▸ Category vs. Continuous\n\nBoxplot + jittered points\nViolin + box overlay\n\n\n\n▸ Time Series\n\nLine + area chart\nStream graph + annotations\n\n\n\n▸ Map\n\nChoropleth + bubble overlay\nMap + inset zoom"
+  },
+  {
+    "objectID": "exporting_tools/debugging_plots.html",
+    "href": "exporting_tools/debugging_plots.html",
+    "title": "Debugging Plots",
+    "section": "",
+    "text": "Debugging plots are essential tools for diagnosing issues in data visualization and analysis. They help identify problems such as incorrect data representation, scaling issues, or unexpected patterns in the data. In this guide, we will explore various techniques and tools for creating effective debugging plots."
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "References"
+  },
+  {
+    "objectID": "exporting_tools/exporting_plots.html",
+    "href": "exporting_tools/exporting_plots.html",
+    "title": "Exporting plots",
+    "section": "",
+    "text": "Exporting plots from R can be done in several ways, depending on the desired output format and quality. Here are some common methods to export plots: 1. Using R’s built-in functions: - png(), jpeg(), tiff(), bmp(): These functions allow you to save plots in various raster formats. You can specify the filename, width, height, and resolution. R      png(\"plot.png\", width=800, height=600)      plot(x, y)      dev.off() - pdf(): This function saves plots in PDF format, which is vector-based and suitable for high-quality prints. R      pdf(\"plot.pdf\", width=8, height=6)      plot(x, y)      dev.off() - svg(): This function saves plots in SVG format, which is also vector-based and ideal for web use. R      svg(\"plot.svg\", width=8, height=6)      plot(x, y)      dev.off()"
+  },
+  {
+    "objectID": "specialized/interactive.html",
+    "href": "specialized/interactive.html",
+    "title": "Interactive",
+    "section": "",
+    "text": "Interactive Visualizations - Using plotly for interactivity - ggiraph and hoverable tooltips - Embedding interactive plots in Quarto or Shiny\n\n▸ Categorical\n\nInteractive bar chart (plotly, ggiraph)\nDropdown-filtered categorical plots\n\n\n\n▸ Continuous\n\nInteractive density or histogram with sliders\nZoomable ridgeline plots\n\n\n\n▸ Category vs. Category\n\nInteractive heatmap\nClickable mosaic plot\n\n\n\n▸ Continuous vs. Continuous\n\nHoverable scatter plot with tooltips\nBrushed selection scatter matrix\n\n\n\n▸ Category vs. Continuous\n\nInteractive violin or boxplot with hover labels\nDynamic filtering by category\n\n\n\n▸ Time Series\n\nScrollable time series\nTooltip-enabled line chart\n\n\n\n▸ Map\n\nInteractive choropleth (leaflet, plotly)\nClickable bubble map with popups\n\nScatter plot\nBubble plot\nHeat map\nTree map\nSankey diagram\nChord diagram\nSpider / radar chart\nWaterfall chart\nForest plot\nWord cloud"
   }
 ]

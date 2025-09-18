@@ -1,0 +1,68 @@
+---
+title: "Intermediate plots"
+author: "SpaRroW"
+---
+
+### ▸ Categorical
+
+-   Grouped bar chart
+
+**- Lollipop chart**
+
+-   Cleveland dot plot
+
+-   Circular Bar plot
+
+-   Waffle Plot
+
+### ▸ Continuous
+
+-   **Ridgeline plot**
+
+-   Frequency polygon
+
+### ▸ Category vs. Category
+
+-   Grouped bar chart with facets
+
+-   Heatmap of categorical intersections
+
+### ▸ Continuous vs. Continuous
+
+-   **Bubble chart**
+
+-   Pair plot (GGally::ggpairs)
+
+-   **Correlation matrix**
+
+-   **Correlogram**
+
+### ▸ Category vs. Continuous
+
+-   **Violin plot**
+
+-   Beeswarm plot
+
+-   Dot plot
+
+-   Jittered scatter over boxplot
+
+### ▸ Time Series
+
+-   **Area chart**
+
+-   **Stacked Area chart**
+
+-   Stream graph
+
+### ▸ Map
+
+-   Faceted choropleths
+
+-   Cartogram
+
+### ▸ Others
+
+-   Heat Map
+
+-   Forest Plot

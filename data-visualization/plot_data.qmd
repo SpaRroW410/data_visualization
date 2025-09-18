@@ -1,0 +1,13 @@
+---
+title: "Plot data"
+author: "SpaRroW"
+---
+
+### Plot types as per data structure
+
+- Categorical vs. continuous variables
+
+- Univariate, bivariate, and multivariate plots
+
+- Time series and grouped data considerations
+

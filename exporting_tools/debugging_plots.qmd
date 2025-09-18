@@ -1,0 +1,10 @@
+---
+title: "Debugging Plots"
+author: "SpaRroW"
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+Debugging plots are essential tools for diagnosing issues in data visualization and analysis. They help identify problems such as incorrect data representation, scaling issues, or unexpected patterns in the data. In this guide, we will explore various techniques and tools for creating effective debugging plots.

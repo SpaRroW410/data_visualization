@@ -7,36 +7,61 @@ website:
   site-url: "data-visualization/intro.qmd"
   navbar:
     left:
-      - text: "Data Visualization"
-        menu:
-          - text: "Introduction"
-            href: data-visualization/intro.qmd
-          - text: "Best Practices"
-            href: data-visualization/best_practices.qmd
       - text: "R Foundations"
         menu:
           - text: "Getting Started"
             href: r-foundations/getting-started.qmd
           - text: "Data Wrangling"
             href: r-foundations/data-wrangling.qmd
+      - text: "Data Visualization"
+        menu:
+          - text: "Introduction"
+            href: data-visualization/intro.qmd
+          - text: "Best Practices"
+            href: data-visualization/best_practices.qmd
+          - text: "Matching data to plots"
+            href: data-visualization/plot_data.qmd
       - text: "Plot Gallery"
         menu:
           - text: "Basic Plots"
             href: plot-gallery/basic.qmd
+          - text: "Intermediate plots"
+            href: plot-gallery/moderate.qmd
           - text: "Advanced Plots"
             href: plot-gallery/advanced.qmd
+      - text: "Specialized Plots"
+        menu:
+          - text: "Merged Visuals"
+            href: specialized/merge_visuals.qmd
+          - text: "Specialized plots (with statistics)"
+            href: specialized/plot_stats.qmd
           - text: "Interactive Plots"
-            href: plot-gallery/interactive.qmd
+            href: specialized/interactive.qmd
+      - text: "Exporting, Tools and Debugging"
+        menu:
+          - text: "Exporting Plots"
+            href: exporting_tools/exporting_plots.qmd
+          - text: "Plotting Tools"
+            href: exporting_tools/plotting_tools.qmd
+          - text: "Debugging Plots"
+            href: exporting_tools/debugging_plots.qmd
     right:
-      - icon: envelope
-        href: contact.qmd
-        aria-label: "Contact Us"
-        text: "Contact"
+      - text: "Reference"
+        icon: book
+        menu:
+        - text: "Contact Us"
+          href: contact.qmd
+        - text: "References"
+          href: references.qmd
+
   sidebar: true
   search: true
 
 format:
   html:
     theme: flatly
-    css: theme_webp.css
+    css: 
+     - theme_webp.css
+     - zoom.css
     toc: true
+    include-after-body: zoom.js

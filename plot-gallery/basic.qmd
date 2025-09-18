@@ -1,5 +1,9 @@
 ---
 title: "Basic Plots"
+format:
+  html:
+    code-copy: true
+    theme: cosmo
 sidebar:
   style: "floating"
   contents:
@@ -7,8 +11,96 @@ sidebar:
       contents:
         - href: basic.qmd
           text: "Basic"
+        - href: moderate.qmd
+          text: "Intermediate"
         - href: advanced.qmd
           text: "Advanced"
-        - href: interactive.qmd
-          text: "Interactive"
+editor: 
+  markdown: 
+    wrap: 72
 ---
+
+```yaml
+execute:
+  echo: true
+  warning: false
+  error: false
+  message: false
+
+format:
+  html:
+    fig-preview: true
+    fig-class: "zoomable" 
+```
+
+
+### ▸ Categorical
+#### **Bar Chart Development**
+
+::: {.panel-tabset}
+
+### Slide 1: Basic Bar Chart
+
+```{r}
+library(ggplot2)
+
+# Basic bar chart showing count of vehicle classes
+p1 <- ggplot(mpg, aes(x = class)) +
+geom_bar()
+print(p1)
+
+
+```
+
+### Slide 2: Grouped Bar Chart
+```{r}
+library(ggplot2)
+
+# Bar chart grouped by drive type
+p2 <- ggplot(mpg, aes(x = class, fill = drv)) +
+geom_bar(position = "dodge")
+
+print(p2)
+
+```
+
+:::
+
+
+### ▸ Categorical
+
+-   **Bar chart**
+
+-   **Pie chart**
+
+-   **Donut chart**
+
+### ▸ Category vs. Category
+
+-   Stacked bar chart
+
+-   Mosaic plot
+
+### ▸ Continuous
+
+-   **Histogram**
+
+-   **Density plot**
+
+### ▸ Continuous vs. Continuous
+
+-   **Scatter plot**
+
+### ▸ Category vs. Continuous
+
+-   **Box plot**
+
+### ▸ Time Series
+
+-   **Line chart**
+
+### ▸ Map
+
+-   Bubble map
+
+-   Basic choropleth

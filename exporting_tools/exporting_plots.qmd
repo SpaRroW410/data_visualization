@@ -1,0 +1,40 @@
+---
+title: "Exporting plots"
+sidebar:
+  style: "floating"
+  contents:
+    - section: "Exporting, tools and debugging"
+      contents:
+        - href: exporting_plots.qmd
+          text: "Exporting Plots"
+        - href: plotting_tools.qmd
+          text: "Intermediate"
+        - href: debugging_plots.qmd
+          text: "Debugging Plots"
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Exporting plots from R can be done in several ways, depending on the desired output format and quality. Here are some common methods to export plots:
+1. **Using R's built-in functions**:
+   - `png()`, `jpeg()`, `tiff()`, `bmp()`: These functions allow you to save plots in various raster formats. You can specify the filename, width, height, and resolution.
+     ```R
+     png("plot.png", width=800, height=600)
+     plot(x, y)
+     dev.off()
+     ```
+   - `pdf()`: This function saves plots in PDF format, which is vector-based and suitable for high-quality prints.
+     ```R
+     pdf("plot.pdf", width=8, height=6)
+     plot(x, y)
+     dev.off()
+     ```
+   - `svg()`: This function saves plots in SVG format, which is also vector-based and ideal for web use.
+     ```R
+     svg("plot.svg", width=8, height=6)
+     plot(x, y)
+     dev.off()
+     ```
+     
+     

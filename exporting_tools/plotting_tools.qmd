@@ -1,0 +1,13 @@
+---
+title: "Plotting Tools"
+author: "SpaRroW"
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Plotting Tools
+
+This chapter introduces various tools and libraries available in R for creating visualizations. It covers base R plotting functions, as well as popular packages like ggplot2 and lattice, which offer advanced capabilities for creating complex and customizable plots.
+
+

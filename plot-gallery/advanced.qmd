@@ -1,7 +1,56 @@
 ---
 title: "Advanced plots"
 author: "SpaRroW"
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
-Practices
+### ▸ Categorical
 
+-   Faceted bar plots **- Spider / radar charts** **- Tree Map** \### ▸
+    Continuous
+
+-   2D density plot
+
+-   Hexbin plot
+
+### ▸ Category vs. Category
+
+-   **Sankey diagram**
+
+-   **Chord diagram**
+
+### ▸ Continuous vs. Continuous
+
+-   Residual plots
+
+### ▸ Category vs. Continuous
+
+-   Raincloud plots
+
+### ▸ Time Series
+
+-   Time series decomposition plots
+
+### ▸ Map
+
+-   Animated geospatial transitions
+
+### ▸ Others
+
+-    **Waterfall chart**
+
+-   **Funnel chart**
+
+-   **Sunburst chart**
+
+-   **Word cloud**
+
+<!-- -->
+
+-   Combining plots with patchwork or cowplot
+
+-   Custom themes and annotations
+
+-   Dual-axis plots (with caution)
