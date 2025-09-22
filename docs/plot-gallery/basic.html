@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -95,8 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../theme_webp.css">
-<link rel="stylesheet" href="../zoom.css">
+<link rel="stylesheet" href="../assets/theme_webp.css">
 </head>
 
 <body class="nav-fixed">
@@ -161,7 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../plot-gallery/moderate.html" rel="" target="">
- <span class="dropdown-text">Intermediate plots</span></a>
+ <span class="dropdown-text">Intermediate Plots</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../plot-gallery/advanced.html" rel="" target="">
@@ -180,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../specialized/plot_stats.html" rel="" target="">
- <span class="dropdown-text">Specialized plots (with statistics)</span></a>
+ <span class="dropdown-text">Statistical Plots</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../specialized/interactive.html" rel="" target="">
@@ -242,14 +207,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#categorical" id="toc-categorical" class="nav-link active" data-scroll-target="#categorical">▸ Categorical</a></li>
-  <li><a href="#categorical-1" id="toc-categorical-1" class="nav-link" data-scroll-target="#categorical-1">▸ Categorical</a></li>
-  <li><a href="#category-vs.-category" id="toc-category-vs.-category" class="nav-link" data-scroll-target="#category-vs.-category">▸ Category vs.&nbsp;Category</a></li>
-  <li><a href="#continuous" id="toc-continuous" class="nav-link" data-scroll-target="#continuous">▸ Continuous</a></li>
-  <li><a href="#continuous-vs.-continuous" id="toc-continuous-vs.-continuous" class="nav-link" data-scroll-target="#continuous-vs.-continuous">▸ Continuous vs.&nbsp;Continuous</a></li>
+  <li><a href="#basic-plot-categories" id="toc-basic-plot-categories" class="nav-link active" data-scroll-target="#basic-plot-categories">🧭 Basic Plot Categories</a>
+  <ul class="collapse">
+  <li><a href="#categorical-plots" id="toc-categorical-plots" class="nav-link" data-scroll-target="#categorical-plots">▸ Categorical Plots</a></li>
+  <li><a href="#continuous-plots" id="toc-continuous-plots" class="nav-link" data-scroll-target="#continuous-plots">▸ Continuous Plots</a></li>
   <li><a href="#category-vs.-continuous" id="toc-category-vs.-continuous" class="nav-link" data-scroll-target="#category-vs.-continuous">▸ Category vs.&nbsp;Continuous</a></li>
-  <li><a href="#time-series" id="toc-time-series" class="nav-link" data-scroll-target="#time-series">▸ Time Series</a></li>
-  <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map">▸ Map</a></li>
+  <li><a href="#time-spatial-plots" id="toc-time-spatial-plots" class="nav-link" data-scroll-target="#time-spatial-plots">▸ Time &amp; Spatial Plots</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -273,114 +237,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">execute</span><span class="kw">:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">echo</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">warning</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">error</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">message</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">fig-preview</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">fig-class</span><span class="kw">:</span><span class="at"> </span><span class="st">"zoomable"</span><span class="at"> </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="categorical" class="level3">
-<h3 class="anchored" data-anchor-id="categorical">▸ Categorical</h3>
-<section id="bar-chart-development" class="level4">
-<h4 class="anchored" data-anchor-id="bar-chart-development"><strong>Bar Chart Development</strong></h4>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Slide 1: Basic Bar Chart</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Slide 2: Grouped Bar Chart</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic bar chart showing count of vehicle classes</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_bar</span>()</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="basic_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar chart grouped by drive type</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="basic_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</div>
-</div>
-</div>
+<section id="basic-plot-categories" class="level2">
+<h2 class="anchored" data-anchor-id="basic-plot-categories">🧭 Basic Plot Categories</h2>
+<p>Explore foundational plots grouped by data type and relationship. Each link opens a dedicated slide deck.</p>
+<hr>
+<section id="categorical-plots" class="level3">
+<h3 class="anchored" data-anchor-id="categorical-plots">▸ Categorical Plots</h3>
+<p>Includes: Bar chart, Pie chart, Donut chart, Stacked bar chart, Mosaic plot<br>
+🔗 <a href="../plot-gallery/basic/categorical.html">View Slide Deck →</a></p>
+<hr>
 </section>
-</section>
-<section id="categorical-1" class="level3">
-<h3 class="anchored" data-anchor-id="categorical-1">▸ Categorical</h3>
-<ul>
-<li><p><strong>Bar chart</strong></p></li>
-<li><p><strong>Pie chart</strong></p></li>
-<li><p><strong>Donut chart</strong></p></li>
-</ul>
-</section>
-<section id="category-vs.-category" class="level3">
-<h3 class="anchored" data-anchor-id="category-vs.-category">▸ Category vs.&nbsp;Category</h3>
-<ul>
-<li><p>Stacked bar chart</p></li>
-<li><p>Mosaic plot</p></li>
-</ul>
-</section>
-<section id="continuous" class="level3">
-<h3 class="anchored" data-anchor-id="continuous">▸ Continuous</h3>
-<ul>
-<li><p><strong>Histogram</strong></p></li>
-<li><p><strong>Density plot</strong></p></li>
-</ul>
-</section>
-<section id="continuous-vs.-continuous" class="level3">
-<h3 class="anchored" data-anchor-id="continuous-vs.-continuous">▸ Continuous vs.&nbsp;Continuous</h3>
-<ul>
-<li><strong>Scatter plot</strong></li>
-</ul>
+<section id="continuous-plots" class="level3">
+<h3 class="anchored" data-anchor-id="continuous-plots">▸ Continuous Plots</h3>
+<p>Includes: Histogram, Density plot, Scatter plot<br>
+🔗 <a href="../plot-gallery/basic/continuous.html">View Slide Deck →</a></p>
+<hr>
 </section>
 <section id="category-vs.-continuous" class="level3">
 <h3 class="anchored" data-anchor-id="category-vs.-continuous">▸ Category vs.&nbsp;Continuous</h3>
-<ul>
-<li><strong>Box plot</strong></li>
-</ul>
+<p>Includes: Box plot<br>
+🔗 <a href="../plot-gallery/basic/cat_vs_cont.html">View Slide Deck →</a></p>
+<hr>
 </section>
-<section id="time-series" class="level3">
-<h3 class="anchored" data-anchor-id="time-series">▸ Time Series</h3>
-<ul>
-<li><strong>Line chart</strong></li>
-</ul>
-</section>
-<section id="map" class="level3">
-<h3 class="anchored" data-anchor-id="map">▸ Map</h3>
-<ul>
-<li><p>Bubble map</p></li>
-<li><p>Basic choropleth</p></li>
-</ul>
+<section id="time-spatial-plots" class="level3">
+<h3 class="anchored" data-anchor-id="time-spatial-plots">▸ Time &amp; Spatial Plots</h3>
+<p>Includes: Line chart, Bubble map, Choropleth map<br>
+🔗 <a href="../plot-gallery/basic/time_space.html">View Slide Deck →</a></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('img.zoomable').forEach(img => {
-      img.addEventListener('click', function () {
-        this.classList.toggle('active');
-      });
-    });
-  });
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

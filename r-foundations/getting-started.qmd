@@ -21,4 +21,11 @@ Using VS Code with R
 
 Writing and executing basic R code
 
-UNderstanding R packages and the tidyverse
+Understanding R packages and the tidyverse
+
+::: {.panel-tabset}
+
+<iframe src="https://view.officeapps.live.com/op/embed.aspx?src=https://raw.githubusercontent.com/github.com/SpaRroW410/data_visualization/slides/intro_r.pptx" width="100%" height="600px" frameborder="0"></iframe>
+
+
+:::

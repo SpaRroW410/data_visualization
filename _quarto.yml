@@ -5,6 +5,7 @@ project:
 website:
   title: "Data Visualization"
   site-url: "data-visualization/intro.qmd"
+
   navbar:
     left:
       - text: "R Foundations"
@@ -25,18 +26,18 @@ website:
         menu:
           - text: "Basic Plots"
             href: plot-gallery/basic.qmd
-          - text: "Intermediate plots"
+          - text: "Intermediate Plots"
             href: plot-gallery/moderate.qmd
           - text: "Advanced Plots"
             href: plot-gallery/advanced.qmd
       - text: "Specialized Plots"
         menu:
-          - text: "Merged Visuals"
-            href: specialized/merge_visuals.qmd
-          - text: "Specialized plots (with statistics)"
-            href: specialized/plot_stats.qmd
-          - text: "Interactive Plots"
-            href: specialized/interactive.qmd
+          - href: specialized/merge_visuals.qmd
+            text: "Merged Visuals"
+          - href: specialized/plot_stats.qmd
+            text: "Statistical Plots"
+          - href: specialized/interactive.qmd
+            text: "Interactive Plots"
       - text: "Exporting, Tools and Debugging"
         menu:
           - text: "Exporting Plots"
@@ -45,23 +46,23 @@ website:
             href: exporting_tools/plotting_tools.qmd
           - text: "Debugging Plots"
             href: exporting_tools/debugging_plots.qmd
+
     right:
       - text: "Reference"
         icon: book
         menu:
-        - text: "Contact Us"
-          href: contact.qmd
-        - text: "References"
-          href: references.qmd
+          - text: "Contact Us"
+            href: contact.qmd
+          - text: "References"
+            href: references.qmd
 
-  sidebar: true
   search: true
 
 format:
   html:
     theme: flatly
-    css: 
-     - theme_webp.css
-     - zoom.css
+    css: assets/theme_webp.css
+    code-copy: true
     toc: true
-    include-after-body: zoom.js
+    lightbox: auto
+

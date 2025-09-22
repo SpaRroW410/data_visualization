@@ -1,0 +1,71 @@
+---
+title: "Categorical Plots"
+format: 
+  revealjs:
+    theme: serif
+    css: ../../assets/theme_webp.css
+    include-after-body: footer.html
+    slide-number: true
+    navigation-mode: linear
+    code-copy: true
+    chalkboard: true
+    preview-links: true
+    center: true
+    zoom: true
+---
+
+```{r}
+#| echo: false
+
+library(ggplot2)
+```
+
+## Bar Chart
+
+## Basic Bar Chart
+
+```{r}
+#| out-width: 100%
+#| echo: true
+#| fig-title: "Basic Bar chart"
+ggplot(mpg, aes(x = class)) +
+  geom_bar()
+```
+
+## Grouped Bar Chart
+
+```{r}
+#| fig-cap: "Grouped Bar Chart"
+#| out-width: 100%
+#| echo: true
+ggplot(mpg, aes(x = class, fill = drv)) +
+  geom_bar(position = "dodge")
+
+```
+
+## Pie Chart
+
+## Basic Pie Chart
+
+```{r}
+#| fig-cap: "Pie Chart"
+#| out-width: 100%
+#| echo: true
+ggplot(mpg, aes(x = "", fill = class)) +
+  geom_bar(width = 1) +
+  coord_polar("y") +
+  theme_void()
+```
+
+## Dough Nut Chart
+
+```{r}
+#| fig-cap: "Donut Chart"
+#| out-width: 100%
+#| echo: true
+ggplot(mpg, aes(x = 2, fill = class)) +
+  geom_bar(width = 1) +
+  coord_polar("y") +
+  theme_void() +
+  xlim(0.5, 2.5)
+```

@@ -1,0 +1,78 @@
+---
+title: "Introduction"
+sidebar:
+  style: "floating"
+  contents:
+    - section: "Data Visualization"
+      contents:
+        - href: intro.qmd
+          text: "Introduction"
+        - href: best_practices.qmd
+          text: "Best Practices"
+        - href: plot_data.qmd 
+          text: "Matching data to plots" 
+---
+
+# Introduction
+
+
+Why Visualize Data?
+
+Grammer of Graphics: the ggplot2 Philosophy
+
+
+Foundations of Visualization
+
+These concepts form the backbone of any ggplot2 plot.
+- Data – The dataset being visualized
+- Aesthetics – Mapping data to visual properties (aes())
+- Geometries – Visual marks like points, lines, bars (geom_*)
+- Statistics – Summarizing or transforming data (stat_*)
+- Coordinates – Defining the plotting space (coord_*)
+- Facets – Creating subplots for subsets of data (facet_wrap, facet_grid)
+- Scales – Mapping data values to aesthetics (scale_*)
+- Guides – Legends and axes to interpret scales
+
+Styling and Layout
+These elements refine the appearance and readability of plots.
+- Themes – Overall visual style (theme_*, theme())
+- Color – Using palettes and contrast effectively
+- Labels – Axis labels, data labels (labs(), geom_text)
+- Titles – Plot titles and subtitles
+- Captions – Additional context below the plot
+- Margins – Adjusting spacing around plot elements
+- Annotations – Highlighting specific data points (annotate(), geom_label)
+
+Structural Composition
+These concepts help build complex and layered plots.
+- Layers – Combining multiple geoms and stats
+- Customization – Tailoring plots to specific needs
+- Exporting – Saving plots (ggsave(), formats)
+- Reproducibility – Ensuring consistent outputs across sessions
+
+Interpretation and Communication
+These ideas focus on the purpose and impact of visualization.
+- Data Preparation – Cleaning and transforming data
+- Data Exploration – Using plots to uncover patterns
+- Communication – Conveying insights effectively
+- Storytelling – Building narrative through visuals
+- Accessibility – Designing for diverse audiences
+
+Advanced Techniques and Tools
+These extend ggplot2’s capabilities and introduce interactivity.
+- Interactivity – Dynamic plots with plotly, ggiraph
+- Animation – Time-based visuals with gganimate
+- Tools and Libraries – Supporting packages (ggplot2, patchwork, cowplot)
+- ggplot2 – Core package for layered grammar of graphics
+- Other R Packages – lattice, plotly, shiny, etc.
+
+Mapping aesthetics to data variables
+- Common aesthetics: x, y, color, fill, size, shape, alpha
+- Aesthetic mappings are defined inside aes() function
+- Example: aes(x = variable1, y = variable2, color = category)
+- Aesthetic mappings can be global (in ggplot()) or local (in geom_*)
+- Global mappings apply to all layers, local mappings override global ones for that layer
+
+
+
+
