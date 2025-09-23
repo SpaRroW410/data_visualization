@@ -12,7 +12,7 @@ website:
         menu:
           - text: "Getting Started"
             href: r-foundations/getting-started.qmd
-          - text: "Data Wrangling"
+          - text: "Data Wrangling (Tidyverse)"
             href: r-foundations/data-wrangling.qmd
       - text: "Data Visualization"
         menu:

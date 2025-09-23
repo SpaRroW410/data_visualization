@@ -210,11 +210,88 @@
     "text": "▸ Categorical\n\nGrouped bar chart\n\n- Lollipop chart\n\nCleveland dot plot\nCircular Bar plot\nWaffle Plot\n\n\n\n▸ Continuous\n\nRidgeline plot\nFrequency polygon\n\n\n\n▸ Category vs. Category\n\nGrouped bar chart with facets\nHeatmap of categorical intersections\n\n\n\n▸ Continuous vs. Continuous\n\nBubble chart\nPair plot (GGally::ggpairs)\nCorrelation matrix\nCorrelogram\n\n\n\n▸ Category vs. Continuous\n\nViolin plot\nBeeswarm plot\nDot plot\nJittered scatter over boxplot\n\n\n\n▸ Time Series\n\nArea chart\nStacked Area chart\nStream graph\n\n\n\n▸ Map\n\nFaceted choropleths\nCartogram\n\n\n\n▸ Others\n\nHeat Map\nForest Plot"
   },
   {
-    "objectID": "r-foundations/getting-started.html",
-    "href": "r-foundations/getting-started.html",
-    "title": "Getting Started with R",
-    "section": "",
-    "text": "R\nInstalling R and RStudio\nNavigating the Rstudio Interface\nUsing VS Code with R\nWriting and executing basic R code\nUnderstanding R packages and the tidyverse"
+    "objectID": "r-foundations/getting-started.html#r---language",
+    "href": "r-foundations/getting-started.html#r---language",
+    "title": "Introduction to R",
+    "section": "R - Language",
+    "text": "R - Language\n\nDeveloped in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand\n\nA powerful language for statistical computing and graphics\n\nWidely used by statisticians, data scientists, and researchers\n\nRStudio: User Interface"
+  },
+  {
+    "objectID": "r-foundations/getting-started.html#why-use-r",
+    "href": "r-foundations/getting-started.html#why-use-r",
+    "title": "Introduction to R",
+    "section": "Why Use R",
+    "text": "Why Use R\n\nExtensive libraries for data analysis and visualization\n\nActive community support\n\nCross-platform compatibility (Windows, MacOS, Linux)\n\nIntegration with Python and C++\n\nFree and open-source"
+  },
+  {
+    "objectID": "r-foundations/getting-started.html#key-features-of-r",
+    "href": "r-foundations/getting-started.html#key-features-of-r",
+    "title": "Introduction to R",
+    "section": "Key Features of R",
+    "text": "Key Features of R\n\nComprehensive statistical analysis tools\n\nAdvanced graphics capabilities with ggplot2\n\nRich ecosystem of packages (dplyr, tidyr)\n\nInteractive and reproducible research with RMarkdown"
+  },
+  {
+    "objectID": "r-foundations/getting-started.html#r-vs-python",
+    "href": "r-foundations/getting-started.html#r-vs-python",
+    "title": "Introduction to R",
+    "section": "R vs Python",
+    "text": "R vs Python\nR\n\nDesigned for statistical analysis and visualization\n\nRich ecosystem: dplyr, ggplot2, caret\n\nPreferred in academia and research\n\nPython\n\nGeneral-purpose language\n\nStrong in data science and ML: pandas, scikit-learn, TensorFlow\n\nVersatile for web, automation, and more"
+  },
+  {
+    "objectID": "r-foundations/getting-started.html#installation-of-r-and-rstudio",
+    "href": "r-foundations/getting-started.html#installation-of-r-and-rstudio",
+    "title": "Introduction to R",
+    "section": "Installation of R and RStudio",
+    "text": "Installation of R and RStudio\n\nR: CRAN Windows\n\nR: CRAN MacOS\n\nRStudio: RStudio Desktop - Posit"
+  },
+  {
+    "objectID": "r-foundations/getting-started.html#r-4.4.1",
+    "href": "r-foundations/getting-started.html#r-4.4.1",
+    "title": "Introduction to R",
+    "section": "R 4.4.1",
+    "text": "R 4.4.1"
+  },
+  {
+    "objectID": "r-foundations/getting-started.html#rstudio-interface",
+    "href": "r-foundations/getting-started.html#rstudio-interface",
+    "title": "Introduction to R",
+    "section": "RStudio Interface",
+    "text": "RStudio Interface\n\nSource Pane\n\nEnvironment / History\n\nConsole Pane\n\nViewer Pane\n\nProject"
+  },
+  {
+    "objectID": "r-foundations/getting-started.html#project",
+    "href": "r-foundations/getting-started.html#project",
+    "title": "Introduction to R",
+    "section": "Project",
+    "text": "Project\n\nCentralized Management\n\nConsistent Environment\n\nVersion Control Integration\n\nQuicker Setup"
+  },
+  {
+    "objectID": "r-foundations/getting-started.html#new-file",
+    "href": "r-foundations/getting-started.html#new-file",
+    "title": "Introduction to R",
+    "section": "New File",
+    "text": "New File"
+  },
+  {
+    "objectID": "r-foundations/getting-started.html#variables-and-functions",
+    "href": "r-foundations/getting-started.html#variables-and-functions",
+    "title": "Introduction to R",
+    "section": "Variables and Functions",
+    "text": "Variables and Functions"
+  },
+  {
+    "objectID": "r-foundations/getting-started.html#lists-and-matrices",
+    "href": "r-foundations/getting-started.html#lists-and-matrices",
+    "title": "Introduction to R",
+    "section": "Lists and Matrices",
+    "text": "Lists and Matrices\nLists\n\nFlexible structure for heterogeneous data\n\nUse cases: nested structures, model results\n\nMatrices\n\n2D array for homogeneous data\n\nUse cases: computations, tabular data, image processing"
+  },
+  {
+    "objectID": "r-foundations/getting-started.html#packages",
+    "href": "r-foundations/getting-started.html#packages",
+    "title": "Introduction to R",
+    "section": "Packages",
+    "text": "Packages\n\nCollections of functions, data, and compiled code\n\nInstallation:\n\n\n  install.packages(c(\"tidyverse\", \"ggplot2\", \"readxl\", \"gtsummary\", \"ggstatsplot\", \"flextable\", \"pacman\"))"
   },
   {
     "objectID": "specialized/interactive.html",

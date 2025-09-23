@@ -1,5 +1,18 @@
 ---
-title: "Getting Started with R"
+title: "Introduction to R"
+subtitle: "Gateway to Statistical Compuing"
+format: 
+  revealjs:
+    theme: serif
+    css: ../assets/theme_webp.css
+    include-after-body: footer.html
+    slide-number: true
+    navigation-mode: linear
+    code-copy: true
+    chalkboard: true
+    preview-links: true
+    center: true
+    zoom: true
 sidebar:
   style: "floating"
   contents:
@@ -8,24 +21,114 @@ sidebar:
         - href: getting-started.qmd
           text: "Getting Started"
         - href: data-wrangling.qmd
-          text: "Data Wrangling"
+          text: "Data Wrangling (Tidyverse)"
 ---
 
-R
 
-Installing R and RStudio
+## R - Language
 
-Navigating the Rstudio Interface
+- Developed in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand  
+- A powerful language for statistical computing and graphics  
+- Widely used by statisticians, data scientists, and researchers  
+- RStudio: User Interface  
 
-Using VS Code with R
+---
 
-Writing and executing basic R code
+## Why Use R
 
-Understanding R packages and the tidyverse
+- Extensive libraries for data analysis and visualization  
+- Active community support  
+- Cross-platform compatibility (Windows, MacOS, Linux)  
+- Integration with Python and C++  
+- Free and open-source  
 
-::: {.panel-tabset}
+---
 
-<iframe src="https://view.officeapps.live.com/op/embed.aspx?src=https://sparrow410.github.io/data_visualization/slides/intro_r.pptx" width="100%" height="600px" frameborder="0"></iframe>
+## Key Features of R
 
+- Comprehensive statistical analysis tools  
+- Advanced graphics capabilities with `ggplot2`  
+- Rich ecosystem of packages (`dplyr`, `tidyr`)  
+- Interactive and reproducible research with RMarkdown  
 
-:::
+---
+
+## R vs Python
+
+### R
+
+- Designed for statistical analysis and visualization  
+- Rich ecosystem: `dplyr`, `ggplot2`, `caret`  
+- Preferred in academia and research  
+
+### Python
+
+- General-purpose language  
+- Strong in data science and ML: `pandas`, `scikit-learn`, `TensorFlow`  
+- Versatile for web, automation, and more  
+
+---
+
+## Installation of R and RStudio
+
+- R: [CRAN Windows](https://cran.rstudio.com/bin/windows/base/R-4.4.1-win.exe)  
+- R: [CRAN MacOS](https://cran.rstudio.com/bin/macosx/big-sur-arm64/base/R-4.4.1-arm64.pkg)  
+- RStudio: RStudio Desktop - Posit  
+
+---
+
+## R 4.4.1
+
+---
+
+## RStudio Interface
+
+- Source Pane  
+- Environment / History  
+- Console Pane  
+- Viewer Pane  
+- Project  
+
+---
+
+## Project
+
+- Centralized Management  
+- Consistent Environment  
+- Version Control Integration  
+- Quicker Setup  
+
+---
+
+## New File
+
+---
+
+## Variables and Functions
+
+---
+
+## Lists and Matrices
+
+### Lists
+
+- Flexible structure for heterogeneous data  
+- Use cases: nested structures, model results  
+
+### Matrices
+
+- 2D array for homogeneous data  
+- Use cases: computations, tabular data, image processing  
+
+---
+
+## Packages
+
+- Collections of functions, data, and compiled code  
+- Installation:  
+
+```{r}
+#| eval: false
+#| echo: true
+  install.packages(c("tidyverse", "ggplot2", "readxl", "gtsummary", "ggstatsplot", "flextable", "pacman"))
+```
