@@ -1,10 +1,17 @@
 [
   {
+    "objectID": "test.html",
+    "href": "test.html",
+    "title": "Test Reveal Deck",
+    "section": "",
+    "text": "library(ggplot2)\nplot(cars)"
+  },
+  {
     "objectID": "test.html#hello",
     "href": "test.html#hello",
     "title": "Test Reveal Deck",
-    "section": "Hello",
-    "text": "Hello"
+    "section": "",
+    "text": "library(ggplot2)\nplot(cars)"
   },
   {
     "objectID": "specialized/merge_visuals.html",
@@ -235,7 +242,7 @@
     "href": "r-foundations/getting-started.html#r-vs-python",
     "title": "Introduction to R",
     "section": "R vs Python",
-    "text": "R vs Python\nR\n\nDesigned for statistical analysis and visualization\n\nRich ecosystem: dplyr, ggplot2, caret\n\nPreferred in academia and research\n\nPython\n\nGeneral-purpose language\n\nStrong in data science and ML: pandas, scikit-learn, TensorFlow\n\nVersatile for web, automation, and more"
+    "text": "R vs Python\n\n\nR\n\nDesigned for statistical analysis and visualization\n\nRich ecosystem: dplyr, ggplot2, caret\n\nPreferred in academia and research\n\n\n\nPython\n\nGeneral-purpose language\n\nStrong in data science and ML: pandas, scikit-learn, TensorFlow\n\nVersatile for web, automation, and more"
   },
   {
     "objectID": "r-foundations/getting-started.html#installation-of-r-and-rstudio",
@@ -284,7 +291,7 @@
     "href": "r-foundations/getting-started.html#lists-and-matrices",
     "title": "Introduction to R",
     "section": "Lists and Matrices",
-    "text": "Lists and Matrices\nLists\n\nFlexible structure for heterogeneous data\n\nUse cases: nested structures, model results\n\nMatrices\n\n2D array for homogeneous data\n\nUse cases: computations, tabular data, image processing"
+    "text": "Lists and Matrices\n\n\nLists\n\nFlexible structure for heterogeneous data\n\nUse cases: nested structures, model results\n\n\nMatrices\n\n2D array for homogeneous data\n\nUse cases: computations, tabular data, image processing"
   },
   {
     "objectID": "r-foundations/getting-started.html#packages",

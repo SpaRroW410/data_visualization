@@ -1,6 +1,6 @@
 ---
 title: "Test Reveal Deck"
-format: revealjs
+format: html
 ---
 
 ## Hello
@@ -9,3 +9,8 @@ format: revealjs
 library(ggplot2)
 plot(cars)
 ```
+
+```{r}
+
+```
+
