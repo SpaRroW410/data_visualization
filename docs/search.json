@@ -4,14 +4,14 @@
     "href": "test.html",
     "title": "Test Reveal Deck",
     "section": "",
-    "text": "library(ggplot2)\nplot(cars)"
+    "text": "library(ggplot2)\n\nWarning: package 'ggplot2' was built under R version 4.5.1\n\nplot(cars)"
   },
   {
     "objectID": "test.html#hello",
     "href": "test.html#hello",
     "title": "Test Reveal Deck",
     "section": "",
-    "text": "library(ggplot2)\nplot(cars)"
+    "text": "library(ggplot2)\n\nWarning: package 'ggplot2' was built under R version 4.5.1\n\nplot(cars)"
   },
   {
     "objectID": "specialized/merge_visuals.html",
