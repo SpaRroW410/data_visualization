@@ -1,6 +1,6 @@
 /* === Typography === */
 body {
-  font-family: 'Georgia', serif, Times, "Times New Roman"; /* ← changed to serif */
+  font-family: 'Georgia', serif, Times, "Times New Roman";
   font-size: 1.05em;
   line-height: 1.6;
   color: #333333;
@@ -8,12 +8,11 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Merriweather', serif, Times, "Times New Roman"; /* ← changed to serif */
+  font-family: 'Merriweather', serif, Times, "Times New Roman";
   color: #2c3e50;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
 }
-
 
 body:not(.reveal) code,
 body:not(.reveal) pre {
@@ -23,7 +22,6 @@ body:not(.reveal) pre {
   border-radius: 4px;
   color: #d6336c;
 }
-
 
 /* === Layout Enhancements === */
 .container {
@@ -80,63 +78,20 @@ blockquote {
   margin: 1em 0;
   font-style: italic;
 }
-/* === Code Block Styling for Projector === */
-.reveal pre code {
-  background-color: #1e1e1e;       /* deep charcoal */
-  color: #f8f8f2;                  /* soft white text */
-  font-family: 'Fira Code', monospace;
-  font-size: 1.2em;                /* larger for projection */
-  line-height: 1.6;
-  padding: 1em;
-  border-radius: 8px;
-  overflow-x: auto;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+
+/* === Iframe Container === */
+.iframe-container {
+  padding: 10px;
+  background-color: #000000;
+  border-radius: 12px;
+  margin-bottom: 20px;
 }
 
-/* Optional: Inline code styling */
-.reveal code {
-    background-color: #333;
-  color: #e0e0e0;
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-size: 1.1em;
+.iframe-container details summary {
+  color: #ffffff;
+  cursor: pointer;
 }
 
-.reveal pre {
-  margin-bottom: 1.5em;
+.iframe-container details[open] summary {
+  color: #ffcc00;
 }
-
-/* === Typography for RevealJS === */  
-.reveal {  
-  font-family: 'Georgia', serif, Times, "Times New Roman"; 
-  line-height: 1.6;  
-  color: #333333;  
-}  
-  
-.reveal h1,   
-.reveal h2,   
-.reveal h3,   
-.reveal h4 {  
-  font-family: 'Merriweather', serif, Times, "Times New Roman";  
-  color: #2c3e50;  
-  margin-top: 1.5em;  
-  margin-bottom: 0.5em;  
-}
-
-/* Reduce spacing between main heading and subheadings in columns */  
-.reveal .columns h2 {  
-  margin-bottom: 0.2em;  
-}  
-  
-.reveal .columns h3 {  
-  margin-top: 0.2em;  
-  margin-bottom: 0.4em;  
-}  
-  
-/* Target first h3 in each column for tighter spacing */  
-.reveal .columns .column h3:first-child {  
-  margin-top: 0.2em;  
-}
-
-
-

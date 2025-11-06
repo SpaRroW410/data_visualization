@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
-  <meta name="author" content="SpaRroW">
-  <title>Data Visualization - Best Practices</title>
+  <title>Data Visualization - Categorical Plots</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -29,15 +28,80 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
-  <link rel="stylesheet" href="../assets/slide_deck.css">
-  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../site_libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="../../assets/theme_webp.css">
+  <link href="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -328,282 +392,56 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Best Practices</h1>
+  <h1 class="title">Categorical Plots</h1>
 
 <div class="quarto-title-authors">
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-SpaRroW 
-</div>
-</div>
 </div>
 
 </section>
-<section id="introduction-to-data-visualization" class="slide level2 center">
-<h2>Introduction to Data Visualization</h2>
-<blockquote>
-<p>“The simple graph has brought more information to the data analyst’s mind than any other device.” - John Tukey</p>
-</blockquote>
-<div>
-<ul>
-<li class="fragment">Data visualization transforms complex data into visual insights</li>
-<li class="fragment">Good visualizations tell a story</li>
-<li class="fragment">Poor visualizations mislead or confuse</li>
-<li class="fragment"><strong>Every choice matters</strong> - especially in healthcare</li>
-</ul>
+<section id="bar-chart" class="slide level2 center">
+<h2>Bar Chart</h2>
+</section>
+<section id="basic-bar-chart" class="slide level2 center">
+<h2>Basic Bar Chart</h2>
+<div class="cell" data-fig-title="Basic Bar chart">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</section>
-<section id="the-big-idea" class="slide level2 center">
-<h2>The Big Idea</h2>
-<p><strong>Can you summarize your message in one sentence?</strong></p>
-<div>
-<ul>
-<li class="fragment">Your “Big Idea” should be:
-<ul>
-<li class="fragment"><strong>Articulate your point of view</strong>: What do you want your audience to know?</li>
-<li class="fragment"><strong>Convey what’s at stake</strong>: Why does this matter?</li>
-<li class="fragment"><strong>Be a complete sentence</strong>: Not just a topic, but a statement</li>
-</ul></li>
-<li class="fragment">Example: “We should implement early discharge planning because it reduces re-admissions by 35%”</li>
-</ul>
+<img data-src="categorical_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:100.0%" class="r-stretch"></section>
+<section id="grouped-bar-chart" class="slide level2 center">
+<h2>Grouped Bar Chart</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
+<img data-src="categorical_files/figure-revealjs/unnamed-chunk-3-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Grouped Bar Chart</p></section>
+<section id="pie-chart" class="slide level2 center">
+<h2>Pie Chart</h2>
 </section>
-<section id="principle-1-choose-the-right-chart-type" class="slide level2 center">
-<h2>Principle 1: Choose the Right Chart Type</h2>
-<p><strong>Match your visualization to your data and message</strong></p>
-<p>Different types of data require different visualizations:</p>
-<div class="slide" style="font-size: 0.7em;">
-<ul>
-<li class="fragment"><strong>Simple text</strong>: When you have 1-2 numbers</li>
-<li class="fragment"><strong>Tables</strong>: For multiple units, precise values</li>
-<li class="fragment"><strong>Heatmaps</strong>: For tables with many values</li>
-<li class="fragment"><strong>Scatter plots</strong>: For relationships between variables</li>
-<li class="fragment"><strong>Line charts</strong>: For continuous data over time</li>
-<li class="fragment"><strong>Slopegraphs</strong>: For comparing two time points</li>
-<li class="fragment"><strong>Bar charts</strong>: For categorical comparisons</li>
-</ul>
+<section id="basic-pie-chart" class="slide level2 center">
+<h2>Basic Pie Chart</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">fill =</span> class)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">geom_bar</span>(<span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">coord_polar</span>(<span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</section>
-<section id="chart-type-simple-text" class="slide level2 center">
-<h2>Chart Type: Simple Text</h2>
+<img data-src="categorical_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Pie Chart</p></section>
+<section id="dough-nut-chart" class="slide level2 center">
+<h2>Dough Nut Chart</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">fill =</span> class)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_bar</span>(<span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">coord_polar</span>(<span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">xlim</span>(<span class="fl">0.5</span>, <span class="fl">2.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> When you have just 1-2 key numbers, text is more impactful than a chart. Makes the metric impossible to miss.</p>
-</section>
-<section id="chart-type-table" class="slide level2 center">
-<h2>Chart Type: Table</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Tables are ideal when you need to show precise values with different units of measure. Better than a chart when exact numbers matter.</p>
-</section>
-<section id="chart-type-heatmap" class="slide level2 center">
-<h2>Chart Type: Heatmap</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Heatmaps encode values with color, making it easy to spot patterns in large tables. Great for identifying hot/cold spots quickly.</p>
-</section>
-<section id="chart-type-scatter-plot" class="slide level2 center">
-<h2>Chart Type: Scatter Plot</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Scatter plots reveal relationships between two continuous variables. The trend line makes the correlation clear.</p>
-</section>
-<section id="chart-type-line-chart" class="slide level2 center">
-<h2>Chart Type: Line Chart</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Line charts show trends over time. The continuous line emphasizes the progression and makes patterns clear.</p>
-</section>
-<section id="chart-type-slopegraph" class="slide level2 center">
-<h2>Chart Type: Slopegraph</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Slopegraphs are perfect for comparing two time points. They show both ranking and magnitude of change clearly.</p>
-</section>
-<section id="chart-type-horizontal-bar-chart" class="slide level2 center">
-<h2>Chart Type: Horizontal Bar Chart</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Horizontal bars are easier to read than vertical, especially with long labels. Natural left-to-right reading.</p>
-</section>
-<section id="avoid-line-charts-for-categories" class="slide level2 center">
-<h2>Avoid: Line Charts for Categories</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Lines suggest continuous change between points, but there’s no meaningful order or connection between these categories.</p>
-</section>
-<section id="chart-type-stacked-bar-chart" class="slide level2 center">
-<h2>Chart Type: Stacked Bar Chart</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Stacked bars show part-to-whole relationships over time. Easy to see both total volume and composition.</p>
-</section>
-<section id="avoid-y-axis-not-starting-at-zero" class="slide level2 center">
-<h2>Avoid: Y-Axis Not Starting at Zero</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Truncating the Y-axis exaggerates small differences. Makes 3% variation look like massive differences in performance.</p>
-</section>
-<section id="better-y-axis-starting-at-zero" class="slide level2 center">
-<h2>Better: Y-Axis Starting at Zero</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Starting at zero shows true proportions. All hospitals are performing well - the differences are minor.</p>
-</section>
-<section id="avoid-pie-charts" class="slide level2 center">
-<h2>Avoid: Pie Charts</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Humans struggle to compare angles and areas. Which is bigger - Respiratory or Other? Hard to tell precisely.</p>
-</section>
-<section id="better-horizontal-bar-chart" class="slide level2 center">
-<h2>Better: Horizontal Bar Chart</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Horizontal bars make comparisons effortless. Rankings and differences are immediately clear.</p>
-</section>
-<section id="principle-2-eliminate-clutter" class="slide level2 center">
-<h2>Principle 2: Eliminate Clutter</h2>
-<p><strong>Remove anything that doesn’t add value</strong></p>
-<div>
-<ul>
-<li class="fragment">Remove chart borders and backgrounds</li>
-<li class="fragment">Lighten or remove gridlines<br>
-</li>
-<li class="fragment">Remove redundant data labels</li>
-<li class="fragment"><strong>Direct labeling &gt; legends</strong></li>
-<li class="fragment">Clean up axis labels</li>
-<li class="fragment">Every element should earn its place</li>
-</ul>
 </div>
-</section>
-<section id="example-default-plot-cluttered" class="slide level2 center">
-<h2>Example: Default Plot (Cluttered)</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Gray background, gridlines, legend, and borders all compete for attention. The data gets lost in visual clutter.</p>
-</section>
-<section id="example-decluttered-with-direct-labels" class="slide level2 center">
-<h2>Example: Decluttered with Direct Labels</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Clean background, minimal gridlines, direct labels. Every element serves the data. The message is clear.</p>
-</section>
-<section id="principle-3-use-preattentive-attributes" class="slide level2 center">
-<h2>Principle 3: Use Preattentive Attributes</h2>
-<p><strong>Guide attention with attributes processed in &lt;250ms</strong></p>
-<div>
-<ul>
-<li class="fragment"><strong>Color</strong>: Most powerful</li>
-<li class="fragment"><strong>Size</strong>: Indicates importance</li>
-<li class="fragment"><strong>Position</strong>: Spatial relationships</li>
-<li class="fragment"><strong>Intensity</strong>: Bold vs light</li>
-<li class="fragment">Use strategically - don’t dilute attention</li>
-</ul>
-</div>
-</section>
-<section id="example-all-equal-no-focus" class="slide level2 center">
-<h2>Example: All Equal (No Focus)</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> All bars are equal - where should the viewer look? No visual hierarchy means no clear message.</p>
-</section>
-<section id="example-strategic-highlighting" class="slide level2 center">
-<h2>Example: Strategic Highlighting</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Red instantly draws the eye to the problem. Gray provides context without competing for attention.</p>
-</section>
-<section id="principle-4-gray-and-bold-technique" class="slide level2 center">
-<h2>Principle 4: Gray and Bold Technique</h2>
-<p><strong>Use color to highlight, gray to push back</strong></p>
-<div>
-<ul>
-<li class="fragment">Bold color for what matters most</li>
-<li class="fragment">Gray for context</li>
-<li class="fragment">Maximum one bold color per chart</li>
-<li class="fragment">Creates instant visual hierarchy</li>
-</ul>
-</div>
-</section>
-<section id="example-too-many-colors-confusing" class="slide level2 center">
-<h2>Example: Too Many Colors (Confusing)</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Too many colors compete for attention. Is this chart trying to highlight everything? That means nothing stands out.</p>
-</section>
-<section id="example-gray-and-bold-clear-message" class="slide level2 center">
-<h2>Example: Gray and Bold (Clear Message)</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Red highlights the problem specialties. Gray provides context. One glance tells the whole story.</p>
-</section>
-<section id="principle-5-think-like-a-designer" class="slide level2 center">
-<h2>Principle 5: Think Like a Designer</h2>
-<p><strong>Alignment, white space, and contrast</strong></p>
-<div>
-<ul>
-<li class="fragment"><strong>Alignment</strong>: Left-align text</li>
-<li class="fragment"><strong>White space</strong>: Give room to breathe</li>
-<li class="fragment"><strong>Contrast</strong>: Create visual hierarchy</li>
-<li class="fragment"><strong>Consistency</strong>: Same fonts, colors</li>
-</ul>
-</div>
-</section>
-<section id="example-poor-design-choices" class="slide level2 center">
-<h2>Example: Poor Design Choices</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Centered title, clashing colors, no subtitle, unclear which line is which. Multiple design problems distract from the data.</p>
-</section>
-<section id="example-good-design-principles" class="slide level2 center">
-<h2>Example: Good Design Principles</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Left-aligned title, clear subtitle, harmonious colors, clean design. Professional and easy to understand.</p>
-</section>
-<section id="principle-6-tell-a-story" class="slide level2 center">
-<h2>Principle 6: Tell a Story</h2>
-<p><strong>Move from descriptive to narrative</strong></p>
-<div>
-<ul>
-<li class="fragment"><strong>Descriptive</strong>: What is this?</li>
-<li class="fragment"><strong>Narrative</strong>: So what?</li>
-<li class="fragment">State your insight in the title</li>
-<li class="fragment">Use subtitles for context</li>
-</ul>
-</div>
-</section>
-<section id="example-descriptive-title-what" class="slide level2 center">
-<h2>Example: Descriptive Title (What?)</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> The title just describes what’s in the chart. No insight, no message, no story. Makes the viewer do all the work.</p>
-</section>
-<section id="example-insight-driven-title-so-what" class="slide level2 center">
-<h2>Example: Insight-Driven Title (So What?)</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-31-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Title states the insight. Subtitle adds context. Color highlights the key period. The story is told instantly.</p>
-</section>
-<section id="before-default-visualization" class="slide level2 center">
-<h2>Before: Default Visualization</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Default theme, no focus, legend requires back-and-forth eye movement. No clear message about what matters.</p>
-</section>
-<section id="after-storytelling-approach" class="slide level2 center">
-<h2>After: Storytelling Approach</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Clean design, strategic color, insight-driven title, direct labeling. All six principles working together.</p>
-</section>
-<section id="key-takeaways" class="slide level2 center">
-<h2>Key Takeaways</h2>
-<div>
-<ol type="1">
-<li class="fragment"><strong>Choose the right chart</strong> - Match to data type</li>
-<li class="fragment"><strong>Eliminate clutter</strong> - Remove non-value elements</li>
-<li class="fragment"><strong>Use preattentive attributes</strong> - Guide attention</li>
-<li class="fragment"><strong>Gray and bold</strong> - Highlight vs context</li>
-<li class="fragment"><strong>Think like a designer</strong> - Alignment, space, contrast</li>
-<li class="fragment"><strong>Tell a story</strong> - State your insight</li>
-</ol>
-</div>
-</section>
-<section id="resources" class="slide level2 center">
-<h2>Resources</h2>
-<ul>
-<li><strong>Book</strong>: <em>Storytelling with Data</em> by Cole Nussbaumer Knaflic</li>
-<li><strong>Book</strong>: <em>The Visual Display of Quantitative Information</em> by Edward Tufte</li>
-<li><strong>Website</strong>: storytellingwithdata.com</li>
-<li><strong>Website</strong>: r-graph-gallery.com</li>
-</ul>
-</section>
-<section id="thank-you" class="slide level2 center">
-<h2>Thank You!</h2>
-<p><strong>Every visualization is a story.</strong><br>
-Make sure yours is worth telling.</p>
-<blockquote>
-<p>“The greatest value of a picture is when it forces us to notice what we never expected to see.” - John Tukey</p>
-</blockquote>
-
-<div class="footer footer-default">
+<img data-src="categorical_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Donut Chart</p><div class="footer footer-default">
 
 </div>
 </section>
@@ -611,20 +449,20 @@ Make sure yours is worth telling.</p>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="../../../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -831,7 +669,8 @@ Make sure yours is worth telling.</p>
       z-index: 9999;
       text-align: center;
     ">
-      <a href="../index.html" style="color: black;">🏠 Home</a> 
+      <a href="../../index.html" style="color: black;">🏠 Home</a> |
+      <a href="../basic.html" style="color: black;">📊 Plot Gallery</a>
     </div>
     
     <script>

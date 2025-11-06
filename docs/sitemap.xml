@@ -2,90 +2,178 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>data-visualization/intro.qmd/test.html</loc>
-    <lastmod>2025-10-10T06:34:26.568Z</lastmod>
+    <lastmod>2025-11-06T23:48:01.805Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/specialized/merge_visuals.html</loc>
-    <lastmod>2025-10-10T06:34:15.935Z</lastmod>
+    <lastmod>2025-11-06T23:47:53.075Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/references.html</loc>
-    <lastmod>2025-10-10T06:34:11.114Z</lastmod>
+    <lastmod>2025-11-06T23:47:50.248Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/r-foundations/data-wrangling.html</loc>
-    <lastmod>2025-10-10T06:34:03.458Z</lastmod>
+    <lastmod>2025-11-06T23:47:45.769Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/plot-gallery/basic.html</loc>
-    <lastmod>2025-10-10T06:33:58.696Z</lastmod>
+    <lastmod>2025-11-06T23:47:42.976Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/plot-gallery/basic/continuous.html</loc>
-    <lastmod>2025-10-10T06:33:54.117Z</lastmod>
+    <lastmod>2025-11-06T23:47:40.266Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/plot-gallery/basic/categorical.html</loc>
-    <lastmod>2025-10-10T06:33:49.470Z</lastmod>
+    <lastmod>2025-11-06T23:47:37.031Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/index.html</loc>
-    <lastmod>2025-10-10T06:33:32.260Z</lastmod>
+    <lastmod>2025-11-06T23:47:27.103Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/exporting_tools/exporting_plots.html</loc>
-    <lastmod>2025-10-10T06:33:27.673Z</lastmod>
+    <lastmod>2025-11-06T23:47:23.934Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/test.html</loc>
+    <lastmod>2025-11-06T23:47:21.161Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/specialized/merge_visuals.html</loc>
+    <lastmod>2025-11-06T23:47:14.429Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/references.html</loc>
+    <lastmod>2025-11-06T23:47:10.656Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/r-foundations/data-wrangling.html</loc>
+    <lastmod>2025-11-06T23:47:05.229Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/plot-gallery/basic.html</loc>
+    <lastmod>2025-11-06T23:47:02.405Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/plot-gallery/basic/continuous.html</loc>
+    <lastmod>2025-11-06T23:46:59.736Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/plot-gallery/basic/categorical.html</loc>
+    <lastmod>2025-11-06T23:46:57.007Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/index.html</loc>
+    <lastmod>2025-11-06T23:46:48.089Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/exporting_tools/exporting_plots.html</loc>
+    <lastmod>2025-11-06T23:46:45.257Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/data-visualization/plot_data.html</loc>
+    <lastmod>2025-11-06T23:46:42.509Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/data-visualization/best_practices.html</loc>
+    <lastmod>2025-11-06T23:46:39.693Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/data-visualization/plot_data.html</loc>
-    <lastmod>2025-10-10T06:33:23.192Z</lastmod>
+    <lastmod>2025-11-06T23:46:36.908Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/data-visualization/best_practices.html</loc>
-    <lastmod>2025-10-10T06:33:18.502Z</lastmod>
+    <lastmod>2025-11-06T23:46:33.648Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/contact.html</loc>
-    <lastmod>2025-10-10T06:33:16.003Z</lastmod>
+    <lastmod>2025-11-06T23:46:04.140Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/data-visualization/intro.html</loc>
-    <lastmod>2025-10-10T06:33:20.990Z</lastmod>
+    <lastmod>2025-11-06T23:46:35.477Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/contact.html</loc>
+    <lastmod>2025-11-06T23:46:38.347Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/data-visualization/intro.html</loc>
+    <lastmod>2025-11-06T23:46:41.152Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/exporting_tools/debugging_plots.html</loc>
+    <lastmod>2025-11-06T23:46:43.873Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/exporting_tools/plotting_tools.html</loc>
+    <lastmod>2025-11-06T23:46:46.627Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/plot-gallery/advanced.html</loc>
+    <lastmod>2025-11-06T23:46:49.599Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/plot-gallery/basic/cat_vs_cont.html</loc>
+    <lastmod>2025-11-06T23:46:58.392Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/plot-gallery/basic/time_space.html</loc>
+    <lastmod>2025-11-06T23:47:01.054Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/plot-gallery/moderate.html</loc>
+    <lastmod>2025-11-06T23:47:03.849Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/r-foundations/getting-started.html</loc>
+    <lastmod>2025-11-06T23:47:08.850Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/specialized/interactive.html</loc>
+    <lastmod>2025-11-06T23:47:12.575Z</lastmod>
+  </url>
+  <url>
+    <loc>data-visualization/intro.qmd/data_visualization/specialized/plot_stats.html</loc>
+    <lastmod>2025-11-06T23:47:16.016Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/exporting_tools/debugging_plots.html</loc>
-    <lastmod>2025-10-10T06:33:25.413Z</lastmod>
+    <lastmod>2025-11-06T23:47:22.528Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/exporting_tools/plotting_tools.html</loc>
-    <lastmod>2025-10-10T06:33:29.939Z</lastmod>
+    <lastmod>2025-11-06T23:47:25.478Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/plot-gallery/advanced.html</loc>
-    <lastmod>2025-10-10T06:33:34.561Z</lastmod>
+    <lastmod>2025-11-06T23:47:28.606Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/plot-gallery/basic/cat_vs_cont.html</loc>
-    <lastmod>2025-10-10T06:33:51.897Z</lastmod>
+    <lastmod>2025-11-06T23:47:38.783Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/plot-gallery/basic/time_space.html</loc>
-    <lastmod>2025-10-10T06:33:56.331Z</lastmod>
+    <lastmod>2025-11-06T23:47:41.601Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/plot-gallery/moderate.html</loc>
-    <lastmod>2025-10-10T06:34:01.033Z</lastmod>
+    <lastmod>2025-11-06T23:47:44.385Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/r-foundations/getting-started.html</loc>
-    <lastmod>2025-10-10T06:34:08.841Z</lastmod>
+    <lastmod>2025-11-06T23:47:48.945Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/specialized/interactive.html</loc>
-    <lastmod>2025-10-10T06:34:13.598Z</lastmod>
+    <lastmod>2025-11-06T23:47:51.693Z</lastmod>
   </url>
   <url>
     <loc>data-visualization/intro.qmd/specialized/plot_stats.html</loc>
-    <lastmod>2025-10-10T06:34:18.349Z</lastmod>
+    <lastmod>2025-11-06T23:47:55.093Z</lastmod>
   </url>
 </urlset>

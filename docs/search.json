@@ -140,18 +140,417 @@
     "text": "Exporting plots from R can be done in several ways, depending on the desired output format and quality. Here are some common methods to export plots: 1. Using R’s built-in functions: - png(), jpeg(), tiff(), bmp(): These functions allow you to save plots in various raster formats. You can specify the filename, width, height, and resolution. R      png(\"plot.png\", width=800, height=600)      plot(x, y)      dev.off() - pdf(): This function saves plots in PDF format, which is vector-based and suitable for high-quality prints. R      pdf(\"plot.pdf\", width=8, height=6)      plot(x, y)      dev.off() - svg(): This function saves plots in SVG format, which is also vector-based and ideal for web use. R      svg(\"plot.svg\", width=8, height=6)      plot(x, y)      dev.off()"
   },
   {
-    "objectID": "data-visualization/plot_data.html",
-    "href": "data-visualization/plot_data.html",
+    "objectID": "data_visualization/test.html",
+    "href": "data_visualization/test.html",
+    "title": "Test Reveal Deck",
+    "section": "",
+    "text": "library(ggplot2)\n\nWarning: package 'ggplot2' was built under R version 4.5.1\n\nplot(cars)"
+  },
+  {
+    "objectID": "data_visualization/test.html#hello",
+    "href": "data_visualization/test.html#hello",
+    "title": "Test Reveal Deck",
+    "section": "",
+    "text": "library(ggplot2)\n\nWarning: package 'ggplot2' was built under R version 4.5.1\n\nplot(cars)"
+  },
+  {
+    "objectID": "data_visualization/specialized/merge_visuals.html",
+    "href": "data_visualization/specialized/merge_visuals.html",
+    "title": "Merged Visuals",
+    "section": "",
+    "text": "Overlaying multiple plot types\nPlotting distributions with statistical overlays\nEmbedding plots within plots (e.g., inset zooms)\n\n\nCategorical\n\nBar chart + annotations\n\n\n\n▸ Continuous\n\nDensity + histogram overlay\nRidgeline + density\n\n\n\n▸ Category vs. Category\n\nGrouped bar chart + facet grid\nMosaic + stacked bar hybrid\n\n\n\n▸ Continuous vs. Continuous\n\nScatter + marginal histograms\nBubble chart + trend line\n\n\n\n▸ Category vs. Continuous\n\nBoxplot + jittered points\nViolin + box overlay\n\n\n\n▸ Time Series\n\nLine + area chart\nStream graph + annotations\n\n\n\n▸ Map\n\nChoropleth + bubble overlay\nMap + inset zoom"
+  },
+  {
+    "objectID": "data_visualization/references.html",
+    "href": "data_visualization/references.html",
+    "title": "References",
+    "section": "",
+    "text": "References"
+  },
+  {
+    "objectID": "data_visualization/r-foundations/data-wrangling.html",
+    "href": "data_visualization/r-foundations/data-wrangling.html",
+    "title": "Data wrangling",
+    "section": "",
+    "text": "Importing data (CSV, Excel, etc.)\nExploring data structures vectors, lists, data frames, tibbles\nData cleaning (handling missing values, duplicates) transforming data with dplyr\nreshaping data (pivoting, melting) tidyr functions like pivot_longer, pivot_wider\nMerging and joining datasets dplyr joins: inner_join, left_join, right_join, full_join\nFiltering and selecting data dplyr functions: filter, select\nSorting and arranging data dplyr function: arrange\nCreating new variables (mutate) dplyr function: mutate"
+  },
+  {
+    "objectID": "data_visualization/plot-gallery/basic.html",
+    "href": "data_visualization/plot-gallery/basic.html",
+    "title": "Basic Plots",
+    "section": "",
+    "text": "Explore foundational plots grouped by data type and relationship. Each link opens a dedicated slide deck.\n\n\n\nIncludes: Bar chart, Pie chart, Donut chart, Stacked bar chart, Mosaic plot\n🔗 View Slide Deck →\n\n\n\n\nIncludes: Histogram, Density plot, Scatter plot\n🔗 View Slide Deck →\n\n\n\n\nIncludes: Box plot\n🔗 View Slide Deck →\n\n\n\n\nIncludes: Line chart, Bubble map, Choropleth map\n🔗 View Slide Deck →"
+  },
+  {
+    "objectID": "data_visualization/plot-gallery/basic.html#basic-plot-categories",
+    "href": "data_visualization/plot-gallery/basic.html#basic-plot-categories",
+    "title": "Basic Plots",
+    "section": "",
+    "text": "Explore foundational plots grouped by data type and relationship. Each link opens a dedicated slide deck.\n\n\n\nIncludes: Bar chart, Pie chart, Donut chart, Stacked bar chart, Mosaic plot\n🔗 View Slide Deck →\n\n\n\n\nIncludes: Histogram, Density plot, Scatter plot\n🔗 View Slide Deck →\n\n\n\n\nIncludes: Box plot\n🔗 View Slide Deck →\n\n\n\n\nIncludes: Line chart, Bubble map, Choropleth map\n🔗 View Slide Deck →"
+  },
+  {
+    "objectID": "data_visualization/plot-gallery/basic/continuous.html",
+    "href": "data_visualization/plot-gallery/basic/continuous.html",
+    "title": "Continuous Plots",
+    "section": "",
+    "text": "Continuous Plots\nContent coming soon…"
+  },
+  {
+    "objectID": "data_visualization/plot-gallery/basic/categorical.html#bar-chart",
+    "href": "data_visualization/plot-gallery/basic/categorical.html#bar-chart",
+    "title": "Categorical Plots",
+    "section": "Bar Chart",
+    "text": "Bar Chart"
+  },
+  {
+    "objectID": "data_visualization/plot-gallery/basic/categorical.html#basic-bar-chart",
+    "href": "data_visualization/plot-gallery/basic/categorical.html#basic-bar-chart",
+    "title": "Categorical Plots",
+    "section": "Basic Bar Chart",
+    "text": "Basic Bar Chart\n\nggplot(mpg, aes(x = class)) +\n  geom_bar()"
+  },
+  {
+    "objectID": "data_visualization/plot-gallery/basic/categorical.html#grouped-bar-chart",
+    "href": "data_visualization/plot-gallery/basic/categorical.html#grouped-bar-chart",
+    "title": "Categorical Plots",
+    "section": "Grouped Bar Chart",
+    "text": "Grouped Bar Chart\n\nggplot(mpg, aes(x = class, fill = drv)) +\n  geom_bar(position = \"dodge\")\n\n\nGrouped Bar Chart"
+  },
+  {
+    "objectID": "data_visualization/plot-gallery/basic/categorical.html#pie-chart",
+    "href": "data_visualization/plot-gallery/basic/categorical.html#pie-chart",
+    "title": "Categorical Plots",
+    "section": "Pie Chart",
+    "text": "Pie Chart"
+  },
+  {
+    "objectID": "data_visualization/plot-gallery/basic/categorical.html#basic-pie-chart",
+    "href": "data_visualization/plot-gallery/basic/categorical.html#basic-pie-chart",
+    "title": "Categorical Plots",
+    "section": "Basic Pie Chart",
+    "text": "Basic Pie Chart\n\nggplot(mpg, aes(x = \"\", fill = class)) +\n  geom_bar(width = 1) +\n  coord_polar(\"y\") +\n  theme_void()\n\n\nPie Chart"
+  },
+  {
+    "objectID": "data_visualization/plot-gallery/basic/categorical.html#dough-nut-chart",
+    "href": "data_visualization/plot-gallery/basic/categorical.html#dough-nut-chart",
+    "title": "Categorical Plots",
+    "section": "Dough Nut Chart",
+    "text": "Dough Nut Chart\n\nggplot(mpg, aes(x = 2, fill = class)) +\n  geom_bar(width = 1) +\n  coord_polar(\"y\") +\n  theme_void() +\n  xlim(0.5, 2.5)\n\n\n\nDonut Chart"
+  },
+  {
+    "objectID": "data_visualization/index.html",
+    "href": "data_visualization/index.html",
+    "title": "Data Visualization",
+    "section": "",
+    "text": "This site is your interactive guide for the Data Visualization Workshop that uses R and Quarto. You’ll find everything you need to learn or improve your skills, including hands-on examples, best practices, and plotting techniques, all in one place."
+  },
+  {
+    "objectID": "data_visualization/index.html#workshop-goals",
+    "href": "data_visualization/index.html#workshop-goals",
+    "title": "Data Visualization",
+    "section": "Workshop Goals",
+    "text": "Workshop Goals\n\nLearn the basics of good data visualization\nUse R to learn how to wrangle and prepare data\nLearn about basic, advanced, and interactive ways to plot data\nMake and share your own visualizations based on Quarto"
+  },
+  {
+    "objectID": "data_visualization/index.html#find-your-way-around-the-workshop",
+    "href": "data_visualization/index.html#find-your-way-around-the-workshop",
+    "title": "Data Visualization",
+    "section": "Find your way around the workshop",
+    "text": "Find your way around the workshop\nTo look at each module, use the navigation bar above:\n\nR Foundations\nLearn how to use R syntax, clean up your data, and make your workflows neat.\nData Visualization Principles\nLearn the basics of good visual design and what not to do.\nPlot Gallery\nLook at examples that range from simple bar charts to interactive dashboards."
+  },
+  {
+    "objectID": "data_visualization/index.html#code-and-examples-in-real-time",
+    "href": "data_visualization/index.html#code-and-examples-in-real-time",
+    "title": "Data Visualization",
+    "section": "Code and Examples in Real Time",
+    "text": "Code and Examples in Real Time\nThere are code snippets, rendered outputs, and downloadable datasets all over the site. You can change and play around with the code for your own projects."
+  },
+  {
+    "objectID": "data_visualization/index.html#printable-resources",
+    "href": "data_visualization/index.html#printable-resources",
+    "title": "Data Visualization",
+    "section": "Printable Resources",
+    "text": "Printable Resources"
+  },
+  {
+    "objectID": "data_visualization/exporting_tools/exporting_plots.html",
+    "href": "data_visualization/exporting_tools/exporting_plots.html",
+    "title": "Exporting plots",
+    "section": "",
+    "text": "Exporting plots from R can be done in several ways, depending on the desired output format and quality. Here are some common methods to export plots: 1. Using R’s built-in functions: - png(), jpeg(), tiff(), bmp(): These functions allow you to save plots in various raster formats. You can specify the filename, width, height, and resolution. R      png(\"plot.png\", width=800, height=600)      plot(x, y)      dev.off() - pdf(): This function saves plots in PDF format, which is vector-based and suitable for high-quality prints. R      pdf(\"plot.pdf\", width=8, height=6)      plot(x, y)      dev.off() - svg(): This function saves plots in SVG format, which is also vector-based and ideal for web use. R      svg(\"plot.svg\", width=8, height=6)      plot(x, y)      dev.off()"
+  },
+  {
+    "objectID": "data_visualization/data-visualization/plot_data.html",
+    "href": "data_visualization/data-visualization/plot_data.html",
     "title": "Plot data",
     "section": "",
     "text": "Plot types as per data structure\n\nCategorical vs. continuous variables\nUnivariate, bivariate, and multivariate plots\nTime series and grouped data considerations"
   },
   {
-    "objectID": "data-visualization/best_practices.html",
-    "href": "data-visualization/best_practices.html",
+    "objectID": "data_visualization/data-visualization/best_practices.html",
+    "href": "data_visualization/data-visualization/best_practices.html",
     "title": "Best practices",
     "section": "",
     "text": "Choosing the right plot for your data type\nAvoiding misleading visuals\nColor theory and accessibility\nLabeling, scaling, and layout tips"
+  },
+  {
+    "objectID": "data-visualization/plot_data.html",
+    "href": "data-visualization/plot_data.html",
+    "title": "Data to plot",
+    "section": "",
+    "text": "Plot types as per data structure\n\nCategorical vs. continuous variables\nUnivariate, bivariate, and multivariate plots\nTime series and grouped data considerations"
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#introduction-to-data-visualization",
+    "href": "data-visualization/best_practices.html#introduction-to-data-visualization",
+    "title": "Best Practices",
+    "section": "Introduction to Data Visualization",
+    "text": "Introduction to Data Visualization\n\n“The simple graph has brought more information to the data analyst’s mind than any other device.” - John Tukey\n\n\n\nData visualization transforms complex data into visual insights\nGood visualizations tell a story\nPoor visualizations mislead or confuse\nEvery choice matters - especially in healthcare"
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#the-big-idea",
+    "href": "data-visualization/best_practices.html#the-big-idea",
+    "title": "Best Practices",
+    "section": "The Big Idea",
+    "text": "The Big Idea\nCan you summarize your message in one sentence?\n\n\nYour “Big Idea” should be:\n\nArticulate your point of view: What do you want your audience to know?\nConvey what’s at stake: Why does this matter?\nBe a complete sentence: Not just a topic, but a statement\n\nExample: “We should implement early discharge planning because it reduces re-admissions by 35%”"
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#principle-1-choose-the-right-chart-type",
+    "href": "data-visualization/best_practices.html#principle-1-choose-the-right-chart-type",
+    "title": "Best Practices",
+    "section": "Principle 1: Choose the Right Chart Type",
+    "text": "Principle 1: Choose the Right Chart Type\nMatch your visualization to your data and message\nDifferent types of data require different visualizations:\n\n\nSimple text: When you have 1-2 numbers\nTables: For multiple units, precise values\nHeatmaps: For tables with many values\nScatter plots: For relationships between variables\nLine charts: For continuous data over time\nSlopegraphs: For comparing two time points\nBar charts: For categorical comparisons"
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#chart-type-simple-text",
+    "href": "data-visualization/best_practices.html#chart-type-simple-text",
+    "title": "Best Practices",
+    "section": "Chart Type: Simple Text",
+    "text": "Chart Type: Simple Text\n\nEffective: When you have just 1-2 key numbers, text is more impactful than a chart. Makes the metric impossible to miss."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#chart-type-table",
+    "href": "data-visualization/best_practices.html#chart-type-table",
+    "title": "Best Practices",
+    "section": "Chart Type: Table",
+    "text": "Chart Type: Table\n\nEffective: Tables are ideal when you need to show precise values with different units of measure. Better than a chart when exact numbers matter."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#chart-type-heatmap",
+    "href": "data-visualization/best_practices.html#chart-type-heatmap",
+    "title": "Best Practices",
+    "section": "Chart Type: Heatmap",
+    "text": "Chart Type: Heatmap\n\nEffective: Heatmaps encode values with color, making it easy to spot patterns in large tables. Great for identifying hot/cold spots quickly."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#chart-type-scatter-plot",
+    "href": "data-visualization/best_practices.html#chart-type-scatter-plot",
+    "title": "Best Practices",
+    "section": "Chart Type: Scatter Plot",
+    "text": "Chart Type: Scatter Plot\n\nEffective: Scatter plots reveal relationships between two continuous variables. The trend line makes the correlation clear."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#chart-type-line-chart",
+    "href": "data-visualization/best_practices.html#chart-type-line-chart",
+    "title": "Best Practices",
+    "section": "Chart Type: Line Chart",
+    "text": "Chart Type: Line Chart\n\nEffective: Line charts show trends over time. The continuous line emphasizes the progression and makes patterns clear."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#chart-type-slopegraph",
+    "href": "data-visualization/best_practices.html#chart-type-slopegraph",
+    "title": "Best Practices",
+    "section": "Chart Type: Slopegraph",
+    "text": "Chart Type: Slopegraph\n\nEffective: Slopegraphs are perfect for comparing two time points. They show both ranking and magnitude of change clearly."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#chart-type-horizontal-bar-chart",
+    "href": "data-visualization/best_practices.html#chart-type-horizontal-bar-chart",
+    "title": "Best Practices",
+    "section": "Chart Type: Horizontal Bar Chart",
+    "text": "Chart Type: Horizontal Bar Chart\n\nEffective: Horizontal bars are easier to read than vertical, especially with long labels. Natural left-to-right reading."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#avoid-line-charts-for-categories",
+    "href": "data-visualization/best_practices.html#avoid-line-charts-for-categories",
+    "title": "Best Practices",
+    "section": "Avoid: Line Charts for Categories",
+    "text": "Avoid: Line Charts for Categories\n\nIneffective: Lines suggest continuous change between points, but there’s no meaningful order or connection between these categories."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#chart-type-stacked-bar-chart",
+    "href": "data-visualization/best_practices.html#chart-type-stacked-bar-chart",
+    "title": "Best Practices",
+    "section": "Chart Type: Stacked Bar Chart",
+    "text": "Chart Type: Stacked Bar Chart\n\nEffective: Stacked bars show part-to-whole relationships over time. Easy to see both total volume and composition."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#avoid-y-axis-not-starting-at-zero",
+    "href": "data-visualization/best_practices.html#avoid-y-axis-not-starting-at-zero",
+    "title": "Best Practices",
+    "section": "Avoid: Y-Axis Not Starting at Zero",
+    "text": "Avoid: Y-Axis Not Starting at Zero\n\nIneffective: Truncating the Y-axis exaggerates small differences. Makes 3% variation look like massive differences in performance."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#better-y-axis-starting-at-zero",
+    "href": "data-visualization/best_practices.html#better-y-axis-starting-at-zero",
+    "title": "Best Practices",
+    "section": "Better: Y-Axis Starting at Zero",
+    "text": "Better: Y-Axis Starting at Zero\n\nEffective: Starting at zero shows true proportions. All hospitals are performing well - the differences are minor."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#avoid-pie-charts",
+    "href": "data-visualization/best_practices.html#avoid-pie-charts",
+    "title": "Best Practices",
+    "section": "Avoid: Pie Charts",
+    "text": "Avoid: Pie Charts\n\nIneffective: Humans struggle to compare angles and areas. Which is bigger - Respiratory or Other? Hard to tell precisely."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#better-horizontal-bar-chart",
+    "href": "data-visualization/best_practices.html#better-horizontal-bar-chart",
+    "title": "Best Practices",
+    "section": "Better: Horizontal Bar Chart",
+    "text": "Better: Horizontal Bar Chart\n\nEffective: Horizontal bars make comparisons effortless. Rankings and differences are immediately clear."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#principle-2-eliminate-clutter",
+    "href": "data-visualization/best_practices.html#principle-2-eliminate-clutter",
+    "title": "Best Practices",
+    "section": "Principle 2: Eliminate Clutter",
+    "text": "Principle 2: Eliminate Clutter\nRemove anything that doesn’t add value\n\n\nRemove chart borders and backgrounds\nLighten or remove gridlines\n\nRemove redundant data labels\nDirect labeling &gt; legends\nClean up axis labels\nEvery element should earn its place"
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#example-default-plot-cluttered",
+    "href": "data-visualization/best_practices.html#example-default-plot-cluttered",
+    "title": "Best Practices",
+    "section": "Example: Default Plot (Cluttered)",
+    "text": "Example: Default Plot (Cluttered)\n\nIneffective: Gray background, gridlines, legend, and borders all compete for attention. The data gets lost in visual clutter."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#example-decluttered-with-direct-labels",
+    "href": "data-visualization/best_practices.html#example-decluttered-with-direct-labels",
+    "title": "Best Practices",
+    "section": "Example: Decluttered with Direct Labels",
+    "text": "Example: Decluttered with Direct Labels\n\nEffective: Clean background, minimal gridlines, direct labels. Every element serves the data. The message is clear."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#principle-3-use-preattentive-attributes",
+    "href": "data-visualization/best_practices.html#principle-3-use-preattentive-attributes",
+    "title": "Best Practices",
+    "section": "Principle 3: Use Preattentive Attributes",
+    "text": "Principle 3: Use Preattentive Attributes\nGuide attention with attributes processed in &lt;250ms\n\n\nColor: Most powerful\nSize: Indicates importance\nPosition: Spatial relationships\nIntensity: Bold vs light\nUse strategically - don’t dilute attention"
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#example-all-equal-no-focus",
+    "href": "data-visualization/best_practices.html#example-all-equal-no-focus",
+    "title": "Best Practices",
+    "section": "Example: All Equal (No Focus)",
+    "text": "Example: All Equal (No Focus)\n\nIneffective: All bars are equal - where should the viewer look? No visual hierarchy means no clear message."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#example-strategic-highlighting",
+    "href": "data-visualization/best_practices.html#example-strategic-highlighting",
+    "title": "Best Practices",
+    "section": "Example: Strategic Highlighting",
+    "text": "Example: Strategic Highlighting\n\nEffective: Red instantly draws the eye to the problem. Gray provides context without competing for attention."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#principle-4-gray-and-bold-technique",
+    "href": "data-visualization/best_practices.html#principle-4-gray-and-bold-technique",
+    "title": "Best Practices",
+    "section": "Principle 4: Gray and Bold Technique",
+    "text": "Principle 4: Gray and Bold Technique\nUse color to highlight, gray to push back\n\n\nBold color for what matters most\nGray for context\nMaximum one bold color per chart\nCreates instant visual hierarchy"
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#example-too-many-colors-confusing",
+    "href": "data-visualization/best_practices.html#example-too-many-colors-confusing",
+    "title": "Best Practices",
+    "section": "Example: Too Many Colors (Confusing)",
+    "text": "Example: Too Many Colors (Confusing)\n\nIneffective: Too many colors compete for attention. Is this chart trying to highlight everything? That means nothing stands out."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#example-gray-and-bold-clear-message",
+    "href": "data-visualization/best_practices.html#example-gray-and-bold-clear-message",
+    "title": "Best Practices",
+    "section": "Example: Gray and Bold (Clear Message)",
+    "text": "Example: Gray and Bold (Clear Message)\n\nEffective: Red highlights the problem specialties. Gray provides context. One glance tells the whole story."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#principle-5-think-like-a-designer",
+    "href": "data-visualization/best_practices.html#principle-5-think-like-a-designer",
+    "title": "Best Practices",
+    "section": "Principle 5: Think Like a Designer",
+    "text": "Principle 5: Think Like a Designer\nAlignment, white space, and contrast\n\n\nAlignment: Left-align text\nWhite space: Give room to breathe\nContrast: Create visual hierarchy\nConsistency: Same fonts, colors"
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#example-poor-design-choices",
+    "href": "data-visualization/best_practices.html#example-poor-design-choices",
+    "title": "Best Practices",
+    "section": "Example: Poor Design Choices",
+    "text": "Example: Poor Design Choices\n\nIneffective: Centered title, clashing colors, no subtitle, unclear which line is which. Multiple design problems distract from the data."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#example-good-design-principles",
+    "href": "data-visualization/best_practices.html#example-good-design-principles",
+    "title": "Best Practices",
+    "section": "Example: Good Design Principles",
+    "text": "Example: Good Design Principles\n\nEffective: Left-aligned title, clear subtitle, harmonious colors, clean design. Professional and easy to understand."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#principle-6-tell-a-story",
+    "href": "data-visualization/best_practices.html#principle-6-tell-a-story",
+    "title": "Best Practices",
+    "section": "Principle 6: Tell a Story",
+    "text": "Principle 6: Tell a Story\nMove from descriptive to narrative\n\n\nDescriptive: What is this?\nNarrative: So what?\nState your insight in the title\nUse subtitles for context"
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#example-descriptive-title-what",
+    "href": "data-visualization/best_practices.html#example-descriptive-title-what",
+    "title": "Best Practices",
+    "section": "Example: Descriptive Title (What?)",
+    "text": "Example: Descriptive Title (What?)\n\nIneffective: The title just describes what’s in the chart. No insight, no message, no story. Makes the viewer do all the work."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#example-insight-driven-title-so-what",
+    "href": "data-visualization/best_practices.html#example-insight-driven-title-so-what",
+    "title": "Best Practices",
+    "section": "Example: Insight-Driven Title (So What?)",
+    "text": "Example: Insight-Driven Title (So What?)\n\nEffective: Title states the insight. Subtitle adds context. Color highlights the key period. The story is told instantly."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#before-default-visualization",
+    "href": "data-visualization/best_practices.html#before-default-visualization",
+    "title": "Best Practices",
+    "section": "Before: Default Visualization",
+    "text": "Before: Default Visualization\n\nIneffective: Default theme, no focus, legend requires back-and-forth eye movement. No clear message about what matters."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#after-storytelling-approach",
+    "href": "data-visualization/best_practices.html#after-storytelling-approach",
+    "title": "Best Practices",
+    "section": "After: Storytelling Approach",
+    "text": "After: Storytelling Approach\n\nEffective: Clean design, strategic color, insight-driven title, direct labeling. All six principles working together."
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#key-takeaways",
+    "href": "data-visualization/best_practices.html#key-takeaways",
+    "title": "Best Practices",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\n\nChoose the right chart - Match to data type\nEliminate clutter - Remove non-value elements\nUse preattentive attributes - Guide attention\nGray and bold - Highlight vs context\nThink like a designer - Alignment, space, contrast\nTell a story - State your insight"
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#resources",
+    "href": "data-visualization/best_practices.html#resources",
+    "title": "Best Practices",
+    "section": "Resources",
+    "text": "Resources\n\nBook: Storytelling with Data by Cole Nussbaumer Knaflic\nBook: The Visual Display of Quantitative Information by Edward Tufte\nWebsite: storytellingwithdata.com\nWebsite: r-graph-gallery.com"
+  },
+  {
+    "objectID": "data-visualization/best_practices.html#thank-you",
+    "href": "data-visualization/best_practices.html#thank-you",
+    "title": "Best Practices",
+    "section": "Thank You!",
+    "text": "Thank You!\nEvery visualization is a story.\nMake sure yours is worth telling.\n\n“The greatest value of a picture is when it forces us to notice what we never expected to see.” - John Tukey"
   },
   {
     "objectID": "contact.html",
@@ -173,6 +572,167 @@
     "title": "Introduction",
     "section": "",
     "text": "Introduction\nWhy Visualize Data?\nGrammer of Graphics: the ggplot2 Philosophy\nFoundations of Visualization\nThese concepts form the backbone of any ggplot2 plot. - Data – The dataset being visualized - Aesthetics – Mapping data to visual properties (aes()) - Geometries – Visual marks like points, lines, bars (geom_) - Statistics – Summarizing or transforming data (stat_) - Coordinates – Defining the plotting space (coord_) - Facets – Creating subplots for subsets of data (facet_wrap, facet_grid) - Scales – Mapping data values to aesthetics (scale_) - Guides – Legends and axes to interpret scales\nStyling and Layout These elements refine the appearance and readability of plots. - Themes – Overall visual style (theme_*, theme()) - Color – Using palettes and contrast effectively - Labels – Axis labels, data labels (labs(), geom_text) - Titles – Plot titles and subtitles - Captions – Additional context below the plot - Margins – Adjusting spacing around plot elements - Annotations – Highlighting specific data points (annotate(), geom_label)\nStructural Composition These concepts help build complex and layered plots. - Layers – Combining multiple geoms and stats - Customization – Tailoring plots to specific needs - Exporting – Saving plots (ggsave(), formats) - Reproducibility – Ensuring consistent outputs across sessions\nInterpretation and Communication These ideas focus on the purpose and impact of visualization. - Data Preparation – Cleaning and transforming data - Data Exploration – Using plots to uncover patterns - Communication – Conveying insights effectively - Storytelling – Building narrative through visuals - Accessibility – Designing for diverse audiences\nAdvanced Techniques and Tools These extend ggplot2’s capabilities and introduce interactivity. - Interactivity – Dynamic plots with plotly, ggiraph - Animation – Time-based visuals with gganimate - Tools and Libraries – Supporting packages (ggplot2, patchwork, cowplot) - ggplot2 – Core package for layered grammar of graphics - Other R Packages – lattice, plotly, shiny, etc.\nMapping aesthetics to data variables - Common aesthetics: x, y, color, fill, size, shape, alpha - Aesthetic mappings are defined inside aes() function - Example: aes(x = variable1, y = variable2, color = category) - Aesthetic mappings can be global (in ggplot()) or local (in geom_*) - Global mappings apply to all layers, local mappings override global ones for that layer"
+  },
+  {
+    "objectID": "data_visualization/contact.html",
+    "href": "data_visualization/contact.html",
+    "title": "Contact Us",
+    "section": "",
+    "text": "We welcome feedback, collaboration ideas, and questions about the workshop or its materials. Whether you’re an educator, learner, or curious explorer, feel free to reach out.\n\n\nDr. Rudresh Negi Assistant Professor, Community Medicine\nDr. Mukul Maheshwari\nAssistant Professor, Community Medicine\nEmail: [ryan00700@gmail.com]\nGitHub: github.com/SpaRroW410\n\n\n\n\n\nCompetency-based medical education\nTime trend analysis\nData visualization and analytics in R\nCurriculum design using Quarto\nFinancial modeling for health economics\nStrategic learning tools and gamified pedagogy\n\n\n\n\n\nIf you’re experiencing issues with the site or workshop materials, please include:\n\nYour R version and operating system\nA brief description of the error\nScreenshot or code snippet (if applicable)\n\nWe’ll do our best to respond promptly and help you troubleshoot.\n\n\n\n\nTo receive updates on new modules, public releases, or upcoming workshops, watch the GitHub repo or connect via email."
+  },
+  {
+    "objectID": "data_visualization/contact.html#get-in-touch",
+    "href": "data_visualization/contact.html#get-in-touch",
+    "title": "Contact Us",
+    "section": "",
+    "text": "We welcome feedback, collaboration ideas, and questions about the workshop or its materials. Whether you’re an educator, learner, or curious explorer, feel free to reach out.\n\n\nDr. Rudresh Negi Assistant Professor, Community Medicine\nDr. Mukul Maheshwari\nAssistant Professor, Community Medicine\nEmail: [ryan00700@gmail.com]\nGitHub: github.com/SpaRroW410\n\n\n\n\n\nCompetency-based medical education\nTime trend analysis\nData visualization and analytics in R\nCurriculum design using Quarto\nFinancial modeling for health economics\nStrategic learning tools and gamified pedagogy\n\n\n\n\n\nIf you’re experiencing issues with the site or workshop materials, please include:\n\nYour R version and operating system\nA brief description of the error\nScreenshot or code snippet (if applicable)\n\nWe’ll do our best to respond promptly and help you troubleshoot.\n\n\n\n\nTo receive updates on new modules, public releases, or upcoming workshops, watch the GitHub repo or connect via email."
+  },
+  {
+    "objectID": "data_visualization/data-visualization/intro.html",
+    "href": "data_visualization/data-visualization/intro.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "Introduction\nWhy Visualize Data?\nGrammer of Graphics: the ggplot2 Philosophy\nFoundations of Visualization\nThese concepts form the backbone of any ggplot2 plot. - Data – The dataset being visualized - Aesthetics – Mapping data to visual properties (aes()) - Geometries – Visual marks like points, lines, bars (geom_) - Statistics – Summarizing or transforming data (stat_) - Coordinates – Defining the plotting space (coord_) - Facets – Creating subplots for subsets of data (facet_wrap, facet_grid) - Scales – Mapping data values to aesthetics (scale_) - Guides – Legends and axes to interpret scales\nStyling and Layout These elements refine the appearance and readability of plots. - Themes – Overall visual style (theme_*, theme()) - Color – Using palettes and contrast effectively - Labels – Axis labels, data labels (labs(), geom_text) - Titles – Plot titles and subtitles - Captions – Additional context below the plot - Margins – Adjusting spacing around plot elements - Annotations – Highlighting specific data points (annotate(), geom_label)\nStructural Composition These concepts help build complex and layered plots. - Layers – Combining multiple geoms and stats - Customization – Tailoring plots to specific needs - Exporting – Saving plots (ggsave(), formats) - Reproducibility – Ensuring consistent outputs across sessions\nInterpretation and Communication These ideas focus on the purpose and impact of visualization. - Data Preparation – Cleaning and transforming data - Data Exploration – Using plots to uncover patterns - Communication – Conveying insights effectively - Storytelling – Building narrative through visuals - Accessibility – Designing for diverse audiences\nAdvanced Techniques and Tools These extend ggplot2’s capabilities and introduce interactivity. - Interactivity – Dynamic plots with plotly, ggiraph - Animation – Time-based visuals with gganimate - Tools and Libraries – Supporting packages (ggplot2, patchwork, cowplot) - ggplot2 – Core package for layered grammar of graphics - Other R Packages – lattice, plotly, shiny, etc.\nMapping aesthetics to data variables - Common aesthetics: x, y, color, fill, size, shape, alpha - Aesthetic mappings are defined inside aes() function - Example: aes(x = variable1, y = variable2, color = category) - Aesthetic mappings can be global (in ggplot()) or local (in geom_*) - Global mappings apply to all layers, local mappings override global ones for that layer"
+  },
+  {
+    "objectID": "data_visualization/exporting_tools/debugging_plots.html",
+    "href": "data_visualization/exporting_tools/debugging_plots.html",
+    "title": "Debugging Plots",
+    "section": "",
+    "text": "Debugging plots are essential tools for diagnosing issues in data visualization and analysis. They help identify problems such as incorrect data representation, scaling issues, or unexpected patterns in the data. In this guide, we will explore various techniques and tools for creating effective debugging plots."
+  },
+  {
+    "objectID": "data_visualization/exporting_tools/plotting_tools.html",
+    "href": "data_visualization/exporting_tools/plotting_tools.html",
+    "title": "Plotting Tools",
+    "section": "",
+    "text": "Plotting Tools\nThis chapter introduces various tools and libraries available in R for creating visualizations. It covers base R plotting functions, as well as popular packages like ggplot2 and lattice, which offer advanced capabilities for creating complex and customizable plots."
+  },
+  {
+    "objectID": "data_visualization/plot-gallery/advanced.html",
+    "href": "data_visualization/plot-gallery/advanced.html",
+    "title": "Advanced plots",
+    "section": "",
+    "text": "▸ Categorical\n\nFaceted bar plots - Spider / radar charts - Tree Map ### ▸ Continuous\n2D density plot\nHexbin plot\n\n\n\n▸ Category vs. Category\n\nSankey diagram\nChord diagram\n\n\n\n▸ Continuous vs. Continuous\n\nResidual plots\n\n\n\n▸ Category vs. Continuous\n\nRaincloud plots\n\n\n\n▸ Time Series\n\nTime series decomposition plots\n\n\n\n▸ Map\n\nAnimated geospatial transitions\n\n\n\n▸ Others\n\nWaterfall chart\nFunnel chart\nSunburst chart\nWord cloud\n\n\n\nCombining plots with patchwork or cowplot\nCustom themes and annotations\nDual-axis plots (with caution)"
+  },
+  {
+    "objectID": "data_visualization/plot-gallery/basic/cat_vs_cont.html",
+    "href": "data_visualization/plot-gallery/basic/cat_vs_cont.html",
+    "title": "Category vs Continuous",
+    "section": "",
+    "text": "Category vs Continuous\nContent coming soon…"
+  },
+  {
+    "objectID": "data_visualization/plot-gallery/basic/time_space.html",
+    "href": "data_visualization/plot-gallery/basic/time_space.html",
+    "title": "Time & Map Plots",
+    "section": "",
+    "text": "Time & Map Plots\nContent coming soon…"
+  },
+  {
+    "objectID": "data_visualization/plot-gallery/moderate.html",
+    "href": "data_visualization/plot-gallery/moderate.html",
+    "title": "Intermediate plots",
+    "section": "",
+    "text": "▸ Categorical\n\nGrouped bar chart\n\n- Lollipop chart\n\nCleveland dot plot\nCircular Bar plot\nWaffle Plot\n\n\n\n▸ Continuous\n\nRidgeline plot\nFrequency polygon\n\n\n\n▸ Category vs. Category\n\nGrouped bar chart with facets\nHeatmap of categorical intersections\n\n\n\n▸ Continuous vs. Continuous\n\nBubble chart\nPair plot (GGally::ggpairs)\nCorrelation matrix\nCorrelogram\n\n\n\n▸ Category vs. Continuous\n\nViolin plot\nBeeswarm plot\nDot plot\nJittered scatter over boxplot\n\n\n\n▸ Time Series\n\nArea chart\nStacked Area chart\nStream graph\n\n\n\n▸ Map\n\nFaceted choropleths\nCartogram\n\n\n\n▸ Others\n\nHeat Map\nForest Plot"
+  },
+  {
+    "objectID": "data_visualization/r-foundations/getting-started.html#r---language",
+    "href": "data_visualization/r-foundations/getting-started.html#r---language",
+    "title": "Introduction to R",
+    "section": "R - Language",
+    "text": "R - Language\n\nDeveloped in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand\n\nA powerful language for statistical computing and graphics\n\nWidely used by statisticians, data scientists, and researchers\n\nRStudio: User Interface"
+  },
+  {
+    "objectID": "data_visualization/r-foundations/getting-started.html#why-use-r",
+    "href": "data_visualization/r-foundations/getting-started.html#why-use-r",
+    "title": "Introduction to R",
+    "section": "Why Use R",
+    "text": "Why Use R\n\nExtensive libraries for data analysis and visualization\n\nActive community support\n\nCross-platform compatibility (Windows, MacOS, Linux)\n\nIntegration with Python and C++\n\nFree and open-source"
+  },
+  {
+    "objectID": "data_visualization/r-foundations/getting-started.html#key-features-of-r",
+    "href": "data_visualization/r-foundations/getting-started.html#key-features-of-r",
+    "title": "Introduction to R",
+    "section": "Key Features of R",
+    "text": "Key Features of R\n\nComprehensive statistical analysis tools\n\nAdvanced graphics capabilities with ggplot2\n\nRich ecosystem of packages (dplyr, tidyr)\n\nInteractive and reproducible research with RMarkdown"
+  },
+  {
+    "objectID": "data_visualization/r-foundations/getting-started.html#r-vs-python",
+    "href": "data_visualization/r-foundations/getting-started.html#r-vs-python",
+    "title": "Introduction to R",
+    "section": "R vs Python",
+    "text": "R vs Python\n\n\nR\n\nDesigned for statistical analysis and visualization\n\nRich ecosystem: dplyr, ggplot2, caret\n\nPreferred in academia and research\n\n\n\nPython\n\nGeneral-purpose language\n\nStrong in data science and ML: pandas, scikit-learn, TensorFlow\n\nVersatile for web, automation, and more"
+  },
+  {
+    "objectID": "data_visualization/r-foundations/getting-started.html#installation-of-r-and-rstudio",
+    "href": "data_visualization/r-foundations/getting-started.html#installation-of-r-and-rstudio",
+    "title": "Introduction to R",
+    "section": "Installation of R and RStudio",
+    "text": "Installation of R and RStudio\n\nR: CRAN Windows\n\nR: CRAN MacOS\n\nRStudio: RStudio Desktop - Posit"
+  },
+  {
+    "objectID": "data_visualization/r-foundations/getting-started.html#r-4.4.1",
+    "href": "data_visualization/r-foundations/getting-started.html#r-4.4.1",
+    "title": "Introduction to R",
+    "section": "R 4.4.1",
+    "text": "R 4.4.1"
+  },
+  {
+    "objectID": "data_visualization/r-foundations/getting-started.html#rstudio-interface",
+    "href": "data_visualization/r-foundations/getting-started.html#rstudio-interface",
+    "title": "Introduction to R",
+    "section": "RStudio Interface",
+    "text": "RStudio Interface\n\nSource Pane\n\nEnvironment / History\n\nConsole Pane\n\nViewer Pane\n\nProject"
+  },
+  {
+    "objectID": "data_visualization/r-foundations/getting-started.html#project",
+    "href": "data_visualization/r-foundations/getting-started.html#project",
+    "title": "Introduction to R",
+    "section": "Project",
+    "text": "Project\n\nCentralized Management\n\nConsistent Environment\n\nVersion Control Integration\n\nQuicker Setup"
+  },
+  {
+    "objectID": "data_visualization/r-foundations/getting-started.html#new-file",
+    "href": "data_visualization/r-foundations/getting-started.html#new-file",
+    "title": "Introduction to R",
+    "section": "New File",
+    "text": "New File"
+  },
+  {
+    "objectID": "data_visualization/r-foundations/getting-started.html#variables-and-functions",
+    "href": "data_visualization/r-foundations/getting-started.html#variables-and-functions",
+    "title": "Introduction to R",
+    "section": "Variables and Functions",
+    "text": "Variables and Functions"
+  },
+  {
+    "objectID": "data_visualization/r-foundations/getting-started.html#lists-and-matrices",
+    "href": "data_visualization/r-foundations/getting-started.html#lists-and-matrices",
+    "title": "Introduction to R",
+    "section": "Lists and Matrices",
+    "text": "Lists and Matrices\n\n\nLists\n\nFlexible structure for heterogeneous data\n\nUse cases: nested structures, model results\n\n\nMatrices\n\n2D array for homogeneous data\n\nUse cases: computations, tabular data, image processing"
+  },
+  {
+    "objectID": "data_visualization/r-foundations/getting-started.html#packages",
+    "href": "data_visualization/r-foundations/getting-started.html#packages",
+    "title": "Introduction to R",
+    "section": "Packages",
+    "text": "Packages\n\nCollections of functions, data, and compiled code\n\nInstallation:\n\n\n  install.packages(c(\"tidyverse\", \"ggplot2\", \"readxl\", \"gtsummary\", \"ggstatsplot\", \"flextable\", \"pacman\"))"
+  },
+  {
+    "objectID": "data_visualization/specialized/interactive.html",
+    "href": "data_visualization/specialized/interactive.html",
+    "title": "Interactive",
+    "section": "",
+    "text": "Interactive Visualizations - Using plotly for interactivity - ggiraph and hoverable tooltips - Embedding interactive plots in Quarto or Shiny\n\n▸ Categorical\n\nInteractive bar chart (plotly, ggiraph)\nDropdown-filtered categorical plots\n\n\n\n▸ Continuous\n\nInteractive density or histogram with sliders\nZoomable ridgeline plots\n\n\n\n▸ Category vs. Category\n\nInteractive heatmap\nClickable mosaic plot\n\n\n\n▸ Continuous vs. Continuous\n\nHoverable scatter plot with tooltips\nBrushed selection scatter matrix\n\n\n\n▸ Category vs. Continuous\n\nInteractive violin or boxplot with hover labels\nDynamic filtering by category\n\n\n\n▸ Time Series\n\nScrollable time series\nTooltip-enabled line chart\n\n\n\n▸ Map\n\nInteractive choropleth (leaflet, plotly)\nClickable bubble map with popups\n\nScatter plot\nBubble plot\nHeat map\nTree map\nSankey diagram\nChord diagram\nSpider / radar chart\nWaterfall chart\nForest plot\nWord cloud"
+  },
+  {
+    "objectID": "data_visualization/specialized/plot_stats.html",
+    "href": "data_visualization/specialized/plot_stats.html",
+    "title": "Specialized Plots (with statistics)",
+    "section": "",
+    "text": "Statistical Visualizations\n\nRegression lines and confidence intervals\nCorrelation matrices\nResidual plots\nVisualizing model outputs\n\n\nCategorical\n\nBar chart with confidence intervals\nProportion plots with error bars\n\n\n\n▸ Continuous\n\nDensity plots with quantile shading\nHistogram with fitted curve\n\n\n\n▸ Category vs. Category\n\nChi-square residual heatmap\nProportional stacked bar with significance markers\n\n\n\n▸ Continuous vs. Continuous\n\nScatter plot with regression line\nCorrelation matrix\nResidual plots\n\n\n\n▸ Category vs. Continuous\n\nViolin plot with median and IQR\nBoxplot with notches or statistical annotations Time Series\nForecast overlays\nDecomposition plots (trend, seasonality, residuals)\n\n\n\n▸ Map\n\nChoropleth with statistical bins\nCartogram scaled by statistical variable\n\nHistogram\nDensity plot\nBox plot\nViolin plot\nCorrelogram\nForest plot\nRidge line plot\nHeat map (especially for correlations or frequencies)\nScatter plot (when enhanced with regression or stats)"
   },
   {
     "objectID": "exporting_tools/debugging_plots.html",

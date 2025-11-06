@@ -3,7 +3,7 @@ title: "Data wrangling"
 author: "SpaRroW"
 ---
 
-<iframe src="https://1drv.ms/p/c/12cb43e2ca5f0d2c/IQTn6Vf8UZ4YSaAXldGnfqnxAdpnDdOtHU6hlrXIN1kVAFU" width="402" height="327" frameborder="0" scrolling="no"></iframe>
+<iframe src="https://1drv.ms/p/c/12cb43e2ca5f0d2c/IQTn6Vf8UZ4YSaAXldGnfqnxAdpnDdOtHU6hlrXIN1kVAFU" width="402" height="327" frameborder="8px solid black" scrolling="no"></iframe>
 
 
 Importing data (CSV, Excel, etc.)

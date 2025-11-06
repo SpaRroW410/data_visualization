@@ -1,5 +1,5 @@
 ---
-title: "Plot data"
+title: "Data to plot"
 author: "SpaRroW"
 ---
 
