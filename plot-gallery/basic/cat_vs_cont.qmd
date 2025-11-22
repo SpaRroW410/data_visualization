@@ -1,8 +1,0 @@
----
-title: "Category vs Continuous"
-format: html
----
-
-# Category vs Continuous
-
-Content coming soon...

@@ -30,6 +30,8 @@ website:
             href: plot-gallery/moderate.qmd
           - text: "Advanced Plots"
             href: plot-gallery/advanced.qmd
+          - text: "Practical Appications"
+            href: plot-gallery/practical_application.qmd
       - text: "Specialized Plots"
         menu:
           - href: specialized/merge_visuals.qmd
@@ -66,3 +68,5 @@ format:
     toc: true
     lightbox: auto
 
+# Custom metadata at root level
+hide-advanced: true

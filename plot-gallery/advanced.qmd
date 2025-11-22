@@ -1,56 +1,100 @@
 ---
 title: "Advanced plots"
-author: "SpaRroW"
-editor: 
-  markdown: 
+format:
+  html:
+    code-copy: true
+    theme: cosmo
+    toc: true
+    lightbox: auto
+
+editor:
+  markdown:
     wrap: 72
+    
+---
+## Intermediate Plot 
+
+Explore foundational plots grouped by data type and relationship
+
 ---
 
-### ▸ Categorical
+### ▸ Categorical Plots
 
--   Faceted bar plots **- Spider / radar charts** **- Tree Map** \### ▸
-    Continuous
+Includes: 
+- Treemaps (hierarchical proportions)
+- Sunburst charts (circular hierarchies)
+- Dendrograms (clustering)
+- Marimekko charts (two-way composition)
+- Waffle charts (unit visualization)
+🔗 [View Slide Deck →](advanced/3.1_categorical_advanced.qmd)
 
--   2D density plot
+---
 
--   Hexbin plot
+### ▸ Continuous Plots
 
-### ▸ Category vs. Category
+Includes: 
+- Contour plots (2D density)
+- 3D surface plots
+- Parallel coordinates
+- Correlation ellipses
+- Hexbin plots (large data)
+🔗 [View Slide Deck →](advanced/3.2_continuous_advanced.qmd)
 
--   **Sankey diagram**
-
--   **Chord diagram**
-
-### ▸ Continuous vs. Continuous
-
--   Residual plots
+---
 
 ### ▸ Category vs. Continuous
 
--   Raincloud plots
+Includes: 
+- Effect plots (model-based)
+- Interaction plots
+- Marginal effects
+- Bayesian credible intervals
+- Mixed effects visualization
+🔗 [View Slide Deck →](advanced/3.3_category_vs_continuous_advanced.qmd)
 
-### ▸ Time Series
+---
 
--   Time series decomposition plots
+### ▸ Time 
 
-### ▸ Map
+Includes:
+- STL decomposition (trend/seasonal)
+- Forecasting with ARIMA
+- Prophet models
+- Change point detection
+- Spectral analysis (FFT)
+🔗 [View Slide Deck →](advanced/3.4_timeseries_advanced.qmd)
 
--   Animated geospatial transitions
+### ▸ Network flow
 
-### ▸ Others
+Includes:
+- Community detection algorithms
+- Centrality measures visualization
+- Network statistics
+- Dynamic networks
+- Bipartite networks
+🔗 [View Slide Deck →](advanced/3.5_network_advanced.qmd)
 
--    **Waterfall chart**
+::: {.content-visible when-meta="advanced-content"}
+### ▸ Geographical
 
--   **Funnel chart**
+Includes:
+- Spatial interpolation (kriging)
+- Cartograms (area distortion)
+- Spatial autocorrelation
+- Hexbin maps
+- Isochrone maps
+🔗 [View Slide Deck →](advanced/3.6_geographic_advanced.qmd)
+:::
 
--   **Sunburst chart**
+::: {.content-visible when-meta="advanced-content"}
+### ▸ Dashboard
 
--   **Word cloud**
+Includes:
+- Dashboard layout principles
+- Shiny app structure
+- Reactive programming
+- plotly interactivity
+- flexdashboard framework
+🔗 [View Slide Deck →](advanced/3.7_dashboards_advanced.qmd)
+:::
 
-<!-- -->
-
--   Combining plots with patchwork or cowplot
-
--   Custom themes and annotations
-
--   Dual-axis plots (with caution)

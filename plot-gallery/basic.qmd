@@ -18,40 +18,46 @@ sidebar:
           text: "Intermediate"
         - href: advanced.qmd
           text: "Advanced"
+        - href: practical_application.qmd
+          text: "Practical Appications"  
 
 editor:
   markdown:
     wrap: 72
 ---
+# Foundations
 
-## 🧭 Basic Plot Categories
+Foundations of Plots
+[View Slide Deck →](basic/0_foundation.qmd)
 
-Explore foundational plots grouped by data type and relationship. Each link opens a dedicated slide deck.
+## Basic Plot 
+
+Explore foundational plots grouped by data type and relationship
 
 ---
 
 ### ▸ Categorical Plots
 
-Includes: Bar chart, Pie chart, Donut chart, Stacked bar chart, Mosaic plot  
-🔗 [View Slide Deck →](basic/categorical.qmd)
+Includes: Bar chart, Pie chart, Donut chart, Stacked bar chart 
+🔗 [View Slide Deck →](basic/1.1_categorical_basic.qmd)
 
 ---
 
 ### ▸ Continuous Plots
 
 Includes: Histogram, Density plot, Scatter plot  
-🔗 [View Slide Deck →](basic/continuous.qmd)
+🔗 [View Slide Deck →](basic/1.2_continuous_basic.qmd)
 
 ---
 
 ### ▸ Category vs. Continuous
 
-Includes: Box plot  
-🔗 [View Slide Deck →](basic/cat_vs_cont.qmd)
+Includes: Box plot, Grouped Bar, Stacked Bar plot
+🔗 [View Slide Deck →](basic/1.3_category_vs_continuous_basic.qmd)
 
 ---
 
-### ▸ Time & Spatial Plots
+### ▸ Time 
 
-Includes: Line chart, Bubble map, Choropleth map  
-🔗 [View Slide Deck →](basic/time_space.qmd)
+Includes: Simple Line Chart, Multiple Line Chart (comparing groups), Line Chart with Points
+🔗 [View Slide Deck →](basic/1.4_timeseries_basic.qmd)

@@ -1,0 +1,305 @@
+---
+title: "Practical Application"
+subtitle: "Real-World Case Studies"
+format:
+  revealjs:
+    theme: serif
+    css: ../assets/slide_deck.css
+    slide-number: true
+    navigation-mode: linear
+    code-copy: true
+    code-fold: true
+    chalkboard: true
+    preview-links: true
+    center: true
+    zoom: true
+---
+
+# From Analysis to Action {.center}
+
+## Case Study 1: Publication Figure
+
+**Scenario:** Need publication-ready figure for medical journal
+
+**Requirements:**
+- High resolution (300 DPI)
+- Grayscale-friendly
+- Clear statistical annotations
+- Professional formatting
+
+## Publication Figure - Code
+
+```{r eval=FALSE, echo=TRUE}
+# Treatment effect with confidence intervals
+model <- lm(SysBP_12m ~ TreatmentGroup + Age + BMI_0m + SysBP_0m,
+           data = health_data)
+
+library(ggeffects)
+effects <- ggpredict(model, terms = "TreatmentGroup")
+
+p <- plot(effects) +
+  labs(title = "Treatment Effect on Systolic Blood Pressure",
+       subtitle = "Adjusted for age, BMI, and baseline BP",
+       x = "Treatment Group",
+       y = "Predicted Systolic BP (mmHg)",
+       caption = "Error bars: 95% confidence intervals. n=500 per group.") +
+  theme_bw(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0),
+    panel.grid.minor = element_blank(),
+    legend.position = "none"
+  )
+
+# Save high-res
+ggsave("figure1.tiff", p, width = 7, height = 5, dpi = 300)
+ggsave("figure1.eps", p, width = 7, height = 5, device = cairo_ps)
+```
+
+## Case Study 2: Executive Dashboard
+
+**Scenario:** Monthly report for C-suite
+
+**Requirements:**
+- Key metrics at a glance
+- Trend over time
+- Regional breakdown
+- Action items highlighted
+
+## Executive Dashboard Structure
+
+```{r eval=FALSE, echo=TRUE}
+---
+title: "Q4 2024 Health Outcomes"
+output:
+  flexdashboard::flex_dashboard:
+    theme: cosmo
+---
+
+# Executive Summary {data-icon="fa-dashboard"}
+
+## Row {data-height=150}
+
+### Total Patients
+valueBox(2500, icon = "fa-users", color = "primary")
+
+### Avg BP Reduction  
+valueBox(-15.3, caption = "mmHg", icon = "fa-arrow-down",
+        color = "success")
+
+### Target Achievement
+gauge(87, min = 0, max = 100, symbol = "%",
+     gaugeSectors(success = c(80, 100), warning = c(60, 80),
+                 danger = c(0, 60)))
+
+## Row
+
+### Trend Over Time
+(plot showing quarterly BP trends)
+
+### Regional Heatmap
+(choropleth of outcomes by region)
+```
+
+## Case Study 3: Exploratory Analysis Report
+
+**Scenario:** Initial data exploration for research team
+
+**Requirements:**
+- Comprehensive EDA
+- Identify patterns
+- Flag data quality issues
+- Generate hypotheses
+
+## EDA Report Template
+
+```{r eval=FALSE, echo=TRUE}
+---
+title: "Exploratory Data Analysis: BP Study"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
+---
+
+# Data Overview
+- Summary statistics
+- Missing data patterns
+- Outlier detection
+
+# Univariate Analysis
+- Distribution of each variable
+- Histograms, density plots
+
+# Bivariate Analysis
+- Correlation matrix
+- Key relationships
+
+# Multivariate Patterns
+- PCA or t-SNE
+- Clustering analysis
+
+# Data Quality Issues
+- Missing data by group
+- Potential errors
+- Recommendations
+```
+
+## Case Study 4: Interactive Web App
+
+**Scenario:** Tool for clinicians to explore patient data
+
+**Requirements:**
+- Filter by patient characteristics
+- Show similar patients
+- Display trends
+- Export reports
+
+## Clinician Tool - Shiny
+
+```{r eval=FALSE, echo=TRUE}
+ui <- fluidPage(
+  titlePanel("Patient Explorer"),
+  sidebarLayout(
+    sidebarPanel(
+      textInput("patientID", "Enter Patient ID:"),
+      selectInput("metric", "Compare:",
+                 choices = c("BP", "Cholesterol", "BMI")),
+      actionButton("find", "Find Similar Patients")
+    ),
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Patient Profile",
+                valueBoxOutput("currentBP"),
+                plotOutput("patientTrend")),
+        tabPanel("Similar Patients",
+                plotOutput("similarScatter"),
+                DTOutput("similarTable")),
+        tabPanel("Predictions",
+                plotOutput("forecastPlot"))
+      )
+    )
+  )
+)
+
+server <- function(input, output) {
+  # Reactive logic for patient comparison
+  # Machine learning for similarity
+  # Visualization of results
+}
+```
+
+## Case Study 5: Automated Reporting
+
+**Scenario:** Weekly reports for 50+ clinic sites
+
+**Requirements:**
+- Automated generation
+- Site-specific content
+- Consistent formatting
+- Email distribution
+
+## Parameterized Reports
+
+```{r eval=FALSE, echo=TRUE}
+---
+title: "Weekly Report: `r params$site_name`"
+output: html_document
+params:
+  site_name: "North Clinic"
+  week_start: "2024-01-01"
+  week_end: "2024-01-07"
+---
+
+
+# Filter data for this site
+site_data <- health_data %>%
+  filter(Site == params$site_name,
+        Date >= params$week_start,
+        Date <= params$week_end)
+
+# Generate site-specific visualizations
+```
+
+# Generate for all sites
+```{r eval=FALSE}
+sites <- unique(health_data$Site)
+for (site in sites) {
+  rmarkdown::render("template.Rmd",
+                   params = list(site_name = site),
+                   output_file = paste0(site, "_report.html"))
+}
+```
+
+## Workflow Best Practices
+
+**Project Organization:**
+
+```
+project/
+├── data/
+│   ├── raw/
+│   └── processed/
+├── R/
+│   ├── 01_cleaning.R
+│   ├── 02_analysis.R
+│   └── functions.R
+├── output/
+│   ├── figures/
+│   └── tables/
+├── reports/
+│   └── analysis.Rmd
+└── README.md
+```
+
+**Version Control:**
+- Use Git for code
+- Document changes
+- Reproducible workflows
+
+## Code Quality Checklist
+
+**Before Sharing:**
+
+- [ ] Remove hardcoded paths
+- [ ] Add comments to complex code
+- [ ] Check for errors/warnings
+- [ ] Test with subset of data
+- [ ] Verify output matches expectations
+- [ ] Include session info (`sessionInfo()`)
+- [ ] Document package versions (`renv`)
+
+## Summary
+
+**Real-world skills:**
+
+1. Publication figures - high-quality, standards-compliant
+2. Executive dashboards - key metrics, trends
+3. EDA reports - comprehensive exploration
+4. Interactive tools - Shiny apps for users
+5. Automated reporting - scale insights
+
+**Remember:**
+- Know your audience
+- Tell a clear story
+- Make it reproducible
+- Test thoroughly
+
+## Congratulations! 🎉
+
+**You've completed all levels:**
+
+- ✓ Foundation
+- ✓ Basic (4 data types)
+- ✓ Intermediate (6 techniques)
+- ✓ Advanced (7 specialized topics)
+- ✓ Practical application
+
+**You can now:**
+- Choose appropriate visualizations
+- Create publication-quality figures
+- Build interactive dashboards
+- Apply advanced techniques
+- Handle real-world scenarios
+
+**Keep practicing and exploring!**

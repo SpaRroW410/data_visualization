@@ -28,8 +28,8 @@ This site is your interactive guide for the **Data Visualization Workshop** that
 
 ## Code and Examples in Real Time
 
- There are code snippets, rendered outputs, and downloadable datasets all over the site.  You can change and play around with the code for your own projects.
+ There are code snippets, rendered outputs, and downloadable datasets all over the site.
 
-## Printable Resources
+## Downloadable Resources
 
  ---

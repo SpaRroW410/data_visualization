@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="SpaRroW">
 
 <title>Data Visualization - Advanced plots</title>
 <style>
@@ -133,6 +132,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../plot-gallery/advanced.html" rel="" target="">
  <span class="dropdown-text">Advanced Plots</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../plot-gallery/practical_application.html" rel="" target="">
+ <span class="dropdown-text">Practical Appications</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -208,13 +211,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#categorical" id="toc-categorical" class="nav-link active" data-scroll-target="#categorical">▸ Categorical</a></li>
-  <li><a href="#category-vs.-category" id="toc-category-vs.-category" class="nav-link" data-scroll-target="#category-vs.-category">▸ Category vs.&nbsp;Category</a></li>
-  <li><a href="#continuous-vs.-continuous" id="toc-continuous-vs.-continuous" class="nav-link" data-scroll-target="#continuous-vs.-continuous">▸ Continuous vs.&nbsp;Continuous</a></li>
+  <li><a href="#intermediate-plot" id="toc-intermediate-plot" class="nav-link active" data-scroll-target="#intermediate-plot">Intermediate Plot</a>
+  <ul class="collapse">
+  <li><a href="#categorical-plots" id="toc-categorical-plots" class="nav-link" data-scroll-target="#categorical-plots">▸ Categorical Plots</a></li>
+  <li><a href="#continuous-plots" id="toc-continuous-plots" class="nav-link" data-scroll-target="#continuous-plots">▸ Continuous Plots</a></li>
   <li><a href="#category-vs.-continuous" id="toc-category-vs.-continuous" class="nav-link" data-scroll-target="#category-vs.-continuous">▸ Category vs.&nbsp;Continuous</a></li>
-  <li><a href="#time-series" id="toc-time-series" class="nav-link" data-scroll-target="#time-series">▸ Time Series</a></li>
-  <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map">▸ Map</a></li>
-  <li><a href="#others" id="toc-others" class="nav-link" data-scroll-target="#others">▸ Others</a></li>
+  <li><a href="#time" id="toc-time" class="nav-link" data-scroll-target="#time">▸ Time</a></li>
+  <li><a href="#network-flow" id="toc-network-flow" class="nav-link" data-scroll-target="#network-flow">▸ Network flow</a></li>
+  <li><a href="#geographical" id="toc-geographical" class="nav-link" data-scroll-target="#geographical">▸ Geographical</a></li>
+  <li><a href="#dashboard" id="toc-dashboard" class="nav-link" data-scroll-target="#dashboard">▸ Dashboard</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -230,12 +236,6 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>SpaRroW </p>
-          </div>
-  </div>
     
   
     
@@ -244,61 +244,43 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="categorical" class="level3">
-<h3 class="anchored" data-anchor-id="categorical">▸ Categorical</h3>
-<ul>
-<li><p>Faceted bar plots <strong>- Spider / radar charts</strong> <strong>- Tree Map</strong> ### ▸ Continuous</p></li>
-<li><p>2D density plot</p></li>
-<li><p>Hexbin plot</p></li>
-</ul>
+<section id="intermediate-plot" class="level2">
+<h2 class="anchored" data-anchor-id="intermediate-plot">Intermediate Plot</h2>
+<p>Explore foundational plots grouped by data type and relationship</p>
+<hr>
+<section id="categorical-plots" class="level3">
+<h3 class="anchored" data-anchor-id="categorical-plots">▸ Categorical Plots</h3>
+<p>Includes: - Treemaps (hierarchical proportions) - Sunburst charts (circular hierarchies) - Dendrograms (clustering) - Marimekko charts (two-way composition) - Waffle charts (unit visualization) 🔗 <a href="../plot-gallery/advanced/3.1_categorical_advanced.html">View Slide Deck →</a></p>
+<hr>
 </section>
-<section id="category-vs.-category" class="level3">
-<h3 class="anchored" data-anchor-id="category-vs.-category">▸ Category vs.&nbsp;Category</h3>
-<ul>
-<li><p><strong>Sankey diagram</strong></p></li>
-<li><p><strong>Chord diagram</strong></p></li>
-</ul>
-</section>
-<section id="continuous-vs.-continuous" class="level3">
-<h3 class="anchored" data-anchor-id="continuous-vs.-continuous">▸ Continuous vs.&nbsp;Continuous</h3>
-<ul>
-<li>Residual plots</li>
-</ul>
+<section id="continuous-plots" class="level3">
+<h3 class="anchored" data-anchor-id="continuous-plots">▸ Continuous Plots</h3>
+<p>Includes: - Contour plots (2D density) - 3D surface plots - Parallel coordinates - Correlation ellipses - Hexbin plots (large data) 🔗 <a href="../plot-gallery/advanced/3.2_continuous_advanced.html">View Slide Deck →</a></p>
+<hr>
 </section>
 <section id="category-vs.-continuous" class="level3">
 <h3 class="anchored" data-anchor-id="category-vs.-continuous">▸ Category vs.&nbsp;Continuous</h3>
-<ul>
-<li>Raincloud plots</li>
-</ul>
+<p>Includes: - Effect plots (model-based) - Interaction plots - Marginal effects - Bayesian credible intervals - Mixed effects visualization 🔗 <a href="../plot-gallery/advanced/3.3_category_vs_continuous_advanced.html">View Slide Deck →</a></p>
+<hr>
 </section>
-<section id="time-series" class="level3">
-<h3 class="anchored" data-anchor-id="time-series">▸ Time Series</h3>
-<ul>
-<li>Time series decomposition plots</li>
-</ul>
+<section id="time" class="level3">
+<h3 class="anchored" data-anchor-id="time">▸ Time</h3>
+<p>Includes: - STL decomposition (trend/seasonal) - Forecasting with ARIMA - Prophet models - Change point detection - Spectral analysis (FFT) 🔗 <a href="../plot-gallery/advanced/3.4_timeseries_advanced.html">View Slide Deck →</a></p>
 </section>
-<section id="map" class="level3">
-<h3 class="anchored" data-anchor-id="map">▸ Map</h3>
-<ul>
-<li>Animated geospatial transitions</li>
-</ul>
+<section id="network-flow" class="level3">
+<h3 class="anchored" data-anchor-id="network-flow">▸ Network flow</h3>
+<p>Includes: - Community detection algorithms - Centrality measures visualization - Network statistics - Dynamic networks - Bipartite networks 🔗 <a href="../plot-gallery/advanced/3.5_network_advanced.html">View Slide Deck →</a></p>
 </section>
-<section id="others" class="level3">
-<h3 class="anchored" data-anchor-id="others">▸ Others</h3>
-<ul>
-<li><p><strong>Waterfall chart</strong></p></li>
-<li><p><strong>Funnel chart</strong></p></li>
-<li><p><strong>Sunburst chart</strong></p></li>
-<li><p><strong>Word cloud</strong></p></li>
-</ul>
-<!-- -->
-<ul>
-<li><p>Combining plots with patchwork or cowplot</p></li>
-<li><p>Custom themes and annotations</p></li>
-<li><p>Dual-axis plots (with caution)</p></li>
-</ul>
+<section id="geographical" class="level3">
+<h3 class="anchored" data-anchor-id="geographical">▸ Geographical</h3>
+<p>Includes: - Spatial interpolation (kriging) - Cartograms (area distortion) - Spatial autocorrelation - Hexbin maps - Isochrone maps 🔗 <a href="../plot-gallery/advanced/3.6_geographic_advanced.html">View Slide Deck →</a></p>
+</section>
+<section id="dashboard" class="level3">
+<h3 class="anchored" data-anchor-id="dashboard">▸ Dashboard</h3>
+<p>Includes: - Dashboard layout principles - Shiny app structure - Reactive programming - plotly interactivity - flexdashboard framework 🔗 <a href="../plot-gallery/advanced/3.7_dashboards_advanced.html">View Slide Deck →</a></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -1,68 +1,76 @@
 ---
-title: "Intermediate plots"
-author: "SpaRroW"
+title: "Intermediate"
+format:
+  html:
+    code-copy: true
+    theme: cosmo
+    toc: true
+    lightbox: auto
+
+editor:
+  markdown:
+    wrap: 72
+---
+## Intermediate Plot 
+
+Explore foundational plots grouped by data type and relationship
+
 ---
 
-### ▸ Categorical
+### ▸ Categorical Plots
 
--   Grouped bar chart
+Includes: Lollipop, Cleveland Dot, Mosaic, Radial Bar
+🔗 [View Slide Deck →](moderate/2.1_categorical_intermediate.qmd)
 
-**- Lollipop chart**
+---
 
--   Cleveland dot plot
+### ▸ Continuous Plots
 
--   Circular Bar plot
+Includes: Violin plots, Ridgeline plots, 2D density, Hexbin
+🔗 [View Slide Deck →](moderate/2.2_continuous_intermediate.qmd)
 
--   Waffle Plot
-
-### ▸ Continuous
-
--   **Ridgeline plot**
-
--   Frequency polygon
-
-### ▸ Category vs. Category
-
--   Grouped bar chart with facets
-
--   Heatmap of categorical intersections
-
-### ▸ Continuous vs. Continuous
-
--   **Bubble chart**
-
--   Pair plot (GGally::ggpairs)
-
--   **Correlation matrix**
-
--   **Correlogram**
+---
 
 ### ▸ Category vs. Continuous
 
--   **Violin plot**
+Includes: 
+- Violin plots, 
+- Ridgeline plots, 
+- Bee swarm plots, 
+- Raincloud plots, 
+- Enhanced grouped/stacked bars
+🔗 [View Slide Deck →](moderate/2.3_category_vs_continuous_intermediate.qmd)
 
--   Beeswarm plot
+---
 
--   Dot plot
+### ▸ Time 
 
--   Jittered scatter over boxplot
+Includes:
+- Smoothed trends (LOESS, moving average)
+- Area charts with confidence bands
+- Multi-series comparison plots
+- Annotations and event markers, Seasonal patterns
+🔗 [View Slide Deck →](moderate/2.4_timeseries_intermediate.qmd)
 
-### ▸ Time Series
+### ▸ Relational flow
 
--   **Area chart**
+Includes:
+- Network diagrams (nodes & edges)
+- Sankey diagrams (flow)
+- Chord diagrams (circular relationships)
+- Alluvial plots (categorical flows)
+- Correlation networks
+🔗 [View Slide Deck →](moderate/2.5_relational_flow_intermediate.qmd)
 
--   **Stacked Area chart**
+::: {.content-visible unless-meta="hide-advanced"}
+### ▸ Geographical 
 
--   Stream graph
+Includes:
+- Choropleth maps (filled regions)
+- Point/bubble maps
+- Heat maps (density)
+- Faceted maps (small multiples)
+- Interactive maps
+🔗 [View Slide Deck](moderate/2.6_geographic_intermediate.qmd)
+:::
 
-### ▸ Map
-
--   Faceted choropleths
-
--   Cartogram
-
-### ▸ Others
-
--   Heat Map
-
--   Forest Plot
