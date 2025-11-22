@@ -16,10 +16,10 @@ website:
             href: r-foundations/data-wrangling.qmd
       - text: "Data Visualization"
         menu:
-          - text: "Introduction"
-            href: data-visualization/intro.qmd
           - text: "Best Practices"
             href: data-visualization/best_practices.qmd
+          - text: "Grammar of Graphics"
+            href: data-visualization/ggplot_grammar.qmd
           - text: "Matching data to plots"
             href: data-visualization/plot_data.qmd
       - text: "Plot Gallery"

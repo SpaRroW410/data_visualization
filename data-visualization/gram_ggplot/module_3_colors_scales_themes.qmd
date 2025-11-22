@@ -1,0 +1,1100 @@
+---
+title: "Grammar of Graphics: Module 3"
+subtitle: "Colors, Scales & Custom Themes"
+author: "Sparrow"
+date: today
+format: 
+  revealjs:
+    theme: serif
+    css: ../../assets/slide_deck.css
+    include-after-body: footer.html
+    slide-number: true
+    navigation-mode: linear
+    code-copy: true
+    code-fold: true
+    chalkboard: true
+    preview-links: true
+    center: true
+    zoom: true
+---
+
+## Module 3 Overview {.smaller}
+
+**Previously**:
+- Module 1: Foundations & Geoms
+- Module 2: Aesthetics & Faceting & Themes
+
+**This Module**:
+- Color palettes & accessibility
+- paletteer package
+- Scale functions (manual, discrete, continuous, gradient)
+- Custom theme creation with theme()
+- element_text(), element_line(), element_rect(), element_blank()
+- Legend management
+
+## Setup
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readxl)
+library(ggthemes)
+library(paletteer)  # For extensive color palettes
+library(patchwork)  # For combining plots
+
+# Load data
+bp_data <- read_excel("../../data/PublicHealth_BP_Dataset.xlsx") %>%
+  mutate(
+    SysBP_Change = SysBP_6m - SysBP_0m,
+    AgeGroup = cut(Age, breaks = c(0, 30, 50, 65, 100),
+                   labels = c("18-30", "31-50", "51-65", "65+")),
+    Hypertension_Baseline = ifelse(SysBP_0m >= 140 | DiaBP_0m >= 90, 
+                                   "Hypertensive", "Normal"),
+    BMI_Category = cut(BMI, breaks = c(0, 18.5, 25, 30, 100),
+                       labels = c("Underweight", "Normal", "Overweight", "Obese"))
+  )
+
+region_summary <- bp_data %>%
+  group_by(Region) %>%
+  summarise(Mean_SysBP = mean(SysBP_0m), N = n(), .groups = "drop")
+```
+
+# Section 1: Color Palettes & Accessibility {background-color="#2C5F8D"}
+
+## Color Theory Basics {.smaller}
+
+::: {.incremental}
+- **Hue**: The color itself (red, blue, green)
+- **Saturation**: Intensity/purity of color
+- **Luminance**: Brightness/lightness
+- **Contrast**: Difference between colors
+:::
+
+::: {.fragment}
+**Key principles**:
+- Use color purposefully, not decoratively
+- Ensure sufficient contrast for readability
+- Consider colorblind accessibility (~8% of males, ~0.5% of females)
+- Limit number of colors (typically ≤7 for categorical data)
+:::
+
+## scale_color_brewer() - ColorBrewer Palettes
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5"
+
+ggplot(bp_data, 
+       aes(x = Age, y = SysBP_0m,
+           color = Region)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_brewer(palette = "Set2") +
+  theme_minimal()
+```
+
+::: {.fragment}
+**Types**: Sequential, Diverging, Qualitative  
+**Use**: Professional, well-tested color combinations
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m, color = Region)) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_brewer(palette = "Set2") +
+  labs(title = "ColorBrewer: Set2 Palette") +
+  theme_minimal(base_size = 12)
+```
+:::
+::::
+
+## Colorblind-Friendly: Viridis
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5"
+
+ggplot(bp_data, 
+       aes(x = BMI, y = Cholesterol,
+           color = SysBP_0m)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_viridis_c(option = "plasma") +
+  theme_minimal()
+```
+
+::: {.fragment}
+**Options**: "viridis", "magma", "plasma", "inferno", "cividis"  
+**Advantages**: Colorblind-safe, perceptually uniform, prints well in B&W
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = BMI, y = Cholesterol, color = SysBP_0m)) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_viridis_c(option = "plasma") +
+  labs(title = "Viridis: Plasma",
+       color = "SysBP") +
+  theme_minimal(base_size = 12)
+```
+:::
+::::
+
+## Viridis for Discrete Variables
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5"
+
+ggplot(bp_data, 
+       aes(x = Age, y = SysBP_0m,
+           color = Region)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_viridis_d(option = "viridis") +
+  theme_minimal()
+```
+
+::: {.fragment}
+**_d** for discrete, **_c** for continuous  
+Always prefer colorblind-friendly palettes!
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m, color = Region)) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_viridis_d(option = "viridis") +
+  labs(title = "Viridis Discrete") +
+  theme_minimal(base_size = 12)
+```
+:::
+::::
+
+## paletteer Package - Universal Access
+
+::: {.incremental}
+- **Access to 2500+ color palettes** from various R packages
+- Unified interface for all palette packages
+- Includes: RColorBrewer, viridis, ggsci, wesanderson, and many more
+- Easy to browse and apply
+:::
+
+```{r}
+#| echo: true
+#| eval: false
+
+library(paletteer)
+
+# Preview available palettes
+# paletteer_d_names  # Discrete palettes
+# paletteer_c_names  # Continuous palettes
+```
+
+## paletteer: Discrete Palettes
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5-6"
+
+ggplot(bp_data, 
+       aes(x = AgeGroup, y = SysBP_0m,
+           fill = TreatmentGroup)) +
+  geom_boxplot(alpha = 0.8) +
+  scale_fill_paletteer_d(
+    "ggsci::nrc_npg") +
+  theme_minimal()
+```
+
+::: {.fragment}
+**Format**: `"package::palette_name"`  
+Explore with: `paletteer_d_names`
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = AgeGroup, y = SysBP_0m, fill = TreatmentGroup)) +
+  geom_boxplot(alpha = 0.8) +
+  scale_fill_paletteer_d("ggsci::nrc_npg") +
+  labs(title = "NPG (Nature Publishing) Colors",
+       fill = "Treatment") +
+  theme_minimal(base_size = 11)
+```
+:::
+::::
+
+## paletteer: Continuous Palettes
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5-6"
+
+ggplot(bp_data, 
+       aes(x = Age, y = BMI,
+           color = Cholesterol)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_paletteer_c(
+    "viridis::mako") +
+  theme_minimal()
+```
+
+::: {.fragment}
+Beautiful gradients for continuous variables  
+Explore with: `paletteer_c_names`
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Age, y = BMI, color = Cholesterol)) +
+  geom_point(size = 2.5, alpha = 0.7) +
+  scale_color_paletteer_c("viridis::mako") +
+  labs(title = "Mako Gradient",
+       color = "Cholesterol") +
+  theme_minimal(base_size = 12)
+```
+:::
+::::
+
+## Best Practices for Color {.smaller}
+
+::: {.incremental}
+1. **Use color purposefully** - not just for decoration
+2. **Prefer colorblind-safe palettes** - viridis, ColorBrewer, paletteer curated sets
+3. **Limit colors** - typically ≤7 distinct colors for categorical
+4. **Use redundant encoding** - combine color with shape, pattern, or position
+5. **Ensure contrast** - especially for text and important distinctions
+6. **Consider grayscale** - will it work if printed in black & white?
+7. **Cultural context** - red/green may have different meanings
+8. **Test with target audience** - especially for accessibility needs
+:::
+
+# Section 2: Scale Functions Deep Dive {background-color="#2C5F8D"}
+
+## Scale System Overview {.smaller}
+
+::: {.incremental}
+- Scales control **how data values map to visual properties**
+- Every aesthetic has an associated scale
+- Format: `scale_<aesthetic>_<type>()`
+  - aesthetic: color, fill, x, y, size, shape, alpha
+  - type: continuous, discrete, manual, gradient, brewer, viridis
+- Scales control: breaks, limits, labels, transformations
+:::
+
+```{r}
+#| echo: true
+#| eval: false
+
+scale_color_manual(values = c("red", "blue"))
+scale_x_continuous(breaks = seq(0, 100, 20))
+```
+
+## scale_color_manual(): Custom Colors
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5-8"
+
+ggplot(bp_data, 
+       aes(x = Age, y = SysBP_0m,
+           color = TreatmentGroup)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_manual(
+    values = c("Control" = "steelblue",
+               "Intervention" = "darkred"),
+    name = "Treatment")
+```
+
+::: {.fragment}
+**Use for**: Exact control over categorical colors  
+Can use named colors or hex codes
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m, color = TreatmentGroup)) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_color_manual(values = c("Control" = "steelblue", "Intervention" = "darkred"),
+                     name = "Treatment") +
+  labs(title = "Custom Manual Colors") +
+  theme_minimal(base_size = 12)
+```
+:::
+::::
+
+## scale_fill_manual(): Custom Fills
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5-9"
+
+ggplot(region_summary, 
+       aes(x = reorder(Region, Mean_SysBP), 
+           y = Mean_SysBP, fill = Region)) +
+  geom_col() +
+  scale_fill_manual(
+    values = c("North" = "lightblue",
+               "South" = "coral",
+               "East" = "lightgreen",
+               "West" = "plum"))
+```
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(region_summary, aes(x = reorder(Region, Mean_SysBP), y = Mean_SysBP, fill = Region)) +
+  geom_col() +
+  scale_fill_manual(values = c("North" = "lightblue", "South" = "coral", 
+                                "East" = "lightgreen", "West" = "plum")) +
+  labs(title = "Custom Fill Colors") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "none")
+```
+:::
+::::
+
+## scale_color_gradient(): Two-Color Gradient
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5-7"
+
+ggplot(bp_data, 
+       aes(x = Age, y = BMI,
+           color = SysBP_0m)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_gradient(
+    low = "yellow", high = "darkred",
+    name = "Systolic BP")
+```
+
+::: {.fragment}
+**Use for**: Continuous variables with low-to-high progression
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Age, y = BMI, color = SysBP_0m)) +
+  geom_point(size = 2.5, alpha = 0.7) +
+  scale_color_gradient(low = "yellow", high = "darkred", name = "Systolic BP") +
+  labs(title = "Two-Color Gradient") +
+  theme_minimal(base_size = 12)
+```
+:::
+::::
+
+## scale_color_gradient2(): Diverging Gradient
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5-9"
+
+ggplot(bp_data, 
+       aes(x = Age, y = BMI,
+           color = SysBP_Change)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_gradient2(
+    low = "blue", mid = "white", 
+    high = "red",
+    midpoint = 0,
+    name = "BP Change")
+```
+
+::: {.fragment}
+**Use for**: Data with meaningful midpoint (zero, mean)  
+Perfect for showing increases vs decreases
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Age, y = BMI, color = SysBP_Change)) +
+  geom_point(size = 2.5, alpha = 0.7) +
+  scale_color_gradient2(low = "blue", mid = "white", high = "red", 
+                        midpoint = 0, name = "BP Change") +
+  labs(title = "Diverging Gradient") +
+  theme_minimal(base_size = 12)
+```
+:::
+::::
+
+## scale_x_continuous(): Axis Control
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|4-8"
+
+ggplot(bp_data, 
+       aes(x = Age, y = SysBP_0m)) +
+  geom_point(alpha = 0.5) +
+  scale_x_continuous(
+    breaks = seq(20, 80, by = 10),
+    limits = c(15, 85),
+    labels = paste0(seq(20, 80, 10), " yrs"),
+    name = "Patient Age")
+```
+
+::: {.fragment}
+**Controls**: breaks (tick marks), limits (range), labels, name
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m)) +
+  geom_point(alpha = 0.5, color = "steelblue") +
+  scale_x_continuous(breaks = seq(20, 80, by = 10),
+                     limits = c(15, 85),
+                     labels = paste0(seq(20, 80, 10), " yrs"),
+                     name = "Patient Age") +
+  labs(title = "Custom X-Axis") +
+  theme_minimal(base_size = 12)
+```
+:::
+::::
+
+## scale_x_discrete(): Reordering Categories
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5-9"
+
+ggplot(region_summary, 
+       aes(x = Region, y = Mean_SysBP,
+           fill = Region)) +
+  geom_col() +
+  scale_x_discrete(
+    limits = c("West", "North", 
+               "South", "East"),
+    labels = c("Western", "Northern",
+               "Southern", "Eastern"))
+```
+
+::: {.fragment}
+**Use for**: Custom order and labels for categorical data
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(region_summary, aes(x = Region, y = Mean_SysBP, fill = Region)) +
+  geom_col() +
+  scale_x_discrete(limits = c("West", "North", "South", "East"),
+                   labels = c("Western", "Northern", "Southern", "Eastern")) +
+  labs(title = "Reordered & Relabeled") +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "none")
+```
+:::
+::::
+
+# Section 3: Custom Themes with theme() {background-color="#2C5F8D"}
+
+## theme() Function Anatomy {.smaller}
+
+The `theme()` function customizes non-data plot elements:
+
+::: {.incremental}
+- **Element functions**:
+  - `element_text()` - Text elements (labels, titles, axis text)
+  - `element_line()` - Line elements (axis lines, grid lines)
+  - `element_rect()` - Rectangle elements (backgrounds, borders)
+  - `element_blank()` - Remove elements completely
+:::
+
+```{r}
+#| echo: true
+#| eval: false
+
+theme(
+  axis.title = element_text(size = 14, face = "bold"),
+  panel.grid = element_line(color = "gray80")
+)
+```
+
+## element_text(): Text Customization
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5-15"
+
+ggplot(bp_data, 
+       aes(x = Region, y = SysBP_0m,
+           fill = Region)) +
+  geom_boxplot() +
+  theme_minimal() +
+  theme(
+    axis.title = element_text(
+      size = 16, face = "bold",
+      color = "darkblue"),
+    axis.text = element_text(
+      size = 12, color = "gray30"),
+    plot.title = element_text(
+      size = 20, face = "bold",
+      hjust = 0.5)
+  )
+```
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Region, y = SysBP_0m, fill = Region)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Custom Text Elements") +
+  theme_minimal() +
+  theme(
+    axis.title = element_text(size = 14, face = "bold", color = "darkblue"),
+    axis.text = element_text(size = 11, color = "gray30"),
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    legend.position = "none"
+  )
+```
+:::
+::::
+
+## Using Serif Fonts
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5-13"
+
+ggplot(bp_data, 
+       aes(x = Age, y = SysBP_0m)) +
+  geom_point(alpha = 0.5, color = "darkred") +
+  labs(title = "Systolic BP by Age") +
+  theme_classic() +
+  theme(
+    text = element_text(
+      family = "serif",
+      size = 14),
+    plot.title = element_text(
+      family = "serif",
+      size = 18, face = "bold")
+  )
+```
+
+::: {.fragment}
+**Common families**: "serif", "sans", "mono"  
+Great for academic publications
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m)) +
+  geom_point(alpha = 0.5, color = "darkred", size = 2) +
+  labs(title = "Systolic BP by Age") +
+  theme_classic() +
+  theme(
+    text = element_text(family = "serif", size = 12),
+    plot.title = element_text(family = "serif", size = 16, face = "bold")
+  )
+```
+:::
+::::
+
+## element_line(): Line Customization
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5-12"
+
+ggplot(bp_data, 
+       aes(x = BMI, y = Cholesterol)) +
+  geom_point(alpha = 0.6) +
+  theme_minimal() +
+  theme(
+    axis.line = element_line(
+      color = "black", 
+      linewidth = 1),
+    panel.grid.major = element_line(
+      color = "gray70", 
+      linewidth = 0.5, 
+      linetype = "dashed")
+  )
+```
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = BMI, y = Cholesterol)) +
+  geom_point(alpha = 0.6, color = "steelblue") +
+  labs(title = "Custom Line Elements") +
+  theme_minimal() +
+  theme(
+    axis.line = element_line(color = "black", linewidth = 1),
+    panel.grid.major = element_line(color = "gray70", linewidth = 0.5, linetype = "dashed"),
+    panel.grid.minor = element_blank()
+  )
+```
+:::
+::::
+
+## element_rect(): Background Customization
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5-15"
+
+ggplot(bp_data, 
+       aes(x = Region, y = SysBP_0m)) +
+  geom_boxplot(fill = "lightblue") +
+  theme_minimal() +
+  theme(
+    plot.background = element_rect(
+      fill = "lightyellow",
+      color = "black",
+      linewidth = 2),
+    panel.background = element_rect(
+      fill = "white"),
+    panel.border = element_rect(
+      color = "darkblue",
+      fill = NA, linewidth = 1.5)
+  )
+```
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Region, y = SysBP_0m)) +
+  geom_boxplot(fill = "lightblue", alpha = 0.7) +
+  labs(title = "Custom Backgrounds") +
+  theme_minimal() +
+  theme(
+    plot.background = element_rect(fill = "lightyellow", color = "black", linewidth = 1.5),
+    panel.background = element_rect(fill = "white"),
+    panel.border = element_rect(color = "darkblue", fill = NA, linewidth = 1.5)
+  )
+```
+:::
+::::
+
+## element_blank(): Removing Elements
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|5-11"
+
+ggplot(bp_data, 
+       aes(x = Age, y = SysBP_0m)) +
+  geom_point(alpha = 0.5) +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    axis.title.x = element_blank(),
+    legend.background = element_blank(),
+    legend.key = element_blank()
+  )
+```
+
+::: {.fragment}
+**Use**: Clean up unnecessary elements for minimal designs
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m)) +
+  geom_point(alpha = 0.5, color = "darkgreen") +
+  labs(title = "Removed Elements",
+       y = "Systolic BP (mmHg)") +
+  theme_minimal() +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    axis.title.x = element_blank()
+  )
+```
+:::
+::::
+
+## Creating an Organizational Theme
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1-15"
+
+# Hospital/Clinical Report Theme
+theme_clinical_report <- function(base_size = 12, base_family = "serif") {
+  theme_bw(base_size = base_size, base_family = base_family) +
+  theme(
+    # Professional serif fonts
+    text = element_text(family = base_family),
+    
+    # Plot titles - centered and bold
+    plot.title = element_text(size = base_size * 1.3, face = "bold", 
+                              hjust = 0.5, margin = margin(b = 10)),
+    plot.subtitle = element_text(size = base_size * 1.1, hjust = 0.5,
+                                 color = "gray30", margin = margin(b = 15)),
+    plot.caption = element_text(size = base_size * 0.9, hjust = 1,
+                                face = "italic", color = "gray50"),
+    
+    # Axis elements - clear and readable
+    axis.title = element_text(size = base_size * 1.1, face = "bold"),
+    axis.text = element_text(size = base_size * 0.9, color = "gray20"),
+    axis.line = element_line(color = "black", linewidth = 0.5),
+    
+    # Panel - clean with subtle grid
+    panel.grid.major = element_line(color = "gray90", linewidth = 0.5),
+    panel.grid.minor = element_blank(),
+    panel.border = element_rect(color = "gray40", fill = NA, linewidth = 1),
+    panel.background = element_rect(fill = "white"),
+    
+    # Legend - bottom position, horizontal
+    legend.position = "bottom",
+    legend.title = element_text(size = base_size, face = "bold"),
+    legend.text = element_text(size = base_size * 0.9),
+    legend.background = element_rect(fill = "white", color = NA),
+    legend.key = element_rect(fill = "white", color = NA),
+    
+    # Plot background
+    plot.background = element_rect(fill = "white", color = NA)
+  )
+}
+```
+
+---
+
+## Clinical Theme in Action
+
+```{r}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 7
+
+bp_time <- bp_data %>%
+  select(PatientID, TreatmentGroup, SysBP_0m, SysBP_3m, SysBP_6m) %>%
+  pivot_longer(cols = starts_with("SysBP"),
+               names_to = "Time", values_to = "SysBP") %>%
+  mutate(Months = as.numeric(gsub("SysBP_|m", "", Time)))
+
+bp_summary <- bp_time %>%
+  group_by(TreatmentGroup, Months) %>%
+  summarise(Mean_SysBP = mean(SysBP, na.rm = TRUE), .groups = "drop")
+
+p1 <- ggplot(bp_summary, aes(x = Months, y = Mean_SysBP, color = TreatmentGroup)) +
+  geom_line(linewidth = 1.5) +
+  geom_point(size = 3) +
+  scale_color_manual(values = c("Control" = "steelblue", "Intervention" = "darkred")) +
+  labs(title = "Mean Systolic BP Over Time",
+       subtitle = "6-Month Follow-up Study",
+       x = "Months from Baseline",
+       y = "Mean Systolic BP (mmHg)",
+       color = "Treatment Group",
+       caption = "n=200 patients | Data: Public Health BP Study") +
+  theme_clinical_report(base_size = 12)
+
+p2 <- ggplot(bp_data %>% filter(!is.na(BMI_Category)), 
+             aes(x = BMI_Category, y = SysBP_Change, fill = TreatmentGroup)) +
+  geom_boxplot(alpha = 0.8) +
+  scale_fill_manual(values = c("Control" = "steelblue", "Intervention" = "darkred")) +
+  labs(title = "BP Change by BMI Category",
+       subtitle = "Baseline to 6-Month Change",
+       x = "BMI Category",
+       y = "Change in Systolic BP (mmHg)",
+       fill = "Treatment Group",
+       caption = "Negative values indicate BP reduction") +
+  theme_clinical_report(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 20, hjust = 1))
+
+p1 / p2
+```
+
+# Section 4: Legend Management {background-color="#2C5F8D"}
+
+## Multiple Legends Scenario
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|1-4"
+
+ggplot(bp_data, 
+       aes(x = Age, y = SysBP_0m,
+           color = TreatmentGroup,
+           size = BMI,
+           shape = Gender)) +
+  geom_point(alpha = 0.7)
+```
+
+::: {.fragment}
+Three aesthetics = three legends!  
+Can be overwhelming...
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m, color = TreatmentGroup, 
+                    size = BMI, shape = Gender)) +
+  geom_point(alpha = 0.7) +
+  labs(title = "Multiple Legends") +
+  theme_minimal(base_size = 10)
+```
+:::
+::::
+
+## Removing Specific Legends
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|7-9"
+
+ggplot(bp_data, 
+       aes(x = Age, y = SysBP_0m,
+           color = TreatmentGroup,
+           size = BMI,
+           shape = Gender)) +
+  geom_point(alpha = 0.7) +
+  guides(
+    size = "none",    # Remove BMI legend
+    shape = "none")   # Remove Gender legend
+```
+
+::: {.fragment}
+Keep only the most important legend(s)
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m, color = TreatmentGroup, 
+                    size = BMI, shape = Gender)) +
+  geom_point(alpha = 0.7) +
+  guides(size = "none", shape = "none") +
+  labs(title = "Selective Legend Removal") +
+  theme_minimal(base_size = 11)
+```
+:::
+::::
+
+## Legend Position
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|6-7"
+
+ggplot(bp_data, 
+       aes(x = Age, y = SysBP_0m,
+           color = TreatmentGroup)) +
+  geom_point(size = 2, alpha = 0.6) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom")
+```
+
+::: {.fragment}
+**Options**: "right" (default), "left", "top", "bottom", "none"  
+Or coordinates: `c(x, y)` where 0 ≤ x, y ≤ 1
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m, color = TreatmentGroup)) +
+  geom_point(size = 2, alpha = 0.6) +
+  labs(title = "Legend at Bottom") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom")
+```
+:::
+::::
+
+## Global Theme Settings
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|1-2|4-9"
+
+# Set global theme for all subsequent plots
+theme_set(theme_clinical_report(base_size = 14))
+
+# Update specific elements globally
+theme_update(
+  plot.title = element_text(hjust = 0.5, face = "bold"),
+  axis.text = element_text(size = 12),
+  legend.position = "bottom"
+)
+
+# Now all plots use this theme!
+```
+
+::: {.fragment}
+**Benefit**: Ensures consistency across all plots in a document/report
+:::
+
+## Module 3 Summary {.smaller}
+
+**What we covered**:
+
+::: {.incremental}
+- Color theory and accessibility
+- ColorBrewer, viridis, and paletteer packages
+- Scale functions: manual, gradient, gradient2, continuous, discrete
+- Custom theme creation with theme()
+- Element functions: element_text(), element_line(), element_rect(), element_blank()
+- Serif fonts and professional styling
+- Organizational theme creation
+- Legend management and removal
+- Global theme settings
+:::
+
+::: {.fragment}
+**Next in Module 4**:
+- Complex visualizations
+- Advanced composition
+- Exporting and reproducibility
+- Limitations of ggplot2
+:::
+
+---
+
+**End of Module 3**
+
+*Continue to Module 4: Advanced Topics & Best Practices*

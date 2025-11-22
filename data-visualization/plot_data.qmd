@@ -1,13 +1,942 @@
 ---
-title: "Data to plot"
+title: "Navigating the Decision Tree"
+subtitle: "Choosing the Right Visualization for Your Data"
 author: "SpaRroW"
+format:
+  revealjs:
+    theme: serif
+    css: custom-theme.css
+    slide-number: true
+    navigation-mode: linear
+    code-copy: true
+    code-fold: true
+    chalkboard: true
+    preview-links: true
+    center: true
+    zoom: true
+    fig-align: center
+    footer: "Data Visualization Decision Framework"
+    transition: fade
+    transition-speed: default
 ---
 
-### Plot types as per data structure
+# Navigating the Decision Tree {.title-slide}
 
-- Categorical vs. continuous variables
+## Choosing the Right Visualization for Your Data
 
-- Univariate, bivariate, and multivariate plots
+**A Practical Framework Based on Analytical Goals**
 
-- Time series and grouped data considerations
+---
 
+# The 3-Step Framework
+
+## Your Roadmap for Visualization Selection
+
+::: {.incremental}
+1. **Identify Your Data Type**
+   - What kind of data do you have? (Numeric, Categorical, Temporal, etc.)
+
+2. **Define Your Analytical Goal**
+   - What do you want to communicate? (Compare, Distribute, Show Relationships, etc.)
+
+3. **Select the Appropriate Chart**
+   - What visualization best achieves your goal?
+:::
+
+---
+
+# The Seven Analytical Goals
+
+## Color-Coded Framework
+
+| Goal | Symbol | Question | Purpose |
+|------|--------|----------|---------|
+| **Distribution** | <span style="color: #FDB462;">●</span> | "What's the spread?" | Show data spread, shape, outliers |
+| **Correlation** | <span style="color: #80B1D3;">●</span> | "How do things relate?" | Show relationships between variables |
+| **Ranking** | <span style="color: #A6D854;">●</span> | "What's the order?" | Compare values in order |
+| **Part of Whole** | <span style="color: #FB8072;">●</span> | "What's the composition?" | Show proportions/percentages |
+| **Evolution** | <span style="color: #80B1D3;">●</span> | "How does it change over time?" | Track trends and changes |
+| **Maps** | <span style="color: #BEBADA;">●</span> | "Where is it located?" | Geographic/spatial distribution |
+| **Flow** | <span style="color: #FCCDE5;">●</span> | "How does it move?" | Movement, transitions, journeys |
+
+---
+
+# Color Legend: Chart-to-Goal Mapping
+
+## Quick Reference - What Each Color Means
+
+- <span style="color: #FDB462;">**●**</span> **Gold/Yellow = Distribution** - Shows data spread, frequency, shape, outliers
+- <span style="color: #80B1D3;">**●**</span> **Blue = Correlation** - Shows relationships, associations between variables
+- <span style="color: #A6D854;">**●**</span> **Green = Ranking** - Shows order, comparison of values, top/bottom
+- <span style="color: #FB8072;">**●**</span> **Red/Salmon = Part of Whole** - Shows composition, proportions, percentages
+- <span style="color: #80B1D3;">**●**</span> **Light Blue = Evolution** - Shows trends, changes over time, trajectories
+- <span style="color: #BEBADA;">**●**</span> **Purple = Maps** - Shows geographic/spatial distribution, location-based data
+- <span style="color: #FCCDE5;">**●**</span> **Pink/Tan = Flow** - Shows movement, transitions, journeys, hierarchies
+
+**Tip:** When you see a colored dot next to a chart name, it tells you what analytical goal that chart serves best!
+
+---
+
+# Know Your Data
+
+## The 6 Data Type Categories
+
+| Data Type | Definition | Examples |
+|-----------|-----------|----------|
+| **Numeric** | Continuous measurements | Age, weight, blood pressure, lab values |
+| **Categoric** | Discrete categories/groups | Gender, disease status, treatment type |
+| **Ordinal** | Ordered categories | Likert scale, tumor stages, severity levels |
+| **Time Series** | Temporal/chronological data | Monthly incidence, patient vitals over time |
+| **Relational** | Connections/networks | Patient pathways, disease networks |
+| **Map** | Geographic/spatial data | Regional disease rates, location coordinates |
+
+---
+
+# The Complete Decision Map
+
+## How Variables Combine
+
+```
+SINGLE VARIABLE
+├── Numeric → Histogram, Density, Boxplot
+├── Categoric → Bar, Pie, Lollipop
+├── Ordinal → Ordered Bar, Cumulative Frequency
+├── Time Series → Line, Area
+├── Map → Choropleth, Bubble Map
+└── Relational → Network Graph
+
+BIVARIATE (TWO VARIABLES)
+├── Numeric × Numeric → Scatter, Hexbin, Bubble
+├── Numeric × Categoric → Boxplot, Violin, Grouped Bar
+├── Categoric × Categoric → Grouped/Stacked Bar, Mosaic, Heatmap
+├── Time Series × Numeric → Multi-line, Stacked Area
+├── Time Series × Categoric → Faceted Line, Interaction Plot
+└── Any + Relational → Sankey, Chord
+
+MULTIVARIATE (3+ VARIABLES)
+├── Numeric × Numeric × Numeric → Bubble, Faceted Scatter
+├── Numeric × Multiple Categoric → Faceted Box/Violin, Interaction
+├── Multiple Categoric × Multiple Categoric → Sankey, Sunburst, Treemap
+├── Time Series × Multiple Variables → Ridgeline, Faceted Line
+└── Hierarchical → Treemap, Sunburst, Hierarchical Edge Bundling
+```
+
+---
+
+# SINGLE VARIABLE: Categoric Data
+
+## <span style="color: #FDB462;">●</span> Distribution | <span style="color: #A6D854;">●</span> Ranking | <span style="color: #FB8072;">●</span> Part of Whole
+
+### Chart Options:
+- **Bar Chart** <span style="color: #FDB462;">●</span> (counts/frequencies)
+- **Lollipop Chart** <span style="color: #FDB462;">●</span> (alternative to bar, especially for long lists)
+- **Cleveland Dot Plot** <span style="color: #A6D854;">●</span> (ranked comparison)
+- **Pie Chart** <span style="color: #FB8072;">●</span> (≤5 categories only, part-to-whole)
+- **Doughnut Chart** <span style="color: #FB8072;">●</span> (like pie, better labels)
+- **Circular Bar Plot** <span style="color: #A6D854;">●</span> (aesthetic alternative)
+
+### Healthcare Examples:
+- Disease prevalence by state
+- Hospitalization by insurance type
+- Comorbidity frequency distribution
+
+### Decision Guide:
+- **Few categories (<5)** and need part-of-whole → Pie/Doughnut
+- **Few-moderate categories** → Bar chart (horizontal if long names)
+- **Many categories (>8)** → Lollipop or Cleveland dot
+- **Need ranking emphasis** → Ordered bar or lollipop
+
+---
+
+# SINGLE VARIABLE: Ordinal Data
+
+## <span style="color: #FDB462;">●</span> Distribution | <span style="color: #FB8072;">●</span> Part of Whole (Ordered)
+
+### Chart Options:
+- **Ordered Bar Chart** <span style="color: #FDB462;">●</span> (maintain categorical order)
+- **Ordered Dot Plot** <span style="color: #FDB462;">●</span>
+- **Cumulative Frequency Plot** <span style="color: #FB8072;">●</span> (especially for Likert scales)
+- **Frequency Polygon** <span style="color: #FDB462;">●</span> (smooth trend)
+
+### Healthcare Examples:
+- Patient satisfaction (Likert: 1=Very Unsatisfied to 5=Very Satisfied)
+- Tumor stages frequency (Stage I → II → III → IV)
+- Pain severity distribution (None → Mild → Moderate → Severe)
+- Risk level counts (Low → Medium → High)
+
+### Decision Guide:
+- **Likert scales** → Stacked ordered bar or cumulative frequency
+- **Natural progression** (stages, severity) → Maintain order on axis
+- **Show accumulation** → Cumulative frequency plot
+- **Compare between groups** → Grouped ordered bar
+
+---
+
+# SINGLE VARIABLE: Numeric Data
+
+## <span style="color: #FDB462;">●</span> Distribution
+
+### Chart Options:
+- **Histogram** <span style="color: #FDB462;">●</span> (shows bin structure, distribution shape)
+- **Density Plot** <span style="color: #FDB462;">●</span> (smooth, continuous estimate)
+- **Boxplot** <span style="color: #FDB462;">●</span> (summary: median, quartiles, outliers)
+- **Violin Plot** <span style="color: #FDB462;">●</span> (distribution + boxplot combined)
+- **Dot/Strip Plot** <span style="color: #FDB462;">●</span> (individual points, best for small n)
+
+### Healthcare Examples:
+- Age distribution in cohort
+- Blood pressure measurements in population
+- Lab values (HbA1c, cholesterol, creatinine)
+- Hospital length of stay
+
+### Decision Guide:
+| Scenario | Best Choice | Why |
+|----------|------------|-----|
+| **n < 20** | Dot/Strip plot | See every point |
+| **n = 20-100** | Histogram + Boxplot | Balance detail & summary |
+| **n > 100** | Density plot | Smooth, reduces noise |
+| **Want outliers** | Boxplot | Shows extreme values clearly |
+| **Want shape details** | Violin plot | Shows multimodality, skewness |
+
+---
+
+# SINGLE VARIABLE: Time Series
+
+## <span style="color: #80B1D3;">●</span> Evolution
+
+### Chart Options:
+- **Line Chart** <span style="color: #80B1D3;">●</span> (standard for continuous time data)
+- **Area Chart** <span style="color: #80B1D3;">●</span> (emphasizes magnitude/volume)
+- **Streamgraph** <span style="color: #80B1D3;">●</span> (stacked area with flowing theme)
+
+### Healthcare Examples:
+- Disease incidence trends over years
+- Hospital admission rates monthly
+- COVID-19 case counts by week
+- Patient vital signs during hospitalization
+
+### Decision Guide:
+- **Single series, continuous time** → Line chart
+- **Show cumulative volume** → Area chart
+- **Multiple series, show total** → Stacked area
+- **Sparse time points** → Line chart with markers
+
+---
+
+# SINGLE VARIABLE: Spatial/Map Data
+
+## <span style="color: #BEBADA;">●</span> Maps
+
+### Chart Options:
+- **Choropleth Map** <span style="color: #BEBADA;">●</span> (color-coded by region)
+- **Bubble Map** <span style="color: #BEBADA;">●</span> (circles sized by value)
+- **Heat Map** <span style="color: #BEBADA;">●</span> (geographic intensity)
+- **Dot Map** <span style="color: #BEBADA;">●</span> (point locations)
+
+### Healthcare Examples:
+- Regional disease rates (e.g., TB incidence by state in India)
+- Hospital bed density by district
+- Maternal mortality ratios by region
+- Vaccination coverage by area
+
+### Decision Guide:
+- **Show rate/percentage by region** → Choropleth
+- **Show absolute counts by location** → Bubble map
+- **Show intensity/density** → Heat map
+- **Specific point locations matter** → Dot map
+
+---
+
+# BIVARIATE: Numeric × Numeric
+
+## <span style="color: #80B1D3;">●</span> Correlation | <span style="color: #FDB462;">●</span> Distribution
+
+### Chart Options:
+- **Scatter Plot** <span style="color: #80B1D3;">●</span> (relationship between two continuous variables)
+- **Hexbin Plot** <span style="color: #80B1D3;">●</span> (2D histogram for dense data)
+- **2D Density Plot** <span style="color: #80B1D3;">●</span> (contour or heatmap of overlapping points)
+- **Bubble Plot** <span style="color: #80B1D3;">●</span> (3rd variable via size or color)
+
+### Healthcare Examples:
+- Age vs BMI (body mass relationship)
+- HbA1c vs Blood Glucose (glycemic control markers)
+- Creatinine vs eGFR (kidney function)
+- Systolic vs Diastolic Blood Pressure
+
+### Decision Guide:
+| Scenario | Best Choice |
+|----------|------------|
+| **Moderate sample, clear pattern** | Scatter plot |
+| **Large n, lots of overplotting** | Hexbin or 2D density |
+| **Want 3rd variable shown** | Bubble (size) or color gradient |
+| **Focused region interest** | Zoomed scatter with annotations |
+
+---
+
+# BIVARIATE: Numeric Outcome × Categoric Predictor
+
+## <span style="color: #FDB462;">●</span> Distribution | <span style="color: #80B1D3;">●</span> Correlation (Comparison)
+
+### Chart Options:
+- **Boxplot** <span style="color: #FDB462;">●</span> (median, quartiles, outliers by group)
+- **Violin Plot** <span style="color: #FDB462;">●</span> (distribution shape by group)
+- **Jittered Dot/Strip/Beeswarm Plot** <span style="color: #FDB462;">●</span> (individual points by group)
+- **Bar Chart with Error Bars** <span style="color: #FDB462;">●</span> (mean/median ± SD/IQR)
+- **Cleveland Dot Plot** <span style="color: #A6D854;">●</span> (ranked group means)
+
+### Healthcare Examples:
+- HbA1c levels across treatment arms
+- BMI by disease status (healthy vs diabetic vs obese)
+- Blood pressure by gender
+- Hospital length of stay by admission type
+
+### Decision Guide:
+| Sample Size | Distribution Focus | Summary Focus |
+|-------------|-------------------|---------------|
+| **n < 30** | Dot/Strip + Boxplot | Not recommended |
+| **n = 30-100** | Violin or Boxplot | Bar with error bars |
+| **n > 100** | Violin plot | Density overlay + mean line |
+| **Outliers matter** | Boxplot + jitter | Always show |
+| **Group ranking focus** | Ranked dots | Lollipop chart |
+
+---
+
+# BIVARIATE: Categoric Outcome × Numeric Predictor
+
+## <span style="color: #80B1D3;">●</span> Correlation (Probability)
+
+### Chart Options:
+- **Logistic Regression Curve** <span style="color: #80B1D3;">●</span> (smooth probability line)
+- **Density Overlay** <span style="color: #80B1D3;">●</span> (stacked densities by category)
+- **Grouped Histogram/Density** <span style="color: #80B1D3;">●</span> (overlapping distributions)
+
+### Healthcare Examples:
+- Disease presence/absence across age ranges
+- Treatment response (yes/no) by baseline score
+- Adverse event (yes/no) by medication dose
+- Mortality (yes/no) by APACHE score
+
+### Visualization:
+- X-axis: Numeric predictor (age, score, dose)
+- Y-axis: Probability or proportion
+- Two groups shown as overlapping curves or stacked
+
+---
+
+# BIVARIATE: Categoric × Categoric
+
+## <span style="color: #FDB462;">●</span> Distribution | <span style="color: #A6D854;">●</span> Ranking | <span style="color: #FB8072;">●</span> Part of Whole | <span style="color: #80B1D3;">●</span> Correlation
+
+### Chart Options:
+- **Grouped Bar Chart** <span style="color: #FDB462;">●</span> (side-by-side comparison)
+- **Dodged Bar Chart** <span style="color: #FDB462;">●</span> (similar to grouped)
+- **Stacked Bar Chart** <span style="color: #FB8072;">●</span> (shows totals + composition)
+- **Stacked Bar (Proportional)** <span style="color: #FB8072;">●</span> (percentage/100% stacked)
+- **Mosaic Plot** <span style="color: #80B1D3;">●</span> (area ∝ frequency, shows association)
+- **Heatmap** <span style="color: #80B1D3;">●</span> (color intensity for cell frequencies)
+
+### Healthcare Examples:
+- Gender vs Disease status (M/F vs HIV+/HIV-)
+- Treatment arm vs Adverse event (Drug A/B vs AE Yes/No)
+- Hospital site vs Patient outcome (Site 1-3 vs Recovered/Died)
+- Risk level by comorbidity count
+
+### Decision Guide:
+| Goal | Best Chart |
+|------|-----------|
+| **Compare totals & subgroups** | Grouped bar |
+| **Show composition per category** | Stacked bar |
+| **Show percentages only** | Stacked bar (proportional) |
+| **Detect association strength** | Mosaic or heatmap |
+| **Many categories, dense** | Heatmap with color gradient |
+
+---
+
+# BIVARIATE: Ordinal × Numeric
+
+## <span style="color: #FDB462;">●</span> Distribution (Ordered)
+
+### Chart Options:
+- **Ordered Boxplot** <span style="color: #FDB462;">●</span> (boxplot by ordinal groups, maintaining order)
+- **Ordered Violin Plot** <span style="color: #FDB462;">●</span> (violin by ordinal groups)
+- **Ordered Jittered Points** <span style="color: #FDB462;">●</span> (points by group, groups ordered)
+
+### Healthcare Examples:
+- Medication efficacy vs dose level (Low/Medium/High)
+- Lab value vs disease severity (Stage I-IV)
+- Pain score vs treatment intensity (Mild/Moderate/Severe)
+- Functional status vs age group (Young/Middle/Elderly)
+
+### Key Point:
+- Always maintain explicit ordering on axis
+- Example: Severity I → II → III → IV (not random order)
+
+---
+
+# BIVARIATE: Time Series × Numeric
+
+## <span style="color: #80B1D3;">●</span> Evolution | <span style="color: #80B1D3;">●</span> Correlation (Trend)
+
+### Chart Options:
+- **Line Chart** <span style="color: #80B1D3;">●</span> (single series over time)
+- **Multi-line Chart** <span style="color: #80B1D3;">●</span> (multiple series overlay)
+- **Area Chart** <span style="color: #80B1D3;">●</span> (cumulative volume over time)
+- **Stacked Area Chart** <span style="color: #80B1D3;">●</span> (composition over time)
+- **Connected Scatter** <span style="color: #80B1D3;">●</span> (if sparse time points)
+
+### Healthcare Examples:
+- Disease incidence trends over years (single disease)
+- Patient vital signs over hospital stay (temperature, BP, HR)
+- Medication effectiveness over weeks (Drug A vs B)
+- Mortality rates over decades by region
+
+### Decision Guide:
+- **Single series** → Line chart
+- **Few series (2-3) to compare** → Multi-line chart
+- **Many series, want to show total** → Stacked area
+- **Series showing parts of whole** → Stacked area
+- **Sparse measurements** → Line with markers or connected scatter
+
+---
+
+# BIVARIATE: Time Series × Categoric
+
+## <span style="color: #80B1D3;">●</span> Evolution (By Group) | <span style="color: #80B1D3;">●</span> Correlation (Group Comparison)
+
+### Chart Options:
+- **Grouped Line Chart** <span style="color: #80B1D3;">●</span> (separate lines for each group)
+- **Faceted Line Chart** <span style="color: #80B1D3;">●</span> (separate subplots per group)
+- **Grouped Area Chart** <span style="color: #80B1D3;">●</span> (stacked or overlapping)
+- **Interaction Plot** <span style="color: #80B1D3;">●</span> (lines intersecting showing interaction)
+- **Ribbon Chart** <span style="color: #80B1D3;">●</span> (flowing bands representing groups)
+
+### Healthcare Examples:
+- Mortality rate trends (gender comparison: M vs F)
+- Hospital admission trends by institution (5-year follow-up)
+- Drug effectiveness over time by treatment arm
+- Complication rates by age group over study period
+
+### Decision Guide:
+- **Few groups (2-3)** → Multi-line chart
+- **Many groups (5+)** → Faceted line plots
+- **Want to show total + groups** → Stacked area
+- **Interaction patterns matter** → Interaction plot (lines cross)
+- **Space constraints** → Faceting better than overlapping
+
+---
+
+# BIVARIATE: Ordinal × Categoric
+
+## <span style="color: #FDB462;">●</span> Distribution (Ordered) | <span style="color: #FB8072;">●</span> Part of Whole (Ordered)
+
+### Chart Options:
+- **Ordered Grouped Bar Chart** <span style="color: #FDB462;">●</span> (bars by category, groups ordered)
+- **Ordered Stacked Bar** <span style="color: #FB8072;">●</span> (stacked, ordinal categories in order)
+- **Faceted Ordered Bar** <span style="color: #FDB462;">●</span> (subplots maintaining order)
+
+### Healthcare Examples:
+- Patient satisfaction (Likert: 1-5) by hospital ward
+- Pain severity (None/Mild/Moderate/Severe) by treatment type
+- Risk level (Low/Med/High) by comorbidity count
+- Functional status by treatment arm
+
+### Key Point:
+- Maintain ordinal ordering on one axis
+- Example: Satisfaction scale always: 1 → 2 → 3 → 4 → 5
+
+---
+
+# MULTIVARIATE: Numeric × Numeric × Numeric
+
+## 3+ Continuous Variables | <span style="color: #80B1D3;">●</span> Correlation
+
+### Chart Options:
+- **Bubble Plot** <span style="color: #80B1D3;">●</span> (x, y, size = 3rd; color/opacity = 4th)
+- **Faceted Scatter** <span style="color: #80B1D3;">●</span> (scatter by groups, multiple subplots)
+- **3D Scatter** (NOT recommended: distorts perception)
+
+### Healthcare Examples:
+- Age vs BMI (size=cholesterol, color=treatment arm)
+- HbA1c vs glucose (size=insulin, faceted by gender)
+- Systolic vs diastolic BP (colored by smoking status)
+
+### Decision Guide:
+- **3 variables** → Bubble plot (x, y, size)
+- **4 variables** → Bubble + color
+- **5+ variables** → Multiple faceted plots (don't try to cram)
+
+---
+
+# MULTIVARIATE: Numeric Outcome × Multiple Numeric Predictors
+
+## <span style="color: #80B1D3;">●</span> Correlation Matrix
+
+### Chart Options:
+- **Correlation Matrix** <span style="color: #80B1D3;">●</span> (numeric table of coefficients)
+- **Correlogram** <span style="color: #80B1D3;">●</span> (heatmap with color intensity = correlation strength)
+- **Scatter Plot Matrix** <span style="color: #80B1D3;">●</span> (pairwise scatter plots)
+
+### Healthcare Examples:
+- Lab inter-correlations: glucose, insulin, triglycerides, HDL, LDL
+- Vital signs correlations: BP, HR, RR, O2 saturation, temperature
+- Biomarker relationships in cohort study
+
+### Visualization:
+- Color intensity (warm = positive, cool = negative)
+- Cell size may represent correlation strength
+- Diagonal typically = 1.0 (variable with itself)
+
+---
+
+# MULTIVARIATE: Numeric Outcome × Multiple Categoric Predictors
+
+## <span style="color: #FDB462;">●</span> Distribution (Faceted) | <span style="color: #80B1D3;">●</span> Correlation (Interaction)
+
+### Chart Options:
+- **Faceted Boxplot/Violin** <span style="color: #FDB462;">●</span> (boxplot per group, subplots for 3rd variable)
+- **Interaction Plot** <span style="color: #80B1D3;">●</span> (lines connecting means by two factors)
+- **Faceted Scatter + regression lines** <span style="color: #80B1D3;">●</span> (by groups)
+
+### Healthcare Examples:
+- HbA1c by treatment type, faceted by gender (4 subplots: 2 treat × 2 gender)
+- Lab values by disease status, colored by age group
+- Drug efficacy by dose level, faceted by patient comorbidity
+
+### Visualization Strategy:
+- Primary grouping on axis
+- Secondary grouping via facets or colors
+- Show interactions: do lines cross? Do patterns differ?
+
+---
+
+# MULTIVARIATE: Time Series × Multiple Variables
+
+## <span style="color: #80B1D3;">●</span> Evolution (Advanced) | <span style="color: #FDB462;">●</span> Distribution (Temporal)
+
+### Chart Options:
+- **Multi-line Chart with Faceting** <span style="color: #80B1D3;">●</span> (separate subplots per group)
+- **Ridgeline Plot** <span style="color: #FDB462;">●</span> (distribution by group, stacked vertically)
+- **Slope Chart** <span style="color: #80B1D3;">●</span> (start → end values, multiple series)
+- **Animated Time Series** <span style="color: #80B1D3;">●</span> (interactive exploration)
+
+### Healthcare Examples:
+- Disease incidence over years, separate lines by region (5 regions)
+- Patient vitals during admission, faceted by treatment arm
+- Hospital census by time, colored by department
+
+### Decision Guide:
+- **Multiple time series + groups** → Faceted multi-line
+- **Distribution evolution over time** → Ridgeline plot
+- **Show change from start to end** → Slope chart
+
+---
+
+# MULTIVARIATE: Complex Categorical (3+ Categoric)
+
+## <span style="color: #FCCDE5;">●</span> Flow | <span style="color: #FB8072;">●</span> Part of Whole (Hierarchical)
+
+### Chart Options:
+- **Sankey Diagram** <span style="color: #FCCDE5;">●</span> (flow from one category to another)
+- **Alluvial Diagram** <span style="color: #FCCDE5;">●</span> (similar to Sankey, broader flows)
+- **Treemap** <span style="color: #FB8072;">●</span> (nested rectangles for hierarchy)
+- **Sunburst Chart** <span style="color: #FB8072;">●</span> (nested circles/rings for hierarchy)
+
+### Healthcare Examples:
+- **Sankey:** Patient flow (admission → diagnostic → treatment → discharge)
+- **Alluvial:** Disease progression stages (diagnosis → worsening/improvement → outcome)
+- **Treemap:** Hospital structure (Region → Hospital → Department → Ward)
+- **Sunburst:** Disease classification (Category → Subcategory → Specific condition)
+
+### Decision Guide:
+- **Flow/transition/journey** → Sankey or Alluvial
+- **Nested hierarchy/parts** → Treemap or Sunburst
+
+---
+
+# MULTIVARIATE: Relational/Network Data
+
+## <span style="color: #FCCDE5;">●</span> Flow | <span style="color: #80B1D3;">●</span> Correlation (Connections)
+
+### Chart Options:
+- **Sankey Diagram** <span style="color: #FCCDE5;">●</span> (directional flows between nodes)
+- **Chord Diagram** <span style="color: #FCCDE5;">●</span> (bi-directional relationships, circular)
+- **Network Graph** <span style="color: #80B1D3;">●</span> (nodes + edges, force-directed layout)
+- **Arc Diagram** <span style="color: #80B1D3;">●</span> (nodes in line, arcs show connections)
+
+### Healthcare Examples:
+- **Sankey:** Patient journeys through clinic system
+- **Chord:** Disease co-occurrence patterns (patient network)
+- **Network:** Hospital referral patterns (which hospitals refer to which)
+- **Arc:** Comorbidity networks (which diseases co-occur)
+
+### Visualization:
+- Nodes = entities (patients, diseases, hospitals)
+- Edges/arcs/flows = relationships (referral, co-occurrence)
+
+---
+
+# MULTIVARIATE: Hierarchical Data (4+ Levels)
+
+## <span style="color: #FB8072;">●</span> Part of Whole | <span style="color: #FCCDE5;">●</span> Flow
+
+### Chart Options:
+- **Treemap** <span style="color: #FB8072;">●</span> (nested rectangles, size ∝ value)
+- **Sunburst Chart** <span style="color: #FB8072;">●</span> (nested circles, size ∝ value)
+- **Hierarchical Edge Bundling** <span style="color: #FCCDE5;">●</span> (connections in hierarchy)
+
+### Healthcare Examples:
+- **Treemap:** Hospital admissions by Region → State → Hospital → Department (size = admission count)
+- **Sunburst:** Disease classification by Category → Subcategory → Specific condition → ICD code
+- **Hierarchical Edge Bundling:** Referral patterns between hospitals at different levels
+
+### Decision Guide:
+- **Static hierarchy focus** → Treemap
+- **Want circular aesthetic** → Sunburst
+- **Complex relationships in hierarchy** → Hierarchical edge bundling
+
+---
+
+# SPECIALIZED: Waterfall & Funnel Charts
+
+## <span style="color: #FCCDE5;">●</span> Flow | <span style="color: #FB8072;">●</span> Part of Whole
+
+### Waterfall Chart
+- Shows cumulative effect of sequential positive/negative values
+- **Healthcare Example:** Patient survival from enrollment → screening loss → randomization → completion
+  - Start: 1000 enrolled
+  - Drop: -50 screening failures
+  - Drop: -30 withdrawn consent
+  - End: 920 completed
+  
+### Funnel Chart
+- Stages in a process, showing attrition at each step
+- **Healthcare Example:** Hospital admission pipeline
+  - Emergency triage: 500
+  - Admitted: 400 (20% filtered out)
+  - Discharged: 350 (12.5% transferred)
+  - Readmitted: 30 (8.6% recurrent)
+
+---
+
+# SPECIALIZED: Advanced Temporal Visualizations
+
+## <span style="color: #80B1D3;">●</span> Evolution (Advanced) | <span style="color: #FDB462;">●</span> Distribution (Temporal)
+
+### Streamgraph
+- Stacked area with flowing, organic theme
+- **Example:** Emergency admissions over time, stacked by department
+  - Total volume trends visible + department composition
+
+### Calendar Heatmap
+- Daily/weekly patterns across entire year
+- **Example:** Hospital occupancy by day of week
+  - Darker = higher occupancy
+  - Pattern reveals peak days/seasons
+
+### Frequency Polygon
+- Line connecting histogram bins
+- **Example:** Age distribution comparison between cohorts
+  - Multiple overlaid frequency polygons
+
+---
+
+# SPECIALIZED: Text & Network Specialized
+
+## <span style="color: #FDB462;">●</span> Distribution (Text) | <span style="color: #80B1D3;">●</span> Correlation (Networks)
+
+### Word Cloud
+- Text frequency visualization, size = occurrence
+- **Limitation:** More visual impact than analytic precision
+- **Healthcare Use:** Patient feedback themes, common symptoms
+
+### Arc Diagram
+- Network relationships with improved readability over hairball graphs
+- **Example:** Disease comorbidity network, cleaner than typical network graph
+
+### Hierarchical Edge Bundling
+- Complex relationship networks with hierarchy
+- **Example:** Referral patterns between hospitals (different organizational levels)
+
+---
+
+# CASE STUDY 1: Real-World Application
+
+## Scenario: "Quarterly revenue by product category over 2 years"
+
+### Step 1: Identify Data Type
+- **Time component:** Quarterly (Time Series)
+- **Product component:** Multiple categories (Categoric)
+- **Revenue component:** Continuous (Numeric)
+- **Combined:** Time Series + Categoric + Numeric
+
+### Step 2: Define Analytical Goal
+- **Primary:** <span style="color: #80B1D3;">●</span> Evolution (how revenue changes over time)
+- **Secondary:** <span style="color: #80B1D3;">●</span> Correlation (how categories compare)
+
+### Step 3: Chart Options
+| Option | Chart Type | Pros | Cons |
+|--------|-----------|------|------|
+| A | Multi-line chart <span style="color: #80B1D3;">●</span> | Clear trend per product | Can be cluttered if >5 products |
+| B | Stacked area <span style="color: #80B1D3;">●</span> | Show total + composition | Hard to compare individual products |
+| C | Faceted line charts <span style="color: #80B1D3;">●</span> | Each product clear | Uses more space |
+| D | Grouped bar chart <span style="color: #FDB462;">●</span> | Periodic view (snapshot) | Less sense of continuous trend |
+
+---
+
+# CASE STUDY 2: Healthcare Example
+
+## Scenario: "HbA1c levels across three treatment arms over 12 months"
+
+### Step 1: Identify Data Type
+- **Time component:** Baseline, 6mo, 12mo (Time Series - discrete)
+- **Group component:** 3 treatment arms (Categoric)
+- **Outcome component:** HbA1c values (Numeric)
+- **Combined:** Time Series + Categoric + Numeric
+
+### Step 2: Define Analytical Goal
+- **Primary:** <span style="color: #80B1D3;">●</span> Evolution (trajectories over follow-up)
+- **Secondary:** <span style="color: #80B1D3;">●</span> Correlation (do arms differ?)
+- **Tertiary:** <span style="color: #FDB462;">●</span> Distribution (spread within each arm at each timepoint)
+
+### Step 3: Chart Options
+| Option | Chart Type | Visualization |
+|--------|-----------|---------------|
+| A | Multi-line ± CI <span style="color: #80B1D3;">●</span> | One line per arm, shaded confidence bands |
+| B | Faceted violin plots <span style="color: #FDB462;">●</span> | 3 subplots (one per arm), violin at each timepoint |
+| C | Spaghetti plot <span style="color: #80B1D3;">●</span> | Individual patient trajectories, color-coded by arm |
+| D | Interaction plot <span style="color: #80B1D3;">●</span> | Means connected by lines, x-axis = timepoint |
+
+---
+
+# CASE STUDY 3: Multi-Dimensional Complexity
+
+## Scenario: "Top 10 competitors' market share over 5 years by region"
+
+### Step 1: Identify Data Type
+- **Time:** Years (Time Series)
+- **Competitors:** 10 categories (Categoric)
+- **Regions:** Multiple regions (Categoric)
+- **Market share:** Percentage (Numeric)
+- **Dimensions:** 4 (too many for single plot!)
+
+### Step 2: Define Analytical Goal
+- <span style="color: #80B1D3;">●</span> Evolution (trends over time)
+- <span style="color: #A6D854;">●</span> Ranking (who's leading?)
+- <span style="color: #80B1D3;">●</span> Correlation (how do regions differ?)
+- <span style="color: #FB8072;">●</span> Composition (what % of total?)
+
+### Step 3: Chart Options
+| Option | Approach |
+|--------|----------|
+| **A** | Stacked area per region (faceted: 3-5 subplots) <span style="color: #80B1D3;">●</span> <span style="color: #FB8072;">●</span> |
+| **B** | Grouped multi-line (each region = different color) <span style="color: #80B1D3;">●</span> |
+| **C** | Animated bar chart (top 10 race by region) <span style="color: #A6D854;">●</span> <span style="color: #80B1D3;">●</span> |
+| **D** | Interactive dashboard (toggle region) <span style="color: #80B1D3;">●</span> |
+
+### Decision:
+- **Best static option:** Faceted stacked area (shows time, composition, region comparison)
+- **Best interactive:** Animated bar or dashboard
+
+---
+
+# Common Pitfalls to Avoid
+
+## ❌ What NOT to Do
+
+### ❌ Pie charts with 10+ categories
+- **Why?** Human perception fails with small angles
+- **Solution:** Use bar chart <span style="color: #FDB462;">●</span>, lollipop <span style="color: #FDB462;">●</span>, or split into multiple pies
+
+### ❌ 3D charts
+- **Why?** Perspective distorts data perception (3D cone/pyramid/sphere)
+- **Solution:** Stick to 2D representations
+
+### ❌ Dual-axis charts
+- **Why?** Can mislead by manipulating axis scales
+- **Solution:** Use faceting or separate plots instead
+
+### ❌ Wrong color coding
+- **Why?** Color should reinforce analytical goal (not random aesthetic)
+- **Solution:** Sequential colors for magnitude, categorical colors for groups
+
+### ❌ Overplotting (overlapping points)
+- **Why?** Can't see density or exact position
+- **Solution:** Use transparency (alpha), jitter, hexbin <span style="color: #80B1D3;">●</span>, or density plots <span style="color: #FDB462;">●</span>
+
+### ❌ Stacked bars for detailed comparison
+- **Why?** Only first and last categories are easy to compare
+- **Solution:** Use grouped bar <span style="color: #FDB462;">●</span> or faceting for detailed comparison
+
+### ❌ Too many dimensions on one plot
+- **Why?** Cognitive overload, hard to extract insight
+- **Solution:** Split into multiple focused visualizations
+
+---
+
+# Quick Decision Matrix (Cheat Sheet)
+
+## Analytical Goal × Data Type Reference
+
+| Goal \ Data Type | Numeric | Categoric | Ordinal | Time Series | Relational | Map |
+|------------------|---------|-----------|---------|-------------|-----------|-----|
+| **Distribution** 🟡 | Hist <span style="color: #FDB462;">●</span>, Density, Box, Violin | Bar <span style="color: #FDB462;">●</span>, Pie | Ordered Bar <span style="color: #FDB462;">●</span> | Line, Area | Network | Choropleth |
+| **Correlation** 🔵 | Scatter <span style="color: #80B1D3;">●</span>, Bubble, Hex | Mosaic <span style="color: #80B1D3;">●</span>, Heatmap | Ordered Box <span style="color: #80B1D3;">●</span> | Multi-line <span style="color: #80B1D3;">●</span> | Sankey, Chord | Choropleth |
+| **Ranking** 🟢 | Dot <span style="color: #A6D854;">●</span> | Lollipop <span style="color: #A6D854;">●</span>, Bar | Ordered Bar <span style="color: #A6D854;">●</span> | Line (end) | - | - |
+| **Part of Whole** 🔴 | - | Pie <span style="color: #FB8072;">●</span>, Stacked Bar, Treemap | Stacked (ordered) | Stacked Area <span style="color: #FB8072;">●</span> | Sankey, Treemap | Choropleth |
+| **Evolution** 🔵 | Line <span style="color: #80B1D3;">●</span>, Area | - | - | Line, Area, Ribbon <span style="color: #80B1D3;">●</span> | - | Animated Map |
+| **Maps** 🟣 | - | - | - | - | - | All map types <span style="color: #BEBADA;">●</span> |
+| **Flow** 🟤 | - | - | - | - | Sankey <span style="color: #FCCDE5;">●</span>, Chord, Network | - |
+
+---
+
+# Your Turn: Practice Exercises
+
+## Apply What You've Learned
+
+### Scenario 1: Employee Satisfaction
+**Question:** Show employee satisfaction scores (Likert 1-5) across hospital departments, comparing before/after intervention
+
+- What data types are present?
+- What analytical goal(s)?
+- Recommend chart type(s)
+
+:::{.notes}
+Answer: Ordinal × Categoric + Time (before/after)
+Goals: Distribution (satisfaction spread), Comparison (departments differ?), Evolution (did intervention help?)
+Charts: Faceted ordered bar / Grouped stacked bar / Interaction plot
+:::
+
+---
+
+# Your Turn: Practice Exercises (continued)
+
+### Scenario 2: Website Analytics
+**Question:** Display website traffic sources (organic, paid, direct, referral) and their conversion rates over 6 months
+
+- What data types are present?
+- What analytical goal(s)?
+- Recommend chart type(s)
+
+:::{.notes}
+Answer: Categoric (traffic source) × Numeric (conversion %) + Time (monthly)
+Goals: Evolution (trends), Comparison (which source converts best?), Part-of-whole (traffic distribution)
+Charts: Multi-line chart / Stacked area / Faceted line per source
+:::
+
+---
+
+# Your Turn: Practice Exercises (continued)
+
+### Scenario 3: Clinical Trial Recruitment
+**Question:** Track patient recruitment rates by site and treatment arm monthly through a 2-year trial
+
+- What data types are present?
+- What analytical goal(s)?
+- Recommend chart type(s)
+
+:::{.notes}
+Answer: Time (monthly) × Categoric (sites, arms) + Numeric (count)
+Goals: Evolution (enrollment pace), Comparison (which site fastest?), Composition (proportional enrollment)
+Charts: Multi-line faceted / Grouped bar per month / Stacked area / Interaction plot
+:::
+
+---
+
+# Your Turn: Practice Exercises (continued)
+
+### Scenario 4: Healthcare - Adverse Events
+**Question:** Compare adverse event frequencies between two drug treatments across age groups (pediatric, adult, elderly)
+
+- What data types are present?
+- What analytical goal(s)?
+- Recommend chart type(s)
+
+:::{.notes}
+Answer: Categoric (drug, AE type) × Categoric (age group) + Numeric (count)
+Goals: Ranking (most common AEs), Comparison (which drug safer?), Distribution (event frequency)
+Charts: Grouped bar / Faceted bar / Mosaic / Heatmap
+:::
+
+---
+
+# Tools & Resources
+
+## Recommended Frameworks & References
+
+### Visualization Tools
+- **R:** ggplot2, plotly, ggvis
+- **Python:** matplotlib, seaborn, plotly, altair
+- **BI Platforms:** Tableau, PowerBI, Looker
+- **Static/Interactive:** D3.js, Observable
+
+### Reference Resources
+- **data-to-viz.com** - Yan Holtz's comprehensive decision tree
+- **R Graph Gallery** (r-graph-gallery.com) - 200+ ggplot2 examples
+- **ggplot2 documentation** - Official reference + cheat sheets
+- **Fundamentals of Data Visualization** (Claus Wilke) - Free online book
+
+### Practice Datasets
+- **UCI Machine Learning Repository**
+- **Kaggle Datasets** - Thousands of public datasets
+- **NFHS-V Data** (National Family Health Survey, India)
+- **GitHub public repositories** - Data visualization examples
+
+---
+
+# Key Takeaways
+
+## Core Principles for Effective Visualization
+
+✅ **Always start with your analytical goal**
+  - What question are you answering? (distribute, compare, rank, relate, etc.)
+
+✅ **Data types narrow your options significantly**
+  - Numeric vs Categoric vs Ordinal vs Temporal vs Spatial
+
+✅ **Multiple valid charts may exist—choose based on audience & context**
+  - Scientist ≠ Executive ≠ Patient communication
+
+✅ **Use color strategically to support your analytical goal**
+  - Sequential for magnitude, categorical for groups, diverging for contrasts
+
+✅ **Simplicity trumps complexity; avoid unnecessary dimensions**
+  - If 3D doesn't add insight, keep it 2D
+  - If faceting helps clarity, use it
+
+✅ **When in doubt, check data-to-viz.com or reference examples**
+  - Don't reinvent the wheel; learn from established best practices
+
+✅ **Practice makes perfect—iterate on visualizations**
+  - First draft rarely optimal; refine based on feedback
+
+---
+
+# Q&A / Thank You
+
+## Resources & Next Steps
+
+### Key Links
+- **data-to-viz.com** - Decision tree flowchart
+- **R Graph Gallery** - Live examples with code
+- **ggplot2 cheat sheet** - Quick reference
+
+### Questions?
+- What visualization challenges are YOU facing?
+- What data type combinations are most common in your work?
+
+### Next Steps
+- Apply the 3-step framework to your own data
+- Practice with the scenario exercises
+- Refer back to the decision matrix when choosing charts
+
+---
+
+# Thank You!
+
+## Navigating the Decision Tree
+
+**Remember:** Good visualization is about clarity, not complexity.
+
+Choose charts that illuminate your data and communicate your insights effectively.
+
+Good luck with your visualizations! 📊📈📉

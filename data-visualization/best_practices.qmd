@@ -14,6 +14,7 @@ format:
     preview-links: true
     center: true
     zoom: true
+    fig-align: center
 ---
 
 ```{r setup, include=FALSE}
@@ -21,7 +22,16 @@ format:
 library(tidyverse)
 library(gridExtra)
 library(grid)
-library(ggplot2)
+library(patchwork)
+library(ggridges)
+```
+
+```{css, echo=FALSE}
+.reveal p.explanation {
+  font-size: 0.75em;
+  line-height: 1.4;
+  margin-top: 1em;
+}
 ```
 
 ## Introduction to Data Visualization
@@ -46,25 +56,26 @@ library(ggplot2)
   - **Articulate your point of view**: What do you want your audience to know?
   - **Convey what's at stake**: Why does this matter?
   - **Be a complete sentence**: Not just a topic, but a statement
-- Example: "We should implement early discharge planning because it reduces re-admissions by 35%"
+- Example: "We should implement early discharge planning because it reduces readmissions by 35%"
 :::
 
 ---
 
-## Principle 1: Choose the Right Chart Type
+## Principle 1: Choose the Right Chart Type {.smaller}
 
 **Match your visualization to your data and message**
 
 Different types of data require different visualizations:
 
-::: {.incremental .slide style="font-size: 0.7em;"}
-- **Simple text**: When you have 1-2 numbers
-- **Tables**: For multiple units, precise values
-- **Heatmaps**: For tables with many values
-- **Scatter plots**: For relationships between variables
-- **Line charts**: For continuous data over time
-- **Slopegraphs**: For comparing two time points
-- **Bar charts**: For categorical comparisons
+::: {.incremental}
+- **Simple text**: 1-2 key numbers
+- **Tables**: Multiple precise values
+- **Categorical**: Bar charts (horizontal preferred)
+- **Continuous over time**: Line charts, area charts
+- **Distributions**: Histograms, boxplots, violin plots, density plots
+- **Relationships**: Scatter plots, correlations
+- **Comparisons**: Slopegraphs, small multiples
+- **Part-to-whole**: Stacked bars (avoid pie charts)
 :::
 
 ---
@@ -72,12 +83,9 @@ Different types of data require different visualizations:
 ## Chart Type: Simple Text
 
 ```{r}
-
-#| echo: true
 #| code-fold: true
-#| fig-align: center
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 
 # Required: ggplot2
 
@@ -94,7 +102,9 @@ ggplot() +
   coord_cartesian(xlim = c(0, 1), ylim = c(0, 1))
 ```
 
-**Effective:** When you have just 1-2 key numbers, text is more impactful than a chart. Makes the metric impossible to miss.
+::: {.explanation}
+**Effective:** When you have just 1-2 key numbers, text is more impactful than a chart. Makes the metric impossible to miss and allows for immediate comprehension.
+:::
 
 ---
 
@@ -102,8 +112,8 @@ ggplot() +
 
 ```{r}
 #| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 
 # Required: gridExtra, grid
 
@@ -122,7 +132,9 @@ table_grob <- tableGrob(lab_results, rows = NULL,
 grid.draw(table_grob)
 ```
 
-**Effective:** Tables are ideal when you need to show precise values with different units of measure. Better than a chart when exact numbers matter.
+::: {.explanation}
+**Effective:** Tables excel when precise values matter and units differ. Better than charts when readers need exact numbers for comparison or reference.
+:::
 
 ---
 
@@ -130,8 +142,8 @@ grid.draw(table_grob)
 
 ```{r}
 #| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 
 # Required: tidyverse
 
@@ -151,102 +163,9 @@ ggplot(hospital_metrics, aes(x = Month, y = Department, fill = PatientSatisfacti
   theme(axis.text.x = element_text(angle = 45, hjust = 1), panel.grid = element_blank())
 ```
 
-**Effective:** Heatmaps encode values with color, making it easy to spot patterns in large tables. Great for identifying hot/cold spots quickly.
-
----
-
-## Chart Type: Scatter Plot
-
-```{r}
-#| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
-
-# Required: ggplot2
-
-set.seed(42)
-clinical_data <- data.frame(
-  nurse_ratio = runif(50, 1, 8),
-  patient_outcomes = runif(50, 60, 95)
-)
-
-clinical_data$patient_outcomes <- 100 - 3 * clinical_data$nurse_ratio + rnorm(50, 0, 5)
-
-ggplot(clinical_data, aes(x = nurse_ratio, y = patient_outcomes)) +
-  geom_point(color = "dodgerblue", size = 3, alpha = 0.6) +
-  geom_smooth(method = "lm", se = TRUE, color = "tomato") +
-  labs(title = "Nurse-to-Patient Ratio vs Outcomes",
-       subtitle = "Lower ratios associated with better outcomes",
-       x = "Patients per Nurse", y = "Outcome Score (%)") +
-  theme_minimal()
-```
-
-**Effective:** Scatter plots reveal relationships between two continuous variables. The trend line makes the correlation clear.
-
----
-
-## Chart Type: Line Chart
-
-```{r}
-#| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
-
-# Required: ggplot2
-
-icu_admissions <- data.frame(
-  month = 1:24,
-  admissions = c(42, 45, 48, 46, 51, 54, 58, 56, 61, 65, 68, 66,
-                 72, 75, 79, 77, 83, 87, 91, 89, 95, 99, 103, 101)
-)
-
-ggplot(icu_admissions, aes(x = month, y = admissions)) +
-  geom_line(color = "navy", size = 1.2) +
-  geom_point(color = "navy", size = 2) +
-  labs(title = "ICU Admissions Trend",
-       subtitle = "Consistent growth over 24 months",
-       x = "Month", y = "Daily Average Admissions") +
-  theme_minimal() +
-  theme(panel.grid.minor = element_blank())
-```
-
-**Effective:** Line charts show trends over time. The continuous line emphasizes the progression and makes patterns clear.
-
----
-
-## Chart Type: Slopegraph
-
-```{r}
-#| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
-#| warning: false
-
-# Required: tidyverse
-
-infection_rates <- data.frame(
-  hospital = c("Hospital A", "Hospital B", "Hospital C", "Hospital D", "Hospital E"),
-  rate_2023 = c(3.2, 4.1, 2.8, 3.9, 3.5),
-  rate_2024 = c(2.1, 2.3, 2.6, 3.7, 3.2)
-)
-
-infection_long <- infection_rates |> 
-  pivot_longer(cols = starts_with("rate"), names_to = "year", values_to = "rate") |>
-  mutate(year = ifelse(year == "rate_2023", "2023", "2024"))
-
-ggplot(infection_long, aes(x = year, y = rate, group = hospital)) +
-  geom_line(color = "gray60", size = 1) +
-  geom_point(color = "gray60", size = 3) +
-  geom_line(data = infection_long |> filter(hospital == "Hospital A"),
-            color = "forestgreen", size = 1.5) +
-  geom_point(data = infection_long |> filter(hospital == "Hospital A"),
-             color = "forestgreen", size = 4) +
-  labs(title = "Hospital A reduced infections most", x = NULL, y = "Infection Rate (%)") +
-  theme_minimal() +
-  theme(panel.grid.major.x = element_blank())
-```
-
-**Effective:** Slopegraphs are perfect for comparing two time points. They show both ranking and magnitude of change clearly.
+::: {.explanation}
+**Effective:** Heatmaps encode values with color, making patterns instantly visible in large tables. Ideal for spotting trends across two categorical dimensions.
+:::
 
 ---
 
@@ -254,8 +173,8 @@ ggplot(infection_long, aes(x = year, y = rate, group = hospital)) +
 
 ```{r}
 #| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 
 # Required: ggplot2
 
@@ -275,16 +194,48 @@ ggplot(departments, aes(x = wait_time, y = reorder(dept, wait_time))) +
   theme(panel.grid.major.y = element_blank())
 ```
 
-**Effective:** Horizontal bars are easier to read than vertical, especially with long labels. Natural left-to-right reading.
+::: {.explanation}
+**Effective:** Horizontal bars are preferred for categorical comparisons. Long labels read naturally, and length comparisons are easier than height comparisons.
+:::
 
 ---
 
-## Avoid: Line Charts for Categories
+## Chart Type: Grouped Bar Chart
+
+```{r}
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 5
+
+# Required: ggplot2
+
+medication_adherence <- data.frame(
+  condition = rep(c("Diabetes", "Hypertension", "Heart Disease", "Asthma"), each = 2),
+  age_group = rep(c("Under 65", "65 and Over"), 4),
+  adherence = c(68, 82, 71, 85, 64, 79, 59, 76)
+)
+
+ggplot(medication_adherence, aes(x = adherence, y = condition, fill = age_group)) +
+  geom_col(position = position_dodge(0.8), width = 0.7) +
+  scale_fill_manual(values = c("steelblue", "coral")) +
+  labs(title = "Medication Adherence by Age Group",
+       subtitle = "Older patients show consistently higher adherence",
+       x = "Adherence Rate (%)", y = NULL, fill = "Age Group") +
+  theme_minimal() +
+  theme(panel.grid.major.y = element_blank(), legend.position = "top")
+```
+
+::: {.explanation}
+**Effective:** Grouped bars allow direct comparison across two categorical variables. The gap between groups creates visual separation that aids comprehension.
+:::
+
+---
+
+## Avoid: Vertical Bars with Long Labels
 
 ```{r}
 #| include: false
-# Create data for both category comparison slides
-departments_cat <- data.frame(
+departments_vertical <- data.frame(
   dept = c("Emergency Medicine", "Surgical Services", "Internal Medicine", 
            "Radiology", "Laboratory", "Pharmacy"),
   wait_time = c(45, 28, 62, 35, 18, 12)
@@ -293,21 +244,369 @@ departments_cat <- data.frame(
 
 ```{r}
 #| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 
 # Required: ggplot2
 
-ggplot(departments_cat, aes(x = dept, y = wait_time, group = 1)) +
-  geom_line(color = "red", size = 1) +
-  geom_point(color = "red", size = 3) +
-  labs(title = "Misleading: Implies Continuity",
+ggplot(departments_vertical, aes(x = dept, y = wait_time)) +
+  geom_col(fill = "coral") +
+  labs(title = "Ineffective: Rotated Text Hard to Read",
        x = NULL, y = "Wait Time (minutes)") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-**Ineffective:** Lines suggest continuous change between points, but there's no meaningful order or connection between these categories.
+::: {.explanation}
+**Ineffective:** Vertical bars with long labels force text rotation, making reading difficult. Horizontal bars solve this problem naturally.
+:::
+
+---
+
+## Chart Type: Line Chart
+
+```{r}
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 5
+
+# Required: ggplot2
+
+icu_admissions <- data.frame(
+  month = 1:24,
+  admissions = c(42, 45, 48, 46, 51, 54, 58, 56, 61, 65, 68, 66,
+                 72, 75, 79, 77, 83, 87, 91, 89, 95, 99, 103, 101)
+)
+
+ggplot(icu_admissions, aes(x = month, y = admissions)) +
+  geom_line(color = "navy", size = 1.2) +
+  geom_point(color = "navy", size = 2) +
+  labs(title = "ICU Admissions Trend",
+       subtitle = "Consistent growth over 24 months",
+       x = "Month", y = "Daily Average Admissions") +
+  theme_minimal() +
+  theme(panel.grid.minor = element_blank())
+```
+
+::: {.explanation}
+**Effective:** Line charts emphasize continuity and trend direction over time. The connecting line helps viewers see patterns and predict future values.
+:::
+
+---
+
+## Chart Type: Area Chart
+
+```{r}
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 5
+
+# Required: tidyverse
+
+patient_volume <- data.frame(
+  month = rep(1:12, 3),
+  department = rep(c("Emergency", "Outpatient", "Inpatient"), each = 12),
+  patients = c(
+    850, 920, 880, 950, 1020, 980, 1050, 1100, 1080, 1150, 1120, 1180,
+    620, 680, 640, 720, 760, 740, 800, 820, 810, 850, 840, 880,
+    430, 450, 440, 480, 500, 490, 520, 540, 530, 560, 550, 580
+  )
+)
+
+ggplot(patient_volume, aes(x = month, y = patients, fill = department)) +
+  geom_area(alpha = 0.7) +
+  scale_fill_manual(values = c("tomato", "steelblue", "forestgreen")) +
+  labs(title = "Patient Volume by Department",
+       subtitle = "Total volume increasing with steady proportions",
+       x = "Month", y = "Number of Patients", fill = "Department") +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+
+::: {.explanation}
+**Effective:** Stacked area charts show both individual trends and cumulative total. The filled areas emphasize volume and make the overall trend prominent.
+:::
+
+---
+
+## Chart Type: Multiple Line Series
+
+```{r}
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 5
+
+# Required: tidyverse
+
+vital_signs <- data.frame(
+  hour = rep(0:23, 3),
+  metric = rep(c("Heart Rate", "Respiratory Rate", "Temperature"), each = 24),
+  value_scaled = c(
+    70 + 5*sin(seq(0, 2*pi, length.out = 24)) + rnorm(24, 0, 2),
+    16 + 2*sin(seq(0, 2*pi, length.out = 24)) + rnorm(24, 0, 0.5),
+    37 + 0.3*sin(seq(0, 2*pi, length.out = 24)) + rnorm(24, 0, 0.1)
+  )
+)
+
+vital_signs_scaled <- vital_signs %>%
+  group_by(metric) %>%
+  mutate(value_norm = (value_scaled - mean(value_scaled)) / sd(value_scaled))
+
+ggplot(vital_signs_scaled, aes(x = hour, y = value_norm, color = metric)) +
+  geom_line(size = 1) +
+  scale_color_manual(values = c("tomato", "steelblue", "forestgreen")) +
+  labs(title = "24-Hour Vital Signs Pattern (Normalized)",
+       subtitle = "All metrics show circadian rhythm",
+       x = "Hour of Day", y = "Standardized Value", color = "Vital Sign") +
+  theme_minimal() +
+  theme(legend.position = "top", panel.grid.minor = element_blank())
+```
+
+::: {.explanation}
+**Effective:** Multiple series work when normalized to comparable scales. Different colors distinguish series while the shared timeline enables pattern comparison across variables.
+:::
+
+---
+
+## Chart Type: Scatter Plot
+
+```{r}
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 5
+
+# Required: ggplot2
+
+set.seed(42)
+clinical_data <- data.frame(
+  nurse_ratio = runif(50, 1, 8),
+  patient_outcomes = runif(50, 60, 95)
+)
+
+clinical_data$patient_outcomes <- 100 - 3 * clinical_data$nurse_ratio + rnorm(50, 0, 5)
+
+ggplot(clinical_data, aes(x = nurse_ratio, y = patient_outcomes)) +
+  geom_point(color = "dodgerblue", size = 3, alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE, color = "tomato") +
+  labs(title = "Nurse-to-Patient Ratio vs Outcomes",
+       subtitle = "Lower ratios associated with better outcomes (r = -0.82)",
+       x = "Patients per Nurse", y = "Outcome Score (%)") +
+  theme_minimal()
+```
+
+::: {.explanation}
+**Effective:** Scatter plots reveal relationships between continuous variables. The trend line and confidence interval quantify the strength and uncertainty of the relationship.
+:::
+
+---
+
+## Chart Type: Scatter with Categories
+
+```{r}
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 5
+
+# Required: ggplot2
+
+set.seed(123)
+treatment_outcomes <- data.frame(
+  treatment = rep(c("Standard", "Treatment A", "Treatment B"), each = 30),
+  baseline_severity = runif(90, 40, 90),
+  improvement = runif(90, 10, 60)
+)
+
+treatment_outcomes$improvement <- treatment_outcomes$improvement + 
+  ifelse(treatment_outcomes$treatment == "Treatment B", 15, 0) +
+  ifelse(treatment_outcomes$treatment == "Treatment A", 8, 0) -
+  0.3 * treatment_outcomes$baseline_severity + rnorm(90, 0, 5)
+
+ggplot(treatment_outcomes, aes(x = baseline_severity, y = improvement, color = treatment)) +
+  geom_point(size = 2.5, alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE, size = 1) +
+  scale_color_manual(values = c("gray60", "steelblue", "forestgreen")) +
+  labs(title = "Treatment Effectiveness by Baseline Severity",
+       subtitle = "Treatment B shows superior outcomes across all severity levels",
+       x = "Baseline Severity Score", y = "Improvement Score", color = "Treatment") +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+
+::: {.explanation}
+**Effective:** Adding categories to scatter plots reveals whether relationships hold across subgroups. Parallel slopes suggest consistent effects; diverging slopes indicate interactions.
+:::
+
+## Chart Type: Boxplot
+
+```{r}
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 5
+
+# Required: ggplot2
+
+set.seed(456)
+los_data <- data.frame(
+  specialty = rep(c("Cardiology", "Orthopedics", "Neurology", "General Surgery"), each = 50),
+  length_of_stay = c(
+    rnorm(50, 5.2, 1.8),
+    rnorm(50, 7.5, 2.3),
+    rnorm(50, 9.2, 3.1),
+    rnorm(50, 4.8, 1.5)
+  )
+)
+los_data$length_of_stay <- pmax(los_data$length_of_stay, 1)
+
+ggplot(los_data, aes(x = length_of_stay, y = reorder(specialty, length_of_stay, median))) +
+  geom_boxplot(fill = "steelblue", alpha = 0.7) +
+  labs(title = "Length of Stay Distribution by Specialty",
+       subtitle = "Neurology shows highest median and greatest variability",
+       x = "Length of Stay (days)", y = NULL) +
+  theme_minimal() +
+  theme(panel.grid.major.y = element_blank())
+```
+
+::: {.explanation}
+**Effective:** Boxplots show distribution shape through quartiles. The box contains 50% of data, whiskers show range, and outliers appear as points - all in one compact visual.
+:::
+
+---
+
+## Chart Type: Violin Plot
+
+```{r}
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 5
+
+# Required: ggplot2
+
+ggplot(los_data, aes(x = length_of_stay, y = reorder(specialty, length_of_stay, median))) +
+  geom_violin(fill = "coral", alpha = 0.7) +
+  geom_boxplot(width = 0.2, fill = "white", alpha = 0.8) +
+  labs(title = "Length of Stay Distribution (Violin Plot)",
+       subtitle = "Shows full distribution shape - bimodal patterns visible",
+       x = "Length of Stay (days)", y = NULL) +
+  theme_minimal() +
+  theme(panel.grid.major.y = element_blank())
+```
+
+::: {.explanation}
+**Effective:** Violin plots reveal distribution details that boxplots hide. The width at each point shows density, making bimodal distributions and skewness immediately apparent.
+:::
+
+---
+
+## Chart Type: Density Plot
+
+```{r}
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 5
+
+# Required: tidyverse
+
+set.seed(789)
+recovery_times <- data.frame(
+  treatment = rep(c("Standard", "Enhanced"), each = 200),
+  days = c(
+    rgamma(200, shape = 4, scale = 3),
+    rgamma(200, shape = 5, scale = 2.5)
+  )
+)
+
+ggplot(recovery_times, aes(x = days, fill = treatment)) +
+  geom_density(alpha = 0.6) +
+  scale_fill_manual(values = c("steelblue", "forestgreen")) +
+  labs(title = "Recovery Time Distributions",
+       subtitle = "Enhanced treatment shifts distribution earlier with less variability",
+       x = "Recovery Time (days)", y = "Density", fill = "Treatment") +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+
+::: {.explanation}
+**Effective:** Density plots show smooth distribution curves, ideal for comparing shapes between groups. Overlapping areas make differences in location, spread, and skewness clear.
+:::
+
+---
+
+## Chart Type: Ridgeline Plot
+
+```{r}
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 5
+#| warning: false
+#| message: false
+
+# Required: tidyverse, ggridges
+
+set.seed(321)
+age_distribution <- data.frame(
+  condition = rep(c("Healthy", "Pre-Diabetes", "Type 2 Diabetes", 
+                    "Cardiovascular Disease", "Multiple Conditions"), each = 150),
+  age = c(
+    rnorm(150, 45, 12),
+    rnorm(150, 52, 10),
+    rnorm(150, 58, 9),
+    rnorm(150, 63, 11),
+    rnorm(150, 68, 8)
+  )
+)
+
+ggplot(age_distribution, aes(x = age, y = condition, fill = condition)) +
+  geom_density_ridges(alpha = 0.7, scale = 0.9) +
+  scale_fill_brewer(palette = "Set2", guide = "none") +
+  labs(title = "Age Distribution by Health Condition",
+       subtitle = "Average age increases with condition severity",
+       x = "Age (years)", y = NULL) +
+  theme_minimal()
+```
+
+::: {.explanation}
+**Effective:** Ridgeline plots stack density curves for easy comparison across many categories. The slight overlap creates visual flow while maintaining distinct distributions.
+:::
+
+---
+
+## Chart Type: Slopegraph
+
+```{r}
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 5
+#| warning: false
+
+# Required: tidyverse
+
+infection_rates <- data.frame(
+  hospital = c("Hospital A", "Hospital B", "Hospital C", "Hospital D", "Hospital E"),
+  rate_2023 = c(3.2, 4.1, 2.8, 3.9, 3.5),
+  rate_2024 = c(2.1, 2.3, 2.6, 3.7, 3.2)
+)
+
+infection_long <- infection_rates %>%
+  pivot_longer(cols = starts_with("rate"), names_to = "year", values_to = "rate") %>%
+  mutate(year = ifelse(year == "rate_2023", "2023", "2024"))
+
+ggplot(infection_long, aes(x = year, y = rate, group = hospital)) +
+  geom_line(color = "gray60", size = 1) +
+  geom_point(color = "gray60", size = 3) +
+  geom_line(data = infection_long %>% filter(hospital == "Hospital A"),
+            color = "forestgreen", size = 1.5) +
+  geom_point(data = infection_long %>% filter(hospital == "Hospital A"),
+             color = "forestgreen", size = 4) +
+  labs(title = "Hospital A Achieved Largest Infection Rate Reduction",
+       subtitle = "34% decrease from 3.2% to 2.1%",
+       x = NULL, y = "Infection Rate (%)") +
+  theme_minimal() +
+  theme(panel.grid.major.x = element_blank())
+```
+
+::: {.explanation}
+**Effective:** Slopegraphs excel at showing change between two time points. The slope angle immediately conveys magnitude and direction of change for each entity.
+:::
 
 ---
 
@@ -315,8 +614,8 @@ ggplot(departments_cat, aes(x = dept, y = wait_time, group = 1)) +
 
 ```{r}
 #| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 
 # Required: ggplot2
 
@@ -331,13 +630,16 @@ patient_sources$quarter <- factor(patient_sources$quarter, levels = c("Q1", "Q2"
 ggplot(patient_sources, aes(x = quarter, y = patients, fill = source)) +
   geom_col() +
   scale_fill_brewer(palette = "Set2") +
-  labs(title = "Emergency admissions increasing",
+  labs(title = "Emergency Admissions Increasing",
+       subtitle = "38% growth while other sources remain stable",
        x = NULL, y = "Patients", fill = "Source") +
   theme_minimal() +
   theme(panel.grid.major.x = element_blank(), legend.position = "top")
 ```
 
-**Effective:** Stacked bars show part-to-whole relationships over time. Easy to see both total volume and composition.
+::: {.explanation}
+**Effective:** Stacked bars show part-to-whole relationships over time. Total height shows cumulative volume while segment heights reveal individual contributions.
+:::
 
 ---
 
@@ -345,7 +647,6 @@ ggplot(patient_sources, aes(x = quarter, y = patients, fill = source)) +
 
 ```{r}
 #| include: false
-# Create data for Y-axis comparison slides
 vaccination_rates <- data.frame(
   hospital = c("Hospital A", "Hospital B", "Hospital C", "Hospital D"),
   rate = c(94, 96, 93, 97)
@@ -354,20 +655,23 @@ vaccination_rates <- data.frame(
 
 ```{r}
 #| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 
 # Required: ggplot2
 
 ggplot(vaccination_rates, aes(x = hospital, y = rate)) +
   geom_col(fill = "coral") +
   coord_cartesian(ylim = c(90, 100)) +
-  labs(title = "Misleading: Exaggerates Differences",
+  labs(title = "Misleading: Exaggerates Small Differences",
+       subtitle = "3% variation appears massive",
        x = NULL, y = "Vaccination Rate (%)") +
   theme_minimal()
 ```
 
-**Ineffective:** Truncating the Y-axis exaggerates small differences. Makes 3% variation look like massive differences in performance.
+::: {.explanation}
+**Ineffective:** Truncating the Y-axis on bar charts distorts proportional relationships. What is actually a 3% difference appears as a 3-fold difference due to the missing baseline.
+:::
 
 ---
 
@@ -375,22 +679,24 @@ ggplot(vaccination_rates, aes(x = hospital, y = rate)) +
 
 ```{r}
 #| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 
 # Required: ggplot2
 
 ggplot(vaccination_rates, aes(x = hospital, y = rate)) +
   geom_col(fill = "steelblue") +
   scale_y_continuous(expand = c(0, 0), limits = c(0, 100)) +
-  labs(title = "Honest: All Hospitals Performing Well",
-       subtitle = "All above 93% vaccination rate",
+  labs(title = "Honest Representation: All Hospitals Excel",
+       subtitle = "All above 93% vaccination rate - differences are minor",
        x = NULL, y = "Vaccination Rate (%)") +
   theme_minimal() +
   theme(panel.grid.major.x = element_blank())
 ```
 
-**Effective:** Starting at zero shows true proportions. All hospitals are performing well - the differences are minor.
+::: {.explanation}
+**Effective:** Starting bar charts at zero shows true proportions. Now it's clear that all hospitals perform similarly at high levels with minimal variation.
+:::
 
 ---
 
@@ -398,7 +704,6 @@ ggplot(vaccination_rates, aes(x = hospital, y = rate)) +
 
 ```{r}
 #| include: false
-# Create data for pie vs bar comparison slides
 diagnosis_data <- data.frame(
   diagnosis = c("Cardiovascular", "Respiratory", "Diabetes", "Infectious", "Other"),
   patients = c(285, 218, 165, 142, 190)
@@ -407,20 +712,22 @@ diagnosis_data <- data.frame(
 
 ```{r}
 #| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 
 # Required: ggplot2
 
 ggplot(diagnosis_data, aes(x = "", y = patients, fill = diagnosis)) +
   geom_bar(stat = "identity", width = 1) +
   coord_polar("y") +
-  labs(title = "Hard to Compare", fill = NULL) +
+  labs(title = "Difficult to Compare Precisely", fill = NULL) +
   theme_void() +
   theme(legend.position = "right")
 ```
 
-**Ineffective:** Humans struggle to compare angles and areas. Which is bigger - Respiratory or Other? Hard to tell precisely.
+::: {.explanation}
+**Ineffective:** Humans struggle with angle and area estimation. Quick: is Respiratory or Other larger? Pie charts make simple comparisons unnecessarily difficult.
+:::
 
 ---
 
@@ -428,22 +735,24 @@ ggplot(diagnosis_data, aes(x = "", y = patients, fill = diagnosis)) +
 
 ```{r}
 #| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 
 # Required: ggplot2
 
 ggplot(diagnosis_data, aes(x = patients, y = reorder(diagnosis, patients))) +
   geom_col(fill = "navy") +
-  labs(title = "Primary Diagnoses",
-       subtitle = "Cardiovascular leads with 285 patients",
+  labs(title = "Primary Diagnoses - Clear Rankings",
+       subtitle = "Cardiovascular (285) exceeds Respiratory (218) by 31%",
        x = "Number of Patients", y = NULL) +
   scale_x_continuous(expand = c(0, 0), limits = c(0, 300)) +
   theme_minimal() +
   theme(panel.grid.major.y = element_blank())
 ```
 
-**Effective:** Horizontal bars make comparisons effortless. Rankings and differences are immediately clear.
+::: {.explanation}
+**Effective:** Horizontal bars make comparisons effortless. Rankings are immediately clear, and length differences are precisely perceivable unlike angles in pie charts.
+:::
 
 ---
 
@@ -455,9 +764,23 @@ ggplot(diagnosis_data, aes(x = patients, y = reorder(diagnosis, patients))) +
 - Remove chart borders and backgrounds
 - Lighten or remove gridlines  
 - Remove redundant data labels
-- **Direct labeling > legends**
+- **Direct labeling > legends** (Gestalt principle of connection)
 - Clean up axis labels
-- Every element should earn its place
+- Maximize **data-to-ink ratio** (Tufte's principle)
+:::
+
+---
+
+## Data-to-Ink Ratio: Maximizing Information
+
+**Every drop of ink should represent data**
+
+::: {.incremental}
+- **Data ink**: Ink that represents actual data points
+- **Non-data ink**: Gridlines, borders, backgrounds, decorations
+- **Goal**: Maximize the ratio of data ink to total ink
+- Remove chart junk: 3D effects, unnecessary colors, decorative elements
+- Keep only what serves comprehension
 :::
 
 ---
@@ -466,12 +789,11 @@ ggplot(diagnosis_data, aes(x = patients, y = reorder(diagnosis, patients))) +
 
 ```{r}
 #| include: false
-# Create data for decluttering comparison slides
 treatment_response <- data.frame(
   quarter = paste0("Q", 1:4),
   treatment_a = c(72, 76, 74, 82),
   treatment_b = c(65, 68, 70, 73)
-) |>
+) %>%
   pivot_longer(cols = c(treatment_a, treatment_b), 
                names_to = "treatment", values_to = "response")
 
@@ -481,8 +803,8 @@ treatment_response$treatment <- ifelse(treatment_response$treatment == "treatmen
 
 ```{r}
 #| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 
 # Required: tidyverse
 
@@ -495,7 +817,9 @@ ggplot(treatment_response, aes(x = quarter, y = response,
   theme_gray()
 ```
 
-**Ineffective:** Gray background, gridlines, legend, and borders all compete for attention. The data gets lost in visual clutter.
+::: {.explanation}
+**Ineffective:** Gray background, heavy gridlines, legend requiring eye travel, and borders all compete for attention. The data-to-ink ratio is low - most ink conveys no data.
+:::
 
 ---
 
@@ -503,8 +827,8 @@ ggplot(treatment_response, aes(x = quarter, y = response,
 
 ```{r}
 #| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 #| warning: false
 
 # Required: tidyverse
@@ -513,7 +837,7 @@ ggplot(treatment_response, aes(x = quarter, y = response,
                                color = treatment, group = treatment)) +
   geom_line(size = 1.2) +
   scale_color_manual(values = c("navy", "gray60")) +
-  labs(title = "Treatment A shows Q4 improvement", x = NULL, y = "Response Rate (%)") +
+  labs(title = "Treatment A Shows Q4 Improvement", x = NULL, y = "Response Rate (%)") +
   theme_minimal() +
   theme(legend.position = "none", panel.grid = element_blank()) +
   annotate("text", x = 4.2, y = 82, label = "Treatment A", 
@@ -524,13 +848,16 @@ ggplot(treatment_response, aes(x = quarter, y = response,
   theme(plot.margin = margin(5, 40, 5, 5))
 ```
 
-**Effective:** Clean background, minimal gridlines, direct labels. Every element serves the data. The message is clear.
+::: {.explanation}
+**Effective:** High data-to-ink ratio achieved by removing backgrounds, excess gridlines, and legend. Direct labels connect to data via proximity (Gestalt principle).
+:::
 
 ---
 
 ## Principle 3: Use Preattentive Attributes
 
-**Guide attention with attributes processed in <250ms**
+
+**Attention with attributes processed in <250ms**
 
 ::: {.incremental}
 - **Color**: Most powerful
@@ -543,7 +870,6 @@ ggplot(treatment_response, aes(x = quarter, y = response,
 ---
 
 ## Example: All Equal (No Focus)
-
 ```{r}
 #| include: false
 # Create data for preattentive attributes comparison slides
@@ -553,7 +879,6 @@ clinical_quality <- data.frame(
   score = c(94, 88, 76, 92, 89, 91)
 )
 ```
-
 ```{r}
 #| code-fold: true
 #| fig-width: 10
@@ -568,12 +893,13 @@ ggplot(clinical_quality, aes(x = score, y = reorder(metric, score))) +
   theme(panel.grid.major.y = element_blank())
 ```
 
+::: {.explanation}
 **Ineffective:** All bars are equal - where should the viewer look? No visual hierarchy means no clear message.
+:::
 
 ---
 
 ## Example: Strategic Highlighting
-
 ```{r}
 #| code-fold: true
 #| fig-width: 10
@@ -592,7 +918,43 @@ ggplot(clinical_quality,
   theme(panel.grid.major.y = element_blank())
 ```
 
+::: {.explanation}
 **Effective:** Red instantly draws the eye to the problem. Gray provides context without competing for attention.
+:::
+
+---
+
+## Example: Using Size for Emphasis
+```{r}
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 5
+
+# Required: tidyverse
+
+adverse_events <- data.frame(
+  month = 1:12,
+  events = c(12, 15, 11, 14, 13, 16, 18, 22, 19, 17, 14, 13),
+  severity = c("normal", "normal", "normal", "normal", "normal", 
+               "normal", "alert", "critical", "alert", "alert", "normal", "normal")
+)
+
+ggplot(adverse_events, aes(x = month, y = events)) +
+  geom_line(color = "gray40", size = 1) +
+  geom_point(aes(size = severity, color = severity)) +
+  scale_size_manual(values = c("alert" = 5, "critical" = 8, "normal" = 2), guide = "none") +
+  scale_color_manual(values = c("alert" = "orange", "critical" = "red", "normal" = "gray40"), 
+                     guide = "none") +
+  labs(title = "Adverse Events Timeline",
+       subtitle = "August spike requires investigation",
+       x = "Month", y = "Number of Events") +
+  theme_minimal() +
+  theme(panel.grid.minor = element_blank())
+```
+
+::: {.explanation}
+**Effective:** Size combined with color creates a clear hierarchy. The large red point in August demands attention while smaller gray points provide context.
+:::
 
 ---
 
@@ -602,18 +964,17 @@ ggplot(clinical_quality,
 
 ::: {.incremental}
 - Bold color for what matters most
-- Gray for context
+- Gray for supporting context
 - Maximum one bold color per chart
 - Creates instant visual hierarchy
+- Reduces cognitive load
 :::
 
 ---
 
-## Example: Too Many Colors (Confusing)
-
+## Example: Too Many Colors
 ```{r}
 #| include: false
-# Create data for gray and bold comparison slides
 hospital_los <- data.frame(
   specialty = c("Cardiology", "Orthopedics", "Neurology", 
                 "General Surgery", "Pediatrics"),
@@ -621,11 +982,10 @@ hospital_los <- data.frame(
   target = 5.0
 )
 ```
-
 ```{r}
 #| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 
 # Required: ggplot2
 
@@ -639,131 +999,451 @@ ggplot(hospital_los, aes(x = los, y = reorder(specialty, los), fill = specialty)
   theme(legend.position = "none", panel.grid.major.y = element_blank())
 ```
 
-**Ineffective:** Too many colors compete for attention. Is this chart trying to highlight everything? That means nothing stands out.
+::: {.explanation}
+**Ineffective:** Multiple bold colors fragment attention. When everything demands attention, nothing gets it.
+:::
 
 ---
 
-## Example: Gray and Bold (Clear Message)
-
+## Example: Gray and Bold Applied
 ```{r}
 #| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
+#| fig-width: 9
+#| fig-height: 5
 
 # Required: ggplot2
 
 ggplot(hospital_los, 
-       aes(x = los, y = reorder(specialty, los), fill = los > target)) +
+       aes(x = los, y = reorder(specialty, los), fill = specialty == "Neurology")) +
   geom_col() +
-  geom_vline(xintercept = 5.0, color = "gray40", linetype = "dashed") +
-  scale_fill_manual(values = c("gray80", "tomato"), guide = "none") +
-  labs(title = "Two specialties exceed target length of stay",
-       subtitle = "Target: 5.0 days",
+  geom_vline(xintercept = 5.0, linetype = "dashed", color = "gray40", size = 0.8) +
+  annotate("text", x = 5.0, y = 5.5, label = "Target: 5 days", hjust = -0.1, size = 3.5) +
+  scale_fill_manual(values = c("gray80", "coral"), guide = "none") +
+  labs(title = "Neurology Exceeds Target Length of Stay",
+       subtitle = "30% over target - opportunity for process improvement",
        x = "Length of Stay (days)", y = NULL) +
   theme_minimal() +
   theme(panel.grid.major.y = element_blank())
 ```
 
-**Effective:** Red highlights the problem specialties. Gray provides context. One glance tells the whole story.
+::: {.explanation}
+**Effective:** One bold color directs attention immediately to the problem area. Gray bars provide necessary context without distraction.
+:::
 
 ---
 
 ## Principle 5: Think Like a Designer
 
-**Alignment, white space, and contrast**
+**Visual design principles enhance communication**
 
 ::: {.incremental}
-- **Alignment**: Left-align text
-- **White space**: Give room to breathe
-- **Contrast**: Create visual hierarchy
-- **Consistency**: Same fonts, colors
+- **Accessibility**: Colorblind-safe palettes
+- **Alignment**: Create invisible structure
+- **White space**: Let your data breathe
+- **Contrast**: Guide the eye
+- **Typography**: Readable, professional fonts
 :::
 
 ---
 
-## Example: Poor Design Choices
+## Accessibility: Colorblind-Safe Palettes
+```{r}
+#| code-fold: true
+#| fig-width: 10
+#| fig-height: 5
 
+# Required: tidyverse
+
+treatment_data <- data.frame(
+  treatment = rep(c("Standard", "New Treatment"), each = 50),
+  outcome = c(rnorm(50, 65, 10), rnorm(50, 72, 10))
+)
+
+p1 <- ggplot(treatment_data, aes(x = treatment, y = outcome, fill = treatment)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("red", "green")) +
+  labs(title = "Not Colorblind Safe", y = "Patient Outcome Score") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+p2 <- ggplot(treatment_data, aes(x = treatment, y = outcome, fill = treatment)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("steelblue", "darkorange")) +
+  labs(title = "Colorblind Safe", y = "Patient Outcome Score") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+p1 + p2
+```
+
+::: {.explanation}
+**Always use colorblind-safe palettes.** Approximately 8% of men and 0.5% of women have color vision deficiency. Blue-orange combinations work for nearly everyone.
+:::
+
+---
+
+## Design Principles: Alignment & Spacing
+```{r}
+#| code-fold: true
+#| fig-width: 10
+#| fig-height: 6
+
+# Required: ggplot2
+
+readmission_data <- data.frame(
+  hospital = c("Hospital A", "Hospital B", "Hospital C", "Hospital D", "National Average"),
+  rate = c(14.2, 18.5, 12.8, 16.3, 15.0)
+)
+
+ggplot(readmission_data, 
+       aes(x = rate, y = reorder(hospital, rate), fill = hospital == "Hospital B")) +
+  geom_col() +
+  geom_vline(xintercept = 15.0, linetype = "dashed", color = "gray40") +
+  annotate("text", x = 15.0, y = 5.5, label = "National Average", hjust = -0.1) +
+  scale_fill_manual(values = c("gray80", "coral"), guide = "none") +
+  labs(title = "Hospital B Exceeds National Readmission Rate",
+       subtitle = "Focused intervention needed",
+       x = "30-Day Readmission Rate (%)",
+       y = NULL) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 16, margin = margin(b = 5)),
+    plot.subtitle = element_text(size = 12, color = "gray30", margin = margin(b = 15)),
+    panel.grid.major.y = element_blank(),
+    axis.text = element_text(size = 11),
+    plot.margin = margin(20, 40, 20, 20)
+  )
+```
+
+::: {.explanation}
+**Effective design:** Generous margins, aligned text, strategic white space, and clear visual hierarchy make the message instantly clear and professional.
+:::
+
+---
+
+## Using Annotations Strategically
+```{r}
+#| code-fold: true
+#| fig-width: 10
+#| fig-height: 6
+
+# Required: ggplot2
+
+satisfaction_trend <- data.frame(
+  month = 1:24,
+  score = c(82, 81, 83, 84, 82, 81, 80, 79, 78, 77, 75, 74,
+            76, 78, 80, 82, 84, 85, 86, 87, 88, 89, 90, 90)
+)
+
+ggplot(satisfaction_trend, aes(x = month, y = score)) +
+  geom_line(color = "steelblue", size = 1.2) +
+  geom_vline(xintercept = 12, linetype = "dashed", color = "gray50") +
+  annotate("rect", xmin = 0, xmax = 12, ymin = -Inf, ymax = Inf, 
+           alpha = 0.1, fill = "red") +
+  annotate("rect", xmin = 12, xmax = 24, ymin = -Inf, ymax = Inf, 
+           alpha = 0.1, fill = "green") +
+  annotate("text", x = 6, y = 91, label = "Before\nIntervention", 
+           size = 4, color = "gray30") +
+  annotate("text", x = 18, y = 91, label = "After\nIntervention", 
+           size = 4, color = "gray30") +
+  annotate("text", x = 12.5, y = 73, 
+           label = "New communication\nprotocol implemented",
+           hjust = 0, size = 3.5, color = "gray30") +
+  labs(title = "Patient Satisfaction Improved After Communication Protocol",
+       subtitle = "15-point increase in 12 months",
+       x = "Month", y = "Satisfaction Score") +
+  theme_minimal() +
+  theme(panel.grid.minor = element_blank())
+```
+
+::: {.explanation}
+**Annotations tell the story.** The chart clearly shows what happened, when it happened, and why it matters - the viewer doesn't need to guess.
+:::
+
+---
+
+## Before/After: Design Transformation
 ```{r}
 #| include: false
-# Create data for design comparison slides
+dept_performance <- data.frame(
+  department = c("Emergency", "Surgery", "Radiology", "Laboratory", "Pharmacy"),
+  score = c(78, 92, 88, 85, 95)
+)
+```
+```{r}
+#| code-fold: true
+#| fig-width: 10
+#| fig-height: 5
+
+# Before: Default styling
+p_before <- ggplot(dept_performance, aes(x = department, y = score)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Department Performance Scores")
+
+# After: Professional design
+p_after <- ggplot(dept_performance, 
+                  aes(x = score, y = reorder(department, score), 
+                      fill = department == "Emergency")) +
+  geom_col() +
+  geom_vline(xintercept = 85, linetype = "dashed", color = "gray40") +
+  annotate("text", x = 85, y = 5.5, label = "Target: 85", hjust = -0.1, size = 3.5) +
+  scale_fill_manual(values = c("gray80", "coral"), guide = "none") +
+  labs(title = "Emergency Department Below Performance Target",
+       subtitle = "All other departments meet or exceed expectations",
+       x = "Performance Score", y = NULL) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11, color = "gray30", margin = margin(b = 10)),
+    panel.grid.major.y = element_blank()
+  )
+
+p_before + p_after
+```
+
+::: {.explanation}
+Design transformation: horizontal orientation, strategic color, descriptive title, reference line, and clean styling create a professional, focused message.
+:::
+
+---
+
+## Principle 6: Tell a Story with Data
+
+**Transform insights into narrative**
+
+::: {.incremental}
+- **Beginning**: Set context (current state)
+- **Middle**: Show the problem/opportunity
+- **End**: Recommend action
+- Use descriptive titles that state your point
+- Guide your audience through the data
+:::
+
+---
+
+## Narrative vs Descriptive Titles
+```{r}
+#| include: false
+# Create data for story examples
 mortality_data <- data.frame(
   year = 2019:2024,
-  observed = c(2.8, 2.6, 2.5, 2.7, 2.2, 2.0),
-  expected = c(2.5, 2.5, 2.5, 2.5, 2.5, 2.5)
+  rate = c(2.8, 2.7, 2.5, 2.2, 1.9, 1.7)
 )
 ```
-
 ```{r}
 #| code-fold: true
 #| fig-width: 10
-#| fig-height: 6
+#| fig-height: 5
 
-# Required: ggplot2
+# Descriptive title
+p1 <- ggplot(mortality_data, aes(x = year, y = rate)) +
+  geom_line(color = "steelblue", size = 1.2) +
+  geom_point(color = "steelblue", size = 3) +
+  labs(title = "Hospital Mortality Rate by Year",
+       x = "Year", y = "Mortality Rate (%)") +
+  theme_minimal()
 
-ggplot(mortality_data) +
-  geom_line(aes(x = year, y = observed), color = "blue", size = 1) +
-  geom_line(aes(x = year, y = expected), color = "red", size = 1) +
-  geom_point(aes(x = year, y = observed), color = "blue", size = 2) +
-  geom_point(aes(x = year, y = expected), color = "red", size = 2) +
-  labs(title = "MORTALITY DATA ANALYSIS") +
+# Narrative title
+p2 <- ggplot(mortality_data, aes(x = year, y = rate)) +
+  geom_line(color = "steelblue", size = 1.2) +
+  geom_point(color = "steelblue", size = 3) +
+  annotate("segment", x = 2019, xend = 2024, y = 2.8, yend = 1.7,
+           arrow = arrow(length = unit(0.3, "cm")), color = "darkgreen", size = 1) +
+  annotate("text", x = 2021.5, y = 2.5, label = "39% reduction", 
+           color = "darkgreen", size = 4, fontface = "bold") +
+  labs(title = "Quality Improvement Initiative Cut Mortality Rate by 39%",
+       subtitle = "Sustained improvement from 2.8% to 1.7% over five years",
+       x = "Year", y = "Mortality Rate (%)") +
   theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5, size = 16))
+  theme(
+    plot.title = element_text(face = "bold", size = 13),
+    plot.subtitle = element_text(size = 11, color = "gray30")
+  )
+
+p1 + p2
 ```
 
-**Ineffective:** Centered title, clashing colors, no subtitle, unclear which line is which. Multiple design problems distract from the data.
-
----
-
-## Example: Good Design Principles
-
-```{r}
-#| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
-
-# Required: ggplot2
-
-ggplot(mortality_data) +
-  geom_line(aes(x = year, y = observed), color = "navy", size = 1.2) +
-  geom_line(aes(x = year, y = expected), color = "gray60", size = 1) +
-  labs(title = "Mortality rate improving beyond expected",
-       subtitle = "Dark: observed, Gray: expected",
-       x = NULL, y = "Mortality Rate (%)") +
-  theme_minimal() +
-  theme(plot.title = element_text(face = "bold", hjust = 0),
-        plot.subtitle = element_text(color = "gray30", hjust = 0),
-        panel.grid.minor = element_blank())
-```
-
-**Effective:** Left-aligned title, clear subtitle, harmonious colors, clean design. Professional and easy to understand.
-
----
-
-## Principle 6: Tell a Story
-
-**Move from descriptive to narrative**
-
-::: {.incremental}
-- **Descriptive**: What is this?
-- **Narrative**: So what?
-- State your insight in the title
-- Use subtitles for context
+::: {.explanation}
+**Narrative titles tell the story.** The right chart doesn't just show data - it communicates the achievement and its magnitude immediately.
 :::
 
 ---
 
-## Example: Descriptive Title (What?)
-
+## Small Multiples: Powerful Comparisons
 ```{r}
-#| include: false
-# Create data for storytelling comparison slides
-er_visits <- data.frame(
-  month = factor(month.abb[1:12], levels = month.abb),
-  visits = c(850, 820, 880, 920, 1420, 1680, 1850, 1720, 
-             1520, 1180, 950, 900)
+#| code-fold: true
+#| fig-width: 11
+#| fig-height: 6
+
+# Required: tidyverse
+
+set.seed(123)
+patient_outcomes <- expand.grid(
+  treatment = c("Standard Care", "Enhanced Protocol", "Intensive Management"),
+  month = 1:12
+) %>%
+  mutate(
+    outcome = case_when(
+      treatment == "Standard Care" ~ 65 + month * 0.5 + rnorm(n(), 0, 3),
+      treatment == "Enhanced Protocol" ~ 68 + month * 1.2 + rnorm(n(), 0, 3),
+      treatment == "Intensive Management" ~ 70 + month * 1.8 + rnorm(n(), 0, 3)
+    )
+  )
+
+ggplot(patient_outcomes, aes(x = month, y = outcome)) +
+  geom_line(color = "steelblue", size = 1) +
+  geom_smooth(method = "lm", se = FALSE, color = "coral", linetype = "dashed") +
+  facet_wrap(~treatment, ncol = 3) +
+  labs(title = "Intensive Management Shows Fastest Improvement Rate",
+       subtitle = "12-month comparison of three treatment protocols",
+       x = "Month", y = "Patient Outcome Score") +
+  theme_minimal() +
+  theme(
+    strip.text = element_text(face = "bold", size = 11),
+    plot.title = element_text(face = "bold", size = 14),
+    panel.spacing = unit(1.5, "lines")
+  )
+```
+
+::: {.explanation}
+**Small multiples enable comparison.** Same scales across panels make differences immediately visible. Trend lines show improvement rates at a glance.
+:::
+
+---
+
+## Small Multiples: Distribution Comparisons
+```{r}
+#| code-fold: true
+#| fig-width: 11
+#| fig-height: 6
+
+# Required: tidyverse
+
+set.seed(456)
+recovery_times <- data.frame(
+  procedure = rep(c("Procedure A", "Procedure B", "Procedure C", "Procedure D"), each = 100),
+  days = c(
+    rnorm(100, 5, 1.5),
+    rnorm(100, 7, 2),
+    rnorm(100, 4, 1),
+    rnorm(100, 6, 2.5)
+  )
 )
+
+ggplot(recovery_times, aes(x = days, fill = procedure)) +
+  geom_histogram(bins = 20, color = "white", show.legend = FALSE) +
+  facet_wrap(~procedure, ncol = 2, scales = "free_y") +
+  geom_vline(xintercept = 5, linetype = "dashed", color = "red", size = 0.8) +
+  annotate("text", x = 5, y = Inf, label = "Target: 5 days", 
+           vjust = 1.5, hjust = -0.1, size = 3, color = "red") +
+  scale_fill_manual(values = c("steelblue", "coral", "darkgreen", "purple")) +
+  labs(title = "Procedure C Has Shortest, Most Consistent Recovery Times",
+       subtitle = "Comparing distribution of recovery days across four procedures",
+       x = "Recovery Days", y = "Number of Patients") +
+  theme_minimal() +
+  theme(
+    strip.text = element_text(face = "bold", size = 11),
+    plot.title = element_text(face = "bold", size = 14),
+    panel.spacing = unit(1, "lines")
+  )
 ```
 
+::: {.explanation}
+**Distribution comparison made easy.** Procedure C clearly clusters below the target with minimal variation, while Procedure D shows high variability and longer recovery.
+:::
+
+---
+
+## Complete Story Example
+```{r}
+#| code-fold: true
+#| fig-width: 11
+#| fig-height: 7
+
+# Required: tidyverse, patchwork
+
+# Create comprehensive dataset
+quarters <- rep(c("Q1 2023", "Q2 2023", "Q3 2023", "Q4 2023", 
+                  "Q1 2024", "Q2 2024"), 3)
+hospitals <- rep(c("Hospital A", "Hospital B", "Hospital C"), each = 6)
+readmit_rates <- c(
+  18, 17.5, 17, 16.8, 16.5, 16.2,  # Hospital A
+  22, 21, 19, 17, 15, 14,          # Hospital B (intervention)
+  16, 15.8, 15.5, 15.3, 15, 14.8   # Hospital C
+)
+
+story_data <- data.frame(
+  quarter = quarters,
+  hospital = hospitals,
+  rate = readmit_rates,
+  quarter_num = rep(1:6, 3)
+)
+
+# Main plot
+main_plot <- ggplot(story_data, 
+                    aes(x = quarter_num, y = rate, 
+                        color = hospital, group = hospital)) +
+  geom_line(aes(size = hospital == "Hospital B")) +
+  geom_point(aes(size = hospital == "Hospital B")) +
+  scale_size_manual(values = c(0.8, 1.5), guide = "none") +
+  scale_color_manual(values = c("gray60", "coral", "gray60")) +
+  geom_vline(xintercept = 2.5, linetype = "dashed", color = "darkgreen", alpha = 0.5) +
+  annotate("rect", xmin = 2.5, xmax = 6, ymin = -Inf, ymax = Inf,
+           alpha = 0.05, fill = "green") +
+  annotate("text", x = 2.5, y = 23, 
+           label = "Intervention\nImplemented", 
+           hjust = -0.1, size = 3.5, color = "darkgreen", fontface = "bold") +
+  annotate("text", x = 5, y = 13, 
+           label = "36% reduction\nin 4 quarters", 
+           size = 4, color = "coral", fontface = "bold") +
+  scale_x_continuous(breaks = 1:6, 
+                     labels = c("Q1\n2023", "Q2\n2023", "Q3\n2023", 
+                               "Q4\n2023", "Q1\n2024", "Q2\n2024")) +
+  labs(title = "Hospital B Readmission Intervention Exceeded Targets",
+       subtitle = "22% to 14% reduction in 18 months - best performance among peer hospitals",
+       x = NULL, y = "30-Day Readmission Rate (%)",
+       color = NULL) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 15, margin = margin(b = 5)),
+    plot.subtitle = element_text(size = 12, color = "gray30", margin = margin(b = 15)),
+    legend.position = "top",
+    panel.grid.minor = element_blank(),
+    plot.margin = margin(20, 20, 10, 20)
+  )
+
+# Comparison bar chart
+final_comparison <- story_data %>%
+  filter(quarter_num == 6) %>%
+  mutate(vs_peer_avg = rate - mean(rate[hospital != "Hospital B"]))
+
+comparison_plot <- ggplot(final_comparison, 
+                          aes(x = rate, y = reorder(hospital, -rate),
+                              fill = hospital == "Hospital B")) +
+  geom_col() +
+  geom_text(aes(label = paste0(rate, "%")), hjust = -0.2, size = 4) +
+  scale_fill_manual(values = c("gray70", "coral"), guide = "none") +
+  labs(title = "Q2 2024 Final Rates",
+       x = "Readmission Rate (%)", y = NULL) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 11),
+    panel.grid.major.y = element_blank(),
+    axis.text.y = element_text(size = 10)
+  ) +
+  xlim(0, 20)
+
+# Combine plots
+main_plot / comparison_plot + plot_layout(heights = c(3, 1))
+```
+
+::: {.explanation}
+**Complete narrative:** Beginning (context with peers), middle (intervention and dramatic improvement), end (current state showing success). Every element supports the story.
+:::
+
+---
+
+## Advanced Topic: Handling Uncertainty
 ```{r}
 #| code-fold: true
 #| fig-width: 10
@@ -771,21 +1451,40 @@ er_visits <- data.frame(
 
 # Required: ggplot2
 
-ggplot(er_visits, aes(x = month, y = visits)) +
-  geom_line(group = 1, color = "gray50", size = 1) +
-  geom_point(color = "gray50", size = 3) +
-  labs(title = "Monthly Emergency Room Visits",
-       x = NULL, y = "Daily ER Visits") +
+treatment_comparison <- data.frame(
+  treatment = c("Current Standard", "New Treatment"),
+  mean_improvement = c(12, 18),
+  lower_ci = c(9, 14),
+  upper_ci = c(15, 22)
+)
+
+ggplot(treatment_comparison, aes(x = treatment, y = mean_improvement)) +
+  geom_col(fill = c("gray70", "steelblue"), width = 0.6) +
+  geom_errorbar(aes(ymin = lower_ci, ymax = upper_ci), 
+                width = 0.2, size = 1, color = "gray30") +
+  geom_text(aes(label = paste0(mean_improvement, "%")), 
+            vjust = -2.5, size = 5, fontface = "bold") +
+  geom_text(aes(label = paste0("(", lower_ci, "%-", upper_ci, "%)")), 
+            vjust = -1, size = 3.5, color = "gray40") +
+  labs(title = "New Treatment Shows Superior Outcomes with High Confidence",
+       subtitle = "Mean improvement with 95% confidence intervals",
+       x = NULL, y = "Mean Improvement (%)") +
+  ylim(0, 25) +
   theme_minimal() +
-  theme(panel.grid.major.x = element_blank())
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    panel.grid.major.x = element_blank(),
+    axis.text.x = element_text(size = 12, face = "bold")
+  )
 ```
 
-**Ineffective:** The title just describes what's in the chart. No insight, no message, no story. Makes the viewer do all the work.
+::: {.explanation}
+**Show uncertainty honestly.** Confidence intervals demonstrate that even accounting for variability, the new treatment shows meaningful improvement over the standard.
+:::
 
 ---
 
-## Example: Insight-Driven Title (So What?)
-
+## Advanced Topic: Distribution of Uncertainty
 ```{r}
 #| code-fold: true
 #| fig-width: 10
@@ -793,122 +1492,250 @@ ggplot(er_visits, aes(x = month, y = visits)) +
 
 # Required: ggplot2
 
-ggplot(er_visits, aes(x = month, y = visits)) +
-  geom_line(group = 1, color = "gray60", size = 1) +
-  geom_point(aes(color = month %in% c("May", "Jun", "Jul", "Aug")), size = 3) +
-  scale_color_manual(values = c("gray60", "tomato"), guide = "none") +
-  labs(title = "Summer flu season drives 2x ER visits",
-       subtitle = "Peak in July requires surge staffing",
-       x = NULL, y = "Daily ER Visits") +
+set.seed(789)
+simulation_results <- data.frame(
+  treatment = rep(c("Current Standard", "New Treatment"), each = 1000),
+  outcome = c(rnorm(1000, 12, 2), rnorm(1000, 18, 2.5))
+)
+
+ggplot(simulation_results, aes(x = outcome, fill = treatment)) +
+  geom_density(alpha = 0.6) +
+  geom_vline(xintercept = c(12, 18), linetype = "dashed", 
+             color = c("coral", "steelblue"), size = 1) +
+  annotate("text", x = 12, y = 0.18, label = "Current\nMean: 12%", 
+           hjust = 1.1, size = 3.5, color = "coral") +
+  annotate("text", x = 18, y = 0.18, label = "New Treatment\nMean: 18%", 
+           hjust = -0.1, size = 3.5, color = "steelblue") +
+  scale_fill_manual(values = c("coral", "steelblue")) +
+  labs(title = "New Treatment Consistently Outperforms Current Standard",
+       subtitle = "Distribution of 1,000 simulated patient outcomes",
+       x = "Improvement (%)", y = "Probability Density",
+       fill = NULL) +
   theme_minimal() +
-  theme(plot.title = element_text(face = "bold"),
-        panel.grid.major.x = element_blank())
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    legend.position = "top"
+  )
 ```
 
-**Effective:** Title states the insight. Subtitle adds context. Color highlights the key period. The story is told instantly.
+::: {.explanation}
+**Full distribution view.** The minimal overlap between distributions shows that the new treatment improvement is robust, not just a result of a few outliers.
+:::
 
 ---
 
-## Before: Default Visualization
-
+## Advanced Topic: Correlation Matrices
 ```{r}
-#| include: false
-# Create data for final transformation slides
-interventions <- data.frame(
-  intervention = c("Telemedicine", "Care Coordination", "Patient Education", 
-                   "Medication Review", "Standard Care"),
-  q1 = c(12, 14, 18, 15, 22),
-  q2 = c(10, 13, 17, 14, 21),
-  q3 = c(9, 12, 16, 13, 20),
-  q4 = c(7, 11, 15, 12, 19)
-) |>
-  pivot_longer(cols = q1:q4, names_to = "quarter", values_to = "readmissions")
+#| code-fold: true
+#| fig-width: 9
+#| fig-height: 8
 
-interventions$quarter <- factor(interventions$quarter, 
-                                 levels = c("q1", "q2", "q3", "q4"),
-                                 labels = c("Q1", "Q2", "Q3", "Q4"))
+# Required: tidyverse
+
+set.seed(101)
+n <- 100
+health_metrics <- data.frame(
+  exercise = rnorm(n, 150, 30),
+  sleep = rnorm(n, 7, 1),
+  stress = rnorm(n, 5, 2),
+  bmi = rnorm(n, 25, 4)
+) %>%
+  mutate(
+    bp_systolic = 120 + exercise * -0.1 + sleep * -2 + stress * 3 + bmi * 0.8 + rnorm(n, 0, 5)
+  )
+
+# Calculate correlations
+cor_matrix <- cor(health_metrics)
+cor_df <- as.data.frame(as.table(cor_matrix))
+names(cor_df) <- c("var1", "var2", "correlation")
+
+# Clean labels
+var_labels <- c("Exercise\n(min/week)", "Sleep\n(hours)", "Stress\nLevel", 
+                "BMI", "Blood\nPressure")
+cor_df$var1 <- factor(cor_df$var1, labels = var_labels)
+cor_df$var2 <- factor(cor_df$var2, labels = var_labels)
+
+ggplot(cor_df, aes(x = var1, y = var2, fill = correlation)) +
+  geom_tile(color = "white", size = 1) +
+  geom_text(aes(label = sprintf("%.2f", correlation)), 
+            color = ifelse(abs(cor_df$correlation) > 0.5, "white", "black"),
+            size = 4, fontface = "bold") +
+  scale_fill_gradient2(low = "steelblue", mid = "white", high = "coral",
+                       midpoint = 0, limits = c(-1, 1)) +
+  labs(title = "Health Metrics Correlation Analysis",
+       subtitle = "Strong positive correlation between BMI and blood pressure",
+       x = NULL, y = NULL, fill = "Correlation") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    axis.text.x = element_text(angle = 0, hjust = 0.5, size = 10),
+    axis.text.y = element_text(size = 10),
+    panel.grid = element_blank()
+  )
 ```
 
+::: {.explanation}
+**Multivariate relationships at a glance.** Correlation matrices reveal complex patterns - here showing BMI and stress as strongest blood pressure predictors.
+:::
+
+---
+
+## Common Pitfall: Cherry-Picking Time Ranges
+```{r}
+#| code-fold: true
+#| fig-width: 10
+#| fig-height: 5
+
+# Required: ggplot2
+
+set.seed(202)
+full_timeline <- data.frame(
+  month = 1:36,
+  metric = 75 + cumsum(rnorm(36, 0.2, 2))
+)
+
+# Misleading: cherry-picked range
+p1 <- ggplot(filter(full_timeline, month >= 20, month <= 30), 
+             aes(x = month, y = metric)) +
+  geom_line(color = "darkgreen", size = 1.2) +
+  geom_point(color = "darkgreen", size = 2) +
+  labs(title = "Misleading: Performance Shows Strong Growth!",
+       subtitle = "10-month selected period",
+       x = "Month", y = "Performance Metric") +
+  theme_minimal()
+
+# Honest: full context
+p2 <- ggplot(full_timeline, aes(x = month, y = metric)) +
+  geom_line(color = "steelblue", size = 1.2) +
+  geom_point(color = "steelblue", size = 2) +
+  annotate("rect", xmin = 20, xmax = 30, ymin = -Inf, ymax = Inf,
+           alpha = 0.2, fill = "yellow") +
+  labs(title = "Honest: Performance Relatively Stable with Noise",
+       subtitle = "Full 3-year context (cherry-picked period highlighted)",
+       x = "Month", y = "Performance Metric") +
+  theme_minimal()
+
+p1 + p2
+```
+
+::: {.explanation}
+**Always show full context.** The "growth" story disappears when viewing the complete timeline. Cherry-picking ranges is a common way to mislead.
+:::
+
+---
+
+## Edge Case: When Breaking Rules Makes Sense
 ```{r}
 #| code-fold: true
 #| fig-width: 10
 #| fig-height: 6
-#| warning: false
 
-# Required: tidyverse
+# Required: ggplot2
 
-ggplot(interventions, 
-       aes(x = quarter, y = readmissions, color = intervention, group = intervention)) +
-  geom_line() +
-  geom_point() +
-  labs(title = "Readmission Rates by Intervention") +
-  theme_gray()
+temperature_data <- data.frame(
+  hour = 0:23,
+  temp = 98.6 + c(0, 0.1, 0.1, 0, -0.1, -0.2, -0.1, 0, 0.2, 0.3, 
+                  0.4, 0.5, 0.4, 0.3, 0.2, 0.3, 0.4, 0.5, 0.4, 0.3, 
+                  0.2, 0.1, 0, -0.1)
+)
+
+ggplot(temperature_data, aes(x = hour, y = temp)) +
+  geom_line(color = "steelblue", size = 1.2) +
+  geom_point(color = "steelblue", size = 2) +
+  geom_hline(yintercept = 98.6, linetype = "dashed", color = "darkgreen") +
+  annotate("text", x = 22, y = 98.6, label = "Normal: 98.6°F", 
+           vjust = -0.5, size = 3.5, color = "darkgreen") +
+  geom_hline(yintercept = 100.4, linetype = "dashed", color = "red") +
+  annotate("text", x = 22, y = 100.4, label = "Fever: 100.4°F", 
+           vjust = -0.5, size = 3.5, color = "red") +
+  scale_y_continuous(limits = c(98, 101), breaks = seq(98, 101, 0.5)) +
+  labs(title = "Patient Body Temperature - 24 Hour Monitoring",
+       subtitle = "Y-axis doesn't start at zero - and that's appropriate here",
+       x = "Hour of Day", y = "Temperature (°F)") +
+  theme_minimal()
 ```
 
-**Ineffective:** Default theme, no focus, legend requires back-and-forth eye movement. No clear message about what matters.
+::: {.explanation}
+**Breaking the "zero baseline" rule is appropriate** when zero is meaningless (temperature, stock prices, pH). The focus should be on clinically meaningful variation.
+:::
 
 ---
 
-## After: Storytelling Approach
+## Summary: Six Core Principles
 
-```{r}
-#| code-fold: true
-#| fig-width: 10
-#| fig-height: 6
-#| warning: false
-
-# Required: tidyverse
-
-tele <- interventions |>  filter(intervention == "Telemedicine")
-other <- interventions |>  filter(intervention != "Telemedicine")
-
-ggplot() +
-  geom_line(data = other, aes(x = quarter, y = readmissions, group = intervention),
-            color = "gray80", size = 0.8) +
-  geom_line(data = tele, aes(x = quarter, y = readmissions),
-            color = "forestgreen", size = 1.5) +
-  geom_point(data = tele, aes(x = quarter, y = readmissions),
-             color = "forestgreen", size = 3) +
-  labs(title = "Telemedicine cuts readmissions by 42%",
-       subtitle = "Others show modest gains while telemedicine drops from 12% to 7%",
-       x = NULL, y = "30-Day Readmission Rate (%)") +
-  theme_minimal() +
-  theme(plot.title = element_text(face = "bold"),
-        panel.grid.minor = element_blank(),
-        panel.grid.major.x = element_blank())
-```
-
-**Effective:** Clean design, strategic color, insight-driven title, direct labeling. All six principles working together.
+::: {.incremental}
+1. **Choose the Right Chart Type** - Match visualization to data and message
+2. **Eliminate Clutter** - Maximize data-to-ink ratio
+3. **Use Preattentive Attributes** - Guide attention strategically
+4. **Apply Gray and Bold** - Create visual hierarchy
+5. **Think Like a Designer** - Professional, accessible presentation
+6. **Tell a Story** - Transform insights into narrative
+:::
 
 ---
 
 ## Key Takeaways
 
 ::: {.incremental}
-1. **Choose the right chart** - Match to data type
-2. **Eliminate clutter** - Remove non-value elements
-3. **Use preattentive attributes** - Guide attention
-4. **Gray and bold** - Highlight vs context
-5. **Think like a designer** - Alignment, space, contrast
-6. **Tell a story** - State your insight
+- **Every choice matters** - color, position, size, titles
+- **Less is more** - remove everything that doesn't serve the message
+- **Context is crucial** - never cherry-pick data ranges
+- **Accessibility counts** - use colorblind-safe palettes
+- **Focus attention** - one bold color, clear hierarchy
+- **Tell the story** - guide your audience to action
 :::
 
 ---
 
-## Resources
+## When to Break the Rules
 
-- **Book**: *Storytelling with Data* by Cole Nussbaumer Knaflic
-- **Book**: *The Visual Display of Quantitative Information* by Edward Tufte
-- **Website**: storytellingwithdata.com
-- **Website**: r-graph-gallery.com
+**Rules are guidelines, not laws**
+
+::: {.incremental}
+- Zero baseline: not for temperature, stock prices, or indices
+- Pie charts: acceptable for simple two-part comparisons
+- Multiple colors: when showing categorical data without hierarchy
+- **The test**: Does breaking the rule serve your audience better?
+- **Always ask**: Am I making the data clearer or just different?
+:::
+
+---
+
+## Resources & Further Learning
+
+::: {.columns}
+::: {.column width="50%"}
+### Books
+
+::: {.incremental}
+- *Storytelling with Data* - Cole Nussbaumer Knaflic
+- *The Visual Display of Quantitative Information* - Edward Tufte
+- *Good Charts* - Scott Berinato
+:::
+:::
+
+::: {.column width="50%"}
+### Online
+
+::: {.incremental}
+- [ggplot2 documentation](https://ggplot2.tidyverse.org/)
+- [R Graph Gallery](https://r-graph-gallery.com/)
+- [Data Visualization Society](https://www.datavisualizationsociety.org/)
+- [Storytelling with Data blog](https://www.storytellingwithdata.com/blog)
+:::
+:::
+:::
 
 ---
 
 ## Thank You!
 
-**Every visualization is a story.**  
-Make sure yours is worth telling.
+**Questions?**
 
-> "The greatest value of a picture is when it forces us to notice what we never expected to see." - John Tukey
+::: {.center}
+**Remember:** The goal of data visualization is not to make beautiful charts - it's to communicate insights that drive better decisions.
 
+*"The greatest value of a picture is when it forces us to notice what we never expected to see."* - John Tukey
+:::
 
+---

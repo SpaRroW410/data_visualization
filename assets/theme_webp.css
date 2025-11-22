@@ -95,3 +95,31 @@ blockquote {
 .iframe-container details[open] summary {
   color: #ffcc00;
 }
+
+/* DT DataTables Styling */
+/* DT DataTables - Make smaller */
+.dataTables_wrapper {
+  font-size: 0.75em !important;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+/* Ensure table fits */
+.dataTables_wrapper table {
+  width: 100% !important;
+  font-size: 0.85em; /* Additional reduction for table content */
+}
+
+/* Make controls compact */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+  font-size: 0.9em;
+  padding: 0.3em 0;
+}
+
+/* Reduce cell padding */
+.dataTables_wrapper table.compact tbody td,
+.dataTables_wrapper table.compact tbody th {
+  padding: 3px 6px;
+}

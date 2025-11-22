@@ -1,30 +1,2264 @@
 ---
-title: "Data wrangling"
-author: "SpaRroW"
+title: "Data Wrangling in R"
+subtitle: "From Import to Transform"
+author: "Sparrow"
+date: today
+format: 
+  revealjs:
+    theme: serif
+    css: ../assets/slide_deck.css
+    include-after-body: footer.html
+    slide-number: true
+    navigation-mode: linear
+    code-copy: true
+    chalkboard: true
+    preview-links: true
+    center: true
+    zoom: true
 ---
 
-<iframe src="https://1drv.ms/p/c/12cb43e2ca5f0d2c/IQTn6Vf8UZ4YSaAXldGnfqnxAdpnDdOtHU6hlrXIN1kVAFU" width="402" height="327" frameborder="8px solid black" scrolling="no"></iframe>
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = TRUE,
+  message = TRUE,
+  comment = "#>",
+  fig.width = 8,
+  fig.height = 5
+)
+
+# Load required packages
+library(tidyverse)
+library(readxl)
+library(haven)
+library(janitor)
+library(DT)
+library(knitr)
+library(kableExtra)
+library(lubridate)
+library(forcats)
+
+# Smart table function for cross-format compatibility
+smart_table <- function(data, pageLength = 5, ...) {
+  if (knitr::is_html_output()) {
+    # HTML: Interactive DT table with pagination
+    DT::datatable(data, 
+                  options = list(
+                    pageLength = pageLength,
+                    lengthMenu = c(5, 10, 25),  # Dropdown options
+                    dom = 'ltp',                # Length menu + Table + Pagination
+                    scrollX = TRUE,             # Horizontal scroll for wide tables
+                    autoWidth = TRUE
+                  ),
+                  rownames = FALSE,
+                  class = 'compact stripe cell-border',
+                  ...)
+  } else {
+    # PowerPoint/PDF: Formatted kable table
+    kable(data, ...) |> 
+      kable_styling(font_size = 5, 
+                    bootstrap_options = c("striped", "condensed"))
+  }
+}
+```
+
+## Workshop Overview
+
+::: {.incremental}
+- **Import**: Getting data into R
+- **Explore**: Understanding data structures
+- **Clean**: Handling messy data
+- **Transform**: Reshaping and manipulating data
+- **Combine**: Merging datasets
+:::
+
+::: {.notes}
+This workshop focuses on the essential data wrangling skills needed before analysis.
+:::
+
+---
+
+## What is Data Wrangling?
+
+![](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/data_cowboy.png){fig-align="center" width="60%"}
+
+::: {.fragment}
+The process of transforming raw data into a format suitable for analysis
+:::
+
+::: {.notes}
+Image credit: Allison Horst
+:::
+
+# The Tidyverse
+
+---
+
+## What is the Tidyverse?
+
+::: {.incremental}
+- A **collection of R packages** designed for data science
+- Created by **Hadley Wickham** and team at Posit (formerly RStudio)
+- Shares common **philosophy**, **grammar**, and **data structures**
+- Makes data science **faster**, **easier**, and **more fun**!
+:::
+
+---
+
+## Tidyverse Philosophy
+
+::: {.columns}
+::: {.column width="50%"}
+### Design Principles
+
+::: {.incremental}
+- **Tidy data** as foundation
+- **Pipe-friendly** functions
+- **Human-readable** code
+- **Consistent** syntax
+- **Composable** operations
+:::
+:::
+
+::: {.column width="50%"}
+### Key Features
+
+::: {.incremental}
+- Functions do **one thing well**
+- First argument is **always data**
+- Works with **pipes** (`|>` or `%>%`)
+- Returns **tibbles**
+- Excellent **documentation**
+:::
+:::
+:::
+
+---
+
+## Core Tidyverse Packages
+
+::: {.columns}
+::: {.column width="50%"}
+**Data Wrangling:**
+
+::: {.incremental}
+- **dplyr** - Manipulation
+- **tidyr** - Tidying  
+- **readr** - Import
+- **stringr** - Strings
+:::
+:::
+
+::: {.column width="50%"}
+**Visualization & More:**
+
+::: {.incremental}
+- **ggplot2** - Visualization
+- **purrr** - Programming
+- **tibble** - Data frames
+- **forcats** - Factors
+:::
+:::
+:::
+
+---
+
+## ggplot2: Data Visualization
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/352c905d-7be3-4808-9514-1fac3b0fe2fc_rw_1920.png?h=e32478e3ccf4317ba2d9536f416e2f90){fig-align="center" width="60%"}
+
+::: {.fragment}
+Create beautiful, publication-ready visualizations
+:::
+
+---
+
+## dplyr: Data Manipulation
+
+![](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/dplyr_wrangling.png){fig-align="center" width="60%"}
+
+::: {.fragment}
+**Today's focus**: Master the grammar of data manipulation
+:::
+
+---
+
+## tidyr: Data Reshaping
+
+![](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/tidyr_spread_gather.png){fig-align="center" width="60%"}
+
+::: {.fragment}
+Transform between wide and long data formats
+:::
+
+---
+
+## stringr: String Operations
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/6bbcc35c-1863-49df-8204-d981303d8cd3_rw_1920.png?h=cef2364d9766f60c5abac6b454d561a2){fig-align="center" width="60%"}
+
+::: {.fragment}
+Work more easily with character strings
+:::
+
+---
+
+## Additional Tidyverse Packages
+
+::: {.columns}
+::: {.column width="50%"}
+**Data Import & Export**
+
+::: {.incremental}
+- **haven** - SPSS, Stata, SAS
+- **readxl** - Excel files
+- **jsonlite** - JSON data
+- **xml2** - XML parsing
+:::
+:::
+
+::: {.column width="50%"}
+**Web, Dates & Modeling**
+
+::: {.incremental}
+- **lubridate** - Dates/times
+- **rvest** - Web scraping
+- **httr** - Web APIs
+- **modelr** - Modeling functions
+- **broom** - Tidy model outputs
+:::
+:::
+:::
 
 
-Importing data (CSV, Excel, etc.)
+---
 
-Exploring data structures
-  vectors, lists, data frames, tibbles
-  
-Data cleaning (handling missing values, duplicates)
-  transforming data with dplyr
-  
-reshaping data (pivoting, melting)
-  tidyr functions like pivot_longer, pivot_wider
-  
-Merging and joining datasets
-  dplyr joins: inner_join, left_join, right_join, full_join
-  
-Filtering and selecting data
-  dplyr functions: filter, select
-  
-Sorting and arranging data
-  dplyr function: arrange
-  
-Creating new variables (mutate)
-  dplyr function: mutate
+## Installation & Loading {.smaller}
+
+::: {.fragment fragment-index=1}
+### Install (once)
+```{r, eval=FALSE}
+# Installs all tidyverse packages
+install.packages("tidyverse")
+```
+:::
+
+::: {.fragment fragment-index=2}
+### Load (every session)
+```{r, eval=FALSE}
+# Loads the 8 core packages
+library(tidyverse)
+```
+:::
+
+::: {.fragment fragment-index=3}
+### What gets loaded?
+```{r, eval=FALSE}
+# ── Attaching core tidyverse packages ──
+# ✔ dplyr     1.1.4     ✔ readr     2.1.5
+# ✔ forcats   1.0.0     ✔ stringr   1.5.1
+# ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+# ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+# ✔ purrr     1.0.2
+```
+:::
+
+---
+
+## Loading Additional Packages
+
+::: {.fragment fragment-index=1}
+**Some tidyverse packages need explicit loading:**
+:::
+
+::: {.fragment fragment-index=2}
+```{r, eval=FALSE}
+library(tidyverse)  # Loads core 8
+library(lubridate)  # Need to load explicitly
+library(readxl)     # Need to load explicitly
+library(haven)      # Need to load explicitly
+```
+:::
+
+::: {.fragment fragment-index=3}
+**Why?** These are specialized packages not needed for every analysis
+:::
+
+---
+
+## Workshop Focus
+
+::: {.incremental}
+- **readr** & **readxl** - Import data
+- **dplyr** - Manipulate data (select, filter, mutate, etc.)
+- **tidyr** - Reshape data (pivot_longer, pivot_wider)
+- **lubridate** - Work with dates
+- **forcats** - Handle factors
+- **janitor** - Clean messy data (not tidyverse, but tidyverse-friendly!)
+:::
+
+---
+
+## Tidyverse Cheatsheets
+
+::: {.columns}
+::: {.column width="50%"}
+**Core Functions:**
+
+::: {.incremental}
+- [Data Import](https://rstudio.github.io/cheatsheets/data-import.pdf)
+- [dplyr](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
+- [tidyr](https://rstudio.github.io/cheatsheets/tidyr.pdf)
+:::
+:::
+
+::: {.column width="50%"}
+**Specialized:**
+
+::: {.incremental}
+- [stringr](https://rstudio.github.io/cheatsheets/strings.pdf)
+- [forcats](https://rstudio.github.io/cheatsheets/factors.pdf)
+- [lubridate](https://rstudio.github.io/cheatsheets/lubridate.pdf)
+- [All Cheatsheets](https://posit.co/resources/cheatsheets/)
+:::
+:::
+:::
+
+---
+
+## Why Use Tidyverse?
+
+::: {.columns}
+::: {.column width="50%"}
+### Readability
+```{r, eval=FALSE}
+# Base R
+result <- aggregate(
+  bp_data$sys_bp_0m,
+  by = list(bp_data$region),
+  FUN = mean,
+  na.rm = TRUE
+)
+```
+:::
+
+::: {.column width="50%"}
+### Tidyverse
+```{r, eval=FALSE}
+# Tidyverse
+result <- bp_data |> 
+  group_by(region) |> 
+  summarise(
+    mean_bp = mean(sys_bp_0m)
+  )
+```
+:::
+:::
+
+::: {.fragment}
+**Tidyverse code reads like sentences!**
+:::
+
+# Importing Data
+
+::: {.incremental}
+- **CSV** - Comma Separated Values (`.csv`)
+- **Excel** - Microsoft Excel (`.xlsx`, `.xls`)
+- **R Data** - R native formats (`.RData`, `.rds`)
+- **SPSS** - Statistical Package (`.sav`)
+- **SAS** - SAS datasets (`.sas7bdat`)
+- **Stata** - Stata files (`.dta`)
+:::
+
+---
+
+## Importing CSV Files {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: How do I read a CSV file?
+:::
+
+::: {.fragment fragment-index=2}
+```{r, eval=FALSE}
+# Base R
+data <- read.csv("data.csv")
+```
+:::
+
+::: {.fragment fragment-index=3}
+```{r, eval=FALSE}
+# Tidyverse (readr) - Recommended
+data <- read_csv("data.csv")
+```
+:::
+
+::: {.fragment fragment-index=4}
+```{r, eval=FALSE}
+# With pipe operator
+data <- "data.csv" |> read_csv()
+```
+:::
+
+---
+
+## Importing Excel Files {.smaller}
+
+::: {.fragment fragment-index=1}
+```{r, eval=FALSE}
+library(readxl)
+```
+:::
+
+::: {.fragment fragment-index=2}
+```{r, eval=FALSE}
+# Read first sheet
+data <- read_excel("data.xlsx")
+```
+:::
+
+::: {.fragment fragment-index=3}
+```{r, eval=FALSE}
+# Specify sheet by name
+data <- read_excel("data.xlsx", sheet = "Sheet1")
+```
+:::
+
+::: {.fragment fragment-index=4}
+```{r, eval=FALSE}
+# Specify sheet by number
+data <- read_excel("data.xlsx", sheet = 2)
+```
+:::
+
+---
+
+## Importing SPSS/SAS/Stata Files {.smaller}
+
+::: {.fragment fragment-index=1}
+```{r, eval=FALSE}
+library(haven)
+```
+:::
+
+::: {.fragment fragment-index=2}
+```{r, eval=FALSE}
+# SPSS
+data <- read_sav("data.sav")
+```
+:::
+
+::: {.fragment fragment-index=3}
+```{r, eval=FALSE}
+# SAS
+data <- read_sas("data.sas7bdat")
+```
+:::
+
+::: {.fragment fragment-index=4}
+```{r, eval=FALSE}
+# Stata
+data <- read_dta("data.dta")
+```
+:::
+
+---
+
+## Our Dataset: Blood Pressure Study {.smaller}
+
+```{r}
+bp_data <- read_excel("../data/PublicHealth_BP_Dataset.xlsx")
+
+bp_data |> 
+  head(10) |> 
+  smart_table()
+```
+
+---
+
+## Good vs Bad Datasets {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+### Bad Dataset
+```{r, echo=FALSE}
+bad_data <- tibble(
+  `Patient Name` = c("John Doe", "Jane Smith"),
+  `Age (years)` = c("45", "32 yrs"),
+  `BP Reading` = c("120/80", "130/85"),
+  `Visit Date` = c("Jan-2024", "2024-01-15"),
+  `Notes` = c("Normal", "")
+)
+kable(bad_data)
+```
+
+::: {.fragment}
+**Problems**:
+
+- Mixed data types
+- Inconsistent formats
+- Combined values
+- Spaces in names
+:::
+:::
+
+::: {.column width="50%"}
+### Good Dataset
+```{r, echo=FALSE}
+good_data <- tibble(
+  patient_id = c(1, 2),
+  age = c(45, 32),
+  systolic_bp = c(120, 130),
+  diastolic_bp = c(80, 85),
+  visit_date = as.Date(c("2024-01-10", "2024-01-15")),
+  notes = c("Normal", NA)
+)
+kable(good_data)
+```
+
+::: {.fragment}
+**Features**:
+
+- Consistent types
+- One value per cell
+- Standard formats
+- Clean names
+:::
+:::
+:::
+
+---
+
+## Tidy Data Principles
+
+![](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/tidydata_1.jpg){fig-align="center" width="70%"}
+
+::: {.incremental}
+1. Each variable is a column
+2. Each observation is a row
+3. Each value is a cell
+:::
+
+
+# Data Structures
+
+---
+
+## Vectors
+
+![](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/vectors.png){fig-align="center" width="50%"}
+
+::: {.fragment}
+```{r}
+# Numeric vector
+ages <- c(25, 30, 45, 60)
+ages
+```
+:::
+
+::: {.fragment}
+```{r}
+# Character vector
+regions <- c("North", "South", "East", "West")
+regions
+```
+:::
+
+---
+
+## Lists
+
+::: {.fragment fragment-index=1}
+Lists can contain different types of objects
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+patient_info <- list(
+  id = 101,
+  name = "John Doe",
+  age = 45,
+  bp_readings = c(120, 125, 118)
+)
+```
+:::
+
+::: {.fragment fragment-index=3}
+```{r}
+patient_info$age
+```
+:::
+
+---
+
+## Data Frames vs Tibbles
+
+::: {.columns}
+::: {.column width="50%"}
+### Data Frame
+```{r}
+df <- data.frame(
+  id = 1:3,
+  name = c("A", "B", "C")
+)
+df
+```
+:::
+
+::: {.column width="50%"}
+### Tibble
+```{r}
+tb <- tibble(
+  id = 1:3,
+  name = c("A", "B", "C")
+)
+tb
+```
+:::
+:::
+
+::: {.fragment}
+**Tibbles** are modern data frames with better printing and stricter behavior
+:::
+
+---
+
+## Exploring Data Structures
+
+::: {.fragment fragment-index=1}
+```{r}
+# Quick look
+glimpse(bp_data)
+```
+:::
+
+---
+
+## Exploring Data: Summary Statistics
+
+```{r}
+summary(bp_data |> select(Age, BMI, SysBP_0m, DiaBP_0m))
+```
+
+---
+
+## Exploring Data: Structure
+
+```{r}
+str(bp_data)
+```
+
+
+
+# Data Cleaning
+
+---
+
+## The Janitor Package
+
+![](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/janitor_clean_names.png){fig-align="center" width="60%"}
+
+::: {.fragment}
+```{r, eval=FALSE}
+library(janitor)
+```
+:::
+
+---
+
+## Cleaning Column Names
+
+::: {.fragment fragment-index=1}
+```{r}
+# Before
+names(bp_data)[1:5]
+```
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+# Clean names
+bp_clean <- bp_data |> 
+  clean_names()
+
+names(bp_clean)[1:5]
+```
+:::
+
+::: {.fragment fragment-index=3}
+All names are now lowercase and use underscores!
+:::
+
+---
+
+## Handling Missing Values
+
+::: {.fragment fragment-index=1}
+**Question**: Which variables have missing data?
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  summarise(across(everything(), ~sum(is.na(.))))
+```
+:::
+
+---
+
+## Removing Rows with Missing Values
+
+::: {.fragment fragment-index=1}
+```{r}
+# Remove rows with ANY missing values
+bp_complete <- bp_clean |> 
+  drop_na()
+```
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+nrow(bp_clean)
+nrow(bp_complete)
+```
+:::
+
+::: {.fragment fragment-index=3}
+**Common Error**: `drop_na()` without `()` - it's a function!
+:::
+
+---
+
+## Removing Specific Missing Values
+
+::: {.fragment fragment-index=1}
+**Question**: Remove only rows missing exercise data
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_exercise <- bp_clean |> 
+  drop_na(exercise_freq)
+```
+:::
+
+::: {.fragment fragment-index=3}
+```{r}
+nrow(bp_clean)
+nrow(bp_exercise)
+```
+:::
+
+---
+
+## Checking for Duplicates
+
+::: {.fragment fragment-index=1}
+```{r}
+# Check for duplicate patient IDs
+bp_clean |> 
+  get_dupes(patient_id)
+```
+:::
+
+::: {.fragment fragment-index=2}
+No duplicates found! ✓
+:::
+
+
+# dplyr: The Grammar of Data Manipulation
+
+---
+
+## The dplyr Package
+
+![](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/dplyr_wrangling.png){fig-align="center" width="70%"}
+
+::: {.fragment}
+Six main verbs for data manipulation
+:::
+
+---
+
+## dplyr Verbs
+
+::: {.incremental}
+- `select()` - Choose columns
+- `filter()` - Choose rows
+- `arrange()` - Sort rows
+- `mutate()` - Create/modify columns
+- `summarise()` - Aggregate data
+- `group_by()` - Group operations
+:::
+
+
+
+# Select: Choosing Columns
+
+---
+
+## Basic Select
+
+::: {.fragment fragment-index=1}
+**Question**: How do I select specific columns?
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  select(patient_id, age, gender, region)
+```
+:::
+
+---
+
+## Select: Removing Columns
+
+::: {.fragment fragment-index=1}
+```{r}
+# Remove columns with minus sign
+bp_clean |> 
+  select(-latitude, -longitude)
+```
+:::
+
+::: {.fragment fragment-index=2}
+**Common Error**: Forgetting the minus sign removes nothing!
+:::
+
+---
+
+## Select: Range of Columns
+
+::: {.fragment fragment-index=1}
+**Question**: Select all columns from age to bmi
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  select(age:bmi)
+```
+:::
+
+---
+
+## Select Helpers {.smaller}
+
+::: {.fragment fragment-index=1}
+Powerful functions to select columns by pattern
+:::
+
+::: {.fragment fragment-index=2}
+```{r, eval=FALSE}
+# Columns starting with "sys"
+select(starts_with("sys"))
+```
+:::
+
+::: {.fragment fragment-index=3}
+```{r, eval=FALSE}
+# Columns ending with "0m"
+select(ends_with("0m"))
+```
+:::
+
+::: {.fragment fragment-index=4}
+```{r, eval=FALSE}
+# Columns containing "bp"
+select(contains("bp"))
+```
+:::
+
+---
+
+## Select Helpers: starts_with()
+
+::: {.fragment fragment-index=1}
+**Question**: Select all systolic BP measurements
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  select(patient_id, starts_with("sys_bp"))
+```
+:::
+
+---
+
+## Select Helpers: ends_with()
+
+::: {.fragment fragment-index=1}
+**Question**: Select all baseline measurements (ending with 0m)
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  select(patient_id, ends_with("0m"))
+```
+:::
+
+---
+
+## Select Helpers: contains()
+
+::: {.fragment fragment-index=1}
+**Question**: Select all blood pressure columns
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  select(patient_id, contains("bp"))
+```
+:::
+
+---
+
+## Select Helpers: matches()
+
+::: {.fragment fragment-index=1}
+```{r}
+# Use regular expressions
+bp_clean |> 
+  select(matches("^(sys|dia)_bp"))
+```
+:::
+
+::: {.fragment fragment-index=2}
+Selects columns starting with "sys_bp" or "dia_bp"
+:::
+
+---
+
+## Select Helpers: where()
+
+::: {.fragment fragment-index=1}
+**Question**: Select all numeric columns
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  select(where(is.numeric))
+```
+:::
+
+---
+
+## Select Helpers: everything()
+
+::: {.fragment fragment-index=1}
+**Question**: Move patient_id to the front
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  select(patient_id, everything())
+```
+:::
+
+
+# Filter: Choosing Rows
+
+---
+
+## Basic Filter
+
+![](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/dplyr_filter.jpg){fig-align="center" width="50%"}
+
+---
+
+## Filter: Single Condition
+
+::: {.fragment fragment-index=1}
+**Question**: Which patients are in the intervention group?
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  filter(treatment_group == "Intervention")
+```
+:::
+
+::: {.fragment fragment-index=3}
+**Common Error**: Using `=` instead of `==` for comparison
+:::
+
+---
+
+## Filter: Numeric Conditions
+
+::: {.fragment fragment-index=1}
+**Question**: Which patients are over 60 years old?
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  filter(age > 60)
+```
+:::
+
+---
+
+## Filter: Multiple Conditions (AND) {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Intervention patients over 60?
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  filter(treatment_group == "Intervention" & age > 60) 
+
+# Alternative: comma means AND
+# bp_clean |> 
+#  filter(treatment_group == "Intervention", age > 60)
+```
+:::
+
+---
+
+## Filter: Multiple Conditions (OR) {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Patients who are either current smokers OR use alcohol?
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  filter(smoking_status == "Current smoker" | alcohol_use == "Yes")
+```
+:::
+
+---
+
+## Filter: Using %in% {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Patients from North or South regions?
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  filter(region %in% c("North", "South"))
+# Much cleaner than: `region == "North" | region == "South"`
+```
+:::
+
+
+---
+
+## Filter: Missing Values {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+::: {.incremental}
+```{r}
+# Missing exercise data
+bp_clean |> 
+  filter(is.na(exercise_freq))
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: {.incremental}
+```{r}
+# NOT missing exercise data
+bp_clean |> 
+  filter(!is.na(exercise_freq)) 
+```
+:::
+:::
+:::
+
+---
+
+## Filter: Between Values {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Patients aged 40-60?
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  filter(age >= 40 & age <= 60)
+
+# Cleaner way
+# bp_clean |> 
+#  filter(between(age, 40, 60))
+```
+:::
+
+
+# Arrange: Sorting Data
+
+---
+
+## Basic Arrange {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Sort patients by age
+:::
+
+::: {.fragment fragment-index=2} 
+```{r}
+bp_clean |> 
+  arrange(age)
+```
+:::
+
+---
+
+## Arrange: Descending Order {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Who has the highest baseline systolic BP?
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  arrange(desc(sys_bp_0m))
+```
+:::
+
+---
+
+## Arrange: Multiple Variables {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Sort by region, then by age within region
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  arrange(region, age)
+```
+:::
+
+---
+
+## Arrange: Mixed Order {.smaller}
+
+::: {.fragment fragment-index=1}
+```{r}
+# Region ascending, age descending
+bp_clean |> 
+  arrange(region, desc(age))
+```
+:::
+
+
+# Mutate: Creating New Variables
+
+---
+
+## Mutate: The Basics
+
+![](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/dplyr_mutate.png){fig-align="center" width="60%"}
+
+---
+
+## Simple Calculations {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Calculate change in systolic BP from baseline to 6 months
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  mutate(sys_bp_change = sys_bp_6m - sys_bp_0m)
+```
+:::
+
+---
+
+## Multiple New Variables {.smaller}
+
+::: {.fragment fragment-index=1}
+```{r}
+bp_clean |> 
+  mutate(
+    sys_bp_change = sys_bp_6m - sys_bp_0m,
+    dia_bp_change = dia_bp_6m - dia_bp_0m
+  )
+```
+:::
+
+---
+
+## case_when(): Multiple Conditions
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/6ffcd6d6-c783-4087-ae76-99aa851663ed_rw_3840.png?h=1ad9b058d4393347d709e8c359b23ba0){fig-align="center" width="60%"}
+
+
+---
+
+## Creating Categories from Continuous Data {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Create age categories
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+#| code-fold: true
+bp_clean |> 
+  mutate(
+    age_group = case_when(
+      age < 40 ~ "Young Adult",
+      age >= 40 & age < 60 ~ "Middle Age",
+      age >= 60 ~ "Senior"
+    )
+  )
+```
+:::
+
+---
+
+## Using cut() for Categories {.smaller}
+
+::: {.fragment fragment-index=1}
+```{r}
+#| code-fold: true
+bp_clean |> 
+  mutate(
+    age_category = cut(age, 
+                       breaks = c(0, 40, 60, 100),
+                       labels = c("Young", "Middle", "Senior"))
+  )
+```
+:::
+
+::: {.fragment fragment-index=2}
+**Common Error**: Not including enough breaks to cover all values
+:::
+
+---
+
+## Creating Hypertension Categories
+
+::: {.fragment fragment-index=1}
+**Question**: Classify baseline BP using clinical guidelines
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_with_category <- bp_clean |> 
+  mutate(
+    bp_category = case_when(
+      sys_bp_0m < 120 & dia_bp_0m < 80 ~ "Normal",
+      sys_bp_0m >= 120 & sys_bp_0m < 130 & dia_bp_0m < 80 ~ "Elevated",
+      (sys_bp_0m >= 130 & sys_bp_0m < 140) | 
+        (dia_bp_0m >= 80 & dia_bp_0m < 90) ~ "Stage 1",
+      sys_bp_0m >= 140 | dia_bp_0m >= 90 ~ "Stage 2"
+    )
+  )
+```
+:::
+
+---
+
+## Hypertension Categories Output
+
+```{r}
+bp_with_category |> 
+  select(patient_id, sys_bp_0m, dia_bp_0m, bp_category) |> 
+  head(10) |> 
+  smart_table()
+```
+
+---
+
+## if_else() for Simple Conditions {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Create a binary high BP indicator
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+#| code-fold: true
+bp_clean |> 
+  mutate(
+    high_bp = if_else(sys_bp_0m >= 140 | dia_bp_0m >= 90, 
+                      "High", 
+                      "Normal")
+  )
+```
+:::
+
+---
+
+## case_when() vs if_else() {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+### if_else()
+- Binary outcomes
+- Single condition
+- Simpler syntax
+
+```{r, eval=FALSE}
+if_else(
+  condition,
+  true_value,
+  false_value
+)
+```
+:::
+
+::: {.column width="50%"}
+### case_when()
+- Multiple outcomes
+- Multiple conditions
+- More flexible
+
+```{r, eval=FALSE}
+case_when(
+  condition1 ~ value1,
+  condition2 ~ value2,
+  TRUE ~ default_value
+)
+```
+:::
+:::
+
+---
+
+## Mutate: Using across() {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Calculate mean for all BP measurements
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_summary <- bp_clean |> 
+  summarise(
+    across(
+      contains("bp_"),
+      ~mean(., na.rm = TRUE),
+      .names = "mean_{.col}"
+    )
+  )
+```
+:::
+
+::: {.fragment fragment-index=3}
+```{r}
+bp_summary
+```
+:::
+
+
+# Working with Dates: lubridate
+
+---
+
+## lubridate Package
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/3017cf57-d7d9-4f73-9b66-f2be0ebf2489_rw_1920.png?h=2cdd179bc087c56b43f8aa6ea849ca1a){fig-align="center" width="60%"}
+
+::: {.fragment}
+"Wrangle times and dates!"
+:::
+
+---
+
+## Why lubridate?
+
+::: {.incremental}
+- Dates are complex (leap years, time zones, daylight savings)
+- lubridate makes date operations intuitive
+- Part of tidyverse but must be loaded separately
+- Essential for healthcare data with visit dates, follow-ups
+:::
+
+---
+
+## Our Dataset Has Dates {.smaller}
+
+::: {.fragment fragment-index=1}
+```{r}
+bp_clean |> 
+  select(patient_id, baseline_date) |> 
+  head()
+```
+:::
+
+::: {.fragment fragment-index=2}
+Let's explore what we can do with these dates!
+:::
+
+---
+
+## Extract Date Components {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Extract year, month, and day from baseline date
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+#| code-fold: true
+library(lubridate)
+
+bp_clean |> 
+  mutate(
+    baseline_year = year(baseline_date),
+    baseline_month = month(baseline_date),
+    baseline_day = day(baseline_date)
+  ) |> 
+  select(patient_id, baseline_date, baseline_year, baseline_month, baseline_day)
+```
+:::
+
+---
+
+## Month Names and Weekdays {.smaller}
+
+::: {.fragment fragment-index=1}
+```{r}
+#| code-fold: true
+bp_clean |> 
+  mutate(
+    month_name = month(baseline_date, label = TRUE),
+    weekday = wday(baseline_date, label = TRUE)
+  ) |> 
+  select(patient_id, baseline_date, month_name, weekday)
+```
+:::
+
+---
+
+## Calculate Time Intervals {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: How many days since baseline for each patient?
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+#| code-fold: true
+#| warning: false
+bp_clean |> 
+  mutate(
+    today_date = today(),
+    days_since_baseline = today() - baseline_date,
+    weeks_since_baseline = as.numeric(days_since_baseline) / 7
+  ) |> 
+  select(patient_id, baseline_date, days_since_baseline, weeks_since_baseline)
+```
+:::
+
+---
+
+## Adding Time Periods {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Calculate follow-up visit dates
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+#| code-fold: true
+bp_clean |> 
+  mutate(
+    visit_3m = baseline_date + months(3),
+    visit_6m = baseline_date + months(6),
+    visit_1y = baseline_date + years(1)
+  ) |> 
+  select(patient_id, baseline_date, visit_3m, visit_6m, visit_1y)
+```
+:::
+
+---
+
+## Age Calculation from Dates {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Calculate age from birthdate
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+#| code-fold: true
+# Example with made-up birthdates
+example_data <- tibble(
+  patient_id = 1:3,
+  birthdate = ymd(c("1980-05-15", "1965-12-20", "1990-03-08")),
+  visit_date = ymd(c("2024-01-15", "2024-01-15", "2024-01-15"))
+)
+
+example_data |> 
+  mutate(
+    age_years = interval(birthdate, visit_date) / years(1),
+    age_months = interval(birthdate, visit_date) / months(1)
+  )
+```
+:::
+
+---
+
+## Useful lubridate Functions
+
+::: {.incremental}
+- **Parsing**: `ymd()`, `mdy()`, `dmy()` - parse dates
+- **Components**: `year()`, `month()`, `day()`, `hour()`, `minute()`
+- **Weekdays**: `wday()`, `week()`
+- **Math**: `days()`, `weeks()`, `months()`, `years()`
+- **Intervals**: `interval()`, `time_length()`
+- **Current**: `today()`, `now()`
+:::
+
+
+# Working with Factors: forcats
+
+---
+
+## forcats::fct_infreq()
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/85988737-84f5-46b9-894a-cc6cde0a26dd_rw_1920.png?h=45032151ae0ce03dde853b4b708c0838){fig-align="center" width="70%"}
+
+::: {.fragment}
+Reorder factor levels by frequency
+:::
+
+---
+
+## Why Reorder Factors? {.smaller}
+
+::: {.fragment fragment-index=1}
+**Problem**: Default alphabetical ordering isn't always meaningful
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+# Count patients by region
+bp_clean |> 
+  count(region)
+```
+:::
+
+::: {.fragment fragment-index=3}
+Let's reorder by frequency for better visualization
+:::
+
+---
+
+## fct_infreq: Order by Frequency {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Which regions have the most patients?
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+library(forcats)
+
+bp_clean |> 
+  mutate(region = fct_infreq(region)) |> 
+  count(region)
+```
+:::
+
+::: {.fragment fragment-index=3}
+Now ordered from most to least common!
+:::
+
+---
+
+## fct_infreq in Practice
+
+::: {.fragment fragment-index=1}
+```{r}
+#| code-fold: true
+
+# Useful for plots - bars in descending order
+bp_clean |> 
+  mutate(
+    smoking_status = fct_infreq(smoking_status)
+  ) |> 
+  count(smoking_status)
+```
+:::
+
+---
+
+## Other forcats Functions
+
+::: {.incremental}
+- `fct_inorder()` - Order by first appearance
+- `fct_reorder()` - Order by another variable
+- `fct_relevel()` - Manually reorder specific levels
+- `fct_lump()` - Combine rare categories into "Other"
+- `fct_recode()` - Manually change level names
+:::
+
+# Relocate: Reordering Columns
+
+---
+
+## dplyr::relocate()
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/850e4954-e2c6-4df1-a3c0-34764a05a3df_rw_3840.png?h=14eaf14dd5c4a9ba3e8ebfc78c9cda3b){fig-align="center" width="60%"}
+
+::: {.fragment}
+Move columns around - to the front, before, or after other columns
+:::
+
+---
+
+## Relocate: Move to Front {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Move BP measurements to the beginning
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  relocate(starts_with("sys_bp"), starts_with("dia_bp"))
+```
+:::
+
+::: {.fragment fragment-index=3}
+By default, `relocate()` moves columns to the front
+:::
+
+---
+
+## Relocate: Before/After {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+::: {.incremental}
+```{r}
+bp_clean |> 
+  relocate(age, .after = patient_id)
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: {.incremental}
+```{r}
+bp_clean |> 
+  relocate(bmi, .before = age)
+```
+:::
+:::
+:::
+
+
+---
+
+## Relocate: To the End {.smaller}
+
+::: {.fragment fragment-index=1}
+```{r}
+# Move geographic coordinates to the end
+bp_clean |> 
+  relocate(latitude, longitude, .after = last_col())
+```
+:::
+
+
+# Rename: Changing Column Names
+
+---
+
+## dplyr::rename()
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/ed07d56b-c5c8-43af-84be-5bcab97eca75_rw_3840.png?h=18b2568f588b41f81e239f60299f3acb){fig-align="center" width="60%"}
+
+::: {.fragment}
+Rename columns: `new_name = old_name`
+:::
+
+---
+
+## Rename: Basic Usage {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Rename baseline BP columns for clarity
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_clean |> 
+  rename(
+    systolic_baseline = sys_bp_0m,
+    diastolic_baseline = dia_bp_0m
+  )
+```
+:::
+
+::: {.fragment fragment-index=3}
+Remember: `new_name = old_name` (left = right)
+:::
+
+---
+
+## Rename: With Helper Functions {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+::: {.incremental}
+```{r}
+# Rename all columns to uppercase
+bp_clean |> 
+  rename_with(toupper)
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: {.incremental}
+```{r}
+# Rename specific columns
+bp_clean |> 
+  rename_with(toupper, starts_with("sys"))
+```
+:::
+:::
+:::
+
+# tidyr: Reshaping Data
+
+---
+
+## Pivoting Data
+
+![](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/tidyr_spread_gather.png){fig-align="center" width="70%"}
+
+---
+
+## Wide vs Long Data
+
+::: {.columns}
+::: {.column width="50%"}
+### Wide Format
+```{r, echo=FALSE}
+wide_example <- tibble(
+  patient_id = 1:2,
+  bp_0m = c(120, 130),
+  bp_3m = c(118, 128),
+  bp_6m = c(115, 125)
+)
+kable(wide_example)
+```
+
+One row per patient
+:::
+
+::: {.column width="50%"}
+### Long Format
+```{r, echo=FALSE}
+long_example <- tibble(
+  patient_id = rep(1:2, each = 3),
+  timepoint = rep(c("0m", "3m", "6m"), 2),
+  bp = c(120, 118, 115, 130, 128, 125)
+)
+kable(long_example)
+```
+
+Multiple rows per patient
+:::
+:::
+
+---
+
+## pivot_longer(): Wide to Long
+
+::: {.fragment fragment-index=1}
+**Question**: Convert BP measurements to long format for plotting
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_long <- bp_clean |> 
+  select(patient_id, treatment_group, starts_with("sys_bp")) |> 
+  pivot_longer(
+    cols = starts_with("sys_bp"),
+    names_to = "timepoint",
+    values_to = "systolic_bp"
+  )
+```
+:::
+
+---
+
+## pivot_longer() Output
+
+```{r}
+bp_long |> 
+  head(10) |> 
+  smart_table(pageLength = 8)
+```
+
+---
+
+## pivot_longer() with name cleaning {.smaller}
+
+::: {.fragment fragment-index=1}
+```{r}
+#| code-fold: true
+bp_long_clean <- bp_clean |> 
+  select(patient_id, treatment_group, starts_with("sys_bp")) |> 
+  pivot_longer(
+    cols = starts_with("sys_bp"),
+    names_to = "timepoint",
+    values_to = "systolic_bp",
+    names_prefix = "sys_bp_"
+  )
+
+bp_long_clean
+```
+:::
+
+---
+
+## pivot_wider(): Long to Wide {.smaller}
+
+::: {.fragment fragment-index=1}
+**Question**: Convert back to wide format
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+#| code-fold: true
+bp_wide <- bp_long_clean |> 
+  pivot_wider(
+    names_from = timepoint,
+    values_from = systolic_bp
+  )
+
+bp_wide
+```
+:::
+
+---
+
+## pivot_wider() with name prefixes {.smaller}
+
+::: {.fragment fragment-index=1}
+```{r}
+#| code-fold: true
+bp_wide_named <- bp_long_clean |> 
+  pivot_wider(
+    names_from = timepoint,
+    values_from = systolic_bp,
+    names_prefix = "sys_bp_"
+  )
+
+bp_wide_named
+```
+:::
+
+
+---
+
+## Pivoting Multiple Variables
+
+::: {.fragment fragment-index=1}
+**Question**: Reshape both systolic and diastolic BP
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+bp_both_long <- bp_clean |> 
+  select(patient_id, contains("bp_")) |> 
+  pivot_longer(
+    cols = contains("bp_"),
+    names_to = c("bp_type", "timepoint"),
+    names_pattern = "(.*)_bp_(.*)",
+    values_to = "value"
+  )
+```
+:::
+
+---
+
+## Multiple Variables Output
+
+```{r}
+bp_both_long |> 
+  head(10) |> 
+  smart_table(pageLength = 6)
+```
+
+
+# Joining Datasets
+
+
+---
+
+## Creating Example Datasets
+
+::: {.fragment fragment-index=1}
+```{r}
+# Patient demographics
+demographics <- tibble(
+  patient_id = c(1, 2, 3, 4),
+  age = c(45, 52, 38, 61),
+  gender = c("Male", "Female", "Male", "Female")
+)
+
+# Lab results (note: not all patients)
+labs <- tibble(
+  patient_id = c(2, 3, 4, 5),
+  cholesterol = c(180, 220, 195, 210),
+  glucose = c(95, 110, 88, 105)
+)
+```
+:::
+
+---
+
+## inner_join()
+
+::: {.fragment fragment-index=1}
+**Question**: Keep only patients with both demographics AND lab results
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+inner_join(demographics, labs, by = "patient_id")
+```
+:::
+
+::: {.fragment fragment-index=3}
+Only patients 2, 3, and 4 are kept (present in both datasets)
+:::
+
+---
+
+## left_join()
+
+::: {.fragment fragment-index=1}
+**Question**: Keep all patients from demographics, add lab data where available
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+left_join(demographics, labs, by = "patient_id")
+```
+:::
+
+::: {.fragment fragment-index=3}
+All 4 patients kept; patient 1 has NA for lab values
+:::
+
+---
+
+## right_join()
+
+::: {.fragment fragment-index=1}
+**Question**: Keep all lab results, add demographics where available
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+right_join(demographics, labs, by = "patient_id")
+```
+:::
+
+::: {.fragment fragment-index=3}
+All lab records kept; patient 5 has NA for demographics
+:::
+
+---
+
+## full_join()
+
+::: {.fragment fragment-index=1}
+**Question**: Keep ALL patients from both datasets
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+full_join(demographics, labs, by = "patient_id")
+```
+:::
+
+::: {.fragment fragment-index=3}
+All 5 patients kept; NAs where data is missing
+:::
+
+---
+
+## Join with Pipe Operator
+
+::: {.fragment fragment-index=1}
+```{r}
+# More readable with pipes
+demographics |> 
+  left_join(labs, by = "patient_id")
+```
+:::
+
+---
+
+## Joining on Multiple Columns
+
+::: {.fragment fragment-index=1}
+```{r}
+# Create datasets with multiple keys
+visits1 <- tibble(
+  patient_id = c(1, 1, 2),
+  visit_date = as.Date(c("2024-01-01", "2024-02-01", "2024-01-15")),
+  bp = c(120, 118, 130)
+)
+
+visits2 <- tibble(
+  patient_id = c(1, 1, 2),
+  visit_date = as.Date(c("2024-01-01", "2024-02-01", "2024-01-15")),
+  weight = c(70, 69, 85)
+)
+```
+:::
+
+---
+
+## Multi-Column Join
+
+::: {.fragment fragment-index=1}
+```{r}
+visits1 |> 
+  left_join(visits2, by = c("patient_id", "visit_date"))
+```
+:::
+
+::: {.fragment fragment-index=2}
+**Common Error**: Forgetting to specify multiple keys when needed
+:::
+
+---
+
+## Join with Different Column Names {.smaller}
+
+::: {.fragment fragment-index=1}
+```{r}
+#| code-fold: true
+# Create datasets with different key names
+data1 <- tibble(
+  id = c(1, 2, 3),
+  value_x = c(10, 20, 30)
+)
+
+data2 <- tibble(
+  patient_id = c(1, 2, 3),
+  value_y = c(100, 200, 300)
+)
+```
+:::
+
+::: {.fragment fragment-index=2}
+```{r}
+data1 |> 
+  left_join(data2, by = c("id" = "patient_id"))
+```
+:::
+
+
+
+# Common Errors & Troubleshooting
+
+---
+
+## Error: Object Not Found {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Error**
+```{r, error=TRUE}
+bp_data |> 
+  select(Patient_ID)
+```
+:::
+
+::: {.column width="50%"}
+**Solution**
+```{r, eval=FALSE}
+# Column names are case-sensitive
+bp_data |> 
+  select(PatientID)
+
+# Or use clean_names()
+bp_clean |> 
+  select(patient_id)
+```
+:::
+:::
+
+---
+
+## Error: Comparison Operators {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Error**
+```{r, error=TRUE}
+bp_clean |> 
+  filter(age = 50)
+```
+:::
+
+::: {.column width="50%"}
+**Solution**
+```{r, eval=FALSE}
+# Use == for comparison
+bp_clean |> 
+  filter(age == 50)
+```
+:::
+:::
+
+---
+
+## Error: Pipe Operator {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Error**
+```{r, error=TRUE}
+bp_clean |> 
+  select(age, gender)
+  filter(age > 50)
+```
+:::
+
+::: {.column width="50%"}
+**Solution**
+```{r, eval=FALSE}
+# Need pipe between operations
+bp_clean |> 
+  select(age, gender) |> 
+  filter(age > 50)
+```
+:::
+:::
+
+---
+
+## Warning: Factor Conversion
+
+::: {.fragment fragment-index=1}
+```{r, warning=TRUE}
+#| code-fold: true
+bp_clean |> 
+  mutate(
+    region_num = as.numeric(region)
+  ) |> 
+  select(region, region_num)
+```
+:::
+
+::: {.fragment fragment-index=2}
+Converts to factor levels, not character → number. Use `as.numeric(as.factor(region))` if needed.
+:::
+
+---
+
+## Error: case_when() Missing TRUE {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Problem**
+```{r}
+#| code-fold: true
+bp_clean |> 
+  mutate(
+    age_cat = case_when(
+      age < 40 ~ "Young",
+      age >= 60 ~ "Senior"
+    )
+  ) |> 
+  select(age, age_cat)
+```
+:::
+
+::: {.column width="50%"}
+**Solution**
+```{r, eval=FALSE}
+bp_clean |> 
+  mutate(
+    age_cat = case_when(
+      age < 40 ~ "Young",
+      age >= 60 ~ "Senior",
+      TRUE ~ "Middle"
+    )
+  )
+```
+:::
+:::
+
+---
+
+## Tips for Troubleshooting
+
+::: {.incremental}
+1. **Build step by step** - Add one operation at a time
+2. **Check intermediate results** - Print after each step
+3. **Use View()** - Inspect data in RStudio: `View(bp_clean)`
+4. **Read error messages** - They usually tell you what's wrong
+5. **Check data types** - Use `glimpse()` or `str()`
+6. **Search for help** - Stack Overflow, R documentation
+:::
+
+---
+
+## Best Practices Summary
+
+::: {.incremental}
+- Use **consistent naming** conventions (snake_case)
+- **Clean names** early with `janitor::clean_names()`
+- **Pipe operations** for readable code
+- **Check your data** at each step
+- **Document** your code with comments
+- **Save** intermediate results when needed
+- **Test** with small samples first
+:::
+
+---
+
+## Resources & References
+
+::: {.incremental}
+- **R for Data Science**: https://r4ds.hadley.nz/
+- **dplyr documentation**: https://dplyr.tidyverse.org/
+- **tidyr documentation**: https://tidyr.tidyverse.org/
+- **Allison Horst's artwork**: https://github.com/allisonhorst/stats-illustrations
+- **RStudio Cheatsheets**: https://posit.co/resources/cheatsheets/
+- **Stack Overflow**: https://stackoverflow.com/questions/tagged/r
+:::
+
+---
+
+## Thank You!
+
+::: {.r-fit-text}
+Questions?
+:::
+
+::: {.fragment}
+![](https://github.com/allisonhorst/stats-illustrations/raw/main/rstats-artwork/code_hero.jpg){fig-align="center" width="50%"}
+:::
+
+::: {.notes}
+Remember: Data wrangling is a skill that improves with practice!
+:::

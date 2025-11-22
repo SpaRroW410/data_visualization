@@ -20,7 +20,7 @@ This site is your interactive guide for the **Data Visualization Workshop** that
  - **[R Foundations](r-foundations/getting-started.qmd)**  
    Learn how to use R syntax, clean up your data, and make your workflows neat.
    
- - **[Data Visualization Principles](data-visualization/intro.qmd)**   
+ - **[Data Visualization Principles](data-visualization/ggplot_grammar.qmd)**   
    Learn the basics of good visual design and what not to do.
 
  - **[Plot Gallery](plot-gallery/basic.qmd)**  

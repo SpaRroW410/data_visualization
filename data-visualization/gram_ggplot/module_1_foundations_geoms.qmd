@@ -1,0 +1,886 @@
+---
+title: "Grammar of Graphics: Module 1"
+subtitle: "Introduction, Foundations & Basic Geoms"
+author: "Sparrow"
+date: today
+format: 
+  revealjs:
+    theme: serif
+    css: ../../assets/slide_deck.css
+    include-after-body: footer.html
+    slide-number: true
+    navigation-mode: linear
+    code-copy: true
+    code-fold: true
+    chalkboard: true
+    preview-links: true
+    center: true
+    zoom: true
+---
+
+
+## What is Grammar of Graphics? {.smaller}
+
+::: {.incremental}
+- A **systematic framework** for creating visualizations
+- Developed by Leland Wilkinson, implemented in ggplot2 by Hadley Wickham
+- Treats plots as **layered compositions** of graphical elements
+- Separates data from aesthetics from geometry
+- Enables **infinite combinations** from finite components
+- More flexible than traditional plotting systems
+:::
+
+::: {.fragment}
+**Core Philosophy**: Build complex visualizations by combining simple, well-defined layers
+:::
+
+## Why ggplot2? {.smaller}
+
+::: {.incremental}
+- **Consistent syntax** across all plot types
+- **Flexible and extensible** - easy to customize
+- **Professional quality** output
+- **Reproducible** - code-based approach
+- **Large ecosystem** of extensions
+- **Industry standard** in R community
+:::
+
+::: {.fragment}
+**vs Base R**: More intuitive, consistent, and powerful for complex visualizations
+:::
+
+# Section 1: Core Foundations {background-color="#2C5F8D"}
+
+## The Seven Layers of Grammar
+
+::: {.incremental}
+1. **Data** - The dataset being visualized
+2. **Aesthetics** - Mapping data to visual properties
+3. **Geometries** - Visual marks (points, lines, bars)
+4. **Statistics** - Data transformations and summaries
+5. **Coordinates** - The plotting space and axes
+6. **Facets** - Subplots for data subsets
+7. **Scales** - Mapping data values to aesthetics
+:::
+
+::: {.fragment}
+Plus: **Themes** for overall visual styling
+:::
+
+## 1. Data Layer {.smaller}
+
+The foundation of every ggplot2 visualization
+
+::: {.incremental}
+- Must be a **data frame** or tibble
+- Each row represents an observation
+- Each column represents a variable
+- Data should be in **tidy format**
+  - Each variable in one column
+  - Each observation in one row
+  - Each value in one cell
+:::
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+
+# Basic structure
+ggplot(data = my_data)
+```
+
+## 2. Aesthetics (aes) {.smaller}
+
+Mapping data variables to visual properties
+
+::: {.incremental}
+- **Position**: x, y
+- **Color**: color (points/lines), fill (areas)
+- **Size**: size of points or line width
+- **Shape**: point shapes
+- **Transparency**: alpha (0 = transparent, 1 = opaque)
+- **Line type**: linetype (solid, dashed, dotted)
+- **Group**: group (for grouping data)
+:::
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+
+ggplot(data, aes(x = var1, y = var2, color = var3))
+```
+
+## 3. Geometries (geom) {.smaller}
+
+Visual representations of data
+
+::: {.incremental}
+- `geom_point()` - Scatter plots
+- `geom_line()` - Line graphs
+- `geom_bar()` / `geom_col()` - Bar charts
+- `geom_histogram()` - Histograms
+- `geom_boxplot()` - Box plots
+- `geom_violin()` - Violin plots
+- `geom_smooth()` - Smoothed conditional means
+- And many more...
+:::
+
+::: {.fragment}
+**Key concept**: Geoms are added as layers with `+`
+:::
+
+## 4. Statistics (stat) {.smaller}
+
+Data transformations and summaries
+
+::: {.incremental}
+- Many geoms have default statistics
+- `stat_identity` - Use data as-is
+- `stat_count` - Count observations
+- `stat_bin` - Bin data into groups
+- `stat_smooth` - Add smoothed line
+- `stat_summary` - Compute summary statistics
+:::
+
+::: {.fragment}
+**Usually implicit**: Most geoms automatically apply appropriate statistics
+:::
+
+## 5. Coordinates (coord) {.smaller}
+
+Defining the plotting space
+
+::: {.incremental}
+- `coord_cartesian()` - Default Cartesian coordinates
+- `coord_flip()` - Flip x and y axes
+- `coord_polar()` - Polar coordinates
+- `coord_fixed()` - Fixed aspect ratio
+- `coord_trans()` - Transformed coordinates
+:::
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+
+# Flip axes for horizontal bars
+ggplot(data, aes(x = category, y = value)) +
+  geom_col() +
+  coord_flip()
+```
+
+## 6. Facets {.smaller}
+
+Creating subplots for data subsets
+
+::: {.incremental}
+- `facet_wrap()` - Wrap panels by one variable
+- `facet_grid()` - Grid of panels by two variables
+- Useful for comparing groups
+- Can have free or fixed scales
+:::
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+
+# Facet by one variable
+facet_wrap(~ treatment_group)
+
+# Facet by two variables
+facet_grid(gender ~ region)
+```
+
+## 7. Scales {.smaller}
+
+Mapping data values to aesthetic properties
+
+::: {.incremental}
+- Control **how** data maps to aesthetics
+- `scale_x_continuous()` - Continuous x-axis
+- `scale_color_manual()` - Manual color specification
+- `scale_fill_brewer()` - ColorBrewer palettes
+- `scale_y_log10()` - Logarithmic transformation
+- Control breaks, limits, labels, transformations
+:::
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+
+scale_color_manual(values = c("red", "blue", "green"))
+```
+
+## 8. Guides (Legends & Axes) {.smaller}
+
+Helping readers interpret the plot
+
+::: {.incremental}
+- **Axes**: Show scale of position aesthetics
+- **Legends**: Show scale of other aesthetics (color, size, shape)
+- Controlled by `guides()` function
+- Can be positioned, styled, or removed
+- Automatically generated from aesthetics
+:::
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+
+guides(color = guide_legend(title = "Treatment Group"))
+```
+
+## Building Plots Progressively {.smaller}
+
+The power of layering
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|1|2|3|4|5"
+#| code-fold: false
+
+ggplot(data, aes(x = age, y = systolic_bp)) +        # 1. Data + aesthetics
+  geom_point() +                                       # 2. Add points
+  geom_smooth() +                                      # 3. Add trend line
+  facet_wrap(~ treatment_group) +                      # 4. Add facets
+  theme_minimal()                                      # 5. Apply theme
+```
+
+::: {.fragment}
+**Each layer builds on the previous**, creating complex visualizations from simple components
+:::
+
+# Section 2: Working with Data {background-color="#2C5F8D"}
+
+## Setup: Loading Packages {.smaller}
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+# Load required packages
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readxl)
+
+# Load the blood pressure dataset
+bp_data <- read_excel("../../data/PublicHealth_BP_Dataset.xlsx")
+
+# Preview the data
+glimpse(bp_data)
+```
+
+## Data Preparation {.smaller}
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+#| code-fold: false
+
+# Create derived variables
+bp_data <- bp_data %>%
+  mutate(
+    # BP change from baseline to 6 months
+    SysBP_Change = SysBP_6m - SysBP_0m,
+    DiaBP_Change = DiaBP_6m - DiaBP_0m,
+    
+    # Age groups
+    AgeGroup = cut(Age, 
+                   breaks = c(0, 30, 50, 65, 100),
+                   labels = c("18-30", "31-50", "51-65", "65+")),
+    
+    # Hypertension status (Systolic ≥140 or Diastolic ≥90)
+    Hypertension_Baseline = ifelse(SysBP_0m >= 140 | DiaBP_0m >= 90, 
+                                   "Hypertensive", "Normal"),
+    
+    # BMI categories
+    BMI_Category = cut(BMI,
+                       breaks = c(0, 18.5, 25, 30, 100),
+                       labels = c("Underweight", "Normal", "Overweight", "Obese"))
+  )
+```
+
+## Handling Missing Data {.smaller}
+
+```{r}
+#| echo: true
+#| message: false
+#| code-fold: false
+
+# Check missing data
+missing_summary <- bp_data %>%
+  summarise(across(everything(), ~sum(is.na(.))))
+
+# Display columns with missing data
+missing_summary %>%
+  select(where(~. > 0))
+```
+
+::: {.fragment}
+**Key variables with missing data**: ExerciseFreq (44), ChronicDisease (75)
+:::
+
+## Handling Missing Data: Strategies
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-fold: false
+
+# Strategy 1: Filter complete cases for specific analysis
+bp_complete <- bp_data %>%
+  filter(!is.na(ExerciseFreq), !is.na(ChronicDisease))
+
+# Strategy 2: Use na.rm in calculations
+bp_data %>%
+  group_by(TreatmentGroup) %>%
+  summarise(Mean_SysBP = mean(SysBP_0m, na.rm = TRUE))
+
+# Strategy 3: Explicitly show missing as category
+bp_data %>%
+  mutate(ExerciseFreq = replace_na(ExerciseFreq, "Unknown"))
+```
+
+# Section 3: Comprehensive Geom Library {background-color="#2C5F8D"}
+
+## geom_point(): Scatter Plots
+
+**Minimum Arguments**: `aes(x, y)`
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|1|2|3"
+#| code-fold: false
+
+# Basic scatter plot
+ggplot(bp_data, aes(x = Age, y = SysBP_0m)) +
+  geom_point()
+```
+
+::: {.fragment}
+**Use for**: Showing relationships between two continuous variables
+:::
+
+---
+
+## geom_point() Output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m)) +
+  geom_point(size = 3, alpha = 0.6) +
+  labs(title = "Age vs Baseline Systolic Blood Pressure",
+       x = "Age (years)",
+       y = "Systolic BP (mmHg)") +
+  theme_minimal(base_size = 16)
+```
+
+## geom_point(): Enhanced Version
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|2|3"
+#| code-fold: false
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m, 
+                    color = TreatmentGroup)) +
+  geom_point(size = 3, alpha = 0.6)
+```
+
+::: {.fragment}
+**Adding aesthetics**: Color by treatment group for comparison
+:::
+
+---
+
+## geom_point() Enhanced Output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m, color = TreatmentGroup)) +
+  geom_point(size = 3, alpha = 0.6) +
+  labs(title = "Age vs Baseline Systolic BP by Treatment Group",
+       x = "Age (years)",
+       y = "Systolic BP (mmHg)",
+       color = "Treatment") +
+  theme_minimal(base_size = 16)
+```
+
+## geom_line(): Line Graphs
+
+**Minimum Arguments**: `aes(x, y)`
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|1-4|5|6"
+#| code-fold: false
+
+# Reshape data for time series
+bp_time <- bp_data %>%
+  select(PatientID, TreatmentGroup, SysBP_0m, SysBP_3m, SysBP_6m) %>%
+  pivot_longer(cols = starts_with("SysBP"),
+               names_to = "Time", values_to = "SysBP") %>%
+  mutate(Months = as.numeric(gsub("SysBP_|m", "", Time)))
+```
+
+---
+
+## geom_line(): Time Series Code
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Average BP over time by treatment
+bp_summary <- bp_time %>%
+  group_by(TreatmentGroup, Months) %>%
+  summarise(Mean_SysBP = mean(SysBP, na.rm = TRUE))
+
+ggplot(bp_summary, aes(x = Months, y = Mean_SysBP, 
+                       color = TreatmentGroup)) +
+  geom_line(linewidth = 1.5)
+```
+
+::: {.fragment}
+**Use for**: Showing trends over time or ordered categories
+:::
+
+---
+
+## geom_line() Output
+
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 10
+#| fig-height: 6
+
+bp_time <- bp_data %>%
+  select(PatientID, TreatmentGroup, SysBP_0m, SysBP_3m, SysBP_6m) %>%
+  pivot_longer(cols = starts_with("SysBP"),
+               names_to = "Time", values_to = "SysBP") %>%
+  mutate(Months = as.numeric(gsub("SysBP_|m", "", Time)))
+
+bp_summary <- bp_time %>%
+  group_by(TreatmentGroup, Months) %>%
+  summarise(Mean_SysBP = mean(SysBP, na.rm = TRUE), .groups = "drop")
+
+ggplot(bp_summary, aes(x = Months, y = Mean_SysBP, color = TreatmentGroup)) +
+  geom_line(linewidth = 1.5) +
+  labs(title = "Mean Systolic BP Over Time by Treatment Group",
+       x = "Months from Baseline",
+       y = "Mean Systolic BP (mmHg)",
+       color = "Treatment") +
+  theme_minimal(base_size = 16)
+```
+
+## geom_col(): Column/Bar Charts
+
+**Minimum Arguments**: `aes(x, y)`
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Average BP change by treatment group
+bp_change_summary <- bp_data %>%
+  group_by(TreatmentGroup) %>%
+  summarise(Mean_Change = mean(SysBP_Change, na.rm = TRUE))
+
+ggplot(bp_change_summary, aes(x = TreatmentGroup, y = Mean_Change,
+                               fill = TreatmentGroup)) +
+  geom_col()
+```
+
+::: {.fragment}
+**Use for**: Comparing values across categories (uses actual values)
+:::
+
+---
+
+## geom_col() Output
+
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 10
+#| fig-height: 6
+
+bp_change_summary <- bp_data %>%
+  group_by(TreatmentGroup) %>%
+  summarise(Mean_Change = mean(SysBP_Change, na.rm = TRUE), .groups = "drop")
+
+ggplot(bp_change_summary, aes(x = TreatmentGroup, y = Mean_Change, fill = TreatmentGroup)) +
+  geom_col(width = 0.6) +
+  labs(title = "Mean Systolic BP Change by Treatment Group",
+       subtitle = "Change from Baseline to 6 Months",
+       x = "Treatment Group",
+       y = "Mean Change in SysBP (mmHg)",
+       fill = "Treatment") +
+  theme_minimal(base_size = 16) +
+  theme(legend.position = "none")
+```
+
+## geom_bar(): Count Bar Charts
+
+**Minimum Arguments**: `aes(x)`
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Count of patients by smoking status
+ggplot(bp_data, aes(x = SmokingStatus, fill = SmokingStatus)) +
+  geom_bar()
+```
+
+::: {.fragment}
+**Use for**: Showing frequency counts of categorical variables
+:::
+
+::: {.fragment}
+**Note**: `geom_bar()` counts observations, `geom_col()` uses y values directly
+:::
+
+---
+
+## geom_bar() Output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+ggplot(bp_data, aes(x = SmokingStatus, fill = SmokingStatus)) +
+  geom_bar() +
+  labs(title = "Distribution of Smoking Status",
+       x = "Smoking Status",
+       y = "Number of Patients",
+       fill = "Status") +
+  theme_minimal(base_size = 16) +
+  theme(legend.position = "none")
+```
+
+## geom_histogram(): Distributions
+
+**Minimum Arguments**: `aes(x)`
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot(bp_data, aes(x = BMI)) +
+  geom_histogram(bins = 30, fill = "steelblue", 
+                 color = "white")
+```
+
+::: {.fragment}
+**Use for**: Visualizing the distribution of a continuous variable
+:::
+
+::: {.fragment}
+**Key parameter**: `bins` controls number of bars (default = 30)
+k = 1+\log _2(n)
+- k = number of bins
+- n = number of observations in your dataset
+- log _2 = logarithm base 2
+:::
+
+---
+
+## geom_histogram() Output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+ggplot(bp_data, aes(x = BMI)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "white") +
+  labs(title = "Distribution of Body Mass Index (BMI)",
+       x = "BMI (kg/m²)",
+       y = "Number of Patients") +
+  theme_minimal(base_size = 16)
+```
+
+## geom_boxplot(): Box-and-Whisker Plots
+
+**Minimum Arguments**: `aes(x, y)` or `aes(y)`
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot(bp_data, aes(x = SmokingStatus, y = SysBP_0m,
+                    fill = SmokingStatus)) +
+  geom_boxplot()
+```
+
+::: {.fragment}
+**Use for**: Comparing distributions across groups, identifying outliers
+:::
+
+::: {.fragment}
+**Shows**: Median, quartiles (IQR), and outliers
+:::
+
+---
+
+## geom_boxplot() Output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+ggplot(bp_data, aes(x = SmokingStatus, y = SysBP_0m, fill = SmokingStatus)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Baseline Systolic BP by Smoking Status",
+       x = "Smoking Status",
+       y = "Systolic BP (mmHg)",
+       fill = "Status") +
+  theme_minimal(base_size = 16) +
+  theme(legend.position = "none")
+```
+
+## geom_violin(): Violin Plots
+
+**Minimum Arguments**: `aes(x, y)`
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot(bp_data, aes(x = Region, y = Cholesterol,
+                    fill = Region)) +
+  geom_violin()
+```
+
+::: {.fragment}
+**Use for**: Showing full distribution shape (density) across groups
+:::
+
+::: {.fragment}
+**Advantage**: Shows distribution shape better than boxplots
+:::
+
+---
+
+## geom_violin() Output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+ggplot(bp_data, aes(x = Region, y = Cholesterol, fill = Region)) +
+  geom_violin(alpha = 0.7) +
+  labs(title = "Cholesterol Levels by Region",
+       x = "Region",
+       y = "Cholesterol (mg/dL)",
+       fill = "Region") +
+  theme_minimal(base_size = 16) +
+  theme(legend.position = "none")
+```
+
+## geom_smooth(): Trend Lines
+
+**Minimum Arguments**: `aes(x, y)`
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-fold: false
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "loess", se = TRUE)
+```
+
+::: {.fragment}
+**Use for**: Adding trend lines and confidence intervals
+:::
+
+::: {.fragment}
+**Methods**: "loess" (smooth), "lm" (linear), "glm", "gam"
+:::
+
+---
+
+## geom_smooth() Output
+
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 10
+#| fig-height: 6
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m)) +
+  geom_point(alpha = 0.4, size = 2) +
+  geom_smooth(method = "loess", se = TRUE, linewidth = 1.5, color = "darkred") +
+  labs(title = "Age vs Systolic BP with LOESS Trend",
+       x = "Age (years)",
+       y = "Systolic BP (mmHg)") +
+  theme_minimal(base_size = 16)
+```
+
+## geom_density(): Density Plots
+
+**Minimum Arguments**: `aes(x)`
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot(bp_data, aes(x = BloodSugar, fill = TreatmentGroup)) +
+  geom_density(alpha = 0.5)
+```
+
+::: {.fragment}
+**Use for**: Smooth density estimates of distributions
+:::
+
+::: {.fragment}
+**Advantage**: Better for overlapping distributions than histograms
+:::
+
+---
+
+## geom_density() Output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+ggplot(bp_data, aes(x = BloodSugar, fill = TreatmentGroup)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Blood Sugar Distribution by Treatment Group",
+       x = "Blood Sugar (mg/dL)",
+       y = "Density",
+       fill = "Treatment") +
+  theme_minimal(base_size = 16)
+```
+
+## geom_jitter(): Reducing Overplotting
+
+**Minimum Arguments**: `aes(x, y)`
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot(bp_data, aes(x = AgeGroup, y = SysBP_0m,
+                    color = TreatmentGroup)) +
+  geom_jitter(width = 0.2, alpha = 0.6)
+```
+
+::: {.fragment}
+**Use for**: Scatter plots with categorical x-axis where points overlap
+:::
+
+::: {.fragment}
+**Key parameters**: `width` controls horizontal jitter, `height` for vertical
+:::
+
+---
+
+## geom_jitter() Output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+ggplot(bp_data, aes(x = AgeGroup, y = SysBP_0m, color = TreatmentGroup)) +
+  geom_jitter(width = 0.2, alpha = 0.6, size = 2.5) +
+  labs(title = "Systolic BP by Age Group and Treatment",
+       x = "Age Group",
+       y = "Systolic BP (mmHg)",
+       color = "Treatment") +
+  theme_minimal(base_size = 16)
+```
+
+## Module 1 Summary {.smaller}
+
+**What we covered**
+
+::: {.incremental}
+- The Grammar of Graphics philosophy
+- Seven layers of plot construction
+- Data preparation and handling missing data
+- Essential geoms: point, line, col, bar, histogram, boxplot, violin, smooth, density, jitter
+:::
+
+::: {.fragment}
+**Next in Module 2**
+
+::: {.incremental}
+- Deep dive into aesthetic mappings
+- Faceting strategies
+- Built-in themes and ggthemes package
+:::
+:::
+## Practice Exercise {.smaller}
+
+Using the BP dataset, create a plot that:
+
+1. Shows the relationship between Age and Cholesterol
+2. Colors points by Gender
+3. Adds a smooth trend line for each gender
+4. Uses appropriate labels
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Your code here
+ggplot(bp_data, aes(x = ___, y = ___, color = ___)) +
+  geom___() +
+  geom_smooth(___) +
+  labs(___)
+```
+
+---
+
+## Practice Solution
+
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 10
+#| fig-height: 6
+
+ggplot(bp_data, aes(x = Age, y = Cholesterol, color = Gender)) +
+  geom_point(size = 2, alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(title = "Age vs Cholesterol by Gender",
+       x = "Age (years)",
+       y = "Cholesterol (mg/dL)",
+       color = "Gender") +
+  theme_minimal(base_size = 16)
+```
+
+---
+
+**End of Module 1**
+
+*Continue to Module 2: Aesthetics, Faceting & Themes*

@@ -1,0 +1,55 @@
+---
+title: "Grammar of Graphics"
+format:
+  html:
+    code-copy: true
+    theme: cosmo
+    toc: true
+    lightbox: auto
+
+sidebar:
+  style: "floating"
+  contents:
+    - section: "Data Visualization"
+      contents:
+        - href: best_practices.qmd
+          text: "Best Practices"
+        - href: ggplot_grammar.qmd
+          text: "Grammar of Graphics"
+        - href: plot_data.qmd 
+          text: "Matching data to plots" 
+
+editor:
+  markdown:
+    wrap: 72
+---
+
+
+
+### ▸ Module 1
+
+Includes: Foundations & Basic Geoms 
+[View Slide Deck →](gram_ggplot/module_1_foundations_geoms.qmd)
+
+---
+
+### ▸ Module 2
+
+Includes: Aesthetics, Faceting & Themes 
+[View Slide Deck →](gram_ggplot/module_2_aesthetics_faceting_themes.qmd)
+
+---
+
+### ▸ Module 3
+
+Includes: Colors, Scales & Custom Themes 
+[View Slide Deck →](gram_ggplot/module_3_colors_scales_themes.qmd)
+
+---
+
+### ▸ Module 4
+
+Includes: Advanced Topics & Best Practices
+[View Slide Deck →](gram_ggplot/module_4_advanced_best_practices.qmd)
+
+**By the end**, you'll master the Grammar of Graphics and create publication-ready visualizations

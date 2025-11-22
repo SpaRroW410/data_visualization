@@ -10,7 +10,8 @@
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
-  <title>Data Visualization - Categorical Plots</title>
+  <meta name="author" content="Sparrow">
+  <title>Data Visualization - Categorical Base Plots</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -95,7 +96,7 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
-  <link rel="stylesheet" href="../../assets/theme_webp.css">
+  <link rel="stylesheet" href="../assets/slide_deck.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -392,59 +393,698 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Categorical Plots</h1>
+  <h1 class="title">Categorical Base Plots</h1>
 
 <div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Sparrow 
+</div>
+</div>
 </div>
 
 </section>
-<section id="bar-chart" class="slide level2 center">
-<h2>Bar Chart</h2>
+<section>
+<section id="title-slide" class="title-slide slide level1 center" data-background-color="#f0f0f0">
+<h1>Title Slide</h1>
+
 </section>
-<section id="basic-bar-chart" class="slide level2 center">
-<h2>Basic Bar Chart</h2>
-<div class="cell" data-fig-title="Basic Bar chart">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="categorical_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:100.0%" class="r-stretch"></section>
-<section id="grouped-bar-chart" class="slide level2 center">
-<h2>Grouped Bar Chart</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">fill =</span> drv)) <span class="sc">+</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="categorical_files/figure-revealjs/unnamed-chunk-3-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Grouped Bar Chart</p></section>
-<section id="pie-chart" class="slide level2 center">
-<h2>Pie Chart</h2>
+<section id="categorical-base-plots" class="slide level2 center">
+<h2>Categorical Base Plots</h2>
+<p><strong>Author:</strong> Sparrow</p>
+<p><strong>Creating Effective Visualizations for Categorical Data</strong></p>
 </section>
-<section id="basic-pie-chart" class="slide level2 center">
-<h2>Basic Pie Chart</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">fill =</span> class)) <span class="sc">+</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">geom_bar</span>(<span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">coord_polar</span>(<span class="st">"y"</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section class="slide level2 center">
 
-</div>
-<img data-src="categorical_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Pie Chart</p></section>
-<section id="dough-nut-chart" class="slide level2 center">
-<h2>Dough Nut Chart</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">fill =</span> class)) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_bar</span>(<span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">coord_polar</span>(<span class="st">"y"</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">xlim</span>(<span class="fl">0.5</span>, <span class="fl">2.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="single-variable-distributions" class="title-slide slide level1 center">
+<h1>Single Variable Distributions</h1>
 
-</div>
-
-<img data-src="categorical_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Donut Chart</p><div class="footer footer-default">
-
+</section>
+<section id="bar-charts-description" class="slide level2 center">
+<h2>Bar Charts: Description</h2>
+<div style="font-size: 22px; line-height: 1.8;">
+<h3 id="when-to-use">When to Use</h3>
+<ul>
+<li>Display frequency distribution of a single categorical variable</li>
+<li>Compare categories in terms of count or frequency</li>
+<li>Works best with 2-8 categories</li>
+</ul>
+<h3 id="requirements">Requirements</h3>
+<ul>
+<li>One categorical variable</li>
+<li>Clear category labels</li>
+</ul>
+<h3 id="advantages">Advantages</h3>
+<p>✅ Easy to interpret and understand<br>
+✅ Clear comparison across categories<br>
+✅ Shows exact frequencies and percentages<br>
+✅ Universally recognized visualization</p>
+<h3 id="limitations">Limitations</h3>
+<p>❌ Not suitable for continuous data<br>
+❌ Overcrowded with too many categories (&gt;10)<br>
+❌ Doesn’t show relationships between variables</p>
 </div>
 </section>
+<section id="bar-chart---code" class="slide level2 center">
+<h2>Bar Chart - Code</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Step 1: Calculate frequencies and percentages</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>gender_data <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">count</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="at">percentage =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="at">label =</span> <span class="fu">paste0</span>(n, <span class="st">"</span><span class="sc">\n</span><span class="st">("</span>, <span class="fu">round</span>(percentage, <span class="dv">1</span>), <span class="st">"%)"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Step 2: Create bar chart with ggplot2</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">ggplot</span>(gender_data, <span class="fu">aes</span>(<span class="at">x =</span> Gender, <span class="at">y =</span> n, <span class="at">fill =</span> Gender)) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Step 3: Add text labels and styling</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> label), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution by Gender"</span>, <span class="at">x =</span> <span class="st">"Gender"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="bar-chart---plot" class="slide level2 center">
+<h2>Bar Chart - Plot</h2>
+
+<img data-src="categorical_files/figure-revealjs/bar-chart-1.png" width="960" class="r-stretch"></section>
+<section id="pie-charts-description" class="slide level2 center">
+<h2>Pie Charts: Description</h2>
+<div style="font-size: 22px; line-height: 1.8;">
+<h3 id="when-to-use-1">When to Use</h3>
+<ul>
+<li>Show proportion/percentage of a whole</li>
+<li>Display parts-to-whole relationships</li>
+<li>Limited to 2-5 categories for clarity</li>
+</ul>
+<h3 id="requirements-1">Requirements</h3>
+<ul>
+<li>One categorical variable</li>
+<li>Focus on proportions, not absolute values</li>
+</ul>
+<h3 id="advantages-1">Advantages</h3>
+<p>✅ Intuitive for showing proportions<br>
+✅ Familiar to most audiences<br>
+✅ Shows relative sizes at a glance<br>
+✅ Good for presenting percentages</p>
+<h3 id="limitations-1">Limitations</h3>
+<p>❌ Hard to compare similar-sized slices<br>
+❌ Difficult with many categories<br>
+❌ Not suitable for precise value comparison<br>
+❌ Takes significant space</p>
+</div>
+</section>
+<section id="pie-chart---code" class="slide level2 center">
+<h2>Pie Chart - Code</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Step 1: Prepare data with percentages</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>region_data <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">count</span>(Region) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="at">percentage =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">label =</span> <span class="fu">paste0</span>(Region, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, n, <span class="st">" ("</span>, <span class="fu">round</span>(percentage, <span class="dv">1</span>), <span class="st">"%)"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Step 2: Create pie chart using coord_polar</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">ggplot</span>(region_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> n, <span class="at">fill =</span> Region)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">coord_polar</span>(<span class="st">"y"</span>, <span class="at">start =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Step 3: Add labels and styling</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> label), </span>
+<span id="cb6-3"><a href="#cb6-3"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>), <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution by Region"</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="pie-chart---plot" class="slide level2 center">
+<h2>Pie Chart - Plot</h2>
+
+<img data-src="categorical_files/figure-revealjs/pie-chart-1.png" width="960" class="r-stretch"></section>
+<section id="horizontal-bar-chart-description" class="slide level2 center">
+<h2>Horizontal Bar Chart: Description</h2>
+<div style="font-size: 22px; line-height: 1.8;">
+<h3 id="when-to-use-2">When to Use</h3>
+<ul>
+<li>Display categorical data with long category names</li>
+<li>Improve readability by rotating bars</li>
+<li>Better for comparing values across categories</li>
+</ul>
+<h3 id="requirements-2">Requirements</h3>
+<ul>
+<li>One categorical variable with long labels</li>
+<li>Clear ordering (ascending/descending recommended)</li>
+</ul>
+<h3 id="advantages-2">Advantages</h3>
+<p>✅ Better for long category names<br>
+✅ Easier to read values from axis<br>
+✅ Natural reading flow<br>
+✅ Ordered display improves comparison</p>
+<h3 id="limitations-2">Limitations</h3>
+<p>❌ Takes more horizontal space<br>
+❌ Axis labels can still overlap if too many</p>
+</div>
+</section>
+<section id="horizontal-bar-chart---code" class="slide level2 center">
+<h2>Horizontal Bar Chart - Code</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Step 1: Calculate frequencies and arrange by count</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>smoking_data <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">count</span>(SmokingStatus) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">percentage =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">label =</span> <span class="fu">paste0</span>(n, <span class="st">" ("</span>, <span class="fu">round</span>(percentage, <span class="dv">1</span>), <span class="st">"%)"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">arrange</span>(n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Step 2: Create horizontal bar chart</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">ggplot</span>(smoking_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(SmokingStatus, n), </span>
+<span id="cb8-3"><a href="#cb8-3"></a>                        <span class="at">y =</span> n, <span class="at">fill =</span> SmokingStatus)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Step 3: Add labels and styling</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> label), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set3"</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution by Smoking Status"</span>, </span>
+<span id="cb9-5"><a href="#cb9-5"></a>       <span class="at">x =</span> <span class="st">"Smoking Status"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="horizontal-bar-chart---plot" class="slide level2 center">
+<h2>Horizontal Bar Chart - Plot</h2>
+
+<img data-src="categorical_files/figure-revealjs/h-bar-1.png" width="960" class="r-stretch"></section>
+<section id="donut-charts-description" class="slide level2 center">
+<h2>Donut Charts: Description</h2>
+<div style="font-size: 22px; line-height: 1.8;">
+<h3 id="when-to-use-3">When to Use</h3>
+<ul>
+<li>Show parts-to-whole relationships like pie charts</li>
+<li>Better visual appeal than pie charts</li>
+<li>Add information in center space</li>
+</ul>
+<h3 id="requirements-3">Requirements</h3>
+<ul>
+<li>One categorical variable (simple)</li>
+<li>2-5 categories recommended</li>
+</ul>
+<h3 id="advantages-3">Advantages</h3>
+<p>✅ More modern look than pie charts<br>
+✅ Center space displays additional info<br>
+✅ Shows proportions effectively<br>
+✅ Good for presentations</p>
+<h3 id="limitations-3">Limitations</h3>
+<p>❌ Similar issues as pie charts<br>
+❌ Can be cluttered with nested data<br>
+❌ Takes more space than bars</p>
+</div>
+</section>
+<section id="donut-chart---code" class="slide level2 center">
+<h2>Donut Chart - Code</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Step 1: Calculate data</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>disease_data <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(ChronicDisease)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">count</span>(ChronicDisease) <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="at">percentage =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb10-7"><a href="#cb10-7"></a>    <span class="at">label =</span> <span class="fu">paste0</span>(ChronicDisease, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, n, <span class="st">" ("</span>, <span class="fu">round</span>(percentage, <span class="dv">1</span>), <span class="st">"%)"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Step 2: Create donut shape with coord_polar</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">ggplot</span>(disease_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> n, <span class="at">fill =</span> ChronicDisease)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">coord_polar</span>(<span class="st">"y"</span>, <span class="at">start =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">xlim</span>(<span class="fl">0.5</span>, <span class="fl">2.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Step 3: Add labels and styling</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> label), </span>
+<span id="cb12-3"><a href="#cb12-3"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>), <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel2"</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Chronic Disease Distribution"</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="donut-chart---plot" class="slide level2 center">
+<h2>Donut Chart - Plot</h2>
+
+<img data-src="categorical_files/figure-revealjs/donut-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="two-variable-relationships" class="title-slide slide level1 center">
+<h1>Two Variable Relationships</h1>
+
+</section>
+<section id="dodged-bar-chart-description" class="slide level2 center">
+<h2>Dodged Bar Chart: Description</h2>
+<div style="font-size: 22px; line-height: 1.8;">
+<h3 id="when-to-use-4">When to Use</h3>
+<ul>
+<li>Compare two categorical variables side-by-side</li>
+<li>Show relationship between two categorical dimensions</li>
+<li>Avoid overlap in bars</li>
+</ul>
+<h3 id="requirements-4">Requirements</h3>
+<ul>
+<li>Two categorical variables</li>
+<li>Each with 2-6 categories</li>
+</ul>
+<h3 id="advantages-4">Advantages</h3>
+<p>✅ Easy side-by-side comparison<br>
+✅ Clear representation of relationships<br>
+✅ Shows both variables simultaneously<br>
+✅ No overlap between bars</p>
+<h3 id="limitations-4">Limitations</h3>
+<p>❌ Gets crowded with many categories<br>
+❌ Doesn’t show proportions (only counts)<br>
+❌ Hard to compare across groups</p>
+</div>
+</section>
+<section id="dodged-bar-chart---code" class="slide level2 center">
+<h2>Dodged Bar Chart - Code</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Step 1: Calculate frequencies</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>smoking_alcohol_data <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">count</span>(SmokingStatus, AlcoholUse) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">group_by</span>(SmokingStatus) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="at">percentage =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="at">label =</span> <span class="fu">paste0</span>(n, <span class="st">"</span><span class="sc">\n</span><span class="st">("</span>, <span class="fu">round</span>(percentage, <span class="dv">1</span>), <span class="st">"%)"</span>)</span>
+<span id="cb13-8"><a href="#cb13-8"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Step 2: Create dodged bar chart</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">ggplot</span>(smoking_alcohol_data, </span>
+<span id="cb14-3"><a href="#cb14-3"></a>       <span class="fu">aes</span>(<span class="at">x =</span> SmokingStatus, <span class="at">y =</span> n, <span class="at">fill =</span> AlcoholUse)) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">width =</span> <span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Step 3: Add labels and styling</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> label), </span>
+<span id="cb15-3"><a href="#cb15-3"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.7</span>), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"No"</span> <span class="ot">=</span> <span class="st">"#66C2A5"</span>, <span class="st">"Yes"</span> <span class="ot">=</span> <span class="st">"#FC8D62"</span>)) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Smoking Status by Alcohol Use"</span>, </span>
+<span id="cb15-6"><a href="#cb15-6"></a>       <span class="at">x =</span> <span class="st">"Smoking Status"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>, <span class="at">fill =</span> <span class="st">"Alcohol Use"</span>) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb15-8"><a href="#cb15-8"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="dodged-bar-chart---plot" class="slide level2 center">
+<h2>Dodged Bar Chart - Plot</h2>
+
+<img data-src="categorical_files/figure-revealjs/dodged-1.png" width="960" class="r-stretch"></section>
+<section id="stacked-bar-count-description" class="slide level2 center">
+<h2>Stacked Bar (Count): Description</h2>
+<div style="font-size: 22px; line-height: 1.8;">
+<h3 id="when-to-use-5">When to Use</h3>
+<ul>
+<li>Compare totals across groups</li>
+<li>Show composition within each group</li>
+<li>Display hierarchical relationships</li>
+</ul>
+<h3 id="requirements-5">Requirements</h3>
+<ul>
+<li>Two categorical variables</li>
+<li>Interest in both individual and total counts</li>
+</ul>
+<h3 id="advantages-5">Advantages</h3>
+<p>✅ Shows both composition and totals<br>
+✅ Easy to compare group totals<br>
+✅ Compact representation<br>
+✅ Good for showing contributions</p>
+<h3 id="limitations-5">Limitations</h3>
+<p>❌ Hard to compare middle/top segments<br>
+❌ Doesn’t show proportions clearly<br>
+❌ Can be misleading with very different group sizes</p>
+</div>
+</section>
+<section id="stacked-bar-count---code" class="slide level2 center">
+<h2>Stacked Bar (Count) - Code</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Step 1: Calculate frequencies</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>region_smoking_data <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">count</span>(Region, SmokingStatus) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">group_by</span>(Region) <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="at">percentage =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb16-7"><a href="#cb16-7"></a>    <span class="at">label =</span> <span class="fu">ifelse</span>(percentage <span class="sc">&gt;</span> <span class="dv">5</span>, </span>
+<span id="cb16-8"><a href="#cb16-8"></a>                   <span class="fu">paste0</span>(n, <span class="st">"</span><span class="sc">\n</span><span class="st">("</span>, <span class="fu">round</span>(percentage, <span class="dv">1</span>), <span class="st">"%)"</span>), <span class="st">""</span>)</span>
+<span id="cb16-9"><a href="#cb16-9"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Step 2: Create stacked bar chart</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">ggplot</span>(region_smoking_data, </span>
+<span id="cb17-3"><a href="#cb17-3"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Region, <span class="at">y =</span> n, <span class="at">fill =</span> SmokingStatus)) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Step 3: Add labels and styling</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> label), </span>
+<span id="cb18-3"><a href="#cb18-3"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>), <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb18-4"><a href="#cb18-4"></a>            <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Region by Smoking Status (Count)"</span>, <span class="at">x =</span> <span class="st">"Region"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb18-8"><a href="#cb18-8"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="stacked-bar-count---plot" class="slide level2 center">
+<h2>Stacked Bar (Count) - Plot</h2>
+
+<img data-src="categorical_files/figure-revealjs/stacked-count-1.png" width="960" class="r-stretch"></section>
+<section id="stacked-bar-proportion-description" class="slide level2 center">
+<h2>Stacked Bar (Proportion): Description</h2>
+<div style="font-size: 22px; line-height: 1.8;">
+<h3 id="when-to-use-6">When to Use</h3>
+<ul>
+<li>Compare proportions/percentages across groups</li>
+<li>Show relative composition (0-100%)</li>
+<li>Compare distributions when group sizes differ</li>
+</ul>
+<h3 id="requirements-6">Requirements</h3>
+<ul>
+<li>Two categorical variables</li>
+<li>Focus on proportions, not absolute counts</li>
+</ul>
+<h3 id="advantages-6">Advantages</h3>
+<p>✅ Easy to compare proportions across groups<br>
+✅ Accounts for different group sizes<br>
+✅ All bars same height (100%)<br>
+✅ Clear compositional comparison</p>
+<h3 id="limitations-6">Limitations</h3>
+<p>❌ Loses information about group sizes<br>
+❌ Hard to compare exact proportions<br>
+❌ Middle segments still hard to compare</p>
+</div>
+</section>
+<section id="stacked-bar-proportion---code" class="slide level2 center">
+<h2>Stacked Bar (Proportion) - Code</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Step 1: Calculate proportions (0-1 scale)</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>region_smoking_prop <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">count</span>(Region, SmokingStatus) <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">group_by</span>(Region) <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb19-6"><a href="#cb19-6"></a>    <span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n),</span>
+<span id="cb19-7"><a href="#cb19-7"></a>    <span class="at">percentage =</span> prop <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb19-8"><a href="#cb19-8"></a>    <span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(percentage, <span class="dv">1</span>), <span class="st">"%"</span>)</span>
+<span id="cb19-9"><a href="#cb19-9"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Step 2: Create 100% stacked bar chart</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">ggplot</span>(region_smoking_prop, </span>
+<span id="cb20-3"><a href="#cb20-3"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Region, <span class="at">y =</span> prop, <span class="at">fill =</span> SmokingStatus)) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Step 3: Format and style</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> label), </span>
+<span id="cb21-3"><a href="#cb21-3"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>), <span class="at">size =</span> <span class="fl">3.5</span>,</span>
+<span id="cb21-4"><a href="#cb21-4"></a>            <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Region by Smoking Status (Proportion 0-100%)"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8"></a>       <span class="at">x =</span> <span class="st">"Region"</span>, <span class="at">y =</span> <span class="st">"Proportion"</span>, <span class="at">fill =</span> <span class="st">"Smoking Status"</span>) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb21-10"><a href="#cb21-10"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="stacked-bar-proportion---plot" class="slide level2 center">
+<h2>Stacked Bar (Proportion) - Plot</h2>
+
+<img data-src="categorical_files/figure-revealjs/stacked-prop-1.png" width="960" class="r-stretch"></section>
+<section id="exploded-pie-chart-description" class="slide level2 center">
+<h2>Exploded Pie Chart: Description</h2>
+<div style="font-size: 22px; line-height: 1.8;">
+<h3 id="when-to-use-7">When to Use</h3>
+<ul>
+<li>Emphasize one or more categories</li>
+<li>Show parts-to-whole with visual emphasis</li>
+<li>Highlight important segments</li>
+</ul>
+<h3 id="requirements-7">Requirements</h3>
+<ul>
+<li>One categorical variable with 2-6 categories</li>
+<li>Need to emphasize specific slice</li>
+</ul>
+<h3 id="advantages-7">Advantages</h3>
+<p>✅ Draws attention to specific category<br>
+✅ More engaging than standard pie<br>
+✅ Good for presentations<br>
+✅ Shows proportions clearly</p>
+<h3 id="limitations-7">Limitations</h3>
+<p>❌ Can be misleading (emphasized slice appears larger)<br>
+❌ Difficult to maintain visual accuracy<br>
+❌ Similar issues as pie charts</p>
+</div>
+</section>
+<section id="exploded-pie-chart---code" class="slide level2 center">
+<h2>Exploded Pie Chart - Code</h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Step 1: Calculate frequencies and percentages</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>treatment_data <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">count</span>(TreatmentGroup) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">mutate</span>(<span class="at">percentage =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb22-5"><a href="#cb22-5"></a></span>
+<span id="cb22-6"><a href="#cb22-6"></a>labels <span class="ot">&lt;-</span> <span class="fu">paste0</span>(treatment_data<span class="sc">$</span>TreatmentGroup, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, </span>
+<span id="cb22-7"><a href="#cb22-7"></a>                 treatment_data<span class="sc">$</span>n, <span class="st">" ("</span>, </span>
+<span id="cb22-8"><a href="#cb22-8"></a>                 <span class="fu">round</span>(treatment_data<span class="sc">$</span>percentage, <span class="dv">1</span>), <span class="st">"%)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Step 2: Create exploded pie using plotrix</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>))</span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="fu">pie3D</span>(treatment_data<span class="sc">$</span>n, </span>
+<span id="cb23-4"><a href="#cb23-4"></a>      <span class="at">labels =</span> labels,</span>
+<span id="cb23-5"><a href="#cb23-5"></a>      <span class="at">explode =</span> <span class="fl">0.1</span>,</span>
+<span id="cb23-6"><a href="#cb23-6"></a>      <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"#8DD3C7"</span>, <span class="st">"#FFFFB3"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Step 3: Add title and formatting</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>      main <span class="ot">=</span> <span class="st">"Treatment Group Distribution (Exploded)"</span>,</span>
+<span id="cb24-3"><a href="#cb24-3"></a>      cex.main <span class="ot">=</span> <span class="fl">1.2</span>,</span>
+<span id="cb24-4"><a href="#cb24-4"></a>      labelcex <span class="ot">=</span> <span class="dv">1</span>,</span>
+<span id="cb24-5"><a href="#cb24-5"></a>      theta <span class="ot">=</span> <span class="fl">1.2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exploded-pie-chart---plot" class="slide level2 center">
+<h2>Exploded Pie Chart - Plot</h2>
+
+<img data-src="categorical_files/figure-revealjs/exploded-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="complex-relationships" class="title-slide slide level1 center">
+<h1>Complex Relationships</h1>
+
+</section>
+<section id="triple-donut-description" class="slide level2 center">
+<h2>Triple Donut: Description</h2>
+<div style="font-size: 22px; line-height: 1.8;">
+<h3 id="when-to-use-8">When to Use</h3>
+<ul>
+<li>Show hierarchical or nested categorical relationships</li>
+<li>Compare three categories simultaneously</li>
+<li>Display proportions at multiple levels</li>
+</ul>
+<h3 id="requirements-8">Requirements</h3>
+<ul>
+<li>Two categorical variables (rings and nested categories)</li>
+<li>Interest in hierarchical proportions</li>
+</ul>
+<h3 id="advantages-concentric">Advantages (Concentric)</h3>
+<p>✅ Shows multiple dimensions compactly<br>
+✅ Hierarchical clarity<br>
+✅ Visually interesting<br>
+✅ Good for storytelling</p>
+<h3 id="limitations-concentric">Limitations (Concentric)</h3>
+<p>❌ Very difficult to compare rings<br>
+❌ Can be visually confusing<br>
+❌ Hard to interpret proportions accurately<br>
+❌ Limited to 3-4 rings maximum</p>
+</div>
+</section>
+<section id="triple-donut---code" class="slide level2 center">
+<h2>Triple Donut - Code</h2>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Prepare three separate datasets for ring positions</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>diabetes_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">filter</span>(ChronicDisease <span class="sc">==</span> <span class="st">"Diabetes"</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(ExerciseFreq)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">count</span>(ExerciseFreq) <span class="sc">%&gt;%</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">mutate</span>(<span class="at">disease =</span> <span class="st">"Diabetes"</span>, <span class="at">x =</span> <span class="fl">0.5</span>)</span>
+<span id="cb25-6"><a href="#cb25-6"></a></span>
+<span id="cb25-7"><a href="#cb25-7"></a>htn_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a>  <span class="fu">filter</span>(ChronicDisease <span class="sc">==</span> <span class="st">"Hypertension"</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(ExerciseFreq)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a>  <span class="fu">count</span>(ExerciseFreq) <span class="sc">%&gt;%</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a>  <span class="fu">mutate</span>(<span class="at">disease =</span> <span class="st">"Hypertension"</span>, <span class="at">x =</span> <span class="fl">0.7</span>)</span>
+<span id="cb25-11"><a href="#cb25-11"></a></span>
+<span id="cb25-12"><a href="#cb25-12"></a>heart_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a>  <span class="fu">filter</span>(ChronicDisease <span class="sc">==</span> <span class="st">"Heart Disease"</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(ExerciseFreq)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a>  <span class="fu">count</span>(ExerciseFreq) <span class="sc">%&gt;%</span></span>
+<span id="cb25-15"><a href="#cb25-15"></a>  <span class="fu">mutate</span>(<span class="at">disease =</span> <span class="st">"Heart Disease"</span>, <span class="at">x =</span> <span class="fl">0.9</span>)</span>
+<span id="cb25-16"><a href="#cb25-16"></a></span>
+<span id="cb25-17"><a href="#cb25-17"></a>combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(diabetes_df, htn_df, heart_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Create three bars at different positions</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">ggplot</span>(combined, <span class="fu">aes</span>(<span class="at">fill =</span> ExerciseFreq, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">geom_bar</span>(<span class="at">data =</span> <span class="fu">filter</span>(combined, disease <span class="sc">==</span> <span class="st">"Diabetes"</span>),</span>
+<span id="cb26-4"><a href="#cb26-4"></a>           <span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">0.5</span>), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.2</span>, </span>
+<span id="cb26-5"><a href="#cb26-5"></a>           <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>  <span class="fu">geom_bar</span>(<span class="at">data =</span> <span class="fu">filter</span>(combined, disease <span class="sc">==</span> <span class="st">"Hypertension"</span>),</span>
+<span id="cb26-7"><a href="#cb26-7"></a>           <span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">0.7</span>), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.2</span>,</span>
+<span id="cb26-8"><a href="#cb26-8"></a>           <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a>  <span class="fu">geom_bar</span>(<span class="at">data =</span> <span class="fu">filter</span>(combined, disease <span class="sc">==</span> <span class="st">"Heart Disease"</span>),</span>
+<span id="cb26-10"><a href="#cb26-10"></a>           <span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">0.9</span>), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.2</span>,</span>
+<span id="cb26-11"><a href="#cb26-11"></a>           <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Convert to polar and style</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="sc">+</span> <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">1.0</span>)) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Daily"</span> <span class="ot">=</span> <span class="st">"#66BB6A"</span>,</span>
+<span id="cb27-5"><a href="#cb27-5"></a>                               <span class="st">"3-5 times/week"</span> <span class="ot">=</span> <span class="st">"#90CAF9"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6"></a>                               <span class="st">"1-2 times/week"</span> <span class="ot">=</span> <span class="st">"#F48FB1"</span>)) <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Exercise Frequency by Chronic Disease"</span>,</span>
+<span id="cb27-8"><a href="#cb27-8"></a>       <span class="at">fill =</span> <span class="st">"Exercise"</span>) <span class="sc">+</span></span>
+<span id="cb27-9"><a href="#cb27-9"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb27-10"><a href="#cb27-10"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb27-11"><a href="#cb27-11"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="triple-donut---plot" class="slide level2 center">
+<h2>Triple Donut - Plot</h2>
+
+<img data-src="categorical_files/figure-revealjs/triple-donut-1.png" width="960" class="r-stretch"></section>
+<section id="mosaic-plot-description" class="slide level2 center">
+<h2>Mosaic Plot: Description</h2>
+<div style="font-size: 22px; line-height: 1.8;">
+<h3 id="when-to-use-9">When to Use</h3>
+<ul>
+<li>Display relationships between 2+ categorical variables</li>
+<li>Show proportions in contingency tables</li>
+<li>Identify associations between variables</li>
+</ul>
+<h3 id="requirements-9">Requirements</h3>
+<ul>
+<li>Multiple categorical variables (2-4 typically)</li>
+<li>Can handle unbalanced data</li>
+</ul>
+<h3 id="how-to-interpret">How to Interpret</h3>
+<ul>
+<li><strong>Tile width</strong>: First variable proportion</li>
+<li><strong>Tile height</strong>: Second variable conditional proportion</li>
+<li><strong>Tile area</strong>: Combined proportion</li>
+<li><strong>Empty space</strong>: Cells with low frequency</li>
+<li><strong>Color intensity</strong>: Strength of association</li>
+</ul>
+<h3 id="advantages-8">Advantages</h3>
+<p>✅ Shows multi-dimensional relationships<br>
+✅ Displays proportions simultaneously<br>
+✅ Highlights sparse cells<br>
+✅ Visual independence test</p>
+</div>
+</section>
+<section id="mosaic-plot---code" class="slide level2 center">
+<h2>Mosaic Plot - Code</h2>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Step 1: Prepare data and remove NAs</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>mosaic_data <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(AlcoholUse)) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">select</span>(TreatmentGroup, Gender, SmokingStatus, AlcoholUse)</span>
+<span id="cb28-5"><a href="#cb28-5"></a></span>
+<span id="cb28-6"><a href="#cb28-6"></a><span class="co"># Create contingency table</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a>mosaic_table <span class="ot">&lt;-</span> <span class="fu">xtabs</span>(<span class="sc">~</span> TreatmentGroup <span class="sc">+</span> Gender <span class="sc">+</span> </span>
+<span id="cb28-8"><a href="#cb28-8"></a>                        SmokingStatus <span class="sc">+</span> AlcoholUse, </span>
+<span id="cb28-9"><a href="#cb28-9"></a>                      <span class="at">data =</span> mosaic_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Step 2: Create mosaic plot using vcd package</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">mosaic</span>(mosaic_table,</span>
+<span id="cb29-3"><a href="#cb29-3"></a>       <span class="at">main =</span> <span class="st">"Mosaic Plot: 4-way Relationship"</span>,</span>
+<span id="cb29-4"><a href="#cb29-4"></a>       <span class="at">highlighting =</span> <span class="st">"AlcoholUse"</span>,</span>
+<span id="cb29-5"><a href="#cb29-5"></a>       <span class="at">highlighting_fill =</span> <span class="fu">c</span>(<span class="st">"#8DD3C7"</span>, <span class="st">"#FB8072"</span>),</span>
+<span id="cb29-6"><a href="#cb29-6"></a>       <span class="at">direction =</span> <span class="fu">c</span>(<span class="st">"v"</span>, <span class="st">"v"</span>, <span class="st">"h"</span>, <span class="st">"h"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># Step 3: Add labels and formatting</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>       spacing <span class="ot">=</span> spacing_highlighting,</span>
+<span id="cb30-3"><a href="#cb30-3"></a>       labeling <span class="ot">=</span> <span class="fu">labeling_border</span>(<span class="at">rot_labels =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb30-4"><a href="#cb30-4"></a>                                  <span class="at">just_labels =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"center"</span>, </span>
+<span id="cb30-5"><a href="#cb30-5"></a>                                                  <span class="st">"center"</span>, <span class="st">"center"</span>),</span>
+<span id="cb30-6"><a href="#cb30-6"></a>                                  <span class="at">varnames =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb30-7"><a href="#cb30-7"></a>                                  <span class="at">abbreviate_labs =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="mosaic-plot---output" class="slide level2 center">
+<h2>Mosaic Plot - Output</h2>
+
+<img data-src="categorical_files/figure-revealjs/mosaic-1.png" width="1152" class="r-stretch"></section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="summary-best-practices" class="title-slide slide level1 center">
+<h1>Summary &amp; Best Practices</h1>
+
+</section>
+<section id="choosing-the-right-plot" class="slide level2 center">
+<h2>Choosing the Right Plot</h2>
+<div style="font-size: 22px; line-height: 1.8;">
+<h3 id="single-variable">Single Variable</h3>
+<p><strong>Bar</strong> → Pie → Horizontal Bar → Donut</p>
+<h3 id="two-variables">Two Variables</h3>
+<p><strong>Dodged</strong> → Stacked Count → Stacked Proportion</p>
+<h3 id="complexhierarchical">Complex/Hierarchical</h3>
+<p><strong>Exploded Pie</strong> → Triple Donut → Mosaic</p>
+<h3 id="key-decision-points">Key Decision Points</h3>
+<ol type="1">
+<li><strong>How many variables?</strong> (1, 2, 3+)</li>
+<li><strong>What’s your message?</strong> (counts vs proportions)</li>
+<li><strong>Who’s the audience?</strong> (technical vs general)</li>
+<li><strong>Show relationships or distributions?</strong></li>
+</ol>
+</div>
+</section>
+<section id="best-practices" class="slide level2 center">
+<h2>Best Practices</h2>
+<div style="font-size: 22px; line-height: 1.8;">
+<h3 id="dos">Do’s ✅</h3>
+<ul>
+<li>Keep labels clear and complete</li>
+<li>Use color meaningfully (not randomly)</li>
+<li>Order categories logically</li>
+<li>Include percentages with counts</li>
+<li>Choose the simplest effective plot</li>
+<li>Test readability at presentation size</li>
+</ul>
+<h3 id="donts">Don’ts ❌</h3>
+<ul>
+<li>Avoid 3D effects (distort perception)</li>
+<li>Don’t use too many colors</li>
+<li>Avoid misleading axis scales</li>
+<li>Don’t overcrowd with too many categories</li>
+<li>Never remove axis labels</li>
+<li>Don’t use pie charts for 5+ categories</li>
+</ul>
+</div>
+</section>
+<section id="questions-discussion" class="slide level2 center">
+<h2>Questions &amp; Discussion</h2>
+<div style="text-align: center; font-size: 28px; margin-top: 150px;">
+<p><strong>Thank You!</strong></p>
+<p><strong>Categorical Base Plots</strong></p>
+<p><strong>For Questions: Contact or References</strong></p>
+</div>
+
+<div class="footer footer-default">
+
+</div>
+</section></section>
     </div>
   </div>
 

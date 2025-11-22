@@ -339,6 +339,18 @@ SpaRroW
 </div>
 
 </section>
+<section class="slide level2 center">
+
+<div class="cell">
+<style type="text/css">
+.reveal p.explanation {
+  font-size: 0.75em;
+  line-height: 1.4;
+  margin-top: 1em;
+}
+</style>
+</div>
+</section>
 <section id="introduction-to-data-visualization" class="slide level2 center">
 <h2>Introduction to Data Visualization</h2>
 <blockquote>
@@ -364,90 +376,173 @@ SpaRroW
 <li class="fragment"><strong>Convey what’s at stake</strong>: Why does this matter?</li>
 <li class="fragment"><strong>Be a complete sentence</strong>: Not just a topic, but a statement</li>
 </ul></li>
-<li class="fragment">Example: “We should implement early discharge planning because it reduces re-admissions by 35%”</li>
+<li class="fragment">Example: “We should implement early discharge planning because it reduces readmissions by 35%”</li>
 </ul>
 </div>
 </section>
-<section id="principle-1-choose-the-right-chart-type" class="slide level2 center">
+<section id="principle-1-choose-the-right-chart-type" class="slide level2 smaller center">
 <h2>Principle 1: Choose the Right Chart Type</h2>
 <p><strong>Match your visualization to your data and message</strong></p>
 <p>Different types of data require different visualizations:</p>
-<div class="slide" style="font-size: 0.7em;">
+<div>
 <ul>
-<li class="fragment"><strong>Simple text</strong>: When you have 1-2 numbers</li>
-<li class="fragment"><strong>Tables</strong>: For multiple units, precise values</li>
-<li class="fragment"><strong>Heatmaps</strong>: For tables with many values</li>
-<li class="fragment"><strong>Scatter plots</strong>: For relationships between variables</li>
-<li class="fragment"><strong>Line charts</strong>: For continuous data over time</li>
-<li class="fragment"><strong>Slopegraphs</strong>: For comparing two time points</li>
-<li class="fragment"><strong>Bar charts</strong>: For categorical comparisons</li>
+<li class="fragment"><strong>Simple text</strong>: 1-2 key numbers</li>
+<li class="fragment"><strong>Tables</strong>: Multiple precise values</li>
+<li class="fragment"><strong>Categorical</strong>: Bar charts (horizontal preferred)</li>
+<li class="fragment"><strong>Continuous over time</strong>: Line charts, area charts</li>
+<li class="fragment"><strong>Distributions</strong>: Histograms, boxplots, violin plots, density plots</li>
+<li class="fragment"><strong>Relationships</strong>: Scatter plots, correlations</li>
+<li class="fragment"><strong>Comparisons</strong>: Slopegraphs, small multiples</li>
+<li class="fragment"><strong>Part-to-whole</strong>: Stacked bars (avoid pie charts)</li>
 </ul>
 </div>
 </section>
 <section id="chart-type-simple-text" class="slide level2 center">
 <h2>Chart Type: Simple Text</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> When you have just 1-2 key numbers, text is more impactful than a chart. Makes the metric impossible to miss.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-2-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> When you have just 1-2 key numbers, text is more impactful than a chart. Makes the metric impossible to miss and allows for immediate comprehension.</p>
+</div>
 </section>
 <section id="chart-type-table" class="slide level2 center">
 <h2>Chart Type: Table</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Tables are ideal when you need to show precise values with different units of measure. Better than a chart when exact numbers matter.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-3-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Tables excel when precise values matter and units differ. Better than charts when readers need exact numbers for comparison or reference.</p>
+</div>
 </section>
 <section id="chart-type-heatmap" class="slide level2 center">
 <h2>Chart Type: Heatmap</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Heatmaps encode values with color, making it easy to spot patterns in large tables. Great for identifying hot/cold spots quickly.</p>
-</section>
-<section id="chart-type-scatter-plot" class="slide level2 center">
-<h2>Chart Type: Scatter Plot</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Scatter plots reveal relationships between two continuous variables. The trend line makes the correlation clear.</p>
-</section>
-<section id="chart-type-line-chart" class="slide level2 center">
-<h2>Chart Type: Line Chart</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Line charts show trends over time. The continuous line emphasizes the progression and makes patterns clear.</p>
-</section>
-<section id="chart-type-slopegraph" class="slide level2 center">
-<h2>Chart Type: Slopegraph</h2>
-
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Slopegraphs are perfect for comparing two time points. They show both ranking and magnitude of change clearly.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-4-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Heatmaps encode values with color, making patterns instantly visible in large tables. Ideal for spotting trends across two categorical dimensions.</p>
+</div>
 </section>
 <section id="chart-type-horizontal-bar-chart" class="slide level2 center">
 <h2>Chart Type: Horizontal Bar Chart</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Horizontal bars are easier to read than vertical, especially with long labels. Natural left-to-right reading.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-5-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Horizontal bars are preferred for categorical comparisons. Long labels read naturally, and length comparisons are easier than height comparisons.</p>
+</div>
 </section>
-<section id="avoid-line-charts-for-categories" class="slide level2 center">
-<h2>Avoid: Line Charts for Categories</h2>
+<section id="chart-type-grouped-bar-chart" class="slide level2 center">
+<h2>Chart Type: Grouped Bar Chart</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Lines suggest continuous change between points, but there’s no meaningful order or connection between these categories.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-6-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Grouped bars allow direct comparison across two categorical variables. The gap between groups creates visual separation that aids comprehension.</p>
+</div>
+</section>
+<section id="avoid-vertical-bars-with-long-labels" class="slide level2 center">
+<h2>Avoid: Vertical Bars with Long Labels</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-8-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Ineffective:</strong> Vertical bars with long labels force text rotation, making reading difficult. Horizontal bars solve this problem naturally.</p>
+</div>
+</section>
+<section id="chart-type-line-chart" class="slide level2 center">
+<h2>Chart Type: Line Chart</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-9-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Line charts emphasize continuity and trend direction over time. The connecting line helps viewers see patterns and predict future values.</p>
+</div>
+</section>
+<section id="chart-type-area-chart" class="slide level2 center">
+<h2>Chart Type: Area Chart</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-10-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Stacked area charts show both individual trends and cumulative total. The filled areas emphasize volume and make the overall trend prominent.</p>
+</div>
+</section>
+<section id="chart-type-multiple-line-series" class="slide level2 center">
+<h2>Chart Type: Multiple Line Series</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-11-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Multiple series work when normalized to comparable scales. Different colors distinguish series while the shared timeline enables pattern comparison across variables.</p>
+</div>
+</section>
+<section id="chart-type-scatter-plot" class="slide level2 center">
+<h2>Chart Type: Scatter Plot</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-12-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Scatter plots reveal relationships between continuous variables. The trend line and confidence interval quantify the strength and uncertainty of the relationship.</p>
+</div>
+</section>
+<section id="chart-type-scatter-with-categories" class="slide level2 center">
+<h2>Chart Type: Scatter with Categories</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-13-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Adding categories to scatter plots reveals whether relationships hold across subgroups. Parallel slopes suggest consistent effects; diverging slopes indicate interactions.</p>
+</div>
+</section>
+<section id="chart-type-boxplot" class="slide level2 center">
+<h2>Chart Type: Boxplot</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-14-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Boxplots show distribution shape through quartiles. The box contains 50% of data, whiskers show range, and outliers appear as points - all in one compact visual.</p>
+</div>
+</section>
+<section id="chart-type-violin-plot" class="slide level2 center">
+<h2>Chart Type: Violin Plot</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-15-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Violin plots reveal distribution details that boxplots hide. The width at each point shows density, making bimodal distributions and skewness immediately apparent.</p>
+</div>
+</section>
+<section id="chart-type-density-plot" class="slide level2 center">
+<h2>Chart Type: Density Plot</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-16-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Density plots show smooth distribution curves, ideal for comparing shapes between groups. Overlapping areas make differences in location, spread, and skewness clear.</p>
+</div>
+</section>
+<section id="chart-type-ridgeline-plot" class="slide level2 center">
+<h2>Chart Type: Ridgeline Plot</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-17-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Ridgeline plots stack density curves for easy comparison across many categories. The slight overlap creates visual flow while maintaining distinct distributions.</p>
+</div>
+</section>
+<section id="chart-type-slopegraph" class="slide level2 center">
+<h2>Chart Type: Slopegraph</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-18-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Slopegraphs excel at showing change between two time points. The slope angle immediately conveys magnitude and direction of change for each entity.</p>
+</div>
 </section>
 <section id="chart-type-stacked-bar-chart" class="slide level2 center">
 <h2>Chart Type: Stacked Bar Chart</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Stacked bars show part-to-whole relationships over time. Easy to see both total volume and composition.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-19-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Stacked bars show part-to-whole relationships over time. Total height shows cumulative volume while segment heights reveal individual contributions.</p>
+</div>
 </section>
 <section id="avoid-y-axis-not-starting-at-zero" class="slide level2 center">
 <h2>Avoid: Y-Axis Not Starting at Zero</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Truncating the Y-axis exaggerates small differences. Makes 3% variation look like massive differences in performance.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-21-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Ineffective:</strong> Truncating the Y-axis on bar charts distorts proportional relationships. What is actually a 3% difference appears as a 3-fold difference due to the missing baseline.</p>
+</div>
 </section>
 <section id="better-y-axis-starting-at-zero" class="slide level2 center">
 <h2>Better: Y-Axis Starting at Zero</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Starting at zero shows true proportions. All hospitals are performing well - the differences are minor.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-22-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Starting bar charts at zero shows true proportions. Now it’s clear that all hospitals perform similarly at high levels with minimal variation.</p>
+</div>
 </section>
 <section id="avoid-pie-charts" class="slide level2 center">
 <h2>Avoid: Pie Charts</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Humans struggle to compare angles and areas. Which is bigger - Respiratory or Other? Hard to tell precisely.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-24-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Ineffective:</strong> Humans struggle with angle and area estimation. Quick: is Respiratory or Other larger? Pie charts make simple comparisons unnecessarily difficult.</p>
+</div>
 </section>
 <section id="better-horizontal-bar-chart" class="slide level2 center">
 <h2>Better: Horizontal Bar Chart</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Horizontal bars make comparisons effortless. Rankings and differences are immediately clear.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-25-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Horizontal bars make comparisons effortless. Rankings are immediately clear, and length differences are precisely perceivable unlike angles in pie charts.</p>
+</div>
 </section>
 <section id="principle-2-eliminate-clutter" class="slide level2 center">
 <h2>Principle 2: Eliminate Clutter</h2>
@@ -458,25 +553,42 @@ SpaRroW
 <li class="fragment">Lighten or remove gridlines<br>
 </li>
 <li class="fragment">Remove redundant data labels</li>
-<li class="fragment"><strong>Direct labeling &gt; legends</strong></li>
+<li class="fragment"><strong>Direct labeling &gt; legends</strong> (Gestalt principle of connection)</li>
 <li class="fragment">Clean up axis labels</li>
-<li class="fragment">Every element should earn its place</li>
+<li class="fragment">Maximize <strong>data-to-ink ratio</strong> (Tufte’s principle)</li>
+</ul>
+</div>
+</section>
+<section id="data-to-ink-ratio-maximizing-information" class="slide level2 center">
+<h2>Data-to-Ink Ratio: Maximizing Information</h2>
+<p><strong>Every drop of ink should represent data</strong></p>
+<div>
+<ul>
+<li class="fragment"><strong>Data ink</strong>: Ink that represents actual data points</li>
+<li class="fragment"><strong>Non-data ink</strong>: Gridlines, borders, backgrounds, decorations</li>
+<li class="fragment"><strong>Goal</strong>: Maximize the ratio of data ink to total ink</li>
+<li class="fragment">Remove chart junk: 3D effects, unnecessary colors, decorative elements</li>
+<li class="fragment">Keep only what serves comprehension</li>
 </ul>
 </div>
 </section>
 <section id="example-default-plot-cluttered" class="slide level2 center">
 <h2>Example: Default Plot (Cluttered)</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Gray background, gridlines, legend, and borders all compete for attention. The data gets lost in visual clutter.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-27-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Ineffective:</strong> Gray background, heavy gridlines, legend requiring eye travel, and borders all compete for attention. The data-to-ink ratio is low - most ink conveys no data.</p>
+</div>
 </section>
 <section id="example-decluttered-with-direct-labels" class="slide level2 center">
 <h2>Example: Decluttered with Direct Labels</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Clean background, minimal gridlines, direct labels. Every element serves the data. The message is clear.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-28-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> High data-to-ink ratio achieved by removing backgrounds, excess gridlines, and legend. Direct labels connect to data via proximity (Gestalt principle).</p>
+</div>
 </section>
 <section id="principle-3-use-preattentive-attributes" class="slide level2 center">
 <h2>Principle 3: Use Preattentive Attributes</h2>
-<p><strong>Guide attention with attributes processed in &lt;250ms</strong></p>
+<p><strong>Attention with attributes processed in &lt;250ms</strong></p>
 <div>
 <ul>
 <li class="fragment"><strong>Color</strong>: Most powerful</li>
@@ -490,12 +602,23 @@ SpaRroW
 <section id="example-all-equal-no-focus" class="slide level2 center">
 <h2>Example: All Equal (No Focus)</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> All bars are equal - where should the viewer look? No visual hierarchy means no clear message.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"><div class="explanation">
+<p><strong>Ineffective:</strong> All bars are equal - where should the viewer look? No visual hierarchy means no clear message.</p>
+</div>
 </section>
 <section id="example-strategic-highlighting" class="slide level2 center">
 <h2>Example: Strategic Highlighting</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Red instantly draws the eye to the problem. Gray provides context without competing for attention.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-31-1.png" width="960" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Red instantly draws the eye to the problem. Gray provides context without competing for attention.</p>
+</div>
+</section>
+<section id="example-using-size-for-emphasis" class="slide level2 center">
+<h2>Example: Using Size for Emphasis</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-32-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> Size combined with color creates a clear hierarchy. The large red point in August demands attention while smaller gray points provide context.</p>
+</div>
 </section>
 <section id="principle-4-gray-and-bold-technique" class="slide level2 center">
 <h2>Principle 4: Gray and Bold Technique</h2>
@@ -503,105 +626,218 @@ SpaRroW
 <div>
 <ul>
 <li class="fragment">Bold color for what matters most</li>
-<li class="fragment">Gray for context</li>
+<li class="fragment">Gray for supporting context</li>
 <li class="fragment">Maximum one bold color per chart</li>
 <li class="fragment">Creates instant visual hierarchy</li>
+<li class="fragment">Reduces cognitive load</li>
 </ul>
 </div>
 </section>
-<section id="example-too-many-colors-confusing" class="slide level2 center">
-<h2>Example: Too Many Colors (Confusing)</h2>
+<section id="example-too-many-colors" class="slide level2 center">
+<h2>Example: Too Many Colors</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Too many colors compete for attention. Is this chart trying to highlight everything? That means nothing stands out.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-34-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Ineffective:</strong> Multiple bold colors fragment attention. When everything demands attention, nothing gets it.</p>
+</div>
 </section>
-<section id="example-gray-and-bold-clear-message" class="slide level2 center">
-<h2>Example: Gray and Bold (Clear Message)</h2>
+<section id="example-gray-and-bold-applied" class="slide level2 center">
+<h2>Example: Gray and Bold Applied</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Red highlights the problem specialties. Gray provides context. One glance tells the whole story.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-35-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Effective:</strong> One bold color directs attention immediately to the problem area. Gray bars provide necessary context without distraction.</p>
+</div>
 </section>
 <section id="principle-5-think-like-a-designer" class="slide level2 center">
 <h2>Principle 5: Think Like a Designer</h2>
-<p><strong>Alignment, white space, and contrast</strong></p>
+<p><strong>Visual design principles enhance communication</strong></p>
 <div>
 <ul>
-<li class="fragment"><strong>Alignment</strong>: Left-align text</li>
-<li class="fragment"><strong>White space</strong>: Give room to breathe</li>
-<li class="fragment"><strong>Contrast</strong>: Create visual hierarchy</li>
-<li class="fragment"><strong>Consistency</strong>: Same fonts, colors</li>
+<li class="fragment"><strong>Accessibility</strong>: Colorblind-safe palettes</li>
+<li class="fragment"><strong>Alignment</strong>: Create invisible structure</li>
+<li class="fragment"><strong>White space</strong>: Let your data breathe</li>
+<li class="fragment"><strong>Contrast</strong>: Guide the eye</li>
+<li class="fragment"><strong>Typography</strong>: Readable, professional fonts</li>
 </ul>
 </div>
 </section>
-<section id="example-poor-design-choices" class="slide level2 center">
-<h2>Example: Poor Design Choices</h2>
+<section id="accessibility-colorblind-safe-palettes" class="slide level2 center">
+<h2>Accessibility: Colorblind-Safe Palettes</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Centered title, clashing colors, no subtitle, unclear which line is which. Multiple design problems distract from the data.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-36-1.png" width="960" class="r-stretch"><div class="explanation">
+<p><strong>Always use colorblind-safe palettes.</strong> Approximately 8% of men and 0.5% of women have color vision deficiency. Blue-orange combinations work for nearly everyone.</p>
+</div>
 </section>
-<section id="example-good-design-principles" class="slide level2 center">
-<h2>Example: Good Design Principles</h2>
+<section id="design-principles-alignment-spacing" class="slide level2 center">
+<h2>Design Principles: Alignment &amp; Spacing</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Left-aligned title, clear subtitle, harmonious colors, clean design. Professional and easy to understand.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-37-1.png" width="960" class="r-stretch"><div class="explanation">
+<p><strong>Effective design:</strong> Generous margins, aligned text, strategic white space, and clear visual hierarchy make the message instantly clear and professional.</p>
+</div>
 </section>
-<section id="principle-6-tell-a-story" class="slide level2 center">
-<h2>Principle 6: Tell a Story</h2>
-<p><strong>Move from descriptive to narrative</strong></p>
+<section id="using-annotations-strategically" class="slide level2 center">
+<h2>Using Annotations Strategically</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch"><div class="explanation">
+<p><strong>Annotations tell the story.</strong> The chart clearly shows what happened, when it happened, and why it matters - the viewer doesn’t need to guess.</p>
+</div>
+</section>
+<section id="beforeafter-design-transformation" class="slide level2 center">
+<h2>Before/After: Design Transformation</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-40-1.png" width="960" class="r-stretch"><div class="explanation">
+<p>Design transformation: horizontal orientation, strategic color, descriptive title, reference line, and clean styling create a professional, focused message.</p>
+</div>
+</section>
+<section id="principle-6-tell-a-story-with-data" class="slide level2 center">
+<h2>Principle 6: Tell a Story with Data</h2>
+<p><strong>Transform insights into narrative</strong></p>
 <div>
 <ul>
-<li class="fragment"><strong>Descriptive</strong>: What is this?</li>
-<li class="fragment"><strong>Narrative</strong>: So what?</li>
-<li class="fragment">State your insight in the title</li>
-<li class="fragment">Use subtitles for context</li>
+<li class="fragment"><strong>Beginning</strong>: Set context (current state)</li>
+<li class="fragment"><strong>Middle</strong>: Show the problem/opportunity</li>
+<li class="fragment"><strong>End</strong>: Recommend action</li>
+<li class="fragment">Use descriptive titles that state your point</li>
+<li class="fragment">Guide your audience through the data</li>
 </ul>
 </div>
 </section>
-<section id="example-descriptive-title-what" class="slide level2 center">
-<h2>Example: Descriptive Title (What?)</h2>
+<section id="narrative-vs-descriptive-titles" class="slide level2 center">
+<h2>Narrative vs Descriptive Titles</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> The title just describes what’s in the chart. No insight, no message, no story. Makes the viewer do all the work.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-42-1.png" width="960" class="r-stretch"><div class="explanation">
+<p><strong>Narrative titles tell the story.</strong> The right chart doesn’t just show data - it communicates the achievement and its magnitude immediately.</p>
+</div>
 </section>
-<section id="example-insight-driven-title-so-what" class="slide level2 center">
-<h2>Example: Insight-Driven Title (So What?)</h2>
+<section id="small-multiples-powerful-comparisons" class="slide level2 center">
+<h2>Small Multiples: Powerful Comparisons</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-31-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Title states the insight. Subtitle adds context. Color highlights the key period. The story is told instantly.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-43-1.png" width="1056" class="r-stretch"><div class="explanation">
+<p><strong>Small multiples enable comparison.</strong> Same scales across panels make differences immediately visible. Trend lines show improvement rates at a glance.</p>
+</div>
 </section>
-<section id="before-default-visualization" class="slide level2 center">
-<h2>Before: Default Visualization</h2>
+<section id="small-multiples-distribution-comparisons" class="slide level2 center">
+<h2>Small Multiples: Distribution Comparisons</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-33-1.png" width="960" class="r-stretch"><p><strong>Ineffective:</strong> Default theme, no focus, legend requires back-and-forth eye movement. No clear message about what matters.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-44-1.png" width="1056" class="r-stretch"><div class="explanation">
+<p><strong>Distribution comparison made easy.</strong> Procedure C clearly clusters below the target with minimal variation, while Procedure D shows high variability and longer recovery.</p>
+</div>
 </section>
-<section id="after-storytelling-approach" class="slide level2 center">
-<h2>After: Storytelling Approach</h2>
+<section id="complete-story-example" class="slide level2 center">
+<h2>Complete Story Example</h2>
 
-<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"><p><strong>Effective:</strong> Clean design, strategic color, insight-driven title, direct labeling. All six principles working together.</p>
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-45-1.png" width="1056" class="r-stretch"><div class="explanation">
+<p><strong>Complete narrative:</strong> Beginning (context with peers), middle (intervention and dramatic improvement), end (current state showing success). Every element supports the story.</p>
+</div>
+</section>
+<section id="advanced-topic-handling-uncertainty" class="slide level2 center">
+<h2>Advanced Topic: Handling Uncertainty</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-46-1.png" width="960" class="r-stretch"><div class="explanation">
+<p><strong>Show uncertainty honestly.</strong> Confidence intervals demonstrate that even accounting for variability, the new treatment shows meaningful improvement over the standard.</p>
+</div>
+</section>
+<section id="advanced-topic-distribution-of-uncertainty" class="slide level2 center">
+<h2>Advanced Topic: Distribution of Uncertainty</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-47-1.png" width="960" class="r-stretch"><div class="explanation">
+<p><strong>Full distribution view.</strong> The minimal overlap between distributions shows that the new treatment improvement is robust, not just a result of a few outliers.</p>
+</div>
+</section>
+<section id="advanced-topic-correlation-matrices" class="slide level2 center">
+<h2>Advanced Topic: Correlation Matrices</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-48-1.png" width="864" class="r-stretch"><div class="explanation">
+<p><strong>Multivariate relationships at a glance.</strong> Correlation matrices reveal complex patterns - here showing BMI and stress as strongest blood pressure predictors.</p>
+</div>
+</section>
+<section id="common-pitfall-cherry-picking-time-ranges" class="slide level2 center">
+<h2>Common Pitfall: Cherry-Picking Time Ranges</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-49-1.png" width="960" class="r-stretch"><div class="explanation">
+<p><strong>Always show full context.</strong> The “growth” story disappears when viewing the complete timeline. Cherry-picking ranges is a common way to mislead.</p>
+</div>
+</section>
+<section id="edge-case-when-breaking-rules-makes-sense" class="slide level2 center">
+<h2>Edge Case: When Breaking Rules Makes Sense</h2>
+
+<img data-src="best_practices_files/figure-revealjs/unnamed-chunk-50-1.png" width="960" class="r-stretch"><div class="explanation">
+<p><strong>Breaking the “zero baseline” rule is appropriate</strong> when zero is meaningless (temperature, stock prices, pH). The focus should be on clinically meaningful variation.</p>
+</div>
+</section>
+<section id="summary-six-core-principles" class="slide level2 center">
+<h2>Summary: Six Core Principles</h2>
+<div>
+<ol type="1">
+<li class="fragment"><strong>Choose the Right Chart Type</strong> - Match visualization to data and message</li>
+<li class="fragment"><strong>Eliminate Clutter</strong> - Maximize data-to-ink ratio</li>
+<li class="fragment"><strong>Use Preattentive Attributes</strong> - Guide attention strategically</li>
+<li class="fragment"><strong>Apply Gray and Bold</strong> - Create visual hierarchy</li>
+<li class="fragment"><strong>Think Like a Designer</strong> - Professional, accessible presentation</li>
+<li class="fragment"><strong>Tell a Story</strong> - Transform insights into narrative</li>
+</ol>
+</div>
 </section>
 <section id="key-takeaways" class="slide level2 center">
 <h2>Key Takeaways</h2>
 <div>
-<ol type="1">
-<li class="fragment"><strong>Choose the right chart</strong> - Match to data type</li>
-<li class="fragment"><strong>Eliminate clutter</strong> - Remove non-value elements</li>
-<li class="fragment"><strong>Use preattentive attributes</strong> - Guide attention</li>
-<li class="fragment"><strong>Gray and bold</strong> - Highlight vs context</li>
-<li class="fragment"><strong>Think like a designer</strong> - Alignment, space, contrast</li>
-<li class="fragment"><strong>Tell a story</strong> - State your insight</li>
-</ol>
+<ul>
+<li class="fragment"><strong>Every choice matters</strong> - color, position, size, titles</li>
+<li class="fragment"><strong>Less is more</strong> - remove everything that doesn’t serve the message</li>
+<li class="fragment"><strong>Context is crucial</strong> - never cherry-pick data ranges</li>
+<li class="fragment"><strong>Accessibility counts</strong> - use colorblind-safe palettes</li>
+<li class="fragment"><strong>Focus attention</strong> - one bold color, clear hierarchy</li>
+<li class="fragment"><strong>Tell the story</strong> - guide your audience to action</li>
+</ul>
 </div>
 </section>
-<section id="resources" class="slide level2 center">
-<h2>Resources</h2>
+<section id="when-to-break-the-rules" class="slide level2 center">
+<h2>When to Break the Rules</h2>
+<p><strong>Rules are guidelines, not laws</strong></p>
+<div>
 <ul>
-<li><strong>Book</strong>: <em>Storytelling with Data</em> by Cole Nussbaumer Knaflic</li>
-<li><strong>Book</strong>: <em>The Visual Display of Quantitative Information</em> by Edward Tufte</li>
-<li><strong>Website</strong>: storytellingwithdata.com</li>
-<li><strong>Website</strong>: r-graph-gallery.com</li>
+<li class="fragment">Zero baseline: not for temperature, stock prices, or indices</li>
+<li class="fragment">Pie charts: acceptable for simple two-part comparisons</li>
+<li class="fragment">Multiple colors: when showing categorical data without hierarchy</li>
+<li class="fragment"><strong>The test</strong>: Does breaking the rule serve your audience better?</li>
+<li class="fragment"><strong>Always ask</strong>: Am I making the data clearer or just different?</li>
 </ul>
+</div>
+</section>
+<section id="resources-further-learning" class="slide level2 center">
+<h2>Resources &amp; Further Learning</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="books">Books</h3>
+<div>
+<ul>
+<li class="fragment"><em>Storytelling with Data</em> - Cole Nussbaumer Knaflic</li>
+<li class="fragment"><em>The Visual Display of Quantitative Information</em> - Edward Tufte</li>
+<li class="fragment"><em>Good Charts</em> - Scott Berinato</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<h3 id="online">Online</h3>
+<div>
+<ul>
+<li class="fragment"><a href="https://ggplot2.tidyverse.org/">ggplot2 documentation</a></li>
+<li class="fragment"><a href="https://r-graph-gallery.com/">R Graph Gallery</a></li>
+<li class="fragment"><a href="https://www.datavisualizationsociety.org/">Data Visualization Society</a></li>
+<li class="fragment"><a href="https://www.storytellingwithdata.com/blog">Storytelling with Data blog</a></li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 <section id="thank-you" class="slide level2 center">
 <h2>Thank You!</h2>
-<p><strong>Every visualization is a story.</strong><br>
-Make sure yours is worth telling.</p>
-<blockquote>
-<p>“The greatest value of a picture is when it forces us to notice what we never expected to see.” - John Tukey</p>
-</blockquote>
+<p><strong>Questions?</strong></p>
+<div class="center">
+<p><strong>Remember:</strong> The goal of data visualization is not to make beautiful charts - it’s to communicate insights that drive better decisions.</p>
+<p><em>“The greatest value of a picture is when it forces us to notice what we never expected to see.”</em> - John Tukey</p>
+</div>
+</section>
+<section class="slide level2 center">
+
 
 <div class="footer footer-default">
 

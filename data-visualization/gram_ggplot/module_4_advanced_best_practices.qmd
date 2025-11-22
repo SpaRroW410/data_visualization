@@ -1,0 +1,1008 @@
+---
+title: "Grammar of Graphics: Module 4"
+subtitle: "Advanced Topics & Best Practices"
+author: "Sparrow"
+date: today
+format: 
+  revealjs:
+    theme: serif
+    css: ../../assets/slide_deck.css
+    include-after-body: footer.html
+    slide-number: true
+    navigation-mode: linear
+    code-copy: true
+    code-fold: true
+    chalkboard: true
+    preview-links: true
+    center: true
+    zoom: true
+---
+
+## Module 4 Overview {.smaller}
+
+**Previously**:
+- Module 1: Foundations & Geoms
+- Module 2: Aesthetics, Faceting & Themes
+- Module 3: Colors, Scales & Custom Themes
+
+**This Module (FINAL)**:
+- Complex visualizations with progressive builds
+- Advanced composition techniques
+- Exporting and reproducibility
+- Limitations of ggplot2
+- Best practices and common pitfalls
+- Workshop summary
+
+## Setup
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readxl)
+library(ggthemes)
+library(paletteer)
+library(patchwork)
+# remotes::install_github("haleyjeppson/ggmosaic")
+library(ggmosaic)  # For mosaic plots
+
+# Load data with all transformations
+bp_data <- read_excel("../../data/PublicHealth_BP_Dataset.xlsx") %>%
+  mutate(
+    SysBP_Change = SysBP_6m - SysBP_0m,
+    DiaBP_Change = DiaBP_6m - DiaBP_0m,
+    AgeGroup = cut(Age, breaks = c(0, 30, 50, 65, 100),
+                   labels = c("18-30", "31-50", "51-65", "65+")),
+    Hypertension_Baseline = ifelse(SysBP_0m >= 140 | DiaBP_0m >= 90, 
+                                   "Hypertensive", "Normal"),
+    BMI_Category = cut(BMI, breaks = c(0, 18.5, 25, 30, 100),
+                       labels = c("Underweight", "Normal", "Overweight", "Obese"))
+  )
+
+# Time series
+bp_time <- bp_data %>%
+  select(PatientID, TreatmentGroup, SysBP_0m, SysBP_3m, SysBP_6m) %>%
+  pivot_longer(cols = starts_with("SysBP"),
+               names_to = "Time", values_to = "SysBP") %>%
+  mutate(Months = as.numeric(gsub("SysBP_|m", "", Time)))
+
+# Summary data
+bp_summary <- bp_time %>%
+  group_by(TreatmentGroup, Months) %>%
+  summarise(Mean_SysBP = mean(SysBP, na.rm = TRUE), .groups = "drop")
+
+ci_data <- bp_time %>%
+  group_by(TreatmentGroup, Months) %>%
+  summarise(Mean = mean(SysBP), SE = sd(SysBP) / sqrt(n()), .groups = "drop")
+
+# Custom theme from Module 3
+theme_clinical_report <- function(base_size = 12, base_family = "serif") {
+  theme_bw(base_size = base_size, base_family = base_family) +
+  theme(
+    text = element_text(family = base_family),
+    plot.title = element_text(size = base_size * 1.3, face = "bold", 
+                              hjust = 0.5, margin = margin(b = 10)),
+    plot.subtitle = element_text(size = base_size * 1.1, hjust = 0.5,
+                                 color = "gray30", margin = margin(b = 15)),
+    plot.caption = element_text(size = base_size * 0.9, hjust = 1,
+                                face = "italic", color = "gray50"),
+    axis.title = element_text(size = base_size * 1.1, face = "bold"),
+    axis.text = element_text(size = base_size * 0.9, color = "gray20"),
+    axis.line = element_line(color = "black", linewidth = 0.5),
+    panel.grid.major = element_line(color = "gray90", linewidth = 0.5),
+    panel.grid.minor = element_blank(),
+    panel.border = element_rect(color = "gray40", fill = NA, linewidth = 1),
+    panel.background = element_rect(fill = "white"),
+    legend.position = "bottom",
+    legend.title = element_text(size = base_size, face = "bold"),
+    legend.text = element_text(size = base_size * 0.9),
+    legend.background = element_rect(fill = "white", color = NA),
+    legend.key = element_rect(fill = "white", color = NA),
+    plot.background = element_rect(fill = "white", color = NA)
+  )
+}
+```
+
+# Section 1: Complex Visualizations {background-color="#2C5F8D"}
+
+## Progressive Build: Starting Simple
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1-3"
+
+# Step 1: Basic plot
+p_base <- ggplot(bp_data, 
+                 aes(x = Age, y = SysBP_0m,
+                     color = TreatmentGroup)) +
+  geom_point(alpha = 0.6, size = 2)
+
+p_base
+```
+
+---
+
+## Progressive Build: Step 1 Output
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+p_base <- ggplot(bp_data, aes(x = Age, y = SysBP_0m, color = TreatmentGroup)) +
+  geom_point(alpha = 0.6, size = 2)
+
+p_base + theme_minimal(base_size = 14)
+```
+
+## Progressive Build: Add Trend Lines
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2-3"
+
+# Step 2: Add smooth trends
+p_trend <- p_base +
+  geom_smooth(method = "lm", se = TRUE, 
+              linewidth = 1.2)
+
+p_trend
+```
+
+---
+
+## Progressive Build: Step 2 Output
+
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 10
+#| fig-height: 6
+
+p_trend <- p_base +
+  geom_smooth(method = "lm", se = TRUE, linewidth = 1.2)
+
+p_trend + theme_minimal(base_size = 14)
+```
+
+## Progressive Build: Apply Theme
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2"
+
+# Step 3: Apply professional theme
+p_themed <- p_trend +
+  theme_clinical_report(base_size = 14)
+
+p_themed
+```
+
+---
+
+## Progressive Build: Step 3 Output
+
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 10
+#| fig-height: 6
+
+p_themed <- p_trend +
+  theme_clinical_report(base_size = 14)
+
+p_themed
+```
+
+## Progressive Build: Final Polish
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|2-8|9-11"
+
+# Step 4: Final customization
+p_final <- p_themed +
+  scale_color_manual(
+    values = c("Control" = "steelblue",
+               "Intervention" = "darkred"),
+    name = "Treatment Group") +
+  labs(title = "Age vs Baseline Systolic BP",
+       subtitle = "With linear trend lines",
+       x = "Age (years)",
+       y = "Systolic BP (mmHg)",
+       caption = "n=200 patients")
+```
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 6
+#| fig-height: 5
+
+p_final <- p_themed +
+  scale_color_manual(values = c("Control" = "steelblue", "Intervention" = "darkred"),
+                     name = "Treatment Group") +
+  labs(title = "Age vs Baseline Systolic BP",
+       subtitle = "With linear trend lines",
+       x = "Age (years)",
+       y = "Systolic BP (mmHg)",
+       caption = "n=200 patients")
+
+p_final
+```
+:::
+::::
+
+## Multi-Geom Plot: Points + Line + Ribbon
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|6-8|9-11|12-14"
+
+ggplot(ci_data, 
+       aes(x = Months, y = Mean,
+           color = TreatmentGroup,
+           fill = TreatmentGroup)) +
+  # Confidence band
+  geom_ribbon(aes(ymin = Mean - 1.96*SE,
+                  ymax = Mean + 1.96*SE),
+              alpha = 0.2, color = NA) +
+  # Trend line
+  geom_line(linewidth = 1.5) +
+  # Data points
+  geom_point(size = 3) +
+  scale_color_manual(
+    values = c("steelblue", "darkred")) +
+  scale_fill_manual(
+    values = c("steelblue", "darkred"))
+```
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(ci_data, aes(x = Months, y = Mean, color = TreatmentGroup, fill = TreatmentGroup)) +
+  geom_ribbon(aes(ymin = Mean - 1.96*SE, ymax = Mean + 1.96*SE), 
+              alpha = 0.2, color = NA) +
+  geom_line(linewidth = 1.5) +
+  geom_point(size = 3) +
+  scale_color_manual(values = c("steelblue", "darkred")) +
+  scale_fill_manual(values = c("steelblue", "darkred")) +
+  labs(title = "BP Trajectory with 95% CI",
+       x = "Months", y = "Mean SysBP (mmHg)",
+       color = "Treatment", fill = "Treatment") +
+  theme_clinical_report(base_size = 11)
+```
+:::
+::::
+
+## Combining Geoms Strategically
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|4-7|8-9|10-11"
+
+ggplot(bp_data, 
+       aes(x = AgeGroup, y = SysBP_Change,
+           fill = TreatmentGroup)) +
+  # Individual points with jitter
+  geom_jitter(aes(color = TreatmentGroup),
+              alpha = 0.3, width = 0.2,
+              size = 1.5, show.legend = FALSE) +
+  # Box plot overlay
+  geom_boxplot(alpha = 0.6, outlier.shape = NA) +
+  # Add mean as point
+  stat_summary(fun = mean, geom = "point",
+               size = 3, color = "black", shape = 18)
+```
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data, aes(x = AgeGroup, y = SysBP_Change, fill = TreatmentGroup)) +
+  geom_jitter(aes(color = TreatmentGroup), alpha = 0.3, width = 0.2, 
+              size = 1.5, show.legend = FALSE) +
+  geom_boxplot(alpha = 0.6, outlier.shape = NA) +
+  stat_summary(fun = mean, geom = "point", size = 3, color = "black", shape = 18) +
+  scale_fill_manual(values = c("steelblue", "darkred")) +
+  scale_color_manual(values = c("steelblue", "darkred")) +
+  labs(title = "Layered Geoms") +
+  theme_minimal(base_size = 10)
+```
+:::
+::::
+
+## Publication-Ready Plot: All Elements
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|1-15|16-23|24-27"
+
+publication_plot <- ggplot(bp_data, 
+                           aes(x = BMI, y = Cholesterol,
+                               color = Hypertension_Baseline)) +
+  # Data layer
+  geom_point(size = 2.5, alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE, linewidth = 1.2) +
+  
+  # Scales
+  scale_color_manual(
+    values = c("Normal" = "forestgreen", "Hypertensive" = "darkred"),
+    name = "Baseline BP Status") +
+  scale_x_continuous(breaks = seq(15, 40, 5)) +
+  scale_y_continuous(breaks = seq(100, 300, 50)) +
+  
+  # Labels
+  labs(
+    title = "Relationship Between BMI and Cholesterol",
+    subtitle = "Stratified by baseline hypertension status",
+    x = "Body Mass Index (kg/m²)",
+    y = "Total Cholesterol (mg/dL)",
+    caption = "Data: Public Health BP Dataset | n=200 patients | Linear regression with 95% CI"
+  ) +
+  
+  # Theme
+  theme_clinical_report(base_size = 14) +
+  theme(
+    legend.position = c(0.85, 0.15),
+    legend.background = element_rect(fill = "white", color = "black", linewidth = 0.5)
+  )
+```
+
+---
+
+## Publication-Ready Output
+
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 11
+#| fig-height: 7
+
+publication_plot <- ggplot(bp_data, 
+                           aes(x = BMI, y = Cholesterol,
+                               color = Hypertension_Baseline)) +
+  geom_point(size = 2.5, alpha = 0.6) +
+  geom_smooth(method = "lm", se = TRUE, linewidth = 1.2) +
+  scale_color_manual(
+    values = c("Normal" = "forestgreen", "Hypertensive" = "darkred"),
+    name = "Baseline BP Status") +
+  scale_x_continuous(breaks = seq(15, 40, 5)) +
+  scale_y_continuous(breaks = seq(100, 300, 50)) +
+  labs(
+    title = "Relationship Between BMI and Cholesterol",
+    subtitle = "Stratified by baseline hypertension status",
+    x = "Body Mass Index (kg/m²)",
+    y = "Total Cholesterol (mg/dL)",
+    caption = "Data: Public Health BP Dataset | n=200 patients | Linear regression with 95% CI"
+  ) +
+  theme_clinical_report(base_size = 14) +
+  theme(
+    legend.position = c(0.85, 0.15),
+    legend.background = element_rect(fill = "white", color = "black", linewidth = 0.5)
+  )
+
+publication_plot
+```
+
+# Section 2: Advanced Composition {background-color="#2C5F8D"}
+
+## Layer Ordering Matters
+
+:::: {.columns}
+::: {.column width="50%"}
+```{r}
+#| echo: true
+#| eval: false
+
+# Smooth UNDER points
+ggplot(bp_data, 
+       aes(x = Age, y = SysBP_0m)) +
+  geom_smooth(method = "lm") +  # First
+  geom_point(alpha = 0.5)        # Second
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 5
+#| fig-height: 4
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m)) +
+  geom_smooth(method = "lm", color = "darkred") +
+  geom_point(alpha = 0.5, color = "steelblue") +
+  labs(title = "Smooth Under Points") +
+  theme_minimal(base_size = 10)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+#| eval: false
+
+# Smooth OVER points
+ggplot(bp_data, 
+       aes(x = Age, y = SysBP_0m)) +
+  geom_point(alpha = 0.5) +      # First
+  geom_smooth(method = "lm")     # Second
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 5
+#| fig-height: 4
+
+ggplot(bp_data, aes(x = Age, y = SysBP_0m)) +
+  geom_point(alpha = 0.5, color = "steelblue") +
+  geom_smooth(method = "lm", color = "darkred") +
+  labs(title = "Smooth Over Points") +
+  theme_minimal(base_size = 10)
+```
+:::
+::::
+
+## Coordinate Systems: coord_flip()
+
+:::: {.columns}
+::: {.column width="60%"}
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|6"
+
+region_summary <- bp_data %>%
+  group_by(Region) %>%
+  summarise(Mean_SysBP = mean(SysBP_0m), .groups = "drop")
+
+ggplot(region_summary, 
+       aes(x = reorder(Region, Mean_SysBP),
+           y = Mean_SysBP, fill = Region)) +
+  geom_col() +
+  coord_flip()
+```
+
+::: {.fragment}
+**Useful for**: Long category names, horizontal bar charts
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 6
+#| fig-height: 5
+
+region_summary <- bp_data %>%
+  group_by(Region) %>%
+  summarise(Mean_SysBP = mean(SysBP_0m), .groups = "drop")
+
+ggplot(region_summary, aes(x = reorder(Region, Mean_SysBP), y = Mean_SysBP, fill = Region)) +
+  geom_col() +
+  coord_flip() +
+  labs(title = "Horizontal Bar Chart") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "none")
+```
+:::
+::::
+
+# Section 3: Exporting & Reproducibility {background-color="#2C5F8D"}
+
+## ggsave(): Saving Plots {.smaller}
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|1-3|5-10"
+
+# Create a plot
+my_plot <- ggplot(bp_data, aes(x = Age, y = SysBP_0m, color = TreatmentGroup)) +
+  geom_point() + theme_minimal()
+
+# Save the plot
+ggsave(
+  filename = "blood_pressure_analysis.png",
+  plot = my_plot,
+  width = 10, height = 6, units = "in",
+  dpi = 300)
+```
+
+::: {.incremental}
+- **filename**: File path and name with extension
+- **plot**: ggplot object (defaults to last plot displayed)
+- **width, height**: Dimensions
+- **units**: "in" (inches), "cm", "mm", "px"
+- **dpi**: Resolution (72 = screen, 300 = print quality, 600 = high-res print)
+:::
+
+## Supported File Formats
+
+:::: {.columns}
+::: {.column width="50%"}
+**Raster (Pixel-based)**:
+
+- **PNG** - Best for web, presentations
+- **JPEG** - Photos, small file size
+- **TIFF** - High-quality archival
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggsave("plot.png", dpi = 300)
+ggsave("plot.jpg", dpi = 150)
+ggsave("plot.tiff", dpi = 600)
+```
+:::
+
+::: {.column width="50%"}
+**Vector (Scalable)**:
+
+- **PDF** - Publications, printing
+- **SVG** - Web, editing in Illustrator
+- **EPS** - Legacy publications
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggsave("plot.pdf", width = 8, 
+       height = 6)
+ggsave("plot.svg")
+ggsave("plot.eps")
+```
+:::
+::::
+
+## Choosing the Right Format {.smaller}
+
+| Format | Use Case | Pros | Cons |
+|--------|----------|------|------|
+| **PNG** | Web, presentations, reports | Lossless, transparent background | Large files |
+| **PDF** | Publications, printing | Scalable, professional | Requires PDF reader |
+| **SVG** | Web, further editing | Scalable, editable | Not all software supports |
+| **JPEG** | Web (photos) | Small files | Lossy compression |
+| **TIFF** | Archival, high-res | Lossless, high quality | Very large files |
+
+::: {.fragment}
+**Recommendation**: Use **PDF** for publications, **PNG** (300 dpi) for presentations/reports
+:::
+
+## Reproducibility Best Practices {.smaller}
+
+::: {.incremental}
+1. **Set seed** for random elements (jitter, sampling)
+```{r}
+#| echo: true
+#| eval: false
+set.seed(123)
+```
+
+2. **Document R and package versions**
+```{r}
+#| echo: true
+#| eval: false
+sessionInfo()
+```
+
+3. **Use relative paths**, not absolute
+```{r}
+#| echo: true
+#| eval: false
+# Good: read_excel("data/bp_data.xlsx")
+# Bad:  read_excel("C:/Users/John/Documents/data/bp_data.xlsx")
+```
+
+4. **Version control** with Git/GitHub
+5. **Use R Projects** for project organization
+:::
+
+# Section 4: Limitations of ggplot2 {background-color="#2C5F8D"}
+
+## What ggplot2 Cannot Do Well {.smaller}
+
+While ggplot2 is powerful, it has limitations:
+
+::: {.incremental}
+1. **Mosaic plots / Marimekko charts** - Better with `ggmosaic` or base R `mosaicplot()`
+2. **3D plots** - Not natively supported, use `plotly` or `rgl`
+3. **Network graphs** - Use `ggraph` or `igraph`
+4. **Interactive plots** - Limited, need `plotly::ggplotly()` or `ggiraph`
+5. **Sankey diagrams** - Use `ggalluvial` or `networkD3`
+6. **Circular plots** (beyond polar) - Use `circlize`
+7. **Very complex statistical diagrams** - May need specialized packages
+:::
+
+## Mosaic Plots
+
+:::: {.columns}
+::: {.column width="60%"}
+**ggplot2 cannot easily create mosaic plots**
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Use ggmosaic package instead
+library(ggmosaic)
+
+ggplot(bp_data) +
+  geom_mosaic(
+    aes(x = product(TreatmentGroup, 
+                    SmokingStatus),
+        fill = TreatmentGroup))
+```
+
+::: {.fragment}
+Or use base R `mosaicplot()` for traditional mosaic plots
+:::
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 6
+#| fig-height: 5
+
+ggplot(bp_data) +
+  geom_mosaic(aes(x = product(TreatmentGroup, SmokingStatus), fill = TreatmentGroup)) +
+  labs(title = "Mosaic Plot with ggmosaic") +
+  theme_minimal(base_size = 11)
+```
+:::
+::::
+
+## When to Use Alternatives {.smaller}
+
+| Need | ggplot2 Solution | Better Alternative |
+|------|-----------------|-------------------|
+| Mosaic plots | ❌ Not supported | `ggmosaic`, base `mosaicplot()` |
+| 3D visualization | ❌ Not supported | `plotly`, `rgl`, `plot3D` |
+| Network graphs | ❌ Not supported | `ggraph`, `igraph`, `visNetwork` |
+| Interactive plots | Limited | `plotly`, `ggiraph`, `highcharter` |
+| Animated plots | Via `gganimate` | `gganimate`, `plotly` |
+| Sankey diagrams | ❌ Not supported | `ggalluvial`, `networkD3` |
+| Circular plots | Limited (`coord_polar`) | `circlize` |
+| Geographic maps | Basic | `leaflet`, `tmap`, `sf` |
+
+## ggplot2 Extensions Ecosystem {.smaller}
+
+**The good news**: The ggplot2 ecosystem is vast!
+
+::: {.incremental}
+- **ggmosaic** - Mosaic plots
+- **gganimate** - Animation
+- **ggraph** - Network/tree diagrams
+- **ggalluvial** - Sankey/alluvial diagrams
+- **ggiraph** - Interactive graphics
+- **patchwork** / **cowplot** - Combining plots
+- **ggridges** - Ridge line plots
+- **ggrepel** - Smart label placement
+- **ggforce** - Additional geoms and stats
+- **ggsci** - Scientific journal color palettes
+:::
+
+::: {.fragment}
+**See**: https://exts.ggplot2.tidyverse.org/ for comprehensive list
+:::
+
+# Section 5: Best Practices & Common Pitfalls {background-color="#2C5F8D"}
+
+## Common Pitfalls to Avoid {.smaller}
+
+::: {.incremental}
+1. **Mapping constants inside aes()** - Use fixed values outside aes
+2. **Too many aesthetics** - Limit to 3-4 visual encodings max
+3. **Poor color choices** - Always test for colorblind accessibility
+4. **Overplotting** - Use alpha, jitter, or facets
+5. **Misleading axes** - Always start at zero for bar charts
+6. **Too much clutter** - Remove unnecessary grid lines, legends, or decorations
+7. **Inconsistent themes** - Use theme_set() for consistency
+8. **Ignoring aspect ratios** - Consider final output dimensions
+9. **Not saving properly** - Use appropriate format and resolution
+10. **Forgetting reproducibility** - Set seed, document packages
+:::
+
+## Best Practices Checklist {.smaller}
+
+Before finalizing visualizations:
+
+::: {.incremental}
+- ☐ **Color**: Use colorblind-friendly palettes (viridis, ColorBrewer)
+- ☐ **Contrast**: Ensure sufficient contrast between elements
+- ☐ **Text size**: Minimum 10pt for body text, 12pt+ for titles
+- ☐ **Redundancy**: Don't rely on color alone (use shape, pattern, labels)
+- ☐ **Simplicity**: Remove unnecessary elements
+- ☐ **Labels**: Clear, descriptive axis labels and titles
+- ☐ **Alt text**: Provide text description for screen readers
+- ☐ **Print**: Test in grayscale/black & white
+- ☐ **Simulation**: Test with colorblind simulator
+- ☐ **Font**: Use readable fonts (avoid decorative fonts)
+:::
+
+## The ggplot2 Building Process
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot(data, aes(x = var1, y = var2)) +           # 1. Data + Aesthetics
+  geom_point(aes(color = var3, size = var4)) +     # 2. Geometry + Local aes
+  scale_color_viridis_d() +                        # 3. Scales
+  scale_size_continuous(range = c(2, 6)) +         # 4. More scales
+  facet_wrap(~ var5) +                             # 5. Facets
+  labs(title = "My Plot",                          # 6. Labels
+       x = "X Label", y = "Y Label") +
+  theme_minimal() +                                # 7. Theme
+  theme(legend.position = "bottom",                # 8. Theme customization
+        plot.title = element_text(hjust = 0.5))
+```
+
+# Section 6: Workshop Summary {background-color="#2C5F8D"}
+
+## Key Takeaways {.smaller}
+
+::: {.incremental}
+1. **Grammar of Graphics** provides a systematic framework for building visualizations
+2. **Layering** is fundamental - data → aesthetics → geometries → scales → themes
+3. **Aesthetics** map data to visual properties (inside `aes()`)
+4. **Geoms** are the building blocks - choose appropriately for your data type
+5. **Themes** control appearance - use built-in or create custom ones
+6. **Colors** matter - always consider colorblind accessibility
+7. **Scales** control how data maps to aesthetics - customize breaks, limits, labels
+8. **Facets** enable small multiples for comparing groups
+9. **Consistency** is key - use global themes and organizational standards
+10. Know ggplot2's **limitations** and when to use alternatives
+:::
+
+## What We Covered Across All Modules
+
+::: {.incremental}
+**Module 1**: Foundations & Basic Geoms
+- Seven layers of Grammar of Graphics
+- Essential geoms: point, line, col, bar, histogram, boxplot, violin, smooth, density, jitter
+- Data preparation and handling missing data
+
+**Module 2**: Aesthetics, Faceting & Themes
+- Global vs local aesthetics
+- facet_wrap() and facet_grid()
+- Built-in themes and ggthemes package
+
+**Module 3**: Colors, Scales & Custom Themes
+- Color palettes and accessibility (viridis, ColorBrewer, paletteer)
+- Scale functions (manual, gradient, continuous, discrete)
+- Custom theme creation with element functions
+
+**Module 4**: Advanced Topics & Best Practices
+- Complex visualizations and progressive builds
+- Exporting and reproducibility
+- Limitations and alternatives
+- Best practices and common pitfalls
+:::
+
+## Resources for Further Learning {.smaller}
+
+**Books**:
+- **"ggplot2: Elegant Graphics for Data Analysis"** by Hadley Wickham
+- **"R Graphics Cookbook"** by Winston Chang
+- **"Fundamentals of Data Visualization"** by Claus O. Wilke
+
+**Online Resources**:
+- Official documentation: https://ggplot2.tidyverse.org/
+- R Graph Gallery: https://r-graph-gallery.com/
+- ggplot2 extensions: https://exts.ggplot2.tidyverse.org/
+- Tidyverse style guide: https://style.tidyverse.org/
+
+**Cheat Sheets**:
+- RStudio ggplot2 cheat sheet
+- Data visualization with ggplot2 cheat sheet
+
+## Quick Reference: Essential Geoms {.smaller}
+
+```{r}
+#| echo: true
+#| eval: false
+
+geom_point()       # Scatter plots
+geom_line()        # Line graphs
+geom_bar()         # Bar charts (count)
+geom_col()         # Column charts (values)
+geom_histogram()   # Histograms
+geom_boxplot()     # Box plots
+geom_violin()      # Violin plots
+geom_smooth()      # Trend lines
+geom_density()     # Density plots
+geom_jitter()      # Jittered points
+geom_tile()        # Heatmaps
+geom_text()        # Text annotations
+geom_errorbar()    # Error bars
+geom_ribbon()      # Confidence bands
+```
+
+## Quick Reference: Essential Scales {.smaller}
+
+```{r}
+#| echo: true
+#| eval: false
+
+scale_color_manual()      # Custom colors
+scale_fill_viridis_d()    # Colorblind-friendly discrete
+scale_x_continuous()      # Continuous x-axis
+scale_y_log10()           # Log transformation
+scale_color_brewer()      # ColorBrewer palettes
+scale_color_gradient2()   # Diverging gradient
+```
+
+## Quick Reference: Theme Elements {.smaller}
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Text elements
+axis.title, axis.text, plot.title, plot.subtitle, 
+plot.caption, legend.title, legend.text
+
+# Line elements
+axis.line, panel.grid.major, panel.grid.minor
+
+# Rectangle elements
+plot.background, panel.background, panel.border,
+legend.background, legend.key
+
+# Position
+legend.position = "top" | "bottom" | "left" | "right" | "none" | c(x,y)
+```
+
+## Final Practice Exercise {.smaller}
+
+Create a comprehensive publication-ready plot that includes:
+
+1. Data from the BP dataset
+2. Multiple geoms (points + smooth or boxplot + jitter)
+3. Appropriate color scale (colorblind-friendly)
+4. Custom theme elements
+5. Proper labels and caption
+6. Legend management
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Your code here - combine everything you've learned!
+ggplot(bp_data, ...) +
+  geom_...() +
+  scale_...() +
+  facet_...() +
+  labs(...) +
+  theme_...() +
+  theme(...)
+```
+
+## Thank You! {.center}
+
+**Congratulations on completing the workshop!**
+
+::: {.fragment}
+**Remember**: 
+
+- Start simple, build complexity layer by layer
+- Always consider your audience
+- Test for accessibility
+- Practice, practice, practice!
+:::
+
+::: {.fragment}
+**Contact & Feedback**: Please provide feedback on this workshop to help improve future sessions
+:::
+
+::: {.fragment}
+**Questions?**
+:::
+
+## Session Info for Reproducibility
+
+```{r}
+#| echo: true
+# Document your R environment
+sessionInfo()
+```
+
+---
+
+**End of Module 4 & Workshop**
+
+*Grammar of Graphics: The ggplot2 Philosophy - Complete*
+
+---
+
+## Bonus: Combining Plots with patchwork {.smaller}
+
+```{r}
+#| echo: true
+#| eval: false
+
+library(patchwork)
+
+# Create individual plots
+p1 <- ggplot(bp_data, aes(x = Age, y = SysBP_0m)) + geom_point()
+p2 <- ggplot(bp_data, aes(x = BMI, y = Cholesterol)) + geom_point()
+p3 <- ggplot(bp_data, aes(x = Region, y = SysBP_0m)) + geom_boxplot()
+p4 <- ggplot(bp_data, aes(x = SysBP_Change)) + geom_histogram()
+
+# Combine in various layouts
+p1 + p2 + p3 + p4                    # Side by side
+(p1 | p2) / (p3 | p4)                # Grid
+p1 / (p2 | p3)                       # Complex layout
+```
+
+::: {.fragment}
+**patchwork** makes combining plots intuitive with `+`, `|`, and `/` operators
+:::
+
+## Bonus: Example Combined Plot
+
+```{r}
+#| echo: false
+#| message: false
+#| fig-width: 12
+#| fig-height: 8
+
+p1 <- ggplot(bp_data, aes(x = Age, y = SysBP_0m, color = TreatmentGroup)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "A. Age vs SysBP") +
+  theme_minimal(base_size = 11)
+
+p2 <- ggplot(bp_data, aes(x = BMI, y = Cholesterol, color = Hypertension_Baseline)) +
+  geom_point(alpha = 0.6) +
+  labs(title = "B. BMI vs Cholesterol") +
+  theme_minimal(base_size = 11)
+
+p3 <- ggplot(bp_data, aes(x = Region, y = SysBP_0m, fill = Region)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "C. SysBP by Region") +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "none")
+
+p4 <- ggplot(bp_data, aes(x = SysBP_Change, fill = TreatmentGroup)) +
+  geom_histogram(bins = 30, alpha = 0.7) +
+  labs(title = "D. Distribution of BP Change") +
+  theme_minimal(base_size = 11)
+
+(p1 | p2) / (p3 | p4) +
+  plot_annotation(
+    title = "Comprehensive Blood Pressure Analysis",
+    subtitle = "Multiple visualizations combined with patchwork",
+    caption = "Data: Public Health BP Dataset (n=200)"
+  )
+```
